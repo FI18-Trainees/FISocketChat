@@ -7,3 +7,4 @@ socketio = SocketIO(app)
 
 from app import sockets
 from app import routes
+
