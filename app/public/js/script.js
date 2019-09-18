@@ -15,7 +15,7 @@ $(function () {
     $('form').submit(function(e){
       e.preventDefault(); // prevents page reloading
 		let u = $('#user_name').val();
-		let nt = $('#nt').val();
+		let nt = $('#ip').val();
 		if(u != "" && nt != "")
 		{
 			socket.emit('chat_message',nt + ";" + u + ": " + $('#m').val());
@@ -57,4 +57,15 @@ $(function () {
 
 	  $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
+    socket.on('status', function(status){
+        $('#usercount').text('Usercount: ' + status['count']);
+    });
+
   });
+  
+  function addEmoteCode(emote)
+  {
+	  document.getElementById('m').value = document.getElementById('m').value + emote + " ";
+	  $("#m").focus();
+  }
+  

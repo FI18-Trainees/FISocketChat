@@ -13,7 +13,8 @@
 		  Super cheap chat with sock(et)?s <i class="fas fa-socks"></i>
 	  </a>
 	  <a class="nav-item mr-auto"><input type="text" required placeholder="username" id="user_name"></a>
-	  
+	  <a class="nav-item mr-auto" id="usercount">Usercount: 0</a>
+
   </nav>
 	<div class="container">
 		<div class="chat">
@@ -21,13 +22,25 @@
 		</div>
 		<div class="message-input">
 		<form action="">
+			<div class="btn-group dropup">
+			<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="far fa-smile"></i>
+			</button>
+			<div class="dropdown-menu">
+				{% for emote in emotes %}
+					<a href="#" onclick="addEmoteCode('{{emote}}');">{{emotes[emote]|safe}}</a>
+				{% endfor %}
+			</div>
+		</div>
 		  <input id="m" autocomplete="off" maxlength="300"/><button>Send</button>
 		</form>
-		<input type="hidden" value="unAuthUser" id="nt">
+		<input type="hidden" value="{{ ip }}" id="ip">
 		</div>
 	</div>
 <script src="/public/js/socket.io.js"></script>
 <script src="/public/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/public/js/script.js"></script>
   </body>
 </html>
