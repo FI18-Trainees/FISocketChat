@@ -15,7 +15,7 @@ def handle_message(message):
     if len(msg[(msg.find(':')+1):].strip()) > 0:
         msg = safe_tags_replace(msg)
         msg = safe_emote_replace(msg)
-        emit('chat_message', usr + msg)
+        emit('chat_message', usr + msg, broadcast=True)
 
 
 count = 0
