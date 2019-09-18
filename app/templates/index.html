@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="/public/css/style.css">
+  </head>
+  <body class="bg-dark text-white">
+  <nav class="navbar navbar-dark bg-dark border-bottom">
+	  <a class="navbar-brand">
+		  <i class="fab fa-skype fa-spin d-inline-block align-top" style="color: #00aff0" title="Skype rotiert"></i>
+		  Super cheap chat with sock(et)?s <i class="fas fa-socks"></i>
+	  </a>
+	  <a class="nav-item mr-auto"><input type="text" required placeholder="username" id="user_name"></a>
+	  
+  </nav>
+	<div class="container">
+		<div class="chat">
+			<ul id="messages"></ul>
+		</div>
+		<div class="message-input">
+		<form action="">
+		  <input id="m" autocomplete="off" maxlength="300"/><button>Send</button>
+		</form>
+		<input type="hidden" value="unAuthUser" id="nt">
+		</div>
+	</div>
+<script src="/public/js/socket.io.js"></script>
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/script.js"></script>
+  </body>
+</html>
