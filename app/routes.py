@@ -1,12 +1,11 @@
 from flask import render_template, send_from_directory, request
-from app import app
-from app.emotes import emotesToReplace
+from app import app, emotehandler
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', ip=request.remote_addr, emotes=emotesToReplace)
+    return render_template('index.html', ip=request.remote_addr, emotes=emotehandler.emotes)
 
 
 @app.route('/public/<path:path>')

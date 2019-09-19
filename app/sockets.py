@@ -1,7 +1,6 @@
-from app import app, socketio
+from app import app, socketio, emotehandler
 from flask_socketio import send, emit
 import re
-from app.emotes import emotesToReplace
 
 
 @socketio.on('chat_message')
@@ -49,7 +48,7 @@ def safe_tags_replace(text):
 
 
 def replaceEmote(emote):
-    return emotesToReplace.get(emote, emote)
+    return emotehandler.emotes.get(emote, emote)
 
 
 def safe_emote_replace(text):

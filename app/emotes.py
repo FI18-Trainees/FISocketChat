@@ -1,30 +1,32 @@
-emotesToReplace = {
-    'Bosch' 		: '<img src="/public/img/bosch1.png" style="height: 32px; width: auto;" alt="Bosch" title="Bosch">',
-    'Kappa'			: '<img src="/public/img/Kappa1.png" style="height: 28px; width: auto;" alt="Kappa" title="Kappa">',
-    'Shawn'			: '<img src="/public/img/emote1.PNG" style="height:35px; width:auto;" alt="Shawn" title="Shawn">',
-    'FeelsGoodMan'  : '<img src="/public/img/FeelsGoodMan1.png" style="height:35px; width:auto;" alt="FeelsGoodMan" title="FeelsGoodMan">',
-	'FeelsBadMan' 	: '<img src="/public/img/FeelsBadMan1.png" style="height:35px; width:auto;" alt="FeelsBadMan" title="FeelsBadMan">',
-	'peepoWide' 	: '<img src="/public/img/peepoWide.png" style="height:35px; width:auto;" alt="peepoWide" title="peepoWide">',
-	'Hackerman' 	: '<img src="/public/img/hackerman.jpg" style="height:100px; width:auto;" alt="Hackerman" title="hackerman">',
-	'D:' 			: '<img src="/public/img/OMG1.png" style="height:32px; width:auto;" alt="D:" title="D:">',
-	'SourPls' 		: '<img src="/public/img/SourPls.gif" style="height:32px; width:auto;" alt="SourPls" title="SourPls">',
-	'ricadoFlick' 	: '<img src="/public/img/ricadoFlick.gif" style="height:32px; width:auto;" alt="ricadoFlick" title="ricadoFlick">',
-	'Pog' 			: '<img src="/public/img/Pog.png" style="height:32px; width:auto;" alt="Pog" title="Pog">',
-	'peepoClap' 	: '<img src="/public/img/peepoClap.gif" style="height:32px; width:auto;" alt="peepoClap" title="peepoClap">',
-	'bongoCat' 		: '<img src="/public/img/bongoCat.gif" style="height:50px; width:auto;" alt="bongoCat" title="bongoCat">',
-	'sumSmash' 		: '<img src="/public/img/sumSmash.gif" style="height:32px; width:auto;" alt="sumSmash" title="sumSmash">',
-	'forsenCD' 		: '<img src="/public/img/forsenCD.png" style="height:32px; width:auto;" alt="forsenCD" title="forsenCD">',
-	'forsenPls' 	: '<img src="/public/img/forsenPls.gif" style="height:32px; width:auto;" alt="forsenPls" title="forsenPls">',
-	'LuL' 			: '<img src="/public/img/LuL.png" style="height:32px; width:auto;" alt="LuL" title="LuL">',
-	'Pepega' 		: '<img src="/public/img/Pepega.png" style="height:32px; width:auto;" alt="Pepega" title="Pepega">',
-	'monkaS' 		: '<img src="/public/img/monkaS.png" style="height:32px; width:auto;" alt="monkaS" title="monkaS">',
-	'OMEGALUL' 		: '<img src="/public/img/OMEGALUL.png" style="height:32px; width:auto;" alt="OMEGALUL" title="OMEGALUL">',
-	'pepeJAM' 		: '<img src="/public/img/pepeJAM.gif" style="height:32px; width:auto;" alt="pepeJAM" title="pepeJAM">',
-	'weSmart' 		: '<img src="/public/img/weSmart.png" style="height:32px; width:auto;" alt="weSmart" title="weSmart">',
-	'monkaHmm' 		: '<img src="/public/img/monkaHmm.png" style="height:32px; width:auto;" alt="monkaHmm" title="monkaHmm">',
-	'monkaW' 		: '<img src="/public/img/monkaW.png" style="height:32px; width:auto;" alt="monkaW" title="monkaW">',
-	'CrabPls' 		: '<img src="/public/img/CrabPls.gif" style="height:32px; width:auto;" alt="CrabPls" title="CrabPls">',
-	'Clap' 			: '<img src="/public/img/Clap.gif" style="height:32px; width:auto;" alt="Clap" title="Clap">',
-	'/shrug'		: '¯\\_(ツ)_/¯',
-  	'/flip'			: '(╯°□°）╯︵ ┻━┻',
-}
+import json
+import time
+import threading
+
+filename = "app\\emotes.json"
+
+
+class Emotes:
+	def __init__(self, start):
+		self.emotes = {}
+		self.runCheck = start
+		self.getemotes()
+		self.startreloader()
+
+	def getemotes(self):
+		if filename:
+			with open(filename, encoding='utf-8', mode='r') as f:
+				return json.load(f)
+
+	def startreloader(self):
+		thread = threading.Thread(target=self.run, args=())
+		thread.daemon = True  # Daemonize thread
+
+		thread.start()
+
+	def stopreloader(self):
+		self.runCheck = False
+
+	def run(self):
+		while self.runCheck:
+			self.emotes = self.getemotes()
+			time.sleep(20)
