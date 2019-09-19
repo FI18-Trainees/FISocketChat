@@ -38,5 +38,6 @@
 	":thinkink:"	: "<img src='/public/img/thinkink.gif' style='height:28px; width:auto;' alt=':thinkink:' title=':thinkink:'>",
 	":thonking:"	: "<img src='/public/img/thonking.png' style='height:28px; width:auto;' alt=':thonking:' title=':thonking:'>",
 	"pikaP"			: "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>",
-	"REEE"			: "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
+	"REEE"			: "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>",
+	"???"			: "Justus Jonas, Peter Shaw, Bob Andrews"
 }
