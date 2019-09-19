@@ -1,2 +1,6 @@
-flask set set FLASK_APP=server.py
+@echo off
+cls
+title FIChat
+flask set FLASK_APP=server.py
 flask run
+PAUSE
