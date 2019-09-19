@@ -29,5 +29,14 @@
   	"/flip"			: "(╯°□°）╯︵ ┻━┻",
 	"/unflip"		: "┬─┬ノ( º _ ºノ) ",
 	"hullo"			: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='Clap' title='Clap'>",
-	"/lenny"		: "( ͡° ͜ʖ ͡°)"
+	"/lenny"		: "( ͡° ͜ʖ ͡°)",
+	"ChangeMyMind"	: "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>",
+	"Pedalo"		: "<img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>",
+	":P"			: "<img src='/public/img/face-with-stuck-out-tongue.png' style='height:28px; width:auto;' alt=':P' title=':P'>",
+	":thinking:"	: "<img src='/public/img/thinking-face.png' style='height:28px; width:auto;' alt=':thinking:' title=':thinking:'>",
+	":upsidedown:"	: "<img src='/public/img/upside-down-face.png' style='height:28px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>",
+	":thinkink:"	: "<img src='/public/img/thinkink.gif' style='height:28px; width:auto;' alt=':thinkink:' title=':thinkink:'>",
+	":thonking:"	: "<img src='/public/img/thonking.png' style='height:28px; width:auto;' alt=':thonking:' title=':thonking:'>",
+	"pikaP"			: "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>",
+	"REEE"			: "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
 }

@@ -41,7 +41,7 @@ $(function () {
 	// else the socket will automatically try to reconnect
 	});
     socket.on('chat_message', function(msg){
-		console.log(msg);
+		//console.log(msg);
 		var message = msg.substr(msg.indexOf(";")+1);
 		var user = msg.substr(0,msg.indexOf(";"));
 		$('#messages').append($('<li>').html(message).prop('title', user));    
