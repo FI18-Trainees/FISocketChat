@@ -27,5 +27,7 @@
 	"Clap" 			: "<img src='/public/img/Clap.gif' style='height:32px; width:auto;' alt='Clap' title='Clap'>",
 	"/shrug"		: "¯\\_(ツ)_/¯",
   	"/flip"			: "(╯°□°）╯︵ ┻━┻",
-	"/unflip"		: "┬─┬ノ( º _ ºノ) "
+	"/unflip"		: "┬─┬ノ( º _ ºノ) ",
+	"hullo"			: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='Clap' title='Clap'>",
+	"/lenny"		: "( ͡° ͜ʖ ͡°)"
 }
