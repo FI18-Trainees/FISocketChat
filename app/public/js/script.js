@@ -58,7 +58,14 @@ $(function () {
 	  $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
     socket.on('status', function(status){
-        $('#usercount').text('Usercount: ' + status['count']);
+        if(status.hasOwnProperty('count'))
+        {
+            $('#usercount').text('Usercount: ' + status['count']);
+        }
+        if(status.hasOwnProperty('emoteupdated'))
+        {
+            alert("They're changes to the emotes!");
+        }
     });
 
   });

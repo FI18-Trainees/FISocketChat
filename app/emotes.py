@@ -1,32 +1,43 @@
 import json
 import time
 import threading
+import app
 
 filename = "app\\emotes.json"
 
 
 class Emotes:
-	def __init__(self, start):
-		self.emotes = {}
-		self.runCheck = start
-		self.getemotes()
-		self.startreloader()
+    def __init__(self, start):
+        self.emotes = {}
+        self.runCheck = start
+        self.startreloader()
+        self.socket = None
 
-	def getemotes(self):
-		if filename:
-			with open(filename, encoding='utf-8', mode='r') as f:
-				return json.load(f)
+    def getemotes(self):
+        if filename:
+            with open(filename, encoding='utf-8', mode='r') as f:
+                return json.load(f)
 
-	def startreloader(self):
-		thread = threading.Thread(target=self.run, args=())
-		thread.daemon = True  # Daemonize thread
+    def startreloader(self):
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True  # Daemonize thread
 
-		thread.start()
+        thread.start()
 
-	def stopreloader(self):
-		self.runCheck = False
+    def stopreloader(self):
+        self.runCheck = False
 
-	def run(self):
-		while self.runCheck:
-			self.emotes = self.getemotes()
-			time.sleep(20)
+    def run(self):
+        while self.runCheck:
+            try:
+                cache = self.getemotes()
+            except:
+                cache = None
+            if cache is not None and cache != self.emotes:
+                self.emotes = self.getemotes()
+                if self.socket is not None:
+                    self.socket.newemote = True
+            time.sleep(4)
+
+    def setsocket(self, socket):
+        self.socket = socket

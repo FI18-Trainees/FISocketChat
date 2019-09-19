@@ -3,6 +3,7 @@ from flask_socketio import send, emit
 import re
 from validators import url as valUrl
 
+newemote = False
 
 @socketio.on('chat_message')
 def handle_message(message):
@@ -36,6 +37,12 @@ def disconnect():
     emit('status', {'count': count}, broadcast=True)
 
 
+@socketio.on('checkEmotes')
+def emotecheck():
+    return None
+    # TODO
+
+
 tagsToReplace = {
     '&': '&amp;',
     '<': '&lt;',
@@ -62,6 +69,7 @@ def safe_emote_replace(text):
 def link_replacer(text):
     return re.sub(r"[:/.?!=_\-\w]+", lambda x: linkwrapping(x.group()), text, 0, re.MULTILINE)
 
+
 def linkwrapping(text):
     res = valUrl(text)
     # print(res)
@@ -69,3 +77,6 @@ def linkwrapping(text):
         return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
     else:
         return text
+
+
+# emit('status', {'emoteupdated': 1}, broadcast=True)
