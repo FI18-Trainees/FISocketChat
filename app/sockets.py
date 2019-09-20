@@ -39,8 +39,8 @@ def disconnect():
 
 @socketio.on('checkEmotes')
 def emotecheck():
-    return None
-    # TODO
+    if newemote:
+        emit('status', {'emoteupdated': 1}, broadcast=True)
 
 
 tagsToReplace = {
@@ -59,7 +59,11 @@ def safe_tags_replace(text):
 
 
 def replaceEmote(emote):
-    return emotehandler.emotes.get(emote, emote)
+    if emote in emotehandler.emotes:
+        text = emotehandler.emotes[emote]["replace"]
+    else:
+        text = emote
+    return text
 
 
 def safe_emote_replace(text):
@@ -79,4 +83,4 @@ def linkwrapping(text):
         return text
 
 
-# emit('status', {'emoteupdated': 1}, broadcast=True)
+
