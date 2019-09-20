@@ -11,3 +11,9 @@ def index():
 @app.route('/public/<path:path>')
 def send_public(path):
     return send_from_directory('public', path)
+
+
+@app.route('/api/emotes')
+def send_emotes():
+    return emotehandler.emotes
+
