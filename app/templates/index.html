@@ -34,7 +34,9 @@
 			</button>
 			<div class="dropdown-menu">
 				{% for emote in emotes %}
-					<a href="#" onclick="addEmoteCode('{{emote}}');">{{emotes[emote]|safe}}</a>
+					{% if emotes[emote]["menuDisplay"]: %}
+						<a href="#" onclick="addEmoteCode('{{emote}}');">{{emotes[emote]["menuDisplayCode"]|safe}}</a>
+					{% endif %}
 				{% endfor %}
 			</div>
 		</div>

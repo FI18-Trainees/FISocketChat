@@ -215,12 +215,12 @@
 		"menuDisplayCode"	: "<img src='/public/img/klugerschachzug.png' style='height:50px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>"
 	},
     "discordload"	: {
-		"replace"			: "<img src='/public/img/discordloadhangds.png' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
+		"replace"			: "<img src='/public/img/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
 		"menuDisplay"		: true,
-		"menuDisplayCode"	: "<img src='/public/img/discordloadhangds.png' style='height:40px; width:auto;' alt='discordload' title='discordload'>"
+		"menuDisplayCode"	: "<img src='/public/img/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>"
 	},
     "gnomed"		: {
-		"replace"			: "<a href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'></a>",
+		"replace"			: "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'></a>",
 		"menuDisplay"		: true,
 		"menuDisplayCode"	: "<img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed, links to the gnomed video on Youtube'>"
 	},
