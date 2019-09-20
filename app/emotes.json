@@ -238,5 +238,60 @@
         "replace"           : "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>",
         "menuDisplay"		: true,
 		"menuDisplayCode"	: "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>"
-    }
+    },
+	"3Head"      : {
+        "replace"           : "<img src='/public/img/3Head.png' style='height:32px; width:auto;' alt='3Head' title='3Head'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/3Head.png' style='height:32px; width:auto;' alt='3Head' title='3Head'>"
+    },
+	"4Head"      : {
+        "replace"           : "<img src='/public/img/4Head.png' style='height:32px; width:auto;' alt='4Head' title='4Head'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/4Head.png' style='height:32px; width:auto;' alt='4Head' title='4Head'>"
+    },
+	"5Head"      : {
+        "replace"           : "<img src='/public/img/5Head.png' style='height:32px; width:auto;' alt='5Head' title='5Head'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/5Head.png' style='height:32px; width:auto;' alt='5Head' title='5Head'>"
+    },
+	"WRS"      : {
+        "replace"           : "<img src='/public/img/blaulicht.gif' style='height:32px; width:auto;' alt='WRS' title='WRS'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/blaulicht.gif' style='height:32px; width:auto;' alt='WRS' title='WRS'>"
+    },
+	"hypeE"      : {
+        "replace"           : "<img src='/public/img/hypeE.gif' style='height:32px; width:auto;' alt='hypeE' title='hypeE'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/hypeE.gif' style='height:32px; width:auto;' alt='hypeE' title='hypeE'>"
+    },
+	"loading"      : {
+        "replace"           : "<img src='/public/img/loading.gif' style='height:32px; width:auto;' alt='loading' title='loading'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/loading.gif' style='height:32px; width:auto;' alt='loading' title='loading'>"
+    },
+	"winloading"      : {
+        "replace"           : "<img src='/public/img/windowsload.gif' style='height:32px; width:auto;' alt='winloading' title='winloading'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/windowsload.gif' style='height:32px; width:auto; background-color: rgba(0,0,0,0.5);' alt='winloading' title='winloading'>"
+    },
+	"progressbar"      : {
+        "replace"           : "<img src='/public/img/progressbar.gif' style='height:32px; width:208px;' alt='progressbar' title='progressbar'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/progressbar.gif' style='height:32px; width:100px;' alt='progressbar' title='progressbar'>"
+    },
+	"peepoStrongest"      : {
+        "replace"           : "<img src='/public/img/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>"
+    },
+	":phone:"      : {
+        "replace"           : "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>"
+	},
+	"monkaRun"      : {
+        "replace"           : "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>"
+	}
 }
