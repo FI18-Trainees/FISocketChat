@@ -37,7 +37,7 @@ class Emotes:
                 self.emotes = self.getemotes()
                 if self.socket is not None:
                     self.socket.newemote = True
-            time.sleep(4)
+            time.sleep(60)
 
     def setsocket(self, socket):
         self.socket = socket
