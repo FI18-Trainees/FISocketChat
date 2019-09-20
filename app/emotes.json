@@ -40,5 +40,6 @@
 	"pikaP"			: "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>",
 	"REEE"			: "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>",
 	"???"			: "Justus Jonas, Peter Shaw, Bob Andrews",
-	"!!!"			: "Kim Jülich, Franziska Winkler, Marie Grevenbroich"
+	"!!!"			: "Kim Jülich, Franziska Winkler, Marie Grevenbroich",
+	"Björn"			: "PjÖrN"
 }
