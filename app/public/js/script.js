@@ -62,10 +62,6 @@ $(function () {
         {
             $('#usercount').text('Usercount: ' + status['count']);
         }
-        if(status.hasOwnProperty('emoteupdated'))
-        {
-            alert("They're changes to the emotes!");
-        }
     });
 
   });
