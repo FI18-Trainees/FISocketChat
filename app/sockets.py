@@ -9,11 +9,11 @@ newemote = False
 def handle_message(message):
     msg = message[(message.find(';')+1):]
     usr = message[:(message.find(';')+1)]
-    if msg.find('Server') == 0 or msg.find(':') > 100:
+    if msg.find('Server') == 0 or msg.find(':') > 100:  # only allow usernames with length 1-100
         msg = msg[msg.find(':'):]
         msg = '{Invalid username}' + msg
 
-    if len(msg[(msg.find(':')+1):].strip()) > 0:
+    if msg[(msg.find(':')+1):].strip():
         msg = safe_tags_replace(msg)
         prefix = msg[:msg.find(": ")+2]
         possiblelink = str.strip(msg[msg.find(": ")+2:])
@@ -22,7 +22,7 @@ def handle_message(message):
         emit('chat_message', usr + msg, broadcast=True)
 
 
-count = 0
+count = 0  # TODO: add a class for this so we dont need globals monkaS
 @socketio.on('connect')
 def connect():
     global count
@@ -39,8 +39,8 @@ def disconnect():
 
 @socketio.on('checkEmotes')
 def emotecheck():
-    return None
-    # TODO
+    if newemote:
+        emit('status', {'emoteupdated': 1}, broadcast=True)
 
 
 tagsToReplace = {
@@ -59,7 +59,10 @@ def safe_tags_replace(text):
 
 
 def replaceEmote(emote):
-    return emotehandler.emotes.get(emote, emote)
+    if emote in emotehandler.emotes:
+        return emotehandler.emotes[emote]["replace"]
+    else:
+        return emote
 
 
 def safe_emote_replace(text):
@@ -67,7 +70,7 @@ def safe_emote_replace(text):
 
 
 def link_replacer(text):
-    return re.sub(r"[:/.?!=_\-\w]+", lambda x: linkwrapping(x.group()), text, 0, re.MULTILINE)
+    return re.sub(r"[:/.?!=_#\-\w]+", lambda x: linkwrapping(x.group()), text, 0, re.MULTILINE)
 
 
 def linkwrapping(text):
@@ -79,4 +82,4 @@ def linkwrapping(text):
         return text
 
 
-# emit('status', {'emoteupdated': 1}, broadcast=True)
+

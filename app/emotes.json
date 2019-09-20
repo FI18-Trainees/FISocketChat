@@ -1,50 +1,237 @@
 {
-    "Bosch" 		: "<img src='/public/img/bosch1.png' style='height: 32px; width: auto;' alt='Bosch' title='Bosch'>",
-    "Kappa"			: "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>",
-    "Shawn"			: "<img src='/public/img/emote1.PNG' style='height:35px; width:auto;' alt='Shawn' title='Shawn'>",
-    "FeelsGoodMan"  : "<img src='/public/img/FeelsGoodMan1.png' style='height:35px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
-	"FeelsBadMan" 	: "<img src='/public/img/FeelsBadMan1.png' style='height:35px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>",
-	"peepoWide" 	: "<img src='/public/img/peepoWide.png' style='height:35px; width:auto;' alt='peepoWide' title='peepoWide'>",
-	"Hackerman" 	: "<img src='/public/img/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'>",
-	"D:" 			: "<img src='/public/img/OMG1.png' style='height:32px; width:auto;' alt='D:' title='D:'>",
-	"SourPls" 		: "<img src='/public/img/SourPls.gif' style='height:32px; width:auto;' alt='SourPls' title='SourPls'>",
-	"ricadoFlick" 	: "<img src='/public/img/ricadoFlick.gif' style='height:32px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>",
-	"Pog" 			: "<img src='/public/img/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>",
-	"peepoClap" 	: "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>",
-	"bongoCat" 		: "<img src='/public/img/bongoCat.gif' style='height:50px; width:auto;' alt='bongoCat' title='bongoCat'>",
-	"sumSmash" 		: "<img src='/public/img/sumSmash.gif' style='height:32px; width:auto;' alt='sumSmash' title='sumSmash'>",
-	"forsenCD" 		: "<img src='/public/img/forsenCD.png' style='height:32px; width:auto;' alt='forsenCD' title='forsenCD'>",
-	"forsenPls" 	: "<img src='/public/img/forsenPls.gif' style='height:32px; width:auto;' alt='forsenPls' title='forsenPls'>",
-	"LuL" 			: "<img src='/public/img/LuL.png' style='height:32px; width:auto;' alt='LuL' title='LuL'>",
-	"Pepega" 		: "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>",
-	"monkaS" 		: "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>",
-	"OMEGALUL" 		: "<img src='/public/img/OMEGALUL.png' style='height:32px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>",
-	"pepeJAM" 		: "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>",
-	"weSmart" 		: "<img src='/public/img/weSmart.png' style='height:32px; width:auto;' alt='weSmart' title='weSmart'>",
-	"monkaHmm" 		: "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>",
-	"monkaW" 		: "<img src='/public/img/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>",
-	"CrabPls" 		: "<img src='/public/img/CrabPls.gif' style='height:32px; width:auto;' alt='CrabPls' title='CrabPls'>",
-	"Clap" 			: "<img src='/public/img/Clap.gif' style='height:32px; width:auto;' alt='Clap' title='Clap'>",
-	"/shrug"		: "¯\\_(ツ)_/¯",
-  	"/flip"			: "(╯°□°）╯︵ ┻━┻",
-	"/unflip"		: "┬─┬ノ( º _ ºノ) ",
-	"hullo"			: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='hullo' title='hullo'>",
-	"/lenny"		: "( ͡° ͜ʖ ͡°)",
-	"ChangeMyMind"	: "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>",
-	"Pedalo"		: "<img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>",
-	":P"			: "<img src='/public/img/face-with-stuck-out-tongue.png' style='height:28px; width:auto;' alt=':P' title=':P'>",
-	":thinking:"	: "<img src='/public/img/thinking-face.png' style='height:28px; width:auto;' alt=':thinking:' title=':thinking:'>",
-	":upsidedown:"	: "<img src='/public/img/upside-down-face.png' style='height:28px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>",
-	":thinkink:"	: "<img src='/public/img/thinkink.gif' style='height:28px; width:auto;' alt=':thinkink:' title=':thinkink:'>",
-	":thonking:"	: "<img src='/public/img/thonking.png' style='height:28px; width:auto;' alt=':thonking:' title=':thonking:'>",
-	"pikaP"			: "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>",
-	"REEE"			: "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>",
-	"???"			: "Justus Jonas, Peter Shaw, Bob Andrews",
-	"!!!"			: "Kim Jülich, Franziska Winkler, Marie Grevenbroich",
-    "KlugerSchachZug"	: "<img src='/public/img/klugerschachzug.png' style='height:100px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>",
-    "discordload"	: "<img src='/public/img/discordloadhangds.png' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
-    "gnomed"		: "<img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'>",
-    "monkaT"		: "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>",
-    "Björn"			: "PjÖrN",
-	"poohRead"		: "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>"
+    "Bosch" 		: 	{
+		"replace" 			: "<img src='/public/img/bosch1.png' style='height: 32px; width: auto;' alt='Bosch' title='Bosch'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/bosch1.png' style='height: 32px; width: auto;' alt='Bosch' title='Bosch'>"
+	},
+    "Kappa"			:	{
+		"replace"			: "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>"
+	},
+    "Shawn"			:	{
+		"replace"			: "<img src='/public/img/emote1.PNG' style='height:35px; width:auto;' alt='Shawn' title='Shawn'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/emote1.PNG' style='height:35px; width:auto;' alt='Shawn' title='Shawn'>"
+	},
+    "FeelsGoodMan"  : 	{
+		"replace"			: "<img src='/public/img/FeelsGoodMan1.png' style='height:35px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/FeelsGoodMan1.png' style='height:35px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>"
+	},
+	"FeelsBadMan" 	:	{
+		"replace"			: "<img src='/public/img/FeelsBadMan1.png' style='height:35px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/FeelsBadMan1.png' style='height:35px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>"
+	},
+	"peepoWide" 	: 	{
+		"replace"			: "<img src='/public/img/peepoWide.png' style='height:35px; width:auto;' alt='peepoWide' title='peepoWide'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/peepoWide.png' style='height:35px; width:auto;' alt='peepoWide' title='peepoWide'>"
+	},
+	"Hackerman" 	: 	{
+		"replace"			: "<img src='/public/img/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
+	},
+	"D:" 			: 	{
+		"replace"			: "<img src='/public/img/OMG1.png' style='height:32px; width:auto;' alt='D:' title='D:'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/OMG1.png' style='height:32px; width:auto;' alt='D:' title='D:'>"
+	},
+	"SourPls" 		: 	{
+		"replace"			: "<img src='/public/img/SourPls.gif' style='height:32px; width:auto;' alt='SourPls' title='SourPls'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/SourPls.gif' style='height:32px; width:auto;' alt='SourPls' title='SourPls'>"
+	},
+	"ricadoFlick" 	:	{
+		"replace"			: "<img src='/public/img/ricadoFlick.gif' style='height:32px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/ricadoFlick.gif' style='height:32px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>"
+	},
+	"Pog" 			: 	{
+		"replace"			: "<img src='/public/img/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>"
+	},
+	"peepoClap" 	: 	{
+		"replace"			: "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>"
+	},
+	"bongoCat" 		: 	{
+		"replace"			: "<img src='/public/img/bongoCat.gif' style='height:50px; width:auto;' alt='bongoCat' title='bongoCat'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/bongoCat.gif' style='height:50px; width:auto;' alt='bongoCat' title='bongoCat'>"
+	},
+	"sumSmash" 		:	{
+		"replace"			: "<img src='/public/img/sumSmash.gif' style='height:32px; width:auto;' alt='sumSmash' title='sumSmash'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/sumSmash.gif' style='height:32px; width:auto;' alt='sumSmash' title='sumSmash'>"
+	},
+	"forsenCD" 		: 	{
+		"replace"			: "<img src='/public/img/forsenCD.png' style='height:32px; width:auto;' alt='forsenCD' title='forsenCD'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/forsenCD.png' style='height:32px; width:auto;' alt='forsenCD' title='forsenCD'>"
+	},
+	"forsenPls" 	:	{
+		"replace"			: "<img src='/public/img/forsenPls.gif' style='height:32px; width:auto;' alt='forsenPls' title='forsenPls'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/forsenPls.gif' style='height:32px; width:auto;' alt='forsenPls' title='forsenPls'>"
+	},
+	"LuL" 			: 	{
+		"replace"			: "<img src='/public/img/LuL.png' style='height:32px; width:auto;' alt='LuL' title='LuL'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/LuL.png' style='height:32px; width:auto;' alt='LuL' title='LuL'>"
+	},
+	"Pepega" 		: 	{
+		"replace"			: "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>"
+	},
+	"monkaS" 		:	{
+		"replace"			: "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>"
+	},
+	"OMEGALUL" 		: {
+		"replace"			: "<img src='/public/img/OMEGALUL.png' style='height:32px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/OMEGALUL.png' style='height:32px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>"
+	},
+	"pepeJAM" 		: {
+		"replace"			: "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>"
+	},
+	"weSmart" 		: {
+		"replace"			: "<img src='/public/img/weSmart.png' style='height:32px; width:auto;' alt='weSmart' title='weSmart'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/weSmart.png' style='height:32px; width:auto;' alt='weSmart' title='weSmart'>"
+	},
+	"monkaHmm" 		: {
+		"replace"			: "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>"
+	},
+	"monkaW" 		: {
+		"replace"			: "<img src='/public/img/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>"
+	},
+	"CrabPls" 		: {
+		"replace"			: "<img src='/public/img/CrabPls.gif' style='height:32px; width:auto;' alt='CrabPls' title='CrabPls'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/CrabPls.gif' style='height:32px; width:auto;' alt='CrabPls' title='CrabPls'>"
+	},
+	"Clap" 			: {
+		"replace"			: "<img src='/public/img/Clap.gif' style='height:32px; width:auto;' alt='Clap' title='Clap'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/Clap.gif' style='height:32px; width:auto;' alt='Clap' title='Clap'>"
+	},
+	"/shrug"		: {
+		"replace"			: "¯\\_(ツ)_/¯",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "/shrug"
+	},
+  	"/flip"			: {
+		"replace"			: "(╯°□°）╯︵ ┻━┻",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "/flip"
+	},
+	"/unflip"		: {
+		"replace"			: "┬─┬ノ( º _ ºノ) ",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "/unflip"
+	},
+	"hullo"			: {
+		"replace"			: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='Clap' title='Clap'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='Clap' title='Clap'>"
+	},
+	"/lenny"		: {
+		"replace"			: "( ͡° ͜ʖ ͡°)",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "( ͡° ͜ʖ ͡°)"
+	},
+	"ChangeMyMind"	: {
+		"replace"			: "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>"
+	},
+	"Pedalo"		: {
+		"replace"			: "<img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>"
+	},
+	":P"			: {
+		"replace"			: "<img src='/public/img/face-with-stuck-out-tongue.png' style='height:28px; width:auto;' alt=':P' title=':P'>",
+		"menuDisplay"		: false,
+		"menuDisplayCode"	: ""
+	},
+	":thinking:"	: {
+		"replace"			: "<img src='/public/img/thinking-face.png' style='height:28px; width:auto;' alt=':thinking:' title=':thinking:'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/thinking-face.png' style='height:28px; width:auto;' alt=':thinking:' title=':thinking:'>"
+	},
+	":upsidedown:"	: {
+		"replace"			: "<img src='/public/img/upside-down-face.png' style='height:28px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/upside-down-face.png' style='height:28px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>"
+	},
+	":thinkink:"	: {
+		"replace"			: "<img src='/public/img/thinkink.gif' style='height:28px; width:auto;' alt=':thinkink:' title=':thinkink:'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/thinkink.gif' style='height:28px; width:auto;' alt=':thinkink:' title=':thinkink:'>"
+	},
+	":thonking:"	: {
+		"replace"			: "<img src='/public/img/thonking.png' style='height:28px; width:auto;' alt=':thonking:' title=':thonking:'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/thonking.png' style='height:28px; width:auto;' alt=':thonking:' title=':thonking:'>"
+	},
+	"pikaP"			: {
+		"replace"			: "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>"
+	},
+	"REEE"			: {
+		"replace"			: "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
+	},
+	"???"			: {
+		"replace"			: "Justus Jonas, Peter Shaw, Bob Andrews",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "???"
+	},
+	"!!!"			: {
+		"replace"			: "Kim Jülich, Franziska Winkler, Marie Grevenbroich",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "!!!"
+	},
+    "KlugerSchachZug"	: {
+		"replace"			: "<img src='/public/img/klugerschachzug.png' style='height:100px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/klugerschachzug.png' style='height:50px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>"
+	},
+    "discordload"	: {
+		"replace"			: "<img src='/public/img/discordloadhangds.png' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/discordloadhangds.png' style='height:40px; width:auto;' alt='discordload' title='discordload'>"
+	},
+    "gnomed"		: {
+		"replace"			: "<a href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'></a>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed, links to the gnomed video on Youtube'>"
+	},
+    "monkaT"		: {
+		"replace"			: "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>",
+		"menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>"
+	},
+    "Björn"			: {
+		"replace"			: "PjÖrN",
+		"menuDisplay"		: false,
+		"menuDisplayCode"	: ""
+	}
 }
