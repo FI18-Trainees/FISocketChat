@@ -145,9 +145,9 @@
 		"menuDisplayCode"	: "/unflip"
 	},
 	"hullo"			: {
-		"replace"			: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='Clap' title='Clap'>",
+		"replace"			: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='hullo' title='hullo'>",
 		"menuDisplay"		: true,
-		"menuDisplayCode"	: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='Clap' title='Clap'>"
+		"menuDisplayCode"	: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='hullo' title='hullo'>"
 	},
 	"/lenny"		: {
 		"replace"			: "( ͡° ͜ʖ ͡°)",
@@ -233,5 +233,10 @@
 		"replace"			: "PjÖrN",
 		"menuDisplay"		: false,
 		"menuDisplayCode"	: ""
-	}
+	},
+    "poohRead"      : {
+        "replace"           : "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>",
+        "menuDisplay"		: true,
+		"menuDisplayCode"	: "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>"
+    }
 }
