@@ -1,5 +1,5 @@
 $(function () {
-    var socket = io();
+    var socket = io({transports: ['websocket']});
 	var focused = true;
 	var unread = 0;
 
@@ -16,10 +16,11 @@ $(function () {
       e.preventDefault(); // prevents page reloading
 		let u = $('#user_name').val();
 		let nt = $('#ip').val();
-		if(u != "" && nt != "")
+		let me = $('#m');
+		if(u !== "" && nt !== "")
 		{
-			socket.emit('chat_message',nt + ";" + u + ": " + $('#m').val());
-			$('#m').val('');
+			socket.emit('chat_message',nt + ";" + u + ": " + me.val());
+			me.val('');
 		}
 		else
 		{
