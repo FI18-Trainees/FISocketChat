@@ -66,11 +66,11 @@ def replaceEmote(emote):
 
 
 def safe_emote_replace(text):
-    return re.sub(r"[\"'\/]?[\/\?:\w]+[\"'\/]?", lambda x: replaceEmote(x.group()), text, 0, re.MULTILINE)
+    return re.sub(r"[\"'/]?[/?!:\w]+[\"'/]?", lambda x: replaceEmote(x.group()), text, 0, re.MULTILINE)
 
 
 def link_replacer(text):
-    return re.sub(r"[:/.?!=_#\-\w]+", lambda x: linkwrapping(x.group()), text, 0, re.MULTILINE)
+    return re.sub(r"[A-Za-z0-9\-._~:/?#\[\]@!$%()*+,;=]+", lambda x: linkwrapping(x.group()), text, 0, re.MULTILINE)
 
 
 def linkwrapping(text):
