@@ -28,7 +28,7 @@
 	"/shrug"		: "¯\\_(ツ)_/¯",
   	"/flip"			: "(╯°□°）╯︵ ┻━┻",
 	"/unflip"		: "┬─┬ノ( º _ ºノ) ",
-	"hullo"			: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='Clap' title='Clap'>",
+	"hullo"			: "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='hullo' title='hullo'>",
 	"/lenny"		: "( ͡° ͜ʖ ͡°)",
 	"ChangeMyMind"	: "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>",
 	"Pedalo"		: "<img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>",
@@ -45,5 +45,6 @@
     "discordload"	: "<img src='/public/img/discordloadhangds.png' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
     "gnomed"		: "<img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'>",
     "monkaT"		: "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>",
-    "Björn"			: "PjÖrN"
+    "Björn"			: "PjÖrN",
+	"poohRead"		: "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>"
 }
