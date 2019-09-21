@@ -11,18 +11,14 @@ $(function () {
 	window.onblur = function() {
 		focused = false;
 	};
-	
     $('form').submit(function(e){
       e.preventDefault(); // prevents page reloading
 		let u = $('#user_name').val();
-		let nt = $('#ip').val();
-		if(u != "" && nt != "")
-		{
-			socket.emit('chat_message',nt + ";" + u + ": " + $('#m').val());
+		if(u !== "") {
+			socket.emit('chat_message', {'user': u, 'message': $('#m').val() });
 			$('#m').val('');
 		}
-		else
-		{
+		else {
 			alert('Username may not be empty!');
 		}
       return false;
@@ -38,32 +34,28 @@ $(function () {
 		// the disconnection was initiated by the server, you need to reconnect manually
 		socket.connect();
 	}
-	// else the socket will automatically try to reconnect
 	});
     socket.on('chat_message', function(msg){
-		//console.log(msg);
-		var message = msg.substr(msg.indexOf(";")+1);
-		var user = msg.substr(0,msg.indexOf(";"));
-		$('#messages').append($('<li>').html(message).prop('title', user));    
-	  if(!msg.startsWith("Server") && !focused)
-	  {
+		let item = $('<li>');
+		item.append($('<a>').prop('title', msg['timestamp']).text(msg['user']));
+		item.append($('<a>').html(msg['message']));
+		$('#messages').append(item);
+	  if(msg['user'] !== "Server" && !focused) {
 		unread++;
 		document.title = "Socket.IO chat" + " (" + unread +")";
 	  }
-	  if($('#messages').children().length > 100)
-	  {
+	  if($('#messages').children().length > 100) {
 		$('#messages').find('li:first-child').remove();
 	  }
 
 	  $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
-    socket.on('status', function(status){
+    socket.on('status', function(status) {
         if(status.hasOwnProperty('count'))
         {
             $('#usercount').text('Usercount: ' + status['count']);
         }
     });
-
   });
   
   function addEmoteCode(emote)
