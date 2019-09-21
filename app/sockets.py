@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from app import app, socketio, emotehandler
 from flask_socketio import send, emit
 import re
