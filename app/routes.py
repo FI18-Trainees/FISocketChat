@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import render_template, send_from_directory, request
 from app import app, emotehandler
 

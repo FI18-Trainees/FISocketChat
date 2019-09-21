@@ -1,5 +1,5 @@
 $(function () {
-    var socket = io();
+    var socket = io({transports: ['websocket']});
 	var focused = true;
 	var unread = 0;
 
@@ -14,9 +14,11 @@ $(function () {
     $('form').submit(function(e){
       e.preventDefault(); // prevents page reloading
 		let u = $('#user_name').val();
-		if(u !== "") {
-			socket.emit('chat_message', {'user': u, 'message': $('#m').val() });
-			$('#m').val('');
+		let m = $('#m');
+		if(u != "")
+		{
+			socket.emit('chat_message', {'user': u, 'message':m.val()});
+			m.val('');
 		}
 		else {
 			alert('Username may not be empty!');
