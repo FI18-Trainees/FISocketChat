@@ -36,16 +36,19 @@ $(function () {
 	}
 	});
     socket.on('chat_message', function(msg){
-		let item = $('<li>');
-		item.append($('<a>').prop('title', msg['timestamp']).text(msg['user']));
-		item.append($('<a>').html(msg['message']));
+        let item = $('<div class="message-container">');
+        let header = $('<h2 class="message-header">');
+        header.append($('<div class="message-name">').prop('title', msg['timestamp']).text(msg['user']));
+        header.append($('<time class="message-timestamp">').text(msg['timestamp']));
+        item.append(header);
+        item.append($('<div class="message-content">').html(msg['message']));
 		$('#messages').append(item);
 	  if(msg['user'] !== "Server" && !focused) {
 		unread++;
 		document.title = "Socket.IO chat" + " (" + unread +")";
 	  }
 	  if($('#messages').children().length > 100) {
-		$('#messages').find('li:first-child').remove();
+		$('#messages').find('#messages:first-child').remove();
 	  }
 
 	  $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);

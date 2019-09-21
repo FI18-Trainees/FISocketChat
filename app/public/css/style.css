@@ -1,42 +1,101 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-	  html, body {
-		height: 99%;
-		}
-      body {
-		font: 13px "Comic Sans MS", Arial;
-		height: inherit;
-		display: flex;
-		flex-direction: column;
-		background: #2c2f33;
-	  }
-	  .bg-dark {
-	  	  background: #2c2f33!important;
-	  }
-	  .container{
-	  	height: 94%;
-	  	max-height: 94%;
-		background: #2c2f33;
-	  }
-      form { background: #2c2f33; padding: 3px; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 84%; margin-right: .5%; }
-      form button { width: 9%; background: #99aab5; border: none; padding: 10px; }
-	  .chat {
-		overflow-x:hidden;
-		overflow-y:auto;
-		 width: 100%;
-		  max-height: 95% !important;
-		  height: 95%;
-	  }
-      #messages {
-		list-style-type: none; 
-		word-wrap: break-word;
-		margin: 0; 
-		padding: 0; 
-		}
-	  .message-input{
-		
-		display: inline-block;
-		width: 100%;
-	  }
-      #messages li { padding: 5px 10px; color: #ffffff; }
-	  #messages a {color: #7289da; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 99%;
+}
+
+body {
+    font: 13px "Comic Sans MS", Arial;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    background: #2c2f33;
+}
+
+.bg-dark {
+    background: #2c2f33 !important;
+}
+
+.container {
+    height: 94%;
+    max-height: 94%;
+    background: #2c2f33;
+}
+
+.chat {
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    max-height: 95% !important;
+    height: 95%;
+}
+
+#messages {
+    word-wrap: break-word;
+    margin: 0;
+    padding: 0;
+}
+    #messages .message-container {
+        padding: 20px 5px;
+        border-bottom: solid 1px;
+        border-bottom-color: rgb(114, 118, 125);
+    }
+
+    #messages .message-header {
+        display: flex;
+        -webkit-box-align: start;
+        align-items: flex-start;
+        align-items: baseline;
+        align-content: normal;
+    }
+
+    #messages .message-name {
+        color: red;
+        font: 18px "Comic Sans MS", Arial;
+    }
+
+    #messages .message-timestamp {
+        color: #99aab5;
+        margin-left: 5px;
+        font: 10px "Comic Sans MS", Arial;
+        
+    }
+
+    #messages .message-content {
+        margin: 0;
+        color: #ffffff;
+    }
+
+    #messages .message-content:link{
+        color: #7289da;
+    }
+
+.message-input {
+    display: inline-block;
+    width: 100%;
+}
+
+form {
+    background: #2c2f33;
+    padding: 3px;
+    bottom: 0;
+    width: 100%;
+}
+
+    form input {
+        border: 0;
+        padding: 10px;
+        width: 84%;
+        margin-right: .5%;
+    }
+
+    form button {
+        width: 9%;
+        background: #99aab5;
+        border: none;
+        padding: 10px;
+    }

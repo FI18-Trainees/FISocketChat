@@ -8,8 +8,8 @@ newemote = False
 
 @socketio.on('chat_message')
 def handle_message(message):
-    timestamp = datetime.now().strftime("%H:%M:%S;")
-    user = message['user'].strip() + ": "
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    user = message['user'].strip()
     message = message['message'].strip()
 
     if user.find('Server') == 0 or len(user) > 100:  # only allow usernames with length 1-100
