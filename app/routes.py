@@ -8,7 +8,6 @@ auth = HTTPBasicAuth()
 
 @auth.verify_password
 def verify_password(username, password):
-    print("test")
     r = requests.get("https://auth.zaanposni.com/verify",
                      auth=(username, password),
                      headers={'Cache-Control': 'no-cache'})
@@ -21,7 +20,6 @@ def verify_password(username, password):
 @app.route('/index')
 @auth.login_required
 def index():
-    print("a")
     return render_template('index.html', ip=request.remote_addr, emotes=emotehandler.emotes)
 
 

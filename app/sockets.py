@@ -6,6 +6,7 @@ from datetime import datetime
 
 newemote = False
 
+
 @socketio.on('chat_message')
 def handle_message(message):
     timestamp = datetime.now().strftime("%H:%M:%S;")
