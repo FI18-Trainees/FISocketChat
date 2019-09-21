@@ -19,9 +19,9 @@
 		  <i class="fab fa-skype fa-spin d-inline-block align-top" style="color: #00aff0" title="Skype rotiert"></i>
 		  Super cheap chat with sock(et)?s <i class="fas fa-socks"></i>
 	  </a>
-	  <a class="nav-item mr-auto"><input type="text" required placeholder="username" id="user_name"></a>
-	  <a class="nav-item mr-auto" id="usercount">Usercount: 0</a>
-	  <a class="nav-item mr-auto">Powered by Python</a>
+	  <a class="nav-item" id="username-item"><input type="text" required placeholder="username" id="user_name"></a>
+	  <a class="nav-item" id="usercount">Usercount: 0</a>
+	  <a class="nav-item" id="powered-by">Powered by Python</a>
 
   </nav>
 	<div class="container">
@@ -29,21 +29,22 @@
 			<div id="messages"></div>
 		</div>
 		<div class="message-input">
-		<form action="">
-			<div class="btn-group dropup">
-			<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<i class="far fa-smile"></i>
-			</button>
-			<div class="dropdown-menu">
-				{% for emote in emotes %}
-					{% if emotes[emote]["menuDisplay"]: %}
-						<a href="#" onclick="addEmoteCode('{{emote}}');">{{emotes[emote]["menuDisplayCode"]|safe}}</a>
-					{% endif %}
-				{% endfor %}
-			</div>
-		</div>
-		  <input id="m" autocomplete="off" maxlength="300"/><button>Send</button>
-		</form>
+		    <form action="">
+			    <div class="btn-group dropup">
+			        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				        <i class="far fa-smile"></i>
+			        </button>
+			        <div class="dropdown-menu">
+    				    {% for emote in emotes %}
+	    				{% if emotes[emote]["menuDisplay"]: %}
+		    			    <a href="#" onclick="addEmoteCode('{{emote}}');">{{emotes[emote]["menuDisplayCode"]|safe}}</a>
+			    		{% endif %}
+				        {% endfor %}
+			        </div>
+		        </div>
+		        <input id="m" autocomplete="off" placeholder="Your message..."/>
+                <button>Send</button>
+		    </form>
 		</div>
 	</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>

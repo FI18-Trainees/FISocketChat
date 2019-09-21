@@ -19,7 +19,8 @@ $(function () {
 			$('#m').val('');
 		}
 		else {
-			alert('Username may not be empty!');
+            alert('Username may not be empty!');
+            document.getElementById('user_name').focus();
 		}
       return false;
     });
@@ -34,25 +35,27 @@ $(function () {
 		// the disconnection was initiated by the server, you need to reconnect manually
 		socket.connect();
 	}
-	});
-    socket.on('chat_message', function(msg){
-        let item = $('<div class="message-container">');
-        let header = $('<h2 class="message-header">');
-        header.append($('<div class="message-name">').prop('title', msg['timestamp']).text(msg['user']));
-        header.append($('<time class="message-timestamp">').text(msg['timestamp']));
-        item.append(header);
-        item.append($('<div class="message-content">').html(msg['message']));
-		$('#messages').append(item);
-	  if(msg['user'] !== "Server" && !focused) {
-		unread++;
-		document.title = "Socket.IO chat" + " (" + unread +")";
+    });
+    //build html-div which will be shown
+    socket.on('chat_message', function (msg) {
+        let item = $('<div class="message-container">');    //div which contains the message
+        let header = $('<h2 class="message-header">');      //div which contains username and timestamp
+        header.append($('<div class="message-name">').prop('title', msg['timestamp']).text(msg['user']));   //append username and timestamp as title to header-div
+        header.append($('<time class="message-timestamp">').text(msg['timestamp']));                        //append timestamp to header-div
+        item.append(header);                                                                                //append header to message-container-div
+        item.append($('<div class="message-content">').html(msg['message']));                               //append message content to message-container-div
+		$('#messages').append(item);    //append message to chat-div
+        if (msg['user'] !== "Server" && !focused) {     //if user is not server and chat is not focused, increase unread message count in the tab menu
+            unread++;
+            document.title = "Socket.IO chat" + " (" + unread + ")";
+        }
+      //if number of messages > 100 remove first message
+	  if($('#messages > div').length > 100) {
+        $('#messages').children().first().remove();
 	  }
-	  if($('#messages').children().length > 100) {
-		$('#messages').find('#messages:first-child').remove();
-	  }
-
 	  $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
+    //show usercount in navbar
     socket.on('status', function(status) {
         if(status.hasOwnProperty('count'))
         {
