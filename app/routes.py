@@ -1,4 +1,4 @@
-from flask import render_template, send_from_directory, request
+from flask import render_template, send_from_directory, request, make_response
 from app import app, emotehandler
 from flask_httpauth import HTTPBasicAuth
 import requests
@@ -21,6 +21,13 @@ def verify_password(username, password):
 @auth.login_required
 def index():
     return render_template('index.html', ip=request.remote_addr, emotes=emotehandler.emotes)
+
+
+@app.route("/status")
+def status():
+    response = make_response("OK")
+    response.headers["api"] = "hellothere"
+    return response
 
 
 @app.route('/public/<path:path>')
