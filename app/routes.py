@@ -1,18 +1,27 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, send_from_directory, request
-from flask import render_template, send_from_directory, request, make_response
+from flask import render_template, send_from_directory, request, make_response, redirect
 from app import app, emotehandler
-from flask_httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPTokenAuth
 import requests
 
-auth = HTTPBasicAuth()
+auth = HTTPTokenAuth()
 
 
-@auth.verify_password
-def verify_password(username, password):
+@auth.error_handler
+def auth_error():
+    return redirect("https://info.zaanposni.com", code=401)
+
+
+@auth.verify_token
+def verify_password(token):
+    token = request.cookies.get("access_token", "")
     r = requests.get("https://auth.zaanposni.com/verify",
-                     auth=(username, password),
-                     headers={'Cache-Control': 'no-cache'})
+                     headers={
+                         'Cache-Control': 'no-cache',
+                         'X-Auth-For': request.headers["X-Forwarded-For"],
+                         'Authorization': f"Bearer {token}"
+                             })
     if r.text == "OK":
         return True
     return False
