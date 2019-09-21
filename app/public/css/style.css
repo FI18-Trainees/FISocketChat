@@ -40,7 +40,7 @@ body {
     padding: 0;
 }
     #messages .message-container {
-        padding: 20px 5px;
+        padding: 10px 5px;
         border-bottom: solid 1px;
         border-bottom-color: rgb(114, 118, 125);
     }
@@ -55,7 +55,7 @@ body {
 
     #messages .message-name {
         color: red;
-        font: 18px "Comic Sans MS", Arial;
+        font: 16px "Comic Sans MS", Arial;
     }
 
     #messages .message-timestamp {
