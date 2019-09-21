@@ -2,24 +2,24 @@ from app import app, socketio, emotehandler
 from flask_socketio import send, emit
 import re
 from validators import url as valUrl
+from datetime import datetime
 
 newemote = False
 
 @socketio.on('chat_message')
 def handle_message(message):
-    msg = message[(message.find(';')+1):]
-    usr = message[:(message.find(';')+1)]
-    if msg.find('Server') == 0 or msg.find(':') > 100:  # only allow usernames with length 1-100
-        msg = msg[msg.find(':'):]
-        msg = '{Invalid username}' + msg
+    timestamp = datetime.now().strftime("%H:%M:%S;")
+    user = message['user'].strip() + ": "
+    message = message['message'].strip()
 
-    if msg[(msg.find(':')+1):].strip():
-        msg = safe_tags_replace(msg)
-        prefix = msg[:msg.find(": ")+2]
-        possiblelink = str.strip(msg[msg.find(": ")+2:])
-        msg = prefix + link_replacer(possiblelink)
-        msg = safe_emote_replace(msg)
-        emit('chat_message', usr + msg, broadcast=True)
+    if user.find('Server') == 0 or len(user) > 100:  # only allow usernames with length 1-100
+        user = '{Invalid username}'
+
+    if len(message) > 0:
+        message = safe_tags_replace(message)
+        message = link_replacer(message)
+        message = safe_emote_replace(message)
+        emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': message}, broadcast=True)
 
 
 count = 0  # TODO: add a class for this so we dont need globals monkaS
