@@ -33,7 +33,6 @@ def status():
 
 
 @app.route('/public/<path:path>')
-@auth.login_required
 def send_public(path):
     return send_from_directory('public', path)
 
