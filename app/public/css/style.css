@@ -4,25 +4,19 @@
     box-sizing: border-box;
 }
 
-/*html, body {
-    height: 100%;
-}*/
-
 html, body {
-    overflow: hidden!important;
+    overflow: hidden !important;
 }
 
 body {
     font: 13px "Comic Sans MS", Arial;
-    /*display: flex;
-    flex-direction: column;*/
 }
 
 .bg-dark {
     background: #2c2f33 !important;
 }
 
-/*::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }
@@ -58,40 +52,11 @@ body {
 
 ::-webkit-scrollbar-corner {
     background: transparent;
-}*/
-
-.navbar {
-    /*display: flex;
-    flex-direction: row;
-    flex-flow: nowrap;
-    justify-content: space-between;
-    justify-items: baseline;*/
-}
-
-.navbar #username-item {
-    /*margin-left: 10px;
-    margin-right: auto;*/
-}
-
-.navbar #usercount {
-    /*margin-right: 20px;*/
-}
-
-.navbar #powered-by {
-    
-}
-
-.container {
-    /*height: 100%;
-    display: flex;
-    flex-direction: column;*/
 }
 
 .chat {
     overflow-x: hidden;
     overflow-y: auto;
-    /*height: inherit;
-    width: 100%;*/
 }
 
 #messages {
@@ -99,27 +64,15 @@ body {
 }
 
     #messages .message-container {
-        /*padding: 8px 5px;*/
-        /*border-bottom: solid 1px;*/
         border-bottom-color: rgb(114, 118, 125);
     }
 
-    #messages .message-header {
-        /*display: flex;
-        -webkit-box-align: start;
-        align-items: flex-start;
-        align-items: baseline;
-        align-content: normal;*/
-    }
-
     #messages .message-name {
-        /*color: red;*/
         font: 13px "Comic Sans MS", Arial;
     }
 
     #messages .message-timestamp {
         color: #99aab5;
-        /*margin-left: 5px;*/
         font: 9px "Comic Sans MS", Arial;
     }
 
@@ -134,32 +87,20 @@ body {
 .message-input {
     bottom: 10px;
     padding: 5px;
-    /*width: 100%;*/
 }
 
-form {
-    /*display: flex;
-    flex: 1 100%;
-    flex-direction: row;
-    flex-flow: nowrap;
-    justify-content: space-between;
-    align-items: baseline;*/
+form input {
+    border: 0;
+    padding: 10px;
 }
 
-    form input {
-        border: 0;
-        padding: 10px;
-        /*margin: auto 10px;
-        flex-grow: inherit;*/
-    }
+form button, form .btn {
+    background: #99aab5;
+}
 
-    form button, form .btn {
-        background: #99aab5;
-    }
-
-    form button {
-        border: none;
-        padding: 10px;
-        color: #ffffff;
-        font-weight: bolder;
-    }
+form button {
+    border: none;
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bolder;
+}
