@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, send_from_directory, request, make_response, redirect
-from src.app import app, emotehandler
+from . import app, emotehandler
 from flask_httpauth import HTTPTokenAuth
 import requests
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from src.app import socketio, emotehandler
+from . import socketio, emotehandler
 from flask_socketio import emit
 import re
 from validators import url as valUrl
