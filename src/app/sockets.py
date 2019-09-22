@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from app import app, socketio, emotehandler
-from flask_socketio import send, emit
+from src.app import socketio, emotehandler
+from flask_socketio import emit
 import re
 from validators import url as valUrl
 from datetime import datetime
