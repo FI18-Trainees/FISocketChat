@@ -20,4 +20,4 @@ jobs:
         pipreqs --encoding=utf8 --savepath=./req.txt  .
     - name: Compare requirements
       run: |
-        python tests/unittest_db.py
+        python tests/test_requirements.py
