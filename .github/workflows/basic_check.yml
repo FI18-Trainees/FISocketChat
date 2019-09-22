@@ -1,4 +1,4 @@
-name: RequirementsCheck
+name: BasicCheckup
 
 on: [pull_request]
 
