@@ -38,10 +38,10 @@ $(function () {
     });
     //build html-div which will be shown
     socket.on('chat_message', function (msg) {
-        let item = $('<div class="message-container">');    //div which contains the message
-        let header = $('<h2 class="message-header">');      //div which contains username and timestamp
-        header.append($('<div class="message-name">').prop('title', msg['timestamp']).text(msg['user']));   //append username and timestamp as title to header-div
-        header.append($('<time class="message-timestamp">').text(msg['timestamp']));                        //append timestamp to header-div
+        let item = $('<div class="message-container border-bottom pt-1 pb-2 px-2">');    //div which contains the message
+        let header = $('<h2 class="message-header d-inline-flex align-items-baseline">');      //div which contains username and timestamp
+        header.append($('<div class="message-name text-danger">').prop('title', msg['timestamp']).text(msg['user']));   //append username and timestamp as title to header-div
+        header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                        //append timestamp to header-div
         item.append(header);                                                                                //append header to message-container-div
         item.append($('<div class="message-content">').html(msg['message']));                               //append message content to message-container-div
 		$('#messages').append(item);    //append message to chat-div
