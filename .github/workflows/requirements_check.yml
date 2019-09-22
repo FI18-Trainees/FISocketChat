@@ -15,7 +15,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install pipreqs
-    - name: Generate second requirements.txt and compare
+    - name: Generate second requirements.txt as req.txt
       run: |
         pipreqs --encoding=utf8 --savepath=./req.txt  .
-        diff req.txt requirements.txt
+    - name: Compare requirements
+      run: |
+        python tests/unittest_db.py
