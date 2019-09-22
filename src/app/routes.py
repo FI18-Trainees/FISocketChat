@@ -15,10 +15,14 @@ def auth_error():
 @auth.verify_token
 def verify_password(token):
     token = request.cookies.get("access_token", "")
+    try:
+        header = request.headers["X-Forwarded-For"]
+    except KeyError:
+        return False
     r = requests.get("https://auth.zaanposni.com/verify",
                      headers={
                          'Cache-Control': 'no-cache',
-                         'X-Auth-For': request.headers["X-Forwarded-For"],
+                         'X-Auth-For': header,
                          'Authorization': f"Bearer {token}"
                              })
     if r.text == "OK":
