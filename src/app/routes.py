@@ -13,7 +13,7 @@ def auth_error():
 
 
 @auth.verify_token
-def verify_password(token):
+def verify_token(token):
     token = request.cookies.get("access_token", "")
     try:
         header = request.headers["X-Forwarded-For"]
