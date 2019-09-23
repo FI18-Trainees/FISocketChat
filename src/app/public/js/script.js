@@ -1,5 +1,5 @@
 $(function () {
-    var socket = io.connect("https://chat.zaanposni.com", {secure: true});
+    var socket = io.connect(window.location.host + ":" + window.location.port + "/", {secure: true});
 	var focused = true;
 	var unread = 0;
 

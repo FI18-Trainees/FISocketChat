@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, send_from_directory, request, make_response, redirect
-from . import app, emotehandler
+from . import app, emotehandler, logindisabled
 from flask_httpauth import HTTPTokenAuth
 import requests
+
 
 auth = HTTPTokenAuth()
 
@@ -14,6 +15,8 @@ def auth_error():
 
 @auth.verify_token
 def verify_token(token):
+    if logindisabled:
+        return True
     token = request.cookies.get("access_token", "")
     try:
         header = request.headers["X-Forwarded-For"]
