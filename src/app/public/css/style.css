@@ -39,15 +39,15 @@ body {
     }
 
 ::-webkit-scrollbar-track {
-    background: rgb(114, 118, 125);
+    background: #2c2f33;
 }
 
     ::-webkit-scrollbar-track:hover {
-        background: rgb(114, 118, 125);
+        background: #2c2f33;
     }
 
     ::-webkit-scrollbar-track:active {
-        background: rgb(114, 118, 125);
+        background: #2c2f33;
     }
 
 ::-webkit-scrollbar-corner {
@@ -57,6 +57,7 @@ body {
 .chat {
     overflow-x: hidden;
     overflow-y: auto;
+	height: 85%;
 }
 
 #messages {

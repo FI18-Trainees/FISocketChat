@@ -21,6 +21,9 @@ jobs:
     - name: Compare requirements
       run: |
         python tests/test_requirements.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   Flask8Test:
     runs-on: ubuntu-latest
     steps:
