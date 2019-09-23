@@ -7,14 +7,16 @@ message = "Hello\nSeems like your requirements.txt is invalid.\nPlease use `pipr
 
 
 def get_address():
-    path = os.environ["GITHUB_EVENT_PATH"]
-    if not path: raise Exception("GITHUB_EVENT_PATH not found")
+    path = os.environ.get("GITHUB_EVENT_PATH", False)
+    if not path:
+        raise Exception("GITHUB_EVENT_PATH not found")
 
     with open(path, 'r') as c:
         event = json.load(c)
 
     url = event["pull_request"]["comments_url"]
-    if not url: raise Exception("API endpoint for adding a comment not found")
+    if not url:
+        raise Exception("API endpoint for adding a comment not found")
 
     return url
 
