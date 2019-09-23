@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex
 from flask_socketio import emit
 import re
 from validators import url as valUrl
@@ -19,6 +19,7 @@ def handle_message(message):
 
     if len(message) > 0:
         message = safe_tags_replace(message)
+        user = safe_tags_replace(user)
         message = link_replacer(message)
         message = safe_emote_replace(message)
         emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': message}, broadcast=True)
@@ -57,7 +58,7 @@ def replaceTag(tag):
 
 
 def safe_tags_replace(text):
-    return re.sub(r"[&<>]", lambda x: replaceTag(x.group()), text, 0, re.MULTILINE)
+    return re.sub(htmlregex, lambda x: replaceTag(x.group()), text, 0)
 
 
 def replaceEmote(emote):
@@ -68,11 +69,11 @@ def replaceEmote(emote):
 
 
 def safe_emote_replace(text):
-    return re.sub(r"[\"'/]?[/?!:\w]+[\"'/]?", lambda x: replaceEmote(x.group()), text, 0, re.MULTILINE)
+    return re.sub(emoteregex, lambda x: replaceEmote(x.group()), text, 0)
 
 
 def link_replacer(text):
-    return re.sub(r"[A-Za-z0-9\-._~:/?#\[\]@!$%()*+,;=]+", lambda x: linkwrapping(x.group()), text, 0, re.MULTILINE)
+    return re.sub(linkregex, lambda x: linkwrapping(x.group()), text, 0)
 
 
 def linkwrapping(text):

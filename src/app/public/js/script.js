@@ -1,5 +1,5 @@
 $(function () {
-    var socket = io.connect(window.location.host + ":" + window.location.port + "/", {secure: true});
+    var socket = io.connect(window.location.href, {secure: true});
 	var focused = true;
 	var unread = 0;
 

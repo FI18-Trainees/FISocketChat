@@ -3,6 +3,7 @@ from flask import Flask
 from flask_socketio import SocketIO
 from .emotes import Emotes
 from sys import argv
+from re import compile, MULTILINE
 
 
 app = Flask(__name__)
@@ -15,6 +16,10 @@ if "-disablelogin" in argv:
     logindisabled = True
 else:
     logindisabled = False
+
+emoteregex = compile(r"[\"'/]?[/?!:\w]+[\"'/]?", MULTILINE)
+htmlregex = compile(r"[&<>]", MULTILINE)
+linkregex = compile(r"[A-Za-z0-9\-._~:/?#\[\]@!$%()*+,;=]+", MULTILINE)
 
 
 
