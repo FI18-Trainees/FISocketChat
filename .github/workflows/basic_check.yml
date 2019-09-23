@@ -26,7 +26,7 @@ jobs:
       if: failure()
       with:
         title: Invalid requirements.txt detected
-        body: "Hello ${GITHUB_ACTOR}\nGitHub Actions here.\nSeems like your requirements.txt is not up to date.\nPlease use pipreqs /path/to/project and try again :)"
+        body: "Hello\nGitHub Actions here.\nSeems like your requirements.txt is not up to date.\nPlease use `pipreqs /path/to/project` and try again :)"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   Flask8Test:
