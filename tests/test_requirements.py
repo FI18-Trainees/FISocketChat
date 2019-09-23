@@ -12,8 +12,8 @@ def get_address():
 
     with open(path, 'r') as c:
         event = json.load(c)
-    print(event)
-    url = event["pull_request"] + event["pull_request.comments_url"]
+
+    url = event["pull_request"]["comments_url"]
     if not url: raise Exception("API endpoint for adding a comment not found")
 
     return url
