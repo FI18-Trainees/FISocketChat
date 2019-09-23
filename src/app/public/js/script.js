@@ -1,3 +1,4 @@
+    localStorage.debug = '*';
 $(function () {
     var socket = io.connect(window.location.href, {secure: true});
 	var focused = true;
@@ -66,9 +67,7 @@ $(function () {
     });
   });
   
-  function addEmoteCode(emote)
-  {
-	  document.getElementById('m').value = document.getElementById('m').value + emote + " ";
+  function addEmoteCode(emote) {
+	  $('#m').val($('#m').val() + emote + " " );
 	  $("#m").focus();
   }
-  

@@ -5,8 +5,6 @@ import re
 from validators import url as valUrl
 from datetime import datetime
 
-newemote = False
-
 
 @socketio.on('chat_message')
 def handle_message(message):
@@ -83,6 +81,3 @@ def linkwrapping(text):
         return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
     else:
         return text
-
-
-

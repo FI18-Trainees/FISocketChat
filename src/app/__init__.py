@@ -22,8 +22,8 @@ htmlregex = compile(r"[&<>]", MULTILINE)
 linkregex = compile(r"[A-Za-z0-9\-._~:/?#\[\]@!$%()*+,;=]+", MULTILINE)
 
 
-
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
+
 
 from . import sockets
 from . import routes
