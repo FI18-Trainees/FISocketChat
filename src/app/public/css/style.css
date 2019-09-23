@@ -17,7 +17,7 @@ body {
 }
 
 .bg-dark {
-    background: #2c2f33 !important;
+    background: var(--discord-dark) !important;
 }
 
 ::-webkit-scrollbar {
@@ -35,7 +35,7 @@ body {
 }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #ffffff;
+        background: var(--discord-white);
     }
 
     ::-webkit-scrollbar-thumb:active {
@@ -43,15 +43,15 @@ body {
     }
 
 ::-webkit-scrollbar-track {
-    background: #2c2f33;
+    background: var(--discord-dark);
 }
 
     ::-webkit-scrollbar-track:hover {
-        background: #2c2f33;
+        background: var(--discord-dark);
     }
 
     ::-webkit-scrollbar-track:active {
-        background: #2c2f33;
+        background: var(--discord-dark);
     }
 
 ::-webkit-scrollbar-corner {
@@ -69,7 +69,7 @@ body {
 }
 
     #messages .message-container {
-        border-bottom-color: rgb(114, 118, 125);
+        border-bottom-color: var(--discord-lightgrey);
     }
 
     #messages .message-name {
@@ -77,16 +77,16 @@ body {
     }
 
     #messages .message-timestamp {
-        color: #99aab5;
+        color: var(--discord-grey);
         font: 9px "Comic Sans MS", Arial;
     }
 
     #messages .message-content {
-        color: #ffffff;
+        color: var(--discord-white);
     }
 
         #messages .message-content:link {
-            color: #7289da;
+            color: var(--discord-blue);
         }
 
 .message-input {
@@ -100,12 +100,12 @@ form input {
 }
 
 form button, form .btn {
-    background: #99aab5;
+    background: var(--discord-grey);
 }
 
 form button {
     border: none;
     padding: 10px;
-    color: #ffffff;
+    color: var(--discord-white);
     font-weight: bolder;
 }
