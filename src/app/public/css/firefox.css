@@ -1,3 +1,18 @@
-.chat{
-    
+body {
+    overflow: auto !important;
+    height: 100%;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+}
+
+.container, .chat {
+    height: 100%;
+}
+
+.message-input {
+    position: sticky;
+    bottom: 0.5em;
 }
