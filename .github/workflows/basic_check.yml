@@ -1,6 +1,6 @@
 name: BasicCheckup
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   ReqCheck:
@@ -21,6 +21,14 @@ jobs:
     - name: Compare requirements
       run: |
         python tests/test_requirements.py
+    - uses: rytswd/respost@v0.1.0
+    - name: Comment on invalid requirements.txt
+      if: failure()
+      with:
+        title: Invalid requirements.txt detected
+        body: "Hello ${GITHUB_ACTOR}\nGitHub Actions here.\nSeems like your requirements.txt is not up to date.\nPlease use pipreqs /path/to/project and try again :)"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   Flask8Test:
     runs-on: ubuntu-latest
     steps:
