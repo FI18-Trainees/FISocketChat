@@ -43,7 +43,8 @@ class TestClass(unittest.TestCase):
                 "Content-Type": "application/json"
             }
 
-            print(requests.post(url, data=body, headers=headers).text)
+            print(body)
+            print(requests.post(url, json=body, headers=headers).text)
 
         self.assertEqual(req, requirements)
 
