@@ -3,7 +3,7 @@ import os
 import requests
 import json
 
-message = "Hello,\nSeems like your requirements.txt is invalid.\nPlease use `pipreqs /path/to/project`\nExpected:\n`"
+message = "Hello\nSeems like your requirements.txt is invalid.\nPlease use `pipreqs /path/to/project```\nExpected:\n```"
 
 
 def get_address():
