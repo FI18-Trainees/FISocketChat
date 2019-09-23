@@ -9,7 +9,7 @@ body {
 }
 
 .container, .chat {
-    height: 100%;
+    height: inherit;
 }
 
 .message-input {

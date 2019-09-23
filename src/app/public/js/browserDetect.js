@@ -20,17 +20,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     // Blink engine detection
     var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-    var output = 'Detecting browsers by ducktyping:<hr>';
-    output += 'isFirefox: ' + isFirefox + '<br>';
-    output += 'isChrome: ' + isChrome + '<br>';
-    output += 'isSafari: ' + isSafari + '<br>';
-    output += 'isOpera: ' + isOpera + '<br>';
-    output += 'isIE: ' + isIE + '<br>';
-    output += 'isEdge: ' + isEdge + '<br>';
-    output += 'isBlink: ' + isBlink + '<br>';
-    if ($(isChrome || isSafari)) {
+    if ((isChrome || isSafari)) {
         $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/chrome-safari.css">');
     } else if (isFirefox) {
         $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/firefox.css">');
+    } else if (isEdge) {
+        $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/edge.css">');
     }
 });
