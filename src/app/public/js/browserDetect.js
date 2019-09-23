@@ -1,4 +1,4 @@
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function (event) {
     // Opera 8.0+
     var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
@@ -20,7 +20,6 @@ window.onload = function () {
     // Blink engine detection
     var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-
     var output = 'Detecting browsers by ducktyping:<hr>';
     output += 'isFirefox: ' + isFirefox + '<br>';
     output += 'isChrome: ' + isChrome + '<br>';
@@ -29,11 +28,9 @@ window.onload = function () {
     output += 'isIE: ' + isIE + '<br>';
     output += 'isEdge: ' + isEdge + '<br>';
     output += 'isBlink: ' + isBlink + '<br>';
-
     if (isChrome || isSafari) {
         $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/style.css">');
-    } else if(isFirefox)
-
-    
-}
-
+    } else if (isFirefox) {
+        $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/firefox.css">');
+    }
+});
