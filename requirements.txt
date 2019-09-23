@@ -2,4 +2,4 @@ Flask_SocketIO==4.2.1
 Flask==1.1.1
 Flask_HTTPAuth==3.3.0
 requests==2.22.0
-validators==0.14.0
+validators==0.14
