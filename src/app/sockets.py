@@ -1,10 +1,12 @@
-from app import app, socketio, emotehandler
-from flask_socketio import send, emit
+# -*- coding: utf-8 -*-
+from . import socketio, emotehandler
+from flask_socketio import emit
 import re
 from validators import url as valUrl
 from datetime import datetime
 
 newemote = False
+
 
 @socketio.on('chat_message')
 def handle_message(message):

@@ -8,6 +8,7 @@
 ```
 pip install -r requirements.txt
 ```
+Apply nginx.conf to your nginx (needed for headers).
 
 ## Note
 foobar

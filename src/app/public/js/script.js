@@ -1,5 +1,5 @@
 $(function () {
-    var socket = io();
+    var socket = io.connect("https://chat.zaanposni.com", {secure: true});
 	var focused = true;
 	var unread = 0;
 
@@ -14,9 +14,11 @@ $(function () {
     $('form').submit(function(e){
       e.preventDefault(); // prevents page reloading
 		let u = $('#user_name').val();
-		if(u !== "") {
-			socket.emit('chat_message', {'user': u, 'message': $('#m').val() });
-			$('#m').val('');
+		let m = $('#m');
+		if(u != "")
+		{
+			socket.emit('chat_message', {'user': u, 'message':m.val()});
+			m.val('');
 		}
 		else {
             alert('Username may not be empty!');
@@ -25,15 +27,15 @@ $(function () {
       return false;
     });
 	socket.on('connect_error', (error)=> {
-		socket.connect();
+		setTimeout(function() { socket.connect(); }, 3000);
 	});
 	socket.on('connect_timeout', (timeout) => {
-		socket.connect();
+		setTimeout(function() { socket.connect(); }, 3000);
 	});
 	socket.on('disconnect', (reason) => {
 	if (reason === 'io server disconnect') {
 		// the disconnection was initiated by the server, you need to reconnect manually
-		socket.connect();
+		setTimeout(function() { socket.connect(); }, 3000);
 	}
     });
     //build html-div which will be shown

@@ -1,9 +1,15 @@
+# -*- coding: utf-8 -*-
 import json
 import time
 import threading
-import app
+import platform
 
-filename = "app\\emotes.json"
+
+system = platform.system()
+if system == "Windows":
+    filename = "app\\emotes.json"
+if system == "Linux":
+    filename = "app/emotes.json"
 
 
 class Emotes:
