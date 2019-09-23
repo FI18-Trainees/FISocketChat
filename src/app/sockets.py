@@ -40,8 +40,7 @@ def disconnect():
 
 @socketio.on('checkEmotes')
 def emotecheck():
-    if newemote:
-        emit('status', {'emoteupdated': 1}, broadcast=True)
+    emit('status', {'emoteupdated': 1}, broadcast=True)
 
 
 tagsToReplace = {

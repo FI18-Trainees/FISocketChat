@@ -1,4 +1,4 @@
-    localStorage.debug = '*';
+localStorage.debug = '*';
 $(function () {
     var socket = io.connect(window.location.href, {secure: true});
 	var focused = true;
