@@ -4,11 +4,15 @@
     box-sizing: border-box;
 }
 
-html, body {
-    overflow: hidden !important;
-}
-
 body {
+    /*variables*/
+    --discord-black: #23272a;
+    --discord-dark: #2c2f33;
+    --discord-grey: #99aab5;
+    --discord-lightgrey: #72767d;
+    --discord-white: #ffffff;
+    --discord-blue: #7289da;
+
     font: 13px "Comic Sans MS", Arial;
 }
 
