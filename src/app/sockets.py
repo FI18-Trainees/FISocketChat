@@ -38,11 +38,6 @@ def disconnect():
     emit('status', {'count': count}, broadcast=True)
 
 
-@socketio.on('checkEmotes')
-def emotecheck():
-    emit('status', {'emoteupdated': 1}, broadcast=True)
-
-
 tagsToReplace = {
     '&': '&amp;',
     '<': '&lt;',

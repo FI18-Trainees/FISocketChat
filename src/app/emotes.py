@@ -17,7 +17,6 @@ class Emotes:
         self.emotes = {}
         self.runCheck = start
         self.startreloader()
-        self.socket = None
 
     def getemotes(self):
         if filename:
@@ -41,9 +40,4 @@ class Emotes:
                 cache = None
             if cache is not None and cache != self.emotes:
                 self.emotes = self.getemotes()
-                if self.socket is not None:
-                    self.socket.newemote = True
             time.sleep(60)
-
-    def setsocket(self, socket):
-        self.socket = socket

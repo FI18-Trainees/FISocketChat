@@ -1,4 +1,4 @@
-localStorage.debug = '*';
+//localStorage.debug = '*';
 $(function () {
     var socket = io.connect(window.location.href, {secure: true});
 	var focused = true;
@@ -60,6 +60,7 @@ $(function () {
     });
     //show usercount in navbar
     socket.on('status', function(status) {
+    console.log(status);
         if(status.hasOwnProperty('count'))
         {
             $('#usercount').text('Usercount: ' + status['count']);
