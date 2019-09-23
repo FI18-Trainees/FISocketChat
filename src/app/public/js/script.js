@@ -28,14 +28,17 @@ $(function () {
       return false;
     });
 	socket.on('connect_error', (error)=> {
+	    setUserCount("offline");
 		setTimeout(function() { socket.connect(); }, 3000);
 	});
 	socket.on('connect_timeout', (timeout) => {
+	    setUserCount("offline");
 		setTimeout(function() { socket.connect(); }, 3000);
 	});
 	socket.on('disconnect', (reason) => {
 	if (reason === 'io server disconnect') {
 		// the disconnection was initiated by the server, you need to reconnect manually
+        setUserCount("offline");
 		setTimeout(function() { socket.connect(); }, 3000);
 	}
     });
@@ -61,13 +64,16 @@ $(function () {
     //show usercount in navbar
     socket.on('status', function(status) {
     console.log(status);
-        if(status.hasOwnProperty('count'))
-        {
-            $('#usercount').text('Usercount: ' + status['count']);
+        if(status.hasOwnProperty('count')) {
+            setUserCount(status['count']);
         }
     });
   });
-  
+
+  function setUserCount(count) {
+    $('#usercount').text('Usercount: ' + count);
+  }
+
   function addEmoteCode(emote) {
 	  $('#m').val($('#m').val() + emote + " " );
 	  $("#m").focus();
