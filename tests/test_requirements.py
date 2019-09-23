@@ -3,7 +3,7 @@ import os
 import requests
 import json
 
-message = "Hello\nSeems like your requirements.txt is invalid.\nPlease use `pipreqs /path/to/project```\nExpected:\n```"
+message = "Hello,\nseems like your requirements.txt is invalid.\nPlease use `pipreqs /path/to/project`\nExpected:\n```"
 
 
 def get_address():
@@ -39,7 +39,7 @@ class TestClass(unittest.TestCase):
                 expected = f.read()
 
             url = get_address()
-            body = {"body": message + expected + "`"}
+            body = {"body": message + expected + "```"}
             headers = {
                 "Authorization": "token " + os.environ["GITHUB_TOKEN"],
                 "Content-Type": "application/json"
