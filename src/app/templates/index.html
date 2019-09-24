@@ -2,56 +2,69 @@
 <html>
 <head>
     <title>Socket.IO chat</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/general.css">
 
     <meta property="og:title" content="FIChat">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
     <meta property="og:description" content="Better than Skype">
-    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Skype-for-Business.svg/1200px-Skype-for-Business.svg.png">
+    <meta property="og:image"
+          content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Skype-for-Business.svg/1200px-Skype-for-Business.svg.png">
 
 </head>
 <body class="bg-dark text-white d-flex flex-column justify-content-start">
-    <nav class="navbar navbar-dark bg-dark border-bottom d-flex flex-nowrap">
-        <div class="navbar-brand">
-            <i class="fab fa-skype fa-spin d-inline-block align-top" style="color: #00aff0" title="Skype rotiert"></i>
-            Super cheap chat with sock(et)?s <i class="fas fa-socks"></i>
-        </div>
-        <div class="nav-item rounded ml-2 mr-auto" id="username-item"><input type="text" required placeholder="username" id="user_name"></div>
-        <div class="nav-item mr-4 ml-auto " id="usercount">Usercount: 0</div>
-        <div class="nav-link text-white" id="powered-by">Powered by <a href="https://python.org" target="_blank" class="text-white">Python</a></div>
-
-    </nav>
-    <div class="container d-flex flex-column h-100">
-        <div class="chat mb-2 mt-2">
-            <div id="messages"></div>
-        </div>
-        <div class="message-input w-100 mb-2">
-            <form class="align-items-top d-flex justify-content-between">
-                <div class="btn-group dropup align-top mr-2">
-                    <button type="button" class="btn btn-secondary dropdown-toggle rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="far fa-smile"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        {% for emote in emotes %}
-                        {% if emotes[emote]["menuDisplay"]: %}
-                        <a href="#" onclick="addEmoteCode('{{emote}}');">{{emotes[emote]["menuDisplayCode"]|safe}}</a>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-                <input class="rounded flex-fill" id="m" autocomplete="off" placeholder="Your message..." />
-                <button class="rounded ml-2">Send</button>
-            </form>
+<nav class="navbar navbar-dark bg-dark border-bottom d-flex flex-nowrap">
+    <div class="navbar-brand">
+        <div id="online-status">
+            <span class="badge badge-pill badge-success">Connected</span>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="/public/js/script.js"></script>
-    <script src="/public/js/browserDetect.js"></script>
+    <div class="nav-item rounded ml-2 mr-auto" id="username-item"><input type="text" required placeholder="username"
+                                                                         id="user_name"></div>
+    <div class="nav-item mr-4 ml-auto " id="usercount">Usercount: 0</div>
+    <div class="nav-link text-white" id="powered-by">Powered by <a href="https://python.org" target="_blank"
+                                                                   class="text-white">Python</a></div>
+
+</nav>
+<div class="container d-flex flex-column h-100">
+    <div class="chat mb-2 mt-2">
+        <div id="messages"></div>
+    </div>
+    <div class="notification-box bg-discord-red" id="errorbox"></div>
+    <div class="message-input w-100 mb-2">
+        <form class="align-items-top d-flex justify-content-between">
+            <div class="btn-group dropup align-top mr-2">
+                <button type="button" class="btn btn-secondary dropdown-toggle rounded" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-smile"></i>
+                </button>
+                <div class="dropdown-menu">
+                    {% for emote in emotes %}
+                        {% if emotes[emote]["menuDisplay"]: %}
+                            <a href="#"
+                               onclick="addEmoteCode('{{ emote }}');">{{ emotes[emote]["menuDisplayCode"]|safe }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <input class="rounded flex-fill" id="m" autocomplete="off" placeholder="Your message..."/>
+            <button class="rounded ml-2">Send</button>
+        </form>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="/public/js/script.js"></script>
+<script src="/public/js/browserDetect.js"></script>
 </body>
 </html>
