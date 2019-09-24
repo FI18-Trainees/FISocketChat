@@ -4,6 +4,7 @@ from flask_socketio import emit
 import re
 from validators import url as valUrl
 from datetime import datetime
+from .global_values import count
 
 newemote = False
 
@@ -24,19 +25,16 @@ def handle_message(message):
         emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': message}, broadcast=True)
 
 
-count = 0  # TODO: add a class for this so we dont need globals monkaS
 @socketio.on('connect')
 def connect():
-    global count
-    count += 1
-    emit('status', {'count': count}, broadcast=True)
+    count.add()
+    emit('status', {'count': count.get_count()}, broadcast=True)
 
 
 @socketio.on('disconnect')
 def disconnect():
-    global count
-    count -= 1
-    emit('status', {'count': count}, broadcast=True)
+    count.rem()
+    emit('status', {'count': count.get_count()}, broadcast=True)
 
 
 @socketio.on('checkEmotes')
