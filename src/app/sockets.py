@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler, userCount
+from . import socketio, emotehandler, user_count
 from flask_socketio import emit
 import re
 from validators import url as valUrl
@@ -26,14 +26,14 @@ def handle_message(message):
 
 @socketio.on('connect')
 def connect():
-    userCount.add()
-    emit('status', {'count': userCount.get_count()}, broadcast=True)
+    user_count.add()
+    emit('status', {'count': user_count.get_count()}, broadcast=True)
 
 
 @socketio.on('disconnect')
 def disconnect():
-    userCount.rem()
-    emit('status', {'count': userCount.get_count()}, broadcast=True)
+    user_count.rem()
+    emit('status', {'count': user_count.get_count()}, broadcast=True)
 
 
 @socketio.on('checkEmotes')
