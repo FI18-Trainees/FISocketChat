@@ -10,6 +10,3 @@ class Count:
 
     def get_count(self):
         return self.count
-
-
-count = Count(0)

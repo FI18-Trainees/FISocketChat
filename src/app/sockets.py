@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler
+from . import socketio, emotehandler, count
 from flask_socketio import emit
 import re
 from validators import url as valUrl
 from datetime import datetime
-from .global_values import count
 
 newemote = False
 
