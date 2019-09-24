@@ -13,6 +13,3 @@ userCount = UserCount(0)
 
 from . import sockets
 from . import routes
-
-
-
