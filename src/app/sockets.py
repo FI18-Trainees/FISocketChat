@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler
+from . import socketio, emotehandler, userCount
 from flask_socketio import emit
 import re
 from validators import url as valUrl
@@ -24,19 +24,16 @@ def handle_message(message):
         emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': message}, broadcast=True)
 
 
-count = 0  # TODO: add a class for this so we dont need globals monkaS
 @socketio.on('connect')
 def connect():
-    global count
-    count += 1
-    emit('status', {'count': count}, broadcast=True)
+    userCount.add()
+    emit('status', {'count': userCount.get_count()}, broadcast=True)
 
 
 @socketio.on('disconnect')
 def disconnect():
-    global count
-    count -= 1
-    emit('status', {'count': count}, broadcast=True)
+    userCount.rem()
+    emit('status', {'count': userCount.get_count()}, broadcast=True)
 
 
 @socketio.on('checkEmotes')
