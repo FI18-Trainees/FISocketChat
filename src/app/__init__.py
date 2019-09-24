@@ -26,4 +26,5 @@ socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins
 
 
 from . import sockets
+emotehandler.setSocket(sockets)
 from . import routes

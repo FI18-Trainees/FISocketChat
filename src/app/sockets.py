@@ -28,14 +28,18 @@ count = 0  # TODO: add a class for this so we dont need globals monkaS
 def connect():
     global count
     count += 1
-    emit('status', {'count': count}, broadcast=True)
+    emitstatus({'count': count})
 
 
 @socketio.on('disconnect')
 def disconnect():
     global count
     count -= 1
-    emit('status', {'count': count}, broadcast=True)
+    emitstatus({'count': count})
+
+
+def emitstatus(status):
+    socketio.emit('status', status)
 
 
 tagsToReplace = {
@@ -70,7 +74,6 @@ def link_replacer(text):
 
 def linkwrapping(text):
     res = valUrl(text)
-    # print(res)
     if res:
         return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
     else:

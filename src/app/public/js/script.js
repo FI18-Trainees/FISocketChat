@@ -1,6 +1,6 @@
 //localStorage.debug = '*';
-$(function () {
-    var socket = io.connect(window.location.href, {secure: true});
+$(document).ready(function () {
+    var socket = io.connect(window.location.href.slice(0, -1), {secure: true, transports: ['websocket']});
 	var focused = true;
 	var unread = 0;
 

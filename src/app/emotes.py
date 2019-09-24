@@ -17,6 +17,7 @@ class Emotes:
         self.emotes = {}
         self.runCheck = start
         self.startreloader()
+        self.socket = None
 
     def getemotes(self):
         if filename:
@@ -26,7 +27,6 @@ class Emotes:
     def startreloader(self):
         thread = threading.Thread(target=self.run, args=())
         thread.daemon = True  # Daemonize thread
-
         thread.start()
 
     def stopreloader(self):
@@ -40,4 +40,9 @@ class Emotes:
                 cache = None
             if cache is not None and cache != self.emotes:
                 self.emotes = self.getemotes()
-            time.sleep(60)
+                if self.socket is not None:
+                    self.socket.emitstatus({'newemote': 1})
+            time.sleep(2)
+
+    def setSocket(self, socket):
+        self.socket = socket
