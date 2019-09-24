@@ -17,6 +17,7 @@ foobar
 - <a href="https://github.com/SFFan123">SFFan123</a>
 - <a href="https://github.com/zaanposni">Zaanposni</a>
 - <a href="https://github.com/Monkmitrad">Monkmitrad</a>
+- <a href="https://github.com/ArPiiX">ArPiiX</a>
 <hr />
 
 ### License:
