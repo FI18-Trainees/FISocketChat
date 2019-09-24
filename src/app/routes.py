@@ -14,7 +14,6 @@ def auth_error():
 
 @auth.verify_token
 def verify_token(token):
-    return True
     token = request.cookies.get("access_token", "")
     try:
         header = request.headers["X-Forwarded-For"]
