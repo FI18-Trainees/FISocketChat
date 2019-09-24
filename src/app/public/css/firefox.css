@@ -1,0 +1,22 @@
+html{
+	min-height: 100%;
+}
+
+body {
+    overflow: auto !important;
+    min-height: 100%;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+}
+
+.container, .chat {
+	min-height: 100vh;
+}
+
+.message-input {
+    position: sticky;
+    bottom: 0.5em;
+}
