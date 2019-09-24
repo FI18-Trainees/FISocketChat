@@ -1,5 +1,5 @@
 class UserCount:
-    def __init__(self, init_value = 0):
+    def __init__(self, init_value=0):
         self.count = init_value
 
     def add(self):
