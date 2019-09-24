@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/chrome-safari.css">');
     } else if (isFirefox) {
         $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/firefox.css">');
+		$('body').append('<script src="/public/js/mutationObserver.js"></script>');
     } else if (isEdge) {
         $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/edge.css">');
     }
