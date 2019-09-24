@@ -26,14 +26,14 @@ def handle_message(message):
 
 @socketio.on('connect')
 def connect():
-    count.add()
-    emit('status', {'count': count.get_count()}, broadcast=True)
+    userCount.add()
+    emit('status', {'count': userCount.get_count()}, broadcast=True)
 
 
 @socketio.on('disconnect')
 def disconnect():
-    count.rem()
-    emit('status', {'count': count.get_count()}, broadcast=True)
+    userCount.rem()
+    emit('status', {'count': userCount.get_count()}, broadcast=True)
 
 
 @socketio.on('checkEmotes')
