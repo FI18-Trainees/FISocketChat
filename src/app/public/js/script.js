@@ -24,20 +24,27 @@ $(function () {
         }
         return false;
     });
+    socket.on('connect', function () {
+        changeOnlineStatus(true);
+    });
+
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
+        changeOnlineStatus(false);
         setTimeout(function () {
             socket.connect();
         }, 3000);
     });
     socket.on('connect_timeout', (timeout) => {
         showError("Connection timed out.");
+        changeOnlineStatus(false);
         setTimeout(function () {
             socket.connect();
         }, 3000);
     });
     socket.on('disconnect', (reason) => {
         showError("Disconnected.");
+        changeOnlineStatus(false);
         if (reason === 'io server disconnect') {
             // the disconnection was initiated by the server, you need to reconnect manually
             setTimeout(function () {
@@ -78,6 +85,16 @@ function showError(message) {
     setTimeout(function() {
         hideError();
     }, 2000);
+}
+
+function changeOnlineStatus(online) {
+    if (online) {
+        document.getElementById("online-status").innerHTML =
+            "<span class=\"badge badge-pill badge-success\">Connected</span>"
+    } else {
+        document.getElementById("online-status").innerHTML =
+            "<span class=\"badge badge-pill badge-danger\">Disconnected</span>"
+    }
 }
 
 function hideError() {
