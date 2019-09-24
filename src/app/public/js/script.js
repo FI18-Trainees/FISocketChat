@@ -1,13 +1,18 @@
 //localStorage.debug = '*';
-$(document).ready(function () {
-    var socket = io.connect(window.location.href.slice(0, -1), {secure: true, transports: ['websocket']});
+    var socket = null;
 	var focused = true;
 	var unread = 0;
-
+    var emotecheck = null;
+$(document).ready(function () {
+    socket = io.connect(window.location.href.slice(0, -1), {secure: true, transports: ['websocket']});
 	window.onfocus = function() {
-	document.title = "Socket.IO chat";
-	unread = 0;
+	    document.title = "Socket.IO chat";
+	    unread = 0;
 		focused = true;
+		if(!socket.connected) {
+		    setUserCount("offline");
+		    socket.connect();
+		}
 	};
 	window.onblur = function() {
 		focused = false;
@@ -28,11 +33,11 @@ $(document).ready(function () {
       return false;
     });
 	socket.on('connect_error', (error)=> {
-	    setUserCount("offline");
+	    setUserCount("offline, error");
 		setTimeout(function() { socket.connect(); }, 3000);
 	});
 	socket.on('connect_timeout', (timeout) => {
-	    setUserCount("offline");
+	    setUserCount("offline, timeout");
 		setTimeout(function() { socket.connect(); }, 3000);
 	});
 	socket.on('disconnect', (reason) => {
@@ -67,6 +72,9 @@ $(document).ready(function () {
         if(status.hasOwnProperty('count')) {
             setUserCount(status['count']);
         }
+        if(status.hasOwnProperty('newemote')) {
+
+        }
     });
   });
 
@@ -78,3 +86,15 @@ $(document).ready(function () {
 	  $('#m').val($('#m').val() + emote + " " );
 	  $("#m").focus();
   }
+  function checkForNewEmote() {
+    socket.emit('checkNewEmote');
+  }
+  function updateEmoteMenu() {
+   // TODO
+  }
+  function setCheckInterval() {
+    emotecheck = setInterval(checkForNewEmote, 300000);
+  }
+
+
+  setCheckInterval();

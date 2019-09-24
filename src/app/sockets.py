@@ -5,6 +5,8 @@ import re
 from validators import url as valUrl
 from datetime import datetime
 
+newEmote = False
+
 
 @socketio.on('chat_message')
 def handle_message(message):
@@ -36,6 +38,13 @@ def disconnect():
     global count
     count -= 1
     emitstatus({'count': count})
+
+
+@socketio.on('checkNewEmote')
+def checkEmote():
+    global newEmote
+    if newEmote:
+        emitstatus({"newemote": 1})
 
 
 def emitstatus(status):
@@ -78,3 +87,10 @@ def linkwrapping(text):
         return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
     else:
         return text
+
+
+def setNewEmote():
+    global newEmote
+    newEmote = True
+
+
