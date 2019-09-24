@@ -1,7 +1,10 @@
 name: BasicCheckup
 
-on: [pull_request]
-
+on:
+  push:
+      branches: 
+        - master
+  pull_request
 jobs:
   ReqCheck:
     runs-on: ubuntu-latest
