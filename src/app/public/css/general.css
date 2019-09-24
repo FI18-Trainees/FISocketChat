@@ -1,0 +1,50 @@
+body {
+    /*variables*/
+    --discord-black: #23272a;
+    --discord-dark: #2c2f33;
+    --discord-grey: #99aab5;
+    --discord-lightgrey: #72767d;
+    --discord-white: #ffffff;
+    --discord-blue: #7289da;
+}
+
+#messages {
+    word-wrap: break-word;
+}
+
+    #messages .message-container {
+        border-bottom-color: var(--discord-lightgrey);
+    }
+
+    #messages .message-name {
+        font: 13px "Comic Sans MS", Arial;
+    }
+
+    #messages .message-timestamp {
+        color: var(--discord-grey);
+        font: 9px "Comic Sans MS", Arial;
+    }
+
+    #messages .message-content {
+        color: var(--discord-white);
+    }
+
+        #messages .message-content:link {
+            color: var(--discord-blue);
+        }
+
+form input {
+    border: 0;
+    padding: 10px;
+}
+
+form button, form .btn {
+    background: var(--discord-grey);
+}
+
+form button {
+    border: none;
+    padding: 10px;
+    color: var(--discord-white);
+    font-weight: bolder;
+}
