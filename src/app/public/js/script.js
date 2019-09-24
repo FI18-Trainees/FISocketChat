@@ -73,7 +73,7 @@ $(function () {
 });
 
 function showError(message) {
-    $("#errorbox").innerHTML = message;
+    document.getElementById("errorbox").innerText = message;
     $("#errorbox").fadeIn("slow");
     setTimeout(function() {
         hideError();
