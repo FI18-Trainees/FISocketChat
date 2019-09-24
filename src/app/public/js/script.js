@@ -1,42 +1,49 @@
 $(function () {
     var socket = io.connect($(("window.location.href").slice(0, -1)), {secure: true});
-	var focused = true;
-	var unread = 0;
+    var focused = true;
+    var unread = 0;
 
-	window.onfocus = function() {
-	document.title = "Socket.IO chat";
-	unread = 0;
-		focused = true;
-	};
-	window.onblur = function() {
-		focused = false;
-	};
-    $('form').submit(function(e){
-      e.preventDefault(); // prevents page reloading
-		let u = $('#user_name').val();
-		let m = $('#m');
-		if(u != "")
-		{
-			socket.emit('chat_message', {'user': u, 'message':m.val()});
-			m.val('');
-		}
-		else {
-            alert('Username may not be empty!');
+    window.onfocus = function () {
+        document.title = "Socket.IO chat";
+        unread = 0;
+        focused = true;
+    };
+    window.onblur = function () {
+        focused = false;
+    };
+    $('form').submit(function (e) {
+        e.preventDefault(); // prevents page reloading
+        let u = $('#user_name').val();
+        let m = $('#m');
+        if (u != "") {
+            socket.emit('chat_message', {'user': u, 'message': m.val()});
+            m.val('');
+        } else {
+            showError("Username may not be empty!");
             document.getElementById('user_name').focus();
-		}
-      return false;
+        }
+        return false;
     });
-	socket.on('connect_error', (error)=> {
-		setTimeout(function() { socket.connect(); }, 3000);
-	});
-	socket.on('connect_timeout', (timeout) => {
-		setTimeout(function() { socket.connect(); }, 3000);
-	});
-	socket.on('disconnect', (reason) => {
-	if (reason === 'io server disconnect') {
-		// the disconnection was initiated by the server, you need to reconnect manually
-		setTimeout(function() { socket.connect(); }, 3000);
-	}
+    socket.on('connect_error', (error) => {
+        showError("Connection failed.");
+        setTimeout(function () {
+            socket.connect();
+        }, 3000);
+    });
+    socket.on('connect_timeout', (timeout) => {
+        showError("Connection timed out.");
+        setTimeout(function () {
+            socket.connect();
+        }, 3000);
+    });
+    socket.on('disconnect', (reason) => {
+        showError("Disconnected.");
+        if (reason === 'io server disconnect') {
+            // the disconnection was initiated by the server, you need to reconnect manually
+            setTimeout(function () {
+                socket.connect();
+            }, 3000);
+        }
     });
     //build html-div which will be shown
     socket.on('chat_message', function (msg) {
@@ -46,29 +53,39 @@ $(function () {
         header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                        //append timestamp to header-div
         item.append(header);                                                                                //append header to message-container-div
         item.append($('<div class="message-content">').html(msg['message']));                               //append message content to message-container-div
-		$('#messages').append(item);    //append message to chat-div
+        $('#messages').append(item);    //append message to chat-div
         if (msg['user'] !== "Server" && !focused) {     //if user is not server and chat is not focused, increase unread message count in the tab menu
             unread++;
             document.title = "Socket.IO chat" + " (" + unread + ")";
         }
-      //if number of messages > 100 remove first message
-	  if($('#messages > div').length > 100) {
-        $('#messages').children().first().remove();
-	  }
-	  $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
+        //if number of messages > 100 remove first message
+        if ($('#messages > div').length > 100) {
+            $('#messages').children().first().remove();
+        }
+        $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
     //show usercount in navbar
-    socket.on('status', function(status) {
-        if(status.hasOwnProperty('count'))
-        {
+    socket.on('status', function (status) {
+        if (status.hasOwnProperty('count')) {
             $('#usercount').text('Usercount: ' + status['count']);
         }
     });
-  });
-  
-  function addEmoteCode(emote)
-  {
-	  document.getElementById('m').value = document.getElementById('m').value + emote + " ";
-	  $("#m").focus();
-  }
+});
+
+function showError(message) {
+    $("#errorbox").innerHTML = message;
+    $("#errorbox").fadeIn("slow");
+    setTimeout(function() {
+        hideError();
+    }, 2000);
+}
+
+function hideError() {
+    $("#errorbox").fadeOut("slow");
+}
+
+function addEmoteCode(emote) {
+    document.getElementById('m').value = document.getElementById('m').value + emote + " ";
+    $("#m").focus();
+}
   

@@ -6,6 +6,7 @@ body {
     --discord-lightgrey: #72767d;
     --discord-white: #ffffff;
     --discord-blue: #7289da;
+    --discord-red: rgba(240, 71, 71, 1);
 }
 
 #messages {
@@ -47,4 +48,23 @@ form button {
     padding: 10px;
     color: var(--discord-white);
     font-weight: bolder;
+}
+
+.notification-box {
+    background-color: var(--discord-dark);
+    border-radius: 15px;
+    box-shadow: inset 0 0 1em var(--discord-black);
+    height: 50px;
+    width: 100%;
+    position: sticky;
+    bottom: 5em;
+    padding: 10px 10px 10px 20px;
+    color: white;
+    z-index: 1000;
+    display: none;
+}
+
+.bg-discord-red {
+    background-color: var(--discord-red);
+    box-shadow: none;
 }
