@@ -3,7 +3,9 @@
 var target = document.querySelector('#messages')
 // create an observer instance
 var observer = new MutationObserver(function(mutations) {
-  window.scrollTo(0,document.body.scrollHeight);   
+	if(target.childNodes.length <= 5){ } else { //prevent scrolling until 5 messages are sent
+		window.scrollTo(0,document.body.scrollHeight);
+	}
 });
 // configuration of the observer:
 var config = { attributes: true, childList: true, characterData: true };
