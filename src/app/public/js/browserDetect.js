@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     // Blink engine detection
     var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-    if ((isChrome || isSafari)) {
-        $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/chrome-safari.css">');
+    if ((isChrome || isSafari || isOpera)) {
+        $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/chrome-safari-opera.css">');
     } else if (isFirefox) {
         $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/firefox.css">');
 		$('body').append('<script src="/public/js/mutationObserver.js"></script>');
