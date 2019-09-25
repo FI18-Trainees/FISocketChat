@@ -42,7 +42,7 @@ class Emotes:
                 self.emotes = self.getemotes()
                 if self.socket is not None:
                     self.socket.emitstatus({'newemote': 1})
-            time.sleep(2)
+            time.sleep(60)
 
     def setSocket(self, socket):
         self.socket = socket
