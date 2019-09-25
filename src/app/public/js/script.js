@@ -112,6 +112,5 @@ function hideError() {
 
 function addEmoteCode(emote) {
     document.getElementById('m').value = document.getElementById('m').value + emote + " ";
-    $("#m").focus();
+    document.querySelector("#messages").focus();
 }
-  
