@@ -24,6 +24,10 @@ $(function () {
         }
         return false;
     });
+    socket.on('error', function (msg) {
+        showError(msg['message']);
+    });
+
     socket.on('connect', function () {
         changeOnlineStatus(true);
     });
