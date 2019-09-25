@@ -61,6 +61,11 @@ $(function () {
         item.append(header);                                                                                //append header to message-container-div
         item.append($('<div class="message-content">').html(msg['message']));                               //append message content to message-container-div
         $('#messages').append(item);    //append message to chat-div
+		if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
+			$('.nano').nanoScroller();
+			chatdiv = document.querySelector('#messages');
+			chatdiv.scrollTop = chatdiv.scrollHeight;
+		}
         if (msg['user'] !== "Server" && !focused) {     //if user is not server and chat is not focused, increase unread message count in the tab menu
             unread++;
             document.title = "Socket.IO chat" + " (" + unread + ")";
