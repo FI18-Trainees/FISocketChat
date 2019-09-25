@@ -1,0 +1,52 @@
+/** initial setup **/
+.nano {
+  position : relative;
+  overflow : hidden;
+}
+.nano > .nano-content {
+  position      : absolute;
+  overflow      : scroll;
+  overflow-x    : hidden;
+  top           : 0;
+  right         : 0;
+  bottom        : 0;
+  left          : 0;
+}
+.nano > .nano-content:focus {
+  outline: thin dotted;
+}
+.nano > .nano-content::-webkit-scrollbar {
+  display: none;
+}
+.has-scrollbar > .nano-content::-webkit-scrollbar {
+  display: block;
+}
+.nano > .nano-pane {
+  background : var(--discord-dark);
+  position   : absolute;
+  width      : 8px;
+  right      : 0;
+  top        : 0;
+  bottom     : 0;
+  visibility : hidden\9; /* Target only IE7 and IE8 with this hack */
+  opacity    : .01;
+  -webkit-transition    : .2s;
+  -moz-transition       : .2s;
+  -o-transition         : .2s;
+  transition            : .2s;
+  -moz-border-radius    : 8px;
+  -webkit-border-radius : 8px;
+  border-radius         : 8px;
+}
+.nano > .nano-pane > .nano-slider {
+  background: var(--discord-red);
+  position              : relative;
+  margin                : 0 1px;
+  -moz-border-radius    : 4px;
+  -webkit-border-radius : 4px;
+  border-radius         : 4px;
+}
+.nano:hover > .nano-pane, .nano-pane.active, .nano-pane.flashed {
+  visibility : visible\9; /* Target only IE7 and IE8 with this hack */
+  opacity    : 0.99;
+}

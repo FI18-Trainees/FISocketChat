@@ -37,6 +37,7 @@ class Emotes:
             try:
                 cache = self.getemotes()
             except:
+                print(f"Failed reading emote file {filename}")
                 cache = None
             if cache is not None and cache != self.emotes:
                 self.emotes = self.getemotes()

@@ -14,15 +14,19 @@ def handle_message(message):
     user = message['user'].strip()
     message = message['message'].strip()
 
-    if user.find('Server') == 0 or len(user) > 100:  # only allow usernames with length 1-100
+    if user.find('Server') == 0 or len(user) not in range(1, 100):  # only allow usernames with length 1-100
         user = '{Invalid username}'
+        emit('error', {"timestamp": timestamp, "message": "invalid username"})
+        return
 
-    if len(message) > 0:
+    if 0 < len(message) < 5000:
         message = safe_tags_replace(message)
         user = safe_tags_replace(user)
         message = link_replacer(message)
         message = safe_emote_replace(message)
         emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': message}, broadcast=True)
+    else:
+        emit('error', {"timestamp": timestamp, "message": "invalid message"})
 
 
 @socketio.on('connect')

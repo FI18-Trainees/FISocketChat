@@ -32,23 +32,28 @@ $('document').ready(function () {
 		}
       return false;
     });
-     socket.on('connect', function () {
+
+    socket.on('error', function (msg) {
+        showError(msg['message']);
+    });
+
+    socket.on('connect', function () {
         changeOnlineStatus(true);
     });
-	socket.on('connect_error', (error) => {
+    socket.on('connect_error', (error) => {
         showError("Connection failed.");
         changeOnlineStatus(false);
         setTimeout(function () {
             socket.connect();
         }, 3000);
     });
-	socket.on('connect_timeout', (timeout) => {
+    socket.on('connect_timeout', (timeout) => {
         changeOnlineStatus(false);
         setTimeout(function () {
             socket.connect();
         }, 3000);
     });
-	socket.on('disconnect', (reason) => {
+    socket.on('disconnect', (reason) => {
         showError("Disconnected.");
         changeOnlineStatus(false);
         if (reason === 'io server disconnect') {
@@ -66,16 +71,21 @@ $('document').ready(function () {
         header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                        //append timestamp to header-div
         item.append(header);                                                                                //append header to message-container-div
         item.append($('<div class="message-content">').html(msg['message']));                               //append message content to message-container-div
-		$('#messages').append(item);    //append message to chat-div
+        $('#messages').append(item);    //append message to chat-div
+		if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
+			$('.nano').nanoScroller();
+			chatdiv = document.querySelector('#messages');
+			chatdiv.scrollTop = chatdiv.scrollHeight;
+		}
         if (msg['user'] !== "Server" && !focused) {     //if user is not server and chat is not focused, increase unread message count in the tab menu
             unread++;
             document.title = "Socket.IO chat" + " (" + unread + ")";
         }
-      //if number of messages > 100 remove first message
-	  if($('#messages > div').length > 100) {
-        $('#messages').children().first().remove();
-	  }
-	  $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
+        //if number of messages > 100 remove first message
+        if ($('#messages > div').length > 100) {
+            $('#messages').children().first().remove();
+        }
+        $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
     //show usercount in navbar
     socket.on('status', function(status) {

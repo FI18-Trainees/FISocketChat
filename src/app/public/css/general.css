@@ -1,3 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+
 body {
     /*variables*/
     --discord-black: #23272a;
@@ -7,6 +19,17 @@ body {
     --discord-white: #ffffff;
     --discord-blue: #7289da;
     --discord-red: rgba(240, 71, 71, 1);
+
+	font: 13px "Comic Sans MS", Arial;
+}
+
+.bg-dark {
+    background: var(--discord-dark) !important;
+}
+
+.chat {
+	overflow: hidden;
+	height: 100%;
 }
 
 #messages {
@@ -33,6 +56,11 @@ body {
         #messages .message-content:link {
             color: var(--discord-blue);
         }
+
+.message-input {
+	bottom: 10px;
+    padding: 5px;
+}
 
 form input {
     border: 0;
