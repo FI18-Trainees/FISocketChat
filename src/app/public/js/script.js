@@ -36,7 +36,6 @@ $(function () {
         }, 3000);
     });
     socket.on('connect_timeout', (timeout) => {
-        showError("Connection timed out.");
         changeOnlineStatus(false);
         setTimeout(function () {
             socket.connect();
