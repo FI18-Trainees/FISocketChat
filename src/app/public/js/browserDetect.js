@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+$('document').ready(function(){
     // Opera 8.0+
     var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var isEdge = !isIE && !!window.StyleMedia;
 
     // Chrome 1 - 71
-    var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 
     // Blink engine detection
     var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-    if ((isChrome || isSafari)) {
-        $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/chrome-safari.css">');
+    if ((isChrome || isSafari || isOpera)) {
+        $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/chrome-safari-opera.css">');
     } else if (isFirefox) {
         $('head').append('<link rel="stylesheet" type="text/css" href="/public/css/firefox.css">');
 		$('body').append('<script src="/public/js/mutationObserver.js"></script>');

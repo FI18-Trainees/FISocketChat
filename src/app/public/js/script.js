@@ -3,8 +3,8 @@
 	var focused = true;
 	var unread = 0;
     var emotecheck = null;
-$(document).ready(function () {
-    socket = io.connect(window.location.href.slice(0, -1), {secure: true, transports: ['websocket']});
+$('document').ready(function () {
+    socket = io.connect(window.location.href.slice(0, -1), {secure: true, transports: ['websocket'], reconnect: true});
 	window.onfocus = function() {
 	    document.title = "Socket.IO chat";
 	    unread = 0;
@@ -32,17 +32,32 @@ $(document).ready(function () {
 		}
       return false;
     });
-	socket.on('connect_error', (error)=> {
-		setTimeout(function() { socket.connect(); }, 3000);
-	});
+     socket.on('connect', function () {
+        changeOnlineStatus(true);
+    });
+	socket.on('connect_error', (error) => {
+        showError("Connection failed.");
+        changeOnlineStatus(false);
+        setTimeout(function () {
+            socket.connect();
+        }, 3000);
+    });
 	socket.on('connect_timeout', (timeout) => {
-		setTimeout(function() { socket.connect(); }, 3000);
-	});
+        showError("Connection timed out.");
+        changeOnlineStatus(false);
+        setTimeout(function () {
+            socket.connect();
+        }, 3000);
+    });
 	socket.on('disconnect', (reason) => {
-	if (reason === 'io server disconnect') {
-		// the disconnection was initiated by the server, you need to reconnect manually
-		setTimeout(function() { socket.connect(); }, 3000);
-	}
+        showError("Disconnected.");
+        changeOnlineStatus(false);
+        if (reason === 'io server disconnect') {
+            // the disconnection was initiated by the server, you need to reconnect manually
+            setTimeout(function () {
+                socket.connect();
+            }, 3000);
+        }
     });
     //build html-div which will be shown
     socket.on('chat_message', function (msg) {
@@ -65,7 +80,6 @@ $(document).ready(function () {
     });
     //show usercount in navbar
     socket.on('status', function(status) {
-    console.log(status);
         if(status.hasOwnProperty('count')) {
             setUserCount(status['count']);
         }
@@ -79,6 +93,25 @@ $(document).ready(function () {
     $('#usercount').text('Usercount: ' + count);
   }
 
+  function showError(message) {
+    document.getElementById("errorbox").innerText = message;
+    $("#errorbox").fadeIn("slow");
+    setTimeout(function() {
+        hideError();
+    }, 2000);
+  }
+  function changeOnlineStatus(online) {
+    if (online) {
+        document.getElementById("online-status").innerHTML =
+            "<span class=\"badge badge-pill badge-success\">Connected</span>"
+    } else {
+        document.getElementById("online-status").innerHTML =
+            "<span class=\"badge badge-pill badge-danger\">Disconnected</span>"
+    }
+  }
+  function hideError() {
+    $("#errorbox").fadeOut("slow");
+  }
   function addEmoteCode(emote) {
 	  $('#m').val($('#m').val() + emote + " " );
 	  $("#m").focus();
