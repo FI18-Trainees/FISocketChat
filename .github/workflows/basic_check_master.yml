@@ -1,5 +1,8 @@
 name: BasicCheckup
-on: [pull_request]
+on:
+  push:
+    branches:    
+      - master
 
 jobs:
   ReqCheck:
