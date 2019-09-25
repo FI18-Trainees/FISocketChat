@@ -4,6 +4,7 @@ from flask_socketio import SocketIO
 from .emotes import Emotes
 from sys import argv
 from re import compile, MULTILINE
+from .global_values import UserCount
 
 
 app = Flask(__name__)
@@ -23,6 +24,7 @@ linkregex = compile(r"[A-Za-z0-9\-._~:/?#\[\]@!$%()*+,;=]+", MULTILINE)
 
 
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
+user_count = UserCount()
 
 
 from . import sockets

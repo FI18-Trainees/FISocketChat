@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, user_count
 from flask_socketio import emit
 import re
 from validators import url as valUrl
 from datetime import datetime
 
-newEmote = False
+newemote = False
 
 
 @socketio.on('chat_message')
@@ -25,20 +25,16 @@ def handle_message(message):
         emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': message}, broadcast=True)
 
 
-count = 0  # TODO: add a class for this so we dont need globals monkaS
 @socketio.on('connect')
 def connect():
-    global count
-    count += 1
-    emitstatus({'count': count})
+    user_count.add()
+    emitstatus({'count': user_count.get_count()})
 
 
 @socketio.on('disconnect')
 def disconnect():
-    global count
-    count -= 1
-    emitstatus({'count': count})
-
+    user_count.rem()
+    emitstatus({'count': user_count.get_count()})
 
 @socketio.on('checkNewEmote')
 def checkEmote():
@@ -90,7 +86,7 @@ def linkwrapping(text):
 
 
 def setNewEmote():
-    global newEmote
-    newEmote = True
+    global newemote
+    newemote = True
 
 

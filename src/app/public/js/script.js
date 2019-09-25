@@ -33,17 +33,14 @@ $(document).ready(function () {
       return false;
     });
 	socket.on('connect_error', (error)=> {
-	    setUserCount("offline, error");
 		setTimeout(function() { socket.connect(); }, 3000);
 	});
 	socket.on('connect_timeout', (timeout) => {
-	    setUserCount("offline, timeout");
 		setTimeout(function() { socket.connect(); }, 3000);
 	});
 	socket.on('disconnect', (reason) => {
 	if (reason === 'io server disconnect') {
 		// the disconnection was initiated by the server, you need to reconnect manually
-        setUserCount("offline");
 		setTimeout(function() { socket.connect(); }, 3000);
 	}
     });
