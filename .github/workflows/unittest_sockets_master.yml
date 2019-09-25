@@ -1,0 +1,78 @@
+name: UnitTestSockets
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Ubuntu18-04_UnitTest:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+        python -m pip install "python-socketio[asyncio_client]"
+    - name: UnitTest Sockets
+      run: |
+        python src/server.py &
+        python tests/test_sockets.py
+
+  Ubuntu16-04_UnitTest:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+        python -m pip install "python-socketio[asyncio_client]"
+    - name: UnitTest Sockets
+      run: |
+        python src/server.py &
+        python tests/test_sockets.py
+
+  Windows2019_UnitTest:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install "python-socketio[asyncio_client]"
+      - name: UnitTest Sockets
+        run: |
+          start "" python src/server.py
+          python tests/test_sockets.py
+
+  Windows2016_UnitTest:
+    runs-on: windows-2016
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install "python-socketio[asyncio_client]"
+      - name: UnitTest Sockets
+        run: |
+          start "" python src/server.py
+          python tests/test_sockets.py
