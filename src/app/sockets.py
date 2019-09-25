@@ -6,7 +6,7 @@ from validators import url as valUrl
 from datetime import datetime
 
 newemote = False
-youtuberegex = re.compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?(?:(?:\?|&|&#38;)index=((?:\d){1,3}))?(?:(?:\?|&|&#38;)?list=([a-zA-Z\-_0-9]{34}))?(?:\S+)?")
+youtuberegex = re.compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?")
 
 @socketio.on('chat_message')
 def handle_message(message):
@@ -84,7 +84,11 @@ def link_replacer(text):
 def linkwrapping(text):
     res = valUrl(text)
     if res:
-        return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
+        youtubeembedded = getembeddyoutubecode(text)
+        if youtubeembedded is not None:
+            return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a> <br>" + youtubeembedded
+        else:
+            return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
     else:
         return text
 
@@ -94,9 +98,9 @@ def setNewEmote():
     newemote = True
 
 
-def isYouTubeLink(link):
+def getembeddyoutubecode(link):
     matches = youtuberegex.finditer(link)
-    for m in matches:
-        print(m)
-    pass
-
+    for matchNum, match in enumerate(matches, start=1):
+        template = """<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{videoID}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
+        return template.format(videoID=match.group(1))
+    return None
