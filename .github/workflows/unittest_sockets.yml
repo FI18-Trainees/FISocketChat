@@ -1,5 +1,5 @@
 name: UnitTestSockets
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   Py37_Ubuntu1804:
