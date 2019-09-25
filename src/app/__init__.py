@@ -20,7 +20,7 @@ else:
 
 emoteregex = compile(r"[\"'/]?[/?!:\w]+[\"'/]?", MULTILINE)
 htmlregex = compile(r"[&<>]", MULTILINE)
-linkregex = compile(r"[A-Za-z0-9\-._~:/?#\[\]@!$%()*+,;=]+", MULTILINE)
+linkregex = compile(r"[A-Za-z0-9\-._~:/?#\[\]@!&$%()*+,;=]+", MULTILINE)
 
 
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
