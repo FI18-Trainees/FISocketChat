@@ -100,7 +100,7 @@ class TestClass(unittest.TestCase):
         self.assertEqual(shared_items, y)
 
         print("Sending message with emoji and test replacement")
-        sockets.send_message("test_user", " Shawn ")
+        sockets.send_message("test_user", "Shawn")
         loop.run_until_complete(sockets.sleep())
         self.assertEqual(len(sockets.messages), 2)
         self.assertEqual(len(sockets.errors), 2)
