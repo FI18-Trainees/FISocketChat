@@ -42,8 +42,8 @@ def disconnect():
 
 @socketio.on('checkNewEmote')
 def checkEmote():
-    global newEmote
-    if newEmote:
+    global newemote
+    if newemote:
         emitstatus({"newemote": 1})
 
 
