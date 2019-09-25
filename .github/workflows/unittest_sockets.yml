@@ -17,7 +17,9 @@ jobs:
         python -m pip install "python-socketio[asyncio_client]"
     - name: UnitTest Sockets
       run: |
-        python src/server.py &
+        cd src
+        python server.py &
+        cd ..
         python tests/test_sockets.py
 
   Py37_Ubuntu1604:
@@ -35,7 +37,9 @@ jobs:
         python -m pip install "python-socketio[asyncio_client]"
     - name: UnitTest Sockets
       run: |
-        python src/server.py &
+        cd src
+        python server.py &
+        cd ..
         python tests/test_sockets.py
 
   Py37Windows2019:
@@ -53,7 +57,9 @@ jobs:
           python -m pip install "python-socketio[asyncio_client]"
       - name: UnitTest Sockets
         run: |
-          start "" python src/server.py
+          cd src
+          start "" python server.py
+          cd ..
           python tests/test_sockets.py
 
   Py37Windows2016:
@@ -71,8 +77,11 @@ jobs:
           python -m pip install "python-socketio[asyncio_client]"
       - name: UnitTest Sockets
         run: |
-          start "" python src/server.py
+          cd src
+          start "" python server.py
+          cd ..
           python tests/test_sockets.py
+
   Py36_Ubuntu1804:
     runs-on: ubuntu-18.04
     steps:
@@ -88,7 +97,9 @@ jobs:
         python -m pip install "python-socketio[asyncio_client]"
     - name: UnitTest Sockets
       run: |
-        python src/server.py &
+        cd src
+        python server.py &
+        cd ..
         python tests/test_sockets.py
 
   Py36_Ubuntu1604:
@@ -106,7 +117,9 @@ jobs:
         python -m pip install "python-socketio[asyncio_client]"
     - name: UnitTest Sockets
       run: |
-        python src/server.py &
+        cd src
+        python server.py &
+        cd ..
         python tests/test_sockets.py
 
   Py36Windows2019:
@@ -124,7 +137,9 @@ jobs:
           python -m pip install "python-socketio[asyncio_client]"
       - name: UnitTest Sockets
         run: |
-          start "" python src/server.py
+          cd src
+          start "" python server.py
+          cd ..
           python tests/test_sockets.py
 
   Py36Windows2016:
@@ -142,5 +157,7 @@ jobs:
           python -m pip install "python-socketio[asyncio_client]"
       - name: UnitTest Sockets
         run: |
-          start "" python src/server.py
+          cd src
+          start "" python server.py
+          cd ..
           python tests/test_sockets.py
