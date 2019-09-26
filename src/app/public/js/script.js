@@ -141,6 +141,10 @@ $('document').ready(function () {
   function setCheckInterval() {
     emotecheck = setInterval(checkForNewEmote, 300000);
   }
-
-
   setCheckInterval();
+
+function addEmoteCode(emote) {
+    document.getElementById('m').value = document.getElementById('m').value + emote + " ";
+    document.querySelector("#messages").focus();
+}
+  
