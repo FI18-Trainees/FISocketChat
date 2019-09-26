@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, user_count
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count
 from flask_socketio import emit
 import re
 from validators import url as valUrl
@@ -39,6 +39,7 @@ def connect():
 def disconnect():
     user_count.rem()
     emitstatus({'count': user_count.get_count()})
+
 
 @socketio.on('checkNewEmote')
 def checkEmote():
@@ -84,7 +85,11 @@ def link_replacer(text):
 def linkwrapping(text):
     res = valUrl(text)
     if res:
-        return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
+        youtubeembedded = getembeddyoutubecode(text)
+        if youtubeembedded is not None:
+            return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a> <br>" + youtubeembedded
+        else:
+            return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
     else:
         return text
 
@@ -94,3 +99,9 @@ def setNewEmote():
     newemote = True
 
 
+def getembeddyoutubecode(link):
+    matches = youtuberegex.finditer(link)
+    for matchNum, match in enumerate(matches, start=1):
+        template = """<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{videoID}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
+        return template.format(videoID=match.group(1))
+    return None
