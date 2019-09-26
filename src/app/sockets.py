@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, logindisabled
 from flask_socketio import emit
 import re
 from validators import url as valUrl
@@ -10,6 +10,13 @@ newemote = False
 
 @socketio.on('chat_message')
 def handle_message(message):
+    if not logindisabled:
+        print("Validating session for new connection.")
+        if not verify_token(message["token"]):
+            print("Invalid session.")
+            emit('error', {'message': 'invalid token'})
+            return
+        print("Valid session.")
     timestamp = datetime.now().strftime("%H:%M:%S")
     user = message['user'].strip()
     message = message['message'].strip()
@@ -30,7 +37,14 @@ def handle_message(message):
 
 
 @socketio.on('connect')
-def connect():
+def connect(data=""):
+    if not logindisabled:
+        print("Validating session for new connection.")
+        if not verify_token(data):
+            print("Invalid session.")
+            emit('error', {'message': 'invalid token'})
+            return
+        print("Valid session.")
     user_count.add()
     emitstatus({'count': user_count.get_count()})
 
