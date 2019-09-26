@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, user_count
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count
 from flask_socketio import emit
 import re
 from validators import url as valUrl
 from datetime import datetime
 
 newemote = False
-youtuberegex = re.compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?")
+
 
 @socketio.on('chat_message')
 def handle_message(message):
@@ -39,6 +39,7 @@ def connect():
 def disconnect():
     user_count.rem()
     emitstatus({'count': user_count.get_count()})
+
 
 @socketio.on('checkNewEmote')
 def checkEmote():
