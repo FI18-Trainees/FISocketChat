@@ -254,10 +254,10 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/5Head.png' style='height:32px; width:auto;' alt='5Head' title='5Head'>"
   },
-  "WRS": {
-    "replace": "<img src='/public/img/blaulicht.gif' style='height:32px; width:auto;' alt='WRS' title='WRS'>",
+  "PRS": {
+    "replace": "<img src='/public/img/blaulicht.gif' style='height:32px; width:auto;' alt='PRS' title='PRS'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/blaulicht.gif' style='height:32px; width:auto;' alt='WRS' title='WRS'>"
+    "menuDisplayCode": "<img src='/public/img/blaulicht.gif' style='height:32px; width:auto;' alt='PRS' title='PRS'>"
   },
   "hypeE": {
     "replace": "<img src='/public/img/hypeE.gif' style='height:32px; width:auto;' alt='hypeE' title='hypeE'>",

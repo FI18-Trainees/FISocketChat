@@ -1,29 +1,38 @@
-$(function () {
-    var socket = io.connect($(("window.location.href").slice(0, -1)), {secure: true});
-    var focused = true;
-    var unread = 0;
-
-    window.onfocus = function () {
-        document.title = "Socket.IO chat";
-        unread = 0;
-        focused = true;
-    };
-    window.onblur = function () {
-        focused = false;
-    };
-    $('form').submit(function (e) {
-        e.preventDefault(); // prevents page reloading
-        let u = $('#user_name').val();
-        let m = $('#m');
-        if (u != "") {
-            socket.emit('chat_message', {'user': u, 'message': m.val()});
-            m.val('');
-        } else {
-            showError("Username may not be empty!");
+//localStorage.debug = '*';
+    var socket = null;
+	var focused = true;
+	var unread = 0;
+    var emotecheck = null;
+$('document').ready(function () {
+    socket = io.connect(window.location.href.slice(0, -1), {secure: true, transports: ['websocket'], reconnect: true});
+	window.onfocus = function() {
+	    document.title = "Socket.IO chat";
+	    unread = 0;
+		focused = true;
+		if(!socket.connected) {
+		    setUserCount("offline");
+		    socket.connect();
+		}
+	};
+	window.onblur = function() {
+		focused = false;
+	};
+    $('form').submit(function(e){
+      e.preventDefault(); // prevents page reloading
+		let u = $('#user_name').val();
+		let m = $('#m');
+		if(u != "")
+		{
+			socket.emit('chat_message', {'user': u, 'message':m.val()});
+			m.val('');
+		}
+		else {
+            alert('Username may not be empty!');
             document.getElementById('user_name').focus();
-        }
-        return false;
+		}
+      return false;
     });
+
     socket.on('error', function (msg) {
         showError(msg['message']);
     });
@@ -31,7 +40,6 @@ $(function () {
     socket.on('connect', function () {
         changeOnlineStatus(true);
     });
-
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
         changeOnlineStatus(false);
@@ -40,7 +48,6 @@ $(function () {
         }, 3000);
     });
     socket.on('connect_timeout', (timeout) => {
-        showError("Connection timed out.");
         changeOnlineStatus(false);
         setTimeout(function () {
             socket.connect();
@@ -88,22 +95,28 @@ $(function () {
         $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
     //show usercount in navbar
-    socket.on('status', function (status) {
-        if (status.hasOwnProperty('count')) {
-            $('#usercount').text('Usercount: ' + status['count']);
+    socket.on('status', function(status) {
+        if(status.hasOwnProperty('count')) {
+            setUserCount(status['count']);
+        }
+        if(status.hasOwnProperty('newemote')) {
+
         }
     });
-});
+  });
 
-function showError(message) {
+  function setUserCount(count) {
+    $('#usercount').text('Usercount: ' + count);
+  }
+
+  function showError(message) {
     document.getElementById("errorbox").innerText = message;
     $("#errorbox").fadeIn("slow");
     setTimeout(function() {
         hideError();
     }, 2000);
-}
-
-function changeOnlineStatus(online) {
+  }
+  function changeOnlineStatus(online) {
     if (online) {
         document.getElementById("online-status").innerHTML =
             "<span class=\"badge badge-pill badge-success\">Connected</span>"
@@ -111,14 +124,23 @@ function changeOnlineStatus(online) {
         document.getElementById("online-status").innerHTML =
             "<span class=\"badge badge-pill badge-danger\">Disconnected</span>"
     }
-}
-
-function hideError() {
+  }
+  function hideError() {
     $("#errorbox").fadeOut("slow");
-}
+  }
+  function addEmoteCode(emote) {
+	  $('#m').val($('#m').val() + emote + " " );
+	  $("#m").focus();
+  }
+  function checkForNewEmote() {
+    socket.emit('checkNewEmote');
+  }
+  function updateEmoteMenu() {
+   // TODO
+  }
+  function setCheckInterval() {
+    emotecheck = setInterval(checkForNewEmote, 300000);
+  }
 
-function addEmoteCode(emote) {
-    document.getElementById('m').value = document.getElementById('m').value + emote + " ";
-    $("#m").focus();
-}
-  
+
+  setCheckInterval();
