@@ -308,5 +308,10 @@
     "replace": "<img src='/public/img/facepalm.png' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/facepalm.png' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>"
+  },
+  "nymnCorn": {
+    "replace": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>"
   }
 }

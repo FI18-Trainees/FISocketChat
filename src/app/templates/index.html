@@ -45,14 +45,7 @@
                             aria-haspopup="true" aria-expanded="false">
                         <i class="far fa-smile"></i>
                     </button>
-                    <div class="dropdown-menu" id="emoteMenu">
-                        {% for emote in emotes %}
-                        {% if emotes[emote]["menuDisplay"]: %}
-                        <a href="#"
-                           onclick="addEmoteCode('{{ emote }}');">{{ emotes[emote]["menuDisplayCode"]|safe }}</a>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
+                    <div class="dropdown-menu" id="emoteMenu">If you see this, the Javascript failed :(</div>
                 </div>
                 <input class="rounded flex-fill" id="m" autocomplete="off" placeholder="Your message..." />
                 <button class="rounded ml-2">Send</button>
@@ -72,5 +65,6 @@
     <script src="/public/js/jquery.nanoscroller.min.js"></script>
     <script>$(".nano").nanoScroller();</script>
     <script src="/public/js/notify.js"></script>
+    <script rel="script" type="text/javascript">setup();</script>
 </body>
 </html>

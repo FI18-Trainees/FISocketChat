@@ -40,7 +40,7 @@ def verify_token(token):
 @app.route('/index')
 @auth.login_required
 def index():
-    return render_template('index.html', ip=request.remote_addr, emotes=emotehandler.emotes)
+    return render_template('index.html')
 
 
 @app.route("/status")

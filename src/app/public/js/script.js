@@ -2,6 +2,7 @@
     var socket = null;
 	var focused = true;
 	var unread = 0;
+    var emotelist = null;
     var emotecheck = null;
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1), {secure: true, transports: ['websocket'], reconnect: true});
@@ -99,16 +100,11 @@ $('document').ready(function () {
         if(status.hasOwnProperty('count')) {
             setUserCount(status['count']);
         }
-        if(status.hasOwnProperty('newemote')) {
-
-        }
     });
   });
-
   function setUserCount(count) {
     $('#usercount').text('Usercount: ' + count);
   }
-
   function showError(message) {
     document.getElementById("errorbox").innerText = message;
     $("#errorbox").fadeIn("slow");
@@ -132,18 +128,19 @@ $('document').ready(function () {
 	  $('#m').val($('#m').val() + emote + " " );
 	  $("#m").focus();
   }
-  function checkForNewEmote() {
-    socket.emit('checkNewEmote');
-  }
   function updateEmoteMenu() {
     // retreving the emotes as JSON from the API
     $.getJSON('/api/emotes', function(result){
         // checking if the JSON even contains emotes.
         if(Object.keys(result).length > 0) {
-        // getting the emote menu
-        let menu = $('#emoteMenu');
-        // clearing the emote menu
-        menu.empty();
+            if( JSON.stringify(emotelist) === JSON.stringify(result)) {
+                return;
+            }
+            emotelist = result
+            // getting the emote menu
+            let menu = $('#emoteMenu');
+            // clearing the emote menu
+            menu.empty();
             // iterate over the emotes from the JSON
             for (let emote in result){
                 // jumping over the hidden ones.
@@ -159,11 +156,9 @@ $('document').ready(function () {
     });
   }
   function setCheckInterval() {
-    emotecheck = setInterval(checkForNewEmote, 300000);
+    emotecheck = setInterval(updateEmoteMenu, 60 * 1000);
   }
-
   function setup(){
+    updateEmoteMenu();
     setCheckInterval();
   }
-
-setCheckInterval();

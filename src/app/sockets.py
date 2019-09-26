@@ -41,13 +41,6 @@ def disconnect():
     emitstatus({'count': user_count.get_count()})
 
 
-@socketio.on('checkNewEmote')
-def checkEmote():
-    global newemote
-    if newemote:
-        emitstatus({"newemote": 1})
-
-
 def emitstatus(status):
     socketio.emit('status', status)
 
