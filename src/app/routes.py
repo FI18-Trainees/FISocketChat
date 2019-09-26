@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+
+
 from flask import render_template, send_from_directory, request, make_response, redirect
 from . import app, emotehandler, logindisabled
 from flask_httpauth import HTTPTokenAuth
+from json import dumps as jdumps
 import requests
 
 
@@ -54,5 +57,5 @@ def send_public(path):
 
 @app.route('/api/emotes')
 def send_emotes():
-    return emotehandler.emotes
+    return jdumps(emotehandler.emotes, sort_keys=False)
 

@@ -136,11 +136,34 @@ $('document').ready(function () {
     socket.emit('checkNewEmote');
   }
   function updateEmoteMenu() {
-   // TODO
+    // retreving the emotes as JSON from the API
+    $.getJSON('/api/emotes', function(result){
+        // checking if the JSON even contains emotes.
+        if(Object.keys(result).length > 0) {
+        // getting the emote menu
+        let menu = $('#emoteMenu');
+        // clearing the emote menu
+        menu.empty();
+            // iterate over the emotes from the JSON
+            for (let emote in result){
+                // jumping over the hidden ones.
+                if(result[emote]["menuDisplay"]){
+                    emoteitem = document.createElement('a');
+                    emoteitem.href = "#";
+                    emoteitem.innerHTML = result[emote]["menuDisplayCode"];
+                    emoteitem.onclick = "addEmoteCode('"+emote+"');";
+                    emoteMenu.append(emoteitem);
+                }
+            }
+        }
+    });
   }
   function setCheckInterval() {
     emotecheck = setInterval(checkForNewEmote, 300000);
   }
 
+  function setup(){
+    setCheckInterval();
+  }
 
-  setCheckInterval();
+setCheckInterval();
