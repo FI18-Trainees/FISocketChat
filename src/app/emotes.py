@@ -27,7 +27,6 @@ class Emotes:
     def startreloader(self):
         thread = threading.Thread(target=self.run, args=())
         thread.daemon = True  # Daemonize thread
-
         thread.start()
 
     def stopreloader(self):
@@ -43,8 +42,8 @@ class Emotes:
             if cache is not None and cache != self.emotes:
                 self.emotes = self.getemotes()
                 if self.socket is not None:
-                    self.socket.newemote = True
+                    self.socket.emitstatus({'newemote': 1})
             time.sleep(60)
 
-    def setsocket(self, socket):
+    def setSocket(self, socket):
         self.socket = socket

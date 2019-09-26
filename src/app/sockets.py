@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler, user_count
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count
 from flask_socketio import emit
 import re
 from validators import url as valUrl
@@ -21,6 +21,7 @@ def handle_message(message):
 
     if 0 < len(message) < 5000:
         message = safe_tags_replace(message)
+        user = safe_tags_replace(user)
         message = link_replacer(message)
         message = safe_emote_replace(message)
         emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': message}, broadcast=True)
@@ -31,19 +32,24 @@ def handle_message(message):
 @socketio.on('connect')
 def connect():
     user_count.add()
-    emit('status', {'count': user_count.get_count()}, broadcast=True)
+    emitstatus({'count': user_count.get_count()})
 
 
 @socketio.on('disconnect')
 def disconnect():
     user_count.rem()
-    emit('status', {'count': user_count.get_count()}, broadcast=True)
+    emitstatus({'count': user_count.get_count()})
 
 
-@socketio.on('checkEmotes')
-def emotecheck():
+@socketio.on('checkNewEmote')
+def checkEmote():
+    global newemote
     if newemote:
-        emit('status', {'emoteupdated': 1}, broadcast=True)
+        emitstatus({"newemote": 1})
+
+
+def emitstatus(status):
+    socketio.emit('status', status)
 
 
 tagsToReplace = {
@@ -58,7 +64,7 @@ def replaceTag(tag):
 
 
 def safe_tags_replace(text):
-    return re.sub(r"[&<>]", lambda x: replaceTag(x.group()), text, 0, re.MULTILINE)
+    return re.sub(htmlregex, lambda x: replaceTag(x.group()), text, 0)
 
 
 def replaceEmote(emote):
@@ -69,20 +75,33 @@ def replaceEmote(emote):
 
 
 def safe_emote_replace(text):
-    return re.sub(r"[\"'/]?[/?!:\w]+[\"'/]?", lambda x: replaceEmote(x.group()), text, 0, re.MULTILINE)
+    return re.sub(emoteregex, lambda x: replaceEmote(x.group()), text, 0)
 
 
 def link_replacer(text):
-    return re.sub(r"[A-Za-z0-9\-._~:/?#\[\]@!$%()*+,;=]+", lambda x: linkwrapping(x.group()), text, 0, re.MULTILINE)
+    return re.sub(linkregex, lambda x: linkwrapping(x.group()), text, 0)
 
 
 def linkwrapping(text):
     res = valUrl(text)
-    # print(res)
     if res:
-        return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
+        youtubeembedded = getembeddyoutubecode(text)
+        if youtubeembedded is not None:
+            return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a> <br>" + youtubeembedded
+        else:
+            return "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + text + "\">" + text + "</a>"
     else:
         return text
 
 
+def setNewEmote():
+    global newemote
+    newemote = True
 
+
+def getembeddyoutubecode(link):
+    matches = youtuberegex.finditer(link)
+    for matchNum, match in enumerate(matches, start=1):
+        template = """<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{videoID}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
+        return template.format(videoID=match.group(1))
+    return None
