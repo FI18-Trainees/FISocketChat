@@ -80,6 +80,13 @@ $('document').ready(function () {
         if (msg['user'] !== "Server" && !focused) {     //if user is not server and chat is not focused, increase unread message count in the tab menu
             unread++;
             document.title = "Socket.IO chat" + " (" + unread + ")";
+            if (checkPermission()) {
+                if (unread === 1) {
+                    newNotification(unread + " unread message!");
+                } else if (unread % 5 === 0) {
+                    newNotification(unread + " unread messages!");
+                }
+            }
         }
         //if number of messages > 100 remove first message
         if ($('#messages > div').length > 100) {

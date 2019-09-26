@@ -30,7 +30,7 @@
     "menuDisplayCode": "<img src='/public/img/peepoWide.png' style='height:35px; width:auto;' alt='peepoWide' title='peepoWide'>"
   },
   "Hackerman": {
-    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=K7Hn1rPQouU\"<img src='/public/img/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'></a>",
+    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=K7Hn1rPQouU\"><img src='/public/img/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'></a>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
   },
