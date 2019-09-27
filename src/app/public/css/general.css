@@ -36,26 +36,26 @@ body {
     word-wrap: break-word;
 }
 
-    #messages .message-container {
-        border-bottom-color: var(--discord-lightgrey);
-    }
+#messages .message-container {
+    border-bottom-color: var(--discord-lightgrey);
+}
 
-    #messages .message-name {
-        font: 13px "Comic Sans MS", Arial;
-    }
+#messages .message-name {
+    font: 13px "Comic Sans MS", Arial;
+}
 
-    #messages .message-timestamp {
-        color: var(--discord-grey);
-        font: 9px "Comic Sans MS", Arial;
-    }
+#messages .message-timestamp {
+    color: var(--discord-grey);
+    font: 9px "Comic Sans MS", Arial;
+}
 
-    #messages .message-content {
-        color: var(--discord-white);
-    }
+#messages .message-content {
+    color: var(--discord-white);
+}
 
-        #messages .message-content:link {
-            color: var(--discord-blue);
-        }
+#messages .message-content:link {
+    color: var(--discord-blue);
+}
 
 .message-input {
 	bottom: 10px;

@@ -28,7 +28,7 @@ $('document').ready(function () {
         let u = $('#user_name').val();
         let m = $('#m');
         if (u != "") {
-            socket.emit('chat_message', {'user': u, 'message': m.val(), "token": getCookie("access_token")});
+            socket.emit('chat_message', {'display_name': u, 'message': m.val(), "token": getCookie("access_token")});
             m.val('');
         }
         return false;
@@ -69,7 +69,7 @@ $('document').ready(function () {
     socket.on('chat_message', function (msg) {
         let item = $('<div class="message-container border-bottom pt-1 pb-2 px-2">');    //div which contains the message
         let header = $('<h2 class="message-header d-inline-flex align-items-baseline">');      //div which contains username and timestamp
-        header.append($('<div class="message-name text-danger">').prop('title', msg['timestamp']).text(msg['user']));   //append username and timestamp as title to header-div
+        header.append($('<div class="message-name">').prop('title', msg['timestamp']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
         header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                        //append timestamp to header-div
         item.append(header);                                                                                //append header to message-container-div
         item.append($('<div class="message-content">').html(msg['message']));                               //append message content to message-container-div

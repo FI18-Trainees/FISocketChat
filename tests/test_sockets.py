@@ -51,7 +51,7 @@ class SocketIOConnection:
         # print('my sid is', self.sio.sid)
 
     def send_message(self, user, message):
-        loop.run_until_complete(self.sio.emit('chat_message', {"user": user, "message": message}))
+        loop.run_until_complete(self.sio.emit('chat_message', {"display_name": user, "message": message}))
 
     async def wait(self):
         await self.sio.wait()
@@ -75,7 +75,7 @@ class TestClass(unittest.TestCase):
         self.assertEqual(len(sockets.messages), 1)
         self.assertEqual(len(sockets.errors), 0)
         x = sockets.messages[0]
-        y = {"user": "test_user", "message": "test_message"}  # expected
+        y = {"display_name": "test_user", "message": "test_message"}  # expected
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
 

@@ -15,18 +15,20 @@ newemote = False
 def handle_message(message):
     print(message)
     timestamp = datetime.now().strftime("%H:%M:%S")
-    user = message['user'].strip()
+    user = message['display_name'].strip()
+    color = "#FF0000"
+    msg = message['message'].strip()
 
     if not logindisabled:
         print("Validating session for new connection.")
         try:
             if socketio.server.environ[request.sid]["userconfig"]["display_name"].strip() != "":
                 user = socketio.server.environ[request.sid]["userconfig"]["display_name"]
+                color = socketio.server.environ[request.sid]["userconfig"]["chat_color"]
         except KeyError:
-            emit('error', {'message': 'invalid token'})
+            emit('error', {'message': 'invalid userconfig'})
             return
 
-    msg = message['message'].strip()
     if user.find('Server') == 0 or len(user) not in range(1, 100):  # only allow usernames with length 1-100
         user = '{Invalid username}'
         emit('error', {"timestamp": timestamp, "message": "invalid username"})
@@ -37,7 +39,13 @@ def handle_message(message):
         user = safe_tags_replace(user)
         msg = link_replacer(msg)
         msg = safe_emote_replace(msg)
-        emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': msg}, broadcast=True)
+        emit('chat_message',
+             {
+                 'timestamp': timestamp,
+                 'display_name': user,
+                 'message': msg,
+                 'user_color': color
+             }, broadcast=True)
     else:
         emit('error', {"timestamp": timestamp, "message": "invalid message"})
 
