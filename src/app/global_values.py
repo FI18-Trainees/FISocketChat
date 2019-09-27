@@ -10,3 +10,8 @@ class UserCount:
 
     def get_count(self):
         return self.count
+
+
+class DataHandler:
+    def __init__(self):
+        pass

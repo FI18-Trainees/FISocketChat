@@ -28,7 +28,7 @@ $('document').ready(function () {
         let u = $('#user_name').val();
         let m = $('#m');
         if (u != "") {
-            socket.emit('chat_message', {'user': u, 'message': m.val(), "token": getCookie("access_token")});
+            socket.emit('chat_message', {'display_name': u, 'message': m.val(), "token": getCookie("access_token")});
             m.val('');
         }
         return false;

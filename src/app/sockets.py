@@ -15,7 +15,7 @@ newemote = False
 def handle_message(message):
     print(message)
     timestamp = datetime.now().strftime("%H:%M:%S")
-    user = message['user'].strip()
+    user = message['display_name'].strip()
     color = "#FF0000"
     msg = message['message'].strip()
 
