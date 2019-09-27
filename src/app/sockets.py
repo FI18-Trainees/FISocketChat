@@ -1,36 +1,85 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
+    logindisabled
 from flask_socketio import emit
 import re
 from validators import url as valUrl
 from datetime import datetime
+from flask import request
+import requests
 
 newemote = False
 
 
 @socketio.on('chat_message')
 def handle_message(message):
+    print(message)
     timestamp = datetime.now().strftime("%H:%M:%S")
-    user = message['user'].strip()
-    message = message['message'].strip()
+    user = message['display_name'].strip()
+    color = "#FF0000"
+    msg = message['message'].strip()
+
+    if not logindisabled:
+        print("Validating session for new connection.")
+        try:
+            if socketio.server.environ[request.sid]["userconfig"]["display_name"].strip() != "":
+                user = socketio.server.environ[request.sid]["userconfig"]["display_name"]
+                color = socketio.server.environ[request.sid]["userconfig"]["chat_color"]
+        except KeyError:
+            emit('error', {'message': 'invalid userconfig'})
+            return
 
     if user.find('Server') == 0 or len(user) not in range(1, 100):  # only allow usernames with length 1-100
         user = '{Invalid username}'
         emit('error', {"timestamp": timestamp, "message": "invalid username"})
         return
 
-    if 0 < len(message) < 5000:
-        message = safe_tags_replace(message)
+    if 0 < len(msg) < 5000:
+        msg = safe_tags_replace(msg)
         user = safe_tags_replace(user)
-        message = link_replacer(message)
-        message = safe_emote_replace(message)
-        emit('chat_message', {'timestamp': timestamp, 'user': user, 'message': message}, broadcast=True)
+        msg = link_replacer(msg)
+        msg = safe_emote_replace(msg)
+        emit('chat_message',
+             {
+                 'timestamp': timestamp,
+                 'display_name': user,
+                 'message': msg,
+                 'user_color': color
+             }, broadcast=True)
     else:
         emit('error', {"timestamp": timestamp, "message": "invalid message"})
 
 
 @socketio.on('connect')
-def connect():
+def connect(data=""):
+    if not logindisabled:
+        print("Validating session for new connection.")
+        if not verify_token(data):
+            print("Invalid session.")
+            emit('error', {'message': 'invalid token'})
+            return
+        ip = socketio.server.environ[request.sid]["HTTP_CF_CONNECTING_IP"]
+        r = requests.get("https://auth.zaanposni.com/username",
+                         headers={
+                             'Cache-Control': 'no-cache',
+                             'X-Auth-For': ip,
+                             'Authorization': f'Bearer {request.cookies.get("access_token", "")}'
+                         })
+        if r.status_code != 200:
+            emit('error', {'status_code': r.status_code, 'message': 'invalid token'})
+            return
+        print(f"Username: {r.text}")
+        r = requests.get(f"https://profile.zaanposni.com/get/{r.text}.json",
+                         headers={
+                             'Cache-Control': 'no-cache',
+                             'Authorization': f'Bearer {request.cookies.get("access_token", "")}'
+                         })
+        if r.status_code != 200:
+            emit('error', {'status_code': r.status_code, 'message': r.text})
+            return
+        print(f"User config: {r.json()}")
+        socketio.server.environ[request.sid]["userconfig"] = r.json()
+        print("Valid session.")
     user_count.add()
     emitstatus({'count': user_count.get_count()})
 

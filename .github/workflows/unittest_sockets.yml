@@ -18,7 +18,7 @@ jobs:
     - name: UnitTest Sockets
       run: |
         cd src
-        python server.py &
+        python server.py -disablelogin &
         cd ..
         python tests/test_sockets.py
 
@@ -38,7 +38,7 @@ jobs:
     - name: UnitTest Sockets
       run: |
         cd src
-        python server.py &
+        python server.py -disablelogin &
         cd ..
         python tests/test_sockets.py
 
@@ -58,7 +58,7 @@ jobs:
       - name: UnitTest Sockets
         run: |
           cd src
-          start "" python server.py
+          start "" python server.py -disablelogin
           cd ..
           python tests/test_sockets.py
 
@@ -78,7 +78,7 @@ jobs:
       - name: UnitTest Sockets
         run: |
           cd src
-          start "" python server.py
+          start "" python server.py -disablelogin
           cd ..
           python tests/test_sockets.py
 
@@ -98,7 +98,7 @@ jobs:
     - name: UnitTest Sockets
       run: |
         cd src
-        python server.py &
+        python server.py -disablelogin &
         cd ..
         python tests/test_sockets.py
 
@@ -118,7 +118,7 @@ jobs:
     - name: UnitTest Sockets
       run: |
         cd src
-        python server.py &
+        python server.py -disablelogin &
         cd ..
         python tests/test_sockets.py
 
@@ -138,7 +138,7 @@ jobs:
       - name: UnitTest Sockets
         run: |
           cd src
-          start "" python server.py
+          start "" python server.py -disablelogin
           cd ..
           python tests/test_sockets.py
 
@@ -158,6 +158,6 @@ jobs:
       - name: UnitTest Sockets
         run: |
           cd src
-          start "" python server.py
+          start "" python server.py -disablelogin
           cd ..
           python tests/test_sockets.py
