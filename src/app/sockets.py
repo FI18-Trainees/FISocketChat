@@ -98,7 +98,7 @@ def checkEmote():
 
 
 def emitstatus(status):
-    socketio.emit('status', status)
+    socketio.emit('status', status, broacast=True)
 
 
 tagsToReplace = {
