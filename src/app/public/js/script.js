@@ -148,8 +148,9 @@ $('document').ready(function () {
                     emoteitem = document.createElement('a');
                     emoteitem.href = "#";
                     emoteitem.innerHTML = result[emote]["menuDisplayCode"];
-                    emoteitem.onclick = "addEmoteCode('"+emote+"');";
+                    emoteitem.onclick = function() {addEmoteCode(emote); };
                     emoteMenu.append(emoteitem);
+                    emoteMenu.append(document.createElement('wbr'));
                 }
             }
         }

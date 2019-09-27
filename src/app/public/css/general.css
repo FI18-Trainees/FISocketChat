@@ -96,3 +96,10 @@ form button {
     background-color: var(--discord-red);
     box-shadow: none;
 }
+#emoteMenu a {
+    white-space: nowrap;
+    margin: 2px;
+}
+#emoteMenu {
+    min-width: 20rem;
+}

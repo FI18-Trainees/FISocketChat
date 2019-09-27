@@ -272,7 +272,7 @@
   "winloading": {
     "replace": "<img src='/public/img/windowsload.gif' style='height:32px; width:auto;' alt='winloading' title='winloading'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/windowsload.gif' style='height:32px; width:auto; background-color: rgba(0,0,0,0.5);' alt='winloading' title='winloading'>"
+    "menuDisplayCode": "<img src='/public/img/windowsload.gif' style='height:32px; width:auto;' alt='winloading' title='winloading'>"
   },
   "progressbar": {
     "replace": "<img src='/public/img/progressbar.gif' style='height:32px; width:208px;' alt='progressbar' title='progressbar'>",
