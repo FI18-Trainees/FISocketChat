@@ -37,7 +37,7 @@ body {
 }
 
 #messages .message-container {
-    border-bottom-color: var(--discord-lightgrey);
+    border-bottom-color: var(--discord-lightgrey) !important;
 }
 
 #messages .message-name {
@@ -60,6 +60,12 @@ body {
 .message-input {
 	bottom: 10px;
     padding: 5px;
+    border-top: 1px solid var(--discord-lightgrey);
+}
+
+.message-box {
+    background: var(--discord-dark);
+    color: var(--discord-white);
 }
 
 form input {
@@ -69,6 +75,7 @@ form input {
 
 form button, form .btn {
     background: var(--discord-grey);
+    color: var(--discord-grey);
 }
 
 form button {
@@ -95,4 +102,55 @@ form button {
 .bg-discord-red {
     background-color: var(--discord-red);
     box-shadow: none;
+}
+
+.maincontent {
+    order: 2;
+}
+
+.sitebar {
+    padding-top: 2%;
+    width: 12%;
+    border-right: 1px solid var(--discord-lightgrey);
+    margin: 0 0 0 0;
+}
+
+.sitebar li {
+    list-style-type: none;
+}
+
+.sitebar-content {
+    margin: 2%;
+    padding: 3%;
+    width: 96%;
+    background-color: var(--discord-lightgrey);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-decoration: none;
+}
+
+.sitebar-content:hover {
+    cursor: pointer;
+}
+
+.sitebar-content .title {
+    color: white;
+    text-decoration: none;
+}
+
+.sitebar-content .content {
+    color: var(--discord-dark);
+    text-decoration: none;
+}
+
+.content-wrapper {
+    display: flex;
+
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
 }
