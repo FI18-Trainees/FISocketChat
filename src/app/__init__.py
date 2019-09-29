@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
+from .shell import *
 from flask import Flask
 from flask_socketio import SocketIO
 from .emotes import Emotes
 import sys
 from re import compile, MULTILINE
-from .global_values import UserCount
+from .global_values import UserCount, Others
 from flask_httpauth import HTTPTokenAuth
 import requests
 from flask import redirect, request
-
+SHL = Console("Init", cls=True)
 auth = HTTPTokenAuth()
+others = Others()
 
 
 @auth.error_handler
@@ -21,20 +23,25 @@ def auth_error():
 def verify_token(token):
     if logindisabled:
         return True
-    token = request.cookies.get("access_token", "")
+    token = request.cookies.get("access_token", token)
+    SHL.output(f"Verify session with token: {token}.", "TokenAuth")
     try:
-        header = request.headers["X-Forwarded-For"]
+        ip = request.headers["X-Forwarded-For"]
     except KeyError:
+        SHL.output(f"{red}Returning False, invalid headers.{white}", "TokenAuth")
         return False
 
     r = requests.get("https://auth.zaanposni.com/verify",
                      headers={
                          'Cache-Control': 'no-cache',
-                         'X-Auth-For': header,
+                         'X-Auth-For': ip,
                          'Authorization': f"Bearer {token}"
                              })
-    if r.text == "OK":
-        return True
+    SHL.output(f"Response from auth service: {r.text}", "TokenAuth")
+    if r.status_code == 200:
+        SHL.output(f"{green2}Returning True.{white}", "TokenAuth")
+        return r.text
+    SHL.output(f"{red}Returning False, invalid session.{white}", "TokenAuth")
     return False
 
 
@@ -44,7 +51,7 @@ emotehandler = Emotes(True)
 
 # init settings
 if "-disablelogin" in [x.strip().lower() for x in sys.argv]:
-    print("Disabled authentication")
+    SHL.output(f"{red}Disabled authentication.{white}")
     logindisabled = True
 else:
     logindisabled = False
@@ -59,7 +66,6 @@ youtuberegex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
 user_count = UserCount()
 
-
 from . import sockets
-emotehandler.setSocket(sockets)
+emotehandler.set_socket(sockets)
 from . import routes

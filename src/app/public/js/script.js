@@ -79,7 +79,7 @@ $('document').ready(function () {
             chatdiv = document.querySelector('#messages');
             chatdiv.scrollTop = chatdiv.scrollHeight;
         }
-        if (msg['user'] !== "Server" && !focused) {     //if user is not server and chat is not focused, increase unread message count in the tab menu
+        if (msg['display_name'] !== "Server" && !focused) {     //if user is not server and chat is not focused, increase unread message count in the tab menu
             unread++;
             document.title = "Socket.IO chat" + " (" + unread + ")";
             if (checkPermission()) {

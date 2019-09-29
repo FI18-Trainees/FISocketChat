@@ -7,7 +7,7 @@ from . import app, emotehandler, auth
 @app.route('/index')
 @auth.login_required
 def index():
-    return render_template('index.html', ip=request.remote_addr, emotes=emotehandler.emotes)
+    return render_template('index.html', emotes=emotehandler.emotes)
 
 
 @app.route("/status")

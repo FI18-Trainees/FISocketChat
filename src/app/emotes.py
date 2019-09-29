@@ -3,6 +3,8 @@ import json
 import time
 import threading
 import platform
+from .shell import Console
+SHL = Console("EmotesHandler")
 
 
 system = platform.system()
@@ -16,34 +18,36 @@ class Emotes:
     def __init__(self, start):
         self.emotes = {}
         self.runCheck = start
-        self.startreloader()
+        self.start_reloader()
         self.socket = None
 
-    def getemotes(self):
+    def get_emotes(self):
         if filename:
             with open(filename, encoding='utf-8', mode='r') as f:
                 return json.load(f)
 
-    def startreloader(self):
+    def start_reloader(self):
         thread = threading.Thread(target=self.run, args=())
         thread.daemon = True  # Daemonize thread
         thread.start()
 
-    def stopreloader(self):
+    def stop_reloader(self):
         self.runCheck = False
 
     def run(self):
         while self.runCheck:
             try:
-                cache = self.getemotes()
+                cache = self.get_emotes()
             except:
-                print(f"Failed reading emote file {filename}")
+                SHL.output(f"Failed reading emote file {filename}.")
                 cache = None
-            if cache is not None and cache != self.emotes:
-                self.emotes = self.getemotes()
-                if self.socket is not None:
-                    self.socket.emitstatus({'newemote': 1})
+            else:
+                if cache != self.emotes:
+                    SHL.output(f"Setting new emotes!")
+                    self.emotes = self.get_emotes()
+                    if self.socket is not None:
+                        self.socket.emitstatus({'newemote': 1})
             time.sleep(60)
 
-    def setSocket(self, socket):
+    def set_socket(self, socket):
         self.socket = socket

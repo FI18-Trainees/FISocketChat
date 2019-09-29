@@ -14,3 +14,7 @@ class UserCount:
 
     def __str__(self):
         return f"User count: {self.count}"
+
+
+class Others:
+    pass
