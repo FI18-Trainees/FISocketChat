@@ -1,6 +1,7 @@
 Flask_SocketIO==4.2.1
-validators==0.14.0
+eventlet==0.25.1
 requests==2.22.0
 Flask_HTTPAuth==3.3.0
 Flask==1.1.1
-gevent_socketio==0.3.6
+validators==0.14.0
+python-socketio==4.3.1

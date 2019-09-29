@@ -309,9 +309,9 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/facepalm.png' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>"
   },
-  "!.?": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=PhMDDF0WxSs\"><img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>",
+  "WiW": {
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=PhMDDF0WxSs\"><img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>"
+    "menuDisplayCode": "<img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'>"
   }
 }
