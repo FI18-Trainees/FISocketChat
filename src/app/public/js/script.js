@@ -166,7 +166,7 @@ function hideError() {
     });
   }
   function setCheckInterval() {
-    emotecheck = setInterval(updateEmoteMenu, 60 * 1000);
+    emotecheck = setInterval(updateEmoteMenu, 60 * 60 * 1000);
   }
 
   function setup(){
