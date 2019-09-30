@@ -96,7 +96,7 @@ def disconnect():
     emit_status({'count': user_count.get_count()})
 
 
-def emitstatus(status):
+def emit_status(status):
     socketio.emit('status', status)
 
 

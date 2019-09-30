@@ -168,23 +168,14 @@ function hideError() {
   function setCheckInterval() {
     emotecheck = setInterval(updateEmoteMenu, 60 * 1000);
   }
+
   function setup(){
     updateEmoteMenu();
-    setCheckInterval();
   }
-}
 
 function addEmoteCode(emote) {
     $('#m').val($('#m').val() + emote + " ");
     $("#m").focus();
-}
-
-function checkForNewEmote() {
-    socket.emit('checkNewEmote');
-}
-
-function setCheckInterval() {
-    emotecheck = setInterval(checkForNewEmote, 300000);
 }
 
 function getCookie(name) {
