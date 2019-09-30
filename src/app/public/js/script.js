@@ -1,7 +1,7 @@
 //localStorage.debug = '*';
     var socket = null;
-	var focused = true;
-	var unread = 0;
+    var focused = true;
+    var unread = 0;
     var emotecheck = null;
     var emotelist = null;
 $('document').ready(function () {
@@ -132,12 +132,14 @@ function changeOnlineStatus(online) {
 
 function hideError() {
     $("#errorbox").fadeOut("slow");
-  }
-  function addEmoteCode(emote) {
-	  $('#m').val($('#m').val() + emote + " " );
-	  $("#m").focus();
-  }
-  function updateEmoteMenu() {
+}
+
+function addEmoteCode(emote) {
+    $('#m').val($('#m').val() + emote + " " );
+    $("#m").focus();
+}
+
+function updateEmoteMenu() {
     // retreving the emotes as JSON from the API
     $.getJSON('/api/emotes', function(result){
         // checking if the JSON even contains emotes.
@@ -164,14 +166,14 @@ function hideError() {
             }
         }
     });
-  }
-  function setCheckInterval() {
+}
+function setCheckInterval() {
     emotecheck = setInterval(updateEmoteMenu, 60 * 60 * 1000);
-  }
+}
 
-  function setup(){
+function setup(){
     updateEmoteMenu();
-  }
+}
 
 function addEmoteCode(emote) {
     $('#m').val($('#m').val() + emote + " ");
@@ -189,5 +191,3 @@ function addEmoteCode(emote) {
     document.getElementById('m').value = document.getElementById('m').value + emote + " ";
     document.querySelector("#messages").focus();
 }
-
-setCheckInterval();
