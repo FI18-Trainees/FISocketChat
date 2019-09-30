@@ -160,7 +160,7 @@
     "menuDisplayCode": "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>"
   },
   "Pedalo": {
-    "replace": "<img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>",
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=NTxdEc3pUJc\"><img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>"
   },
@@ -195,7 +195,7 @@
     "menuDisplayCode": "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>"
   },
   "REEE": {
-    "replace": "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>",
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=RBRxM5yq2NU\"><img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
   },
@@ -205,7 +205,7 @@
     "menuDisplayCode": "???"
   },
   "!!!": {
-    "replace": "Kim Jülich, Franziska Winkler, Marie Grevenbroich",
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=7KPDSYskJo4\">Kim Jülich, Franziska Winkler, Marie Grevenbroich</a>",
     "menuDisplay": true,
     "menuDisplayCode": "!!!"
   },
@@ -308,6 +308,11 @@
     "replace": "<img src='/public/img/facepalm.png' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/facepalm.png' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>"
+  },
+  "WiW": {
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=PhMDDF0WxSs\"><img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'>"
   },
   "nymnCorn": {
     "replace": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>",

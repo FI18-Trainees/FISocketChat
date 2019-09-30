@@ -1,39 +1,7 @@
 # -*- coding: utf-8 -*-
-
-
-from flask import render_template, send_from_directory, request, make_response, redirect
-from . import app, emotehandler, logindisabled
-from flask_httpauth import HTTPTokenAuth
+from flask import render_template, send_from_directory, request, make_response
+from . import app, emotehandler, auth
 from json import dumps as jdumps
-import requests
-
-
-auth = HTTPTokenAuth()
-
-
-@auth.error_handler
-def auth_error():
-    return redirect("https://info.zaanposni.com", code=401)
-
-
-@auth.verify_token
-def verify_token(token):
-    if logindisabled:
-        return True
-    token = request.cookies.get("access_token", "")
-    try:
-        header = request.headers["X-Forwarded-For"]
-    except KeyError:
-        return False
-    r = requests.get("https://auth.zaanposni.com/verify",
-                     headers={
-                         'Cache-Control': 'no-cache',
-                         'X-Auth-For': header,
-                         'Authorization': f"Bearer {token}"
-                             })
-    if r.text == "OK":
-        return True
-    return False
 
 
 @app.route('/')
