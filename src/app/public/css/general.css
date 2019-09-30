@@ -161,3 +161,9 @@ a:hover, a:visited, a:link, a:active
 #emoteMenu {
     min-width: 20rem;
 }
+.bg-lighter-01{
+    background-color: rgba(255,255,255,0.05);
+}
+.bg-lighter-01:hover{
+    background-color: rgba(255,255,255,0.1);
+}
