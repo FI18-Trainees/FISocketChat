@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, send_from_directory, request, make_response
 from . import app, emotehandler, auth
+from json import dumps as jdumps
 
 
 @app.route('/')
 @app.route('/index')
 @auth.login_required
 def index():
-    return render_template('index.html', emotes=emotehandler.emotes)
+    return render_template('index.html')
 
 
 @app.route("/status")
@@ -24,5 +25,5 @@ def send_public(path):
 
 @app.route('/api/emotes')
 def send_emotes():
-    return emotehandler.emotes
+    return jdumps(emotehandler.emotes, sort_keys=False)
 

@@ -1,8 +1,9 @@
 //localStorage.debug = '*';
-var socket = null;
-var focused = true;
-var unread = 0;
-var emotecheck = null;
+    var socket = null;
+    var focused = true;
+    var unread = 0;
+    var emotecheck = null;
+    var emotelist = null;
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
         {
@@ -134,20 +135,49 @@ function hideError() {
 }
 
 function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + emote + " ");
+    $('#m').val($('#m').val() + emote + " " );
     $("#m").focus();
 }
 
-function checkForNewEmote() {
-    socket.emit('checkNewEmote');
-}
-
 function updateEmoteMenu() {
-// TODO
+    // retreving the emotes as JSON from the API
+    $.getJSON('/api/emotes', function(result){
+        // checking if the JSON even contains emotes.
+        if(Object.keys(result).length > 0) {
+            if( JSON.stringify(emotelist) === JSON.stringify(result)) {
+                return;
+            }
+            emotelist = result
+            // getting the emote menu
+            let menu = $('#emoteMenu');
+            // clearing the emote menu
+            menu.empty();
+            // iterate over the emotes from the JSON
+            for (let emote in result){
+                // jumping over the hidden ones.
+                if(result[emote]["menuDisplay"]){
+                    emoteitem = document.createElement('a');
+                    emoteitem.href = "#";
+                    emoteitem.innerHTML = result[emote]["menuDisplayCode"];
+                    emoteitem.onclick = function() {addEmoteCode(emote); };
+                    emoteMenu.append(emoteitem);
+                    emoteMenu.append(document.createElement('wbr'));
+                }
+            }
+        }
+    });
+}
+function setCheckInterval() {
+    emotecheck = setInterval(updateEmoteMenu, 60 * 60 * 1000);
 }
 
-function setCheckInterval() {
-    emotecheck = setInterval(checkForNewEmote, 300000);
+function setup(){
+    updateEmoteMenu();
+}
+
+function addEmoteCode(emote) {
+    $('#m').val($('#m').val() + emote + " ");
+    $("#m").focus();
 }
 
 function getCookie(name) {
@@ -161,5 +191,3 @@ function addEmoteCode(emote) {
     document.getElementById('m').value = document.getElementById('m').value + emote + " ";
     document.querySelector("#messages").focus();
 }
-
-setCheckInterval();

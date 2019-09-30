@@ -96,15 +96,8 @@ def disconnect():
     emit_status({'count': user_count.get_count()})
 
 
-@socketio.on('checkNewEmote')
-def check_emote():
-    SHL.output(f"Checking for new emotes: {others.new_emotes}.", "S.ON checkNewEmote")
-    if others.new_emotes:
-        emit_status({"newemote": 1})
-
-
 def emit_status(status):
-    socketio.emit('status', status, broacast=True)
+    socketio.emit('status', status)
 
 
 tagsToReplace = {
