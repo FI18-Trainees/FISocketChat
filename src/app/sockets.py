@@ -82,6 +82,7 @@ def connect(data=""):
             emit('error', {'status_code': r.status_code, 'message': r.text})
             return
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
+        socketio.server.environ[request.sid]["username"] = username
         socketio.server.environ[request.sid]["userconfig"] = r.json()
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     user_count.add()
