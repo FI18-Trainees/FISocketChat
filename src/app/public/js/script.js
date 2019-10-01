@@ -190,5 +190,6 @@ function getCookie(name) {
 
 function addEmoteCode(emote) {
     document.getElementById('m').value = document.getElementById('m').value + emote + " ";
-    document.querySelector("#messages").focus();
+    document.querySelector('#messages').focus();
+    document.querySelector('#m').focus();
 }
