@@ -127,6 +127,7 @@ function changeOnlineStatus(online) {
     } else {
         document.getElementById("online-status").innerHTML =
             "<span class=\"badge badge-pill badge-danger\">Disconnected</span>"
+        disconnectNotification();
     }
 }
 
@@ -189,5 +190,6 @@ function getCookie(name) {
 
 function addEmoteCode(emote) {
     document.getElementById('m').value = document.getElementById('m').value + emote + " ";
-    document.querySelector("#messages").focus();
+    document.querySelector('#messages').focus();
+    document.querySelector('#m').focus();
 }
