@@ -6,7 +6,7 @@ window.onload = function () {
     }
 
     // Let's check whether notification permissions have already been granted
-    else if (Notification.permission === "granted") {
+    else if (checkPermission()) {
     //    // If it's okay let's create a notification
     //    new Notification("Welcome back!");
     }
@@ -15,7 +15,7 @@ window.onload = function () {
     else if (Notification.permission !== "denied") {
         Notification.requestPermission().then(function (permission) {
             // If the user accepts, let's create a notification
-            if (permission === "granted") {
+            if (checkPermission()) {
                 new Notification("This is how a notification would appear!");
             }
         });
@@ -24,7 +24,7 @@ window.onload = function () {
     // want to be respectful there is no need to bother them any more.
 };
 
-//create new notificaion with the variable "text" as content
+//create new notification with the variable "text" as content
 function newNotification(text) {
     new Notification(text);
 }
@@ -35,5 +35,11 @@ function checkPermission() {
         return true;
     } else {
         return false;
+    }
+}
+
+function disconnectNotification() {
+    if (checkPermission()) {
+        newNotification("You have been disconnected from the chat!");
     }
 }
