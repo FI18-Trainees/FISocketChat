@@ -4,15 +4,15 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/bosch1.png' style='height: 32px; width: auto;' alt='Bosch' title='Bosch'>"
   },
-  "Kappa": {
-    "replace": "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>"
-  },
   "Shawn": {
     "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=v2kV6pgJxuo\"><img src='/public/img/emote1.PNG' style='height:35px; width:auto;' alt='Shawn' title='Shawn'></a>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/emote1.PNG' style='height:35px; width:auto;' alt='Shawn' title='Shawn'>"
+  },
+  "Hackerman": {
+    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=K7Hn1rPQouU\"><img src='/public/img/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'></a>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
   },
   "FeelsGoodMan": {
     "replace": "<img src='/public/img/FeelsGoodMan1.png' style='height:35px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
@@ -29,10 +29,55 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/peepoWide.png' style='height:35px; width:auto;' alt='peepoWide' title='peepoWide'>"
   },
-  "Hackerman": {
-    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=K7Hn1rPQouU\"><img src='/public/img/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'></a>",
+  "peepoClap": {
+    "replace": "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
+    "menuDisplayCode": "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>"
+  },
+  "Pepega": {
+    "replace": "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>"
+  },
+  "monkaS": {
+    "replace": "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>"
+  },
+  "pepeJAM": {
+    "replace": "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>"
+  },
+  "monkaHmm": {
+    "replace": "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>"
+  },
+  "monkaW": {
+    "replace": "<img src='/public/img/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>"
+  },
+  "REEE": {
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=RBRxM5yq2NU\"><img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
+  },
+  "monkaT": {
+    "replace": "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>"
+  },
+  "peepoStrongest": {
+    "replace": "<img src='/public/img/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>"
+  },
+  "monkaRun": {
+    "replace": "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>"
   },
   "D:": {
     "replace": "<img src='/public/img/OMG1.png' style='height:32px; width:auto;' alt='D:' title='D:'>",
@@ -48,16 +93,6 @@
     "replace": "<img src='/public/img/ricadoFlick.gif' style='height:32px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/ricadoFlick.gif' style='height:32px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>"
-  },
-  "Pog": {
-    "replace": "<img src='/public/img/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>"
-  },
-  "peepoClap": {
-    "replace": "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>"
   },
   "bongoCat": {
     "replace": "<img src='/public/img/bongoCat.gif' style='height:50px; width:auto;' alt='bongoCat' title='bongoCat'>",
@@ -84,40 +119,20 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/LuL.png' style='height:32px; width:auto;' alt='LuL' title='LuL'>"
   },
-  "Pepega": {
-    "replace": "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>",
+  "Pog": {
+    "replace": "<img src='/public/img/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>"
-  },
-  "monkaS": {
-    "replace": "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>"
+    "menuDisplayCode": "<img src='/public/img/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>"
   },
   "OMEGALUL": {
     "replace": "<img src='/public/img/OMEGALUL.png' style='height:32px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/OMEGALUL.png' style='height:32px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>"
   },
-  "pepeJAM": {
-    "replace": "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>"
-  },
   "weSmart": {
     "replace": "<img src='/public/img/weSmart.png' style='height:32px; width:auto;' alt='weSmart' title='weSmart'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/weSmart.png' style='height:32px; width:auto;' alt='weSmart' title='weSmart'>"
-  },
-  "monkaHmm": {
-    "replace": "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>"
-  },
-  "monkaW": {
-    "replace": "<img src='/public/img/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>"
   },
   "CrabPls": {
     "replace": "<img src='/public/img/CrabPls.gif' style='height:32px; width:auto;' alt='CrabPls' title='CrabPls'>",
@@ -129,30 +144,10 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/Clap.gif' style='height:32px; width:auto;' alt='Clap' title='Clap'>"
   },
-  "/shrug": {
-    "replace": "¯\\_(ツ)_/¯",
-    "menuDisplay": true,
-    "menuDisplayCode": "/shrug"
-  },
-  "/flip": {
-    "replace": "(╯°□°）╯︵ ┻━┻",
-    "menuDisplay": true,
-    "menuDisplayCode": "/flip"
-  },
-  "/unflip": {
-    "replace": "┬─┬ノ( º _ ºノ) ",
-    "menuDisplay": true,
-    "menuDisplayCode": "/unflip"
-  },
   "hullo": {
     "replace": "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='hullo' title='hullo'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='hullo' title='hullo'>"
-  },
-  "/lenny": {
-    "replace": "( ͡° ͜ʖ ͡°)",
-    "menuDisplay": true,
-    "menuDisplayCode": "( ͡° ͜ʖ ͡°)"
   },
   "ChangeMyMind": {
     "replace": "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>",
@@ -194,21 +189,6 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>"
   },
-  "REEE": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=RBRxM5yq2NU\"><img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
-  },
-  "???": {
-    "replace": "Justus Jonas, Peter Shaw, Bob Andrews",
-    "menuDisplay": true,
-    "menuDisplayCode": "???"
-  },
-  "!!!": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=7KPDSYskJo4\">Kim Jülich, Franziska Winkler, Marie Grevenbroich</a>",
-    "menuDisplay": true,
-    "menuDisplayCode": "!!!"
-  },
   "KlugerSchachZug": {
     "replace": "<img src='/public/img/klugerschachzug.png' style='height:100px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>",
     "menuDisplay": true,
@@ -223,11 +203,6 @@
     "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'></a>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed, links to the gnomed video on Youtube'>"
-  },
-  "monkaT": {
-    "replace": "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>"
   },
   "Björn": {
     "replace": "PjÖrN",
@@ -279,20 +254,15 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/progressbar.gif' style='height:32px; width:100px;' alt='progressbar' title='progressbar'>"
   },
-  "peepoStrongest": {
-    "replace": "<img src='/public/img/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>"
-  },
   ":phone:": {
     "replace": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>",
     "menuDisplay": true,
     "menuDisplayCode": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>"
   },
-  "monkaRun": {
-    "replace": "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>",
+  "Kappa": {
+    "replace": "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>"
+    "menuDisplayCode": "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>"
   },
   "KappaG": {
     "replace": "<img src='/public/img/kappagold.png' style='height:32px; width:auto;' alt='KappaG' title='KappaG'>",
@@ -318,5 +288,35 @@
     "replace": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>"
+  },
+  "/shrug": {
+    "replace": "¯\\_(ツ)_/¯",
+    "menuDisplay": true,
+    "menuDisplayCode": "/shrug"
+  },
+  "/flip": {
+    "replace": "(╯°□°）╯︵ ┻━┻",
+    "menuDisplay": true,
+    "menuDisplayCode": "/flip"
+  },
+  "/unflip": {
+    "replace": "┬─┬ノ( º _ ºノ) ",
+    "menuDisplay": true,
+    "menuDisplayCode": "/unflip"
+  },
+  "/lenny": {
+    "replace": "( ͡° ͜ʖ ͡°)",
+    "menuDisplay": true,
+    "menuDisplayCode": "( ͡° ͜ʖ ͡°)"
+  },
+  "???": {
+    "replace": "Justus Jonas, Peter Shaw, Bob Andrews",
+    "menuDisplay": true,
+    "menuDisplayCode": "???"
+  },
+  "!!!": {
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=7KPDSYskJo4\">Kim Jülich, Franziska Winkler, Marie Grevenbroich</a>",
+    "menuDisplay": true,
+    "menuDisplayCode": "!!!"
   }
 }
