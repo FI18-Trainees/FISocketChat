@@ -128,21 +128,38 @@ def safe_emote_replace(text):
 
 
 def link_replacer(text):
-    return re.sub(linkregex, lambda x: link_wrapping(x.group()), text, 0)
+    text = link_display(text)
+    links = re.findall(linkregex, text)
+    for link in set(links):
+        replace = link_preview(link)
+        if replace:
+            text += replace + "<br/>"
+    return text
 
 
-def link_wrapping(text):
+def link_display(text):
+    return re.sub(linkregex, lambda x: change_link(x.group()), text, 0)
+
+
+def change_link(text):
+    if val_url(text):
+        return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a>'
+    else:
+        return text
+
+
+def link_preview(text):
     if val_url(text):
         youtube_embeded = get_embed_youtube_code(text)
         image_embeded = get_embed_image_link(text)
         if youtube_embeded is not None:
-            return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a> <br>{youtube_embeded}'
+            return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{youtube_embeded}'
         elif image_embeded is not None:
-            return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a> <br>{image_embeded}'
+            return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{image_embeded}'
         else:
-            return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a>'
+            return None
     else:
-        return text
+        return None
 
 
 def set_new_emote():
