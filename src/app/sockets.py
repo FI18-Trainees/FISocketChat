@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
-    logindisabled, others
+    logindisabled, others, imageregex
 from .shell import *
 from flask_socketio import emit
 import re
-from validators import url as valUrl
+from validators import url as val_url
 from datetime import datetime
 from flask import request
 import requests
@@ -128,18 +128,38 @@ def safe_emote_replace(text):
 
 
 def link_replacer(text):
-    return re.sub(linkregex, lambda x: link_wrapping(x.group()), text, 0)
+    text = link_display(text)
+    links = re.findall(linkregex, text)
+    for link in set(links):
+        replace = link_preview(link)
+        if replace:
+            text += replace + "<br/>"
+    return text
 
 
-def link_wrapping(text):
-    if valUrl(text):
-        youtube_embeded = get_embed_youtube_code(text)
-        if youtube_embeded is not None:
-            return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a> <br>{youtube_embeded}'
-        else:
-            return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a>'
+def link_display(text):
+    return re.sub(linkregex, lambda x: change_link(x.group()), text, 0)
+
+
+def change_link(text):
+    if val_url(text):
+        return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a>'
     else:
         return text
+
+
+def link_preview(text):
+    if val_url(text):
+        youtube_embeded = get_embed_youtube_code(text)
+        image_embeded = get_embed_image_link(text)
+        if youtube_embeded is not None:
+            return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{youtube_embeded}'
+        elif image_embeded is not None:
+            return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{image_embeded}'
+        else:
+            return None
+    else:
+        return None
 
 
 def set_new_emote():
@@ -149,6 +169,13 @@ def set_new_emote():
 def get_embed_youtube_code(link):
     matches = youtuberegex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        template = """<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{videoID}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
-        return template.format(videoID=match.group(1))
+        return f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{match.group(1)}" ' \
+               f'frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" ' \
+               f'allowfullscreen></iframe>'
+
+
+def get_embed_image_link(link):
+    matches = imageregex.finditer(link)
+    for matchNum, match in enumerate(matches, start=1):
+        return f'<img class="image-preview" src="{link}"/>'
     return None

@@ -61,7 +61,7 @@ emoteregex = compile(r"[\"'/]?[/?!:\w]+[\"'/]?", MULTILINE)
 htmlregex = compile(r"[&<>]", MULTILINE)
 linkregex = compile(r"[A-Za-z0-9\-._~:/?#\[\]@!&$%()*+,;=]+", MULTILINE)
 youtuberegex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?")
-
+imageregex = compile(r"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)")
 
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
 user_count = UserCount()
