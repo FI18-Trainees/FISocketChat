@@ -115,36 +115,6 @@ form button {
     margin: 0 0 0 0;
 }
 
-.sitebar li {
-    list-style-type: none;
-}
-
-.sitebar-content {
-    margin: 2%;
-    padding: 3%;
-    width: 96%;
-    background-color: var(--discord-lightgrey);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-decoration: none;
-}
-
-.sitebar-content:hover {
-    cursor: pointer;
-}
-
-.sitebar-content .title {
-    color: white;
-    text-decoration: none;
-}
-
-.sitebar-content .content {
-    color: var(--discord-dark);
-    text-decoration: none;
-}
-
 .content-wrapper {
     display: flex;
 

@@ -53,7 +53,6 @@ $('document').ready(function () {
     });
     socket.on('connect_timeout', (timeout) => {
         changeOnlineStatus(false);
-        disconnectNotification();
         setTimeout(function () {
             socket.connect();
         }, 3000);
