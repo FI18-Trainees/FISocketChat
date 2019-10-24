@@ -176,7 +176,8 @@ function setCheckInterval() {
 
 function setup(){
     updateEmoteMenu();
-    document.getElementById("emotebtn").addEventListener("click", toggleEmoteMenu);
+    document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
+    document.getElementById("navbar").addEventListener('resize', resizeNavbar);
 }
 
 function addEmoteCode(emote) {
@@ -208,3 +209,12 @@ function toggleEmoteMenu(){
     }
 }
 
+function resizeNavbar() {
+    /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+    var x = document.getElementById("navbar");
+    if (x.className === "navbar") {
+        x.className += " responsive";
+    } else {
+        x.className = "navbar";
+    }
+}
