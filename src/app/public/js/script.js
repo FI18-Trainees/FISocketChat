@@ -45,7 +45,6 @@ $('document').ready(function () {
     });
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
-        disconnectNotification();
         console.log(error);
         changeOnlineStatus(false);
         setTimeout(function () {
