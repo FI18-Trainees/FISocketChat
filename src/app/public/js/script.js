@@ -45,6 +45,7 @@ $('document').ready(function () {
     });
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
+        disconnectNotification();
         console.log(error);
         changeOnlineStatus(false);
         setTimeout(function () {
@@ -53,12 +54,14 @@ $('document').ready(function () {
     });
     socket.on('connect_timeout', (timeout) => {
         changeOnlineStatus(false);
+        disconnectNotification();
         setTimeout(function () {
             socket.connect();
         }, 3000);
     });
     socket.on('disconnect', (reason) => {
         showError("Disconnected.");
+        disconnectNotification();
         changeOnlineStatus(false);
         if (reason === 'io server disconnect') {
             // the disconnection was initiated by the server, you need to reconnect manually
@@ -128,7 +131,6 @@ function changeOnlineStatus(online) {
     } else {
         document.getElementById("online-status").innerHTML =
             "<span class=\"badge badge-pill badge-danger\">Disconnected</span>"
-        disconnectNotification();
     }
 }
 
@@ -137,7 +139,7 @@ function hideError() {
 }
 
 function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + emote + " " );
+    $('#m').val($('#m').val() + " " +  emote + " " );
     toggleEmoteMenu();
     $("#m").focus();
 }
@@ -180,7 +182,7 @@ function setup(){
 }
 
 function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + emote + " ");
+    $('#m').val($('#m').val() + " " +  emote + " ");
     toggleEmoteMenu();
     $("#m").focus();
 }
@@ -193,7 +195,7 @@ function getCookie(name) {
 
 
 function addEmoteCode(emote) {
-    document.getElementById('m').value = document.getElementById('m').value + emote + " ";
+    document.getElementById('m').value = document.getElementById('m').value + " " + emote + " ";
     toggleEmoteMenu();
     document.querySelector('#messages').focus();
     document.querySelector('#m').focus();
