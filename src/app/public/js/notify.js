@@ -1,4 +1,7 @@
 //More info here: https://developer.mozilla.org/de/docs/Web/API/notification
+
+var notifications = new Array();
+
 window.onload = function () {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
@@ -26,10 +29,11 @@ window.onload = function () {
 
 //create new notification with the variable "text" as content
 function newNotification(text) {
-    new Notification(text);
+    var notification = new Notification(text);
+    notifications.push(notification);
 }
 
-//check if prmission to show notifiaction is granted
+//check if permission to show notification is granted
 function checkPermission() {
     if (Notification.permission === "granted") {
         return true;
@@ -42,4 +46,14 @@ function disconnectNotification() {
     if (checkPermission()) {
         newNotification("You have been disconnected from the chat!");
     }
+}
+
+function closeAllNotifications() {
+    if(notifications.length > 0){
+        notifications.forEach(closeNotification);
+    }
+}
+
+function closeNotification(item){
+    item.close();
 }
