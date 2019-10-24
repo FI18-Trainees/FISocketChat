@@ -137,6 +137,7 @@ function hideError() {
 
 function addEmoteCode(emote) {
     $('#m').val($('#m').val() + emote + " " );
+    toggleEmoteMenu();
     $("#m").focus();
 }
 
@@ -174,10 +175,12 @@ function setCheckInterval() {
 
 function setup(){
     updateEmoteMenu();
+    document.getElementById("emotebtn").addEventListener("click", toggleEmoteMenu);
 }
 
 function addEmoteCode(emote) {
     $('#m').val($('#m').val() + emote + " ");
+    toggleEmoteMenu();
     $("#m").focus();
 }
 
@@ -190,6 +193,17 @@ function getCookie(name) {
 
 function addEmoteCode(emote) {
     document.getElementById('m').value = document.getElementById('m').value + emote + " ";
+    toggleEmoteMenu();
     document.querySelector('#messages').focus();
     document.querySelector('#m').focus();
 }
+
+function toggleEmoteMenu(){
+    var object = document.getElementById("emoteMenu");
+    if(object.style.display == "none" || object.style.display == ""){
+        object.style.display = "block";
+    } else {
+        object.style.display = "none";
+    }
+}
+
