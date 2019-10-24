@@ -254,6 +254,26 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/progressbar.gif' style='height:32px; width:100px;' alt='progressbar' title='progressbar'>"
   },
+  "Danke": {
+    "replace": "<img src='/public/img/danke.png' style='height:32px; width:82px;' alt='Danke' title='Danke'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/danke.png' style='height:32px; width:auto;' alt='Danke' title='Danke'>"
+  },
+  "Kuchen": {
+    "replace": "<img src='/public/img/kuchen.png' style='height:auto; width:250px;' alt='Kuchen' title='Kuchen'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/kuchen.png' style='height:50px; width:auto;' alt='Kuchen' title='Kuchen'>"
+  },
+  "DaVista": {
+    "replace": "<img src='/public/img/stoll.jpg' style='height:32px; width:auto;' alt='DaVista' title='DaVista'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/stoll.jpg' style='height:32px; width:auto;' alt='DaVista' title='DaVista'>"
+  },
+  "DaVista2": {
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://rb-davista.de.bosch.com\"><img src='/public/img/stoll2.png' style='height:32px; width:auto;' alt='DaVista2' title='DaVista2'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/stoll2.png' style='height:32px; width:auto;' alt='DaVista2' title='DaVista2'>"
+  },
   ":phone:": {
     "replace": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>",
     "menuDisplay": true,

@@ -20,6 +20,7 @@ $('document').ready(function () {
             setUserCount("offline");
             socket.connect();
         }
+        closeAllNotifications();
     };
     window.onblur = function () {
         focused = false;
@@ -142,7 +143,7 @@ function addEmoteCode(emote) {
 }
 
 function updateEmoteMenu() {
-    // retreving the emotes as JSON from the API
+    // retrieving the emotes as JSON from the API
     $.getJSON('/api/emotes', function(result){
         // checking if the JSON even contains emotes.
         if(Object.keys(result).length > 0) {
