@@ -256,17 +256,17 @@
   },
   "Danke": {
     "replace": "<img src='/public/img/danke.png' style='height:32px; width:82px;' alt='Danke' title='Danke'>",
-    "menuDisplay": true,
+    "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/danke.png' style='height:32px; width:auto;' alt='Danke' title='Danke'>"
   },
   "Kuchen": {
     "replace": "<img src='/public/img/kuchen.png' style='height:auto; width:250px;' alt='Kuchen' title='Kuchen'>",
-    "menuDisplay": true,
+    "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/kuchen.png' style='height:50px; width:auto;' alt='Kuchen' title='Kuchen'>"
   },
   "DaVista": {
     "replace": "<img src='/public/img/stoll.jpg' style='height:32px; width:auto;' alt='DaVista' title='DaVista'>",
-    "menuDisplay": true,
+    "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/stoll.jpg' style='height:32px; width:auto;' alt='DaVista' title='DaVista'>"
   },
   ":phone:": {
