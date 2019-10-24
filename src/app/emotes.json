@@ -260,7 +260,7 @@
     "menuDisplayCode": "<img src='/public/img/danke.png' style='height:32px; width:auto;' alt='Danke' title='Danke'>"
   },
   "Kuchen": {
-    "replace": "<img src='/public/img/kuchen.png' style='height:144px; width:513px;' alt='Kuchen' title='Kuchen'>",
+    "replace": "<img src='/public/img/kuchen.png' style='height:auto; width:250px;' alt='Kuchen' title='Kuchen'>",
     "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/kuchen.png' style='height:50px; width:auto;' alt='Kuchen' title='Kuchen'>"
   },
