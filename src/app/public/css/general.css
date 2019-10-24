@@ -155,15 +155,38 @@ a:hover, a:visited, a:link, a:active
     text-decoration: none;
 }
 
-#emoteMenu a {
+#emoteMenu {
+    display: none;
+}
+
+.emote-dropup {
+    position: relative;
+    display: inline-block;
+}
+
+.emote-dropmenu {
+    position: absolute;
+    min-width: 320px;
+    bottom: 50px;
+}
+
+.emote-dropmenu a {
     white-space: nowrap;
+    display: inline;
     margin: 2px;
 }
-
-#emoteMenu {
-    min-width: 20rem;
+/*
+.emote-dropup:hover .emote-dropmenu {
+    display: block;
+    white-space: nowrap;
 }
-
+*/
+/*
+.emote-dropup:active {
+    display: block;
+    white-space: nowrap;
+}
+*/
 .bg-lighter-01{
     background-color: rgba(255,255,255,0.05);
 }
