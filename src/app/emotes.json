@@ -269,6 +269,11 @@
     "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/stoll.jpg' style='height:32px; width:auto;' alt='DaVista' title='DaVista'>"
   },
+  "DaVista2": {
+    "replace": "<img src='/public/img/stoll2.png' style='height:32px; width:auto;' alt='DaVista2' title='DaVista2'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/stoll2.png' style='height:32px; width:auto;' alt='DaVista2' title='DaVista2'>"
+  },
   ":phone:": {
     "replace": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>",
     "menuDisplay": true,
