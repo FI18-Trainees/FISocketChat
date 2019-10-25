@@ -1,4 +1,4 @@
-import subprocess
+import os
 from datetime import datetime
 
 black = '\033[30m'
@@ -25,7 +25,8 @@ class Console:
         return f'[{str(datetime.now()).split(".", 1)[0]}]'
 
     def __init__(self, prefix, cls=False):
-        if cls: subprocess.call('cls', shell=True)
+        if cls:
+            os.system("cls" if os.name == "nt" else "clear")
         self.prefix = f'{green2}[{prefix}]{white}'
 
     def output(self, text, p=""):
