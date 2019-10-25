@@ -12,6 +12,7 @@ from flask import redirect, request
 SHL = Console("Init", cls=True)
 auth = HTTPTokenAuth()
 others = Others()
+user_count = UserCount()
 
 
 @auth.error_handler
@@ -64,8 +65,7 @@ youtuberegex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/
 imageregex = compile(r"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)")
 
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
-user_count = UserCount()
 
-from . import sockets
-emotehandler.set_socket(sockets)
+from .sockets import emit_status
+emotehandler.set_emit_socket(emit_status)
 from . import routes

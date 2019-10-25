@@ -19,7 +19,7 @@ class Emotes:
         self.emotes = {}
         self.runCheck = start
         self.start_reloader()
-        self.socket = None
+        self.emit_status = None
 
     def get_emotes(self):
         if filename:
@@ -45,9 +45,9 @@ class Emotes:
                 if cache != self.emotes:
                     SHL.output(f"Setting new emotes!")
                     self.emotes = self.get_emotes()
-                    if self.socket is not None:
-                        self.socket.emitstatus({'newemote': 1})
+                    if self.emit_status is not None:
+                        self.emit_status({'newemote': 1})
             time.sleep(60)
 
-    def set_socket(self, socket):
-        self.socket = socket
+    def set_emit_socket(self, emit_status):
+        self.emit_status = emit_status
