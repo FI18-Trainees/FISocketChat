@@ -8,6 +8,7 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/general.css">
     <link rel="stylesheet" href="/public/css/nanoscroller.css">
+    <link rel="stylesheet" href="/public/css/responsive.css">
 
     <meta property="og:title" content="FIChat">
     <meta charset="utf-8">
@@ -18,7 +19,7 @@
 
 </head>
 <body class="bg-dark text-white d-flex flex-column justify-content-start">
-    <nav class="navbar navbar-dark bg-dark border-bottom d-flex flex-nowrap">
+    <nav class="navbar navbar-dark bg-dark border-bottom d-flex flex-nowrap" id="navbar">
         <div class="navbar-brand">
             <div id="online-status">
                 <span class="badge badge-pill badge-danger">Disconnected</span>
@@ -26,17 +27,20 @@
         </div>
         <div class="nav-item rounded ml-2 mr-auto" id="username-item"><input type="text" placeholder="username"
                                                                              id="user_name"></div>
-        <div class="navbar-brand">
+        <div class="navbar-brand ml-2">
             <i class="fab fa-skype fa-spin d-inline-block align-center" style="color: #00aff0;" title="Skype rotiert"></i>
             Super cheap chat with sock(et)?s <i class="fas fa-socks d-inline-block align-center"></i>
         </div>
-        <div class="nav-item mr-4 ml-auto " id="usercount">Usercount: 0</div>
-        <div class="nav-link text-white" id="powered-by">Powered by <a href="https://python.org" target="_blank"
+        <div class="nav-item mr-4 ml-auto text-nowrap" id="usercount">Usercount: 0</div>
+        <div class="nav-link text-white text-nowrap" id="powered-by">Powered by <a href="https://python.org" target="_blank"
                                                                        class="text-white">Python</a></div>
+        <a href="javascript:void(0);" class="icon" onclick="openNavMenu()">
+            <i class="fa-2x fa-bars"></i>
+        </a>
     </nav>
     <div class="content-wrapper h-100">
         <div class="container sitebar">
-            <ul>
+            <div>
                 <a href="https://github.com/FI18-Trainees/FISocketChat" target="_blank">
                     <div class="media text-decoration-none bg-lighter-01 rounded p-1">
                         <div class="media-body">
@@ -46,7 +50,7 @@
                         <i class="fab fa-github fa-2x text-white"></i>
                     </div>
                 </a>
-            </ul>
+            </div>
         </div>
         <div class="container d-flex flex-column h-100">
             <div class="chat mb-2 mt-2 nano">
