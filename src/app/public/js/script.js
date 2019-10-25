@@ -4,6 +4,7 @@
     var unread = 0;
     var emotecheck = null;
     var emotelist = null;
+    var loginmode = true;
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
         {
@@ -27,10 +28,18 @@ $('document').ready(function () {
     };
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
-        let u = $('#user_name').val();
         let m = $('#m');
-        if (u != "") {
-            socket.emit('chat_message', {'display_name': u, 'message': m.val(), "token": getCookie("access_token")});
+        if (loginmode == false){
+            let u = $('#user_name').val();
+            if (u != '') {
+                socket.emit('chat_message', {'display_name': u, 'message': m.val(), 'token': getCookie('access_token')});
+                m.val('');
+            } else {
+                showError('Username must be given.');
+            }
+        } else {
+            let u = 'Shawn'; // username will be replaced with value from userconfig
+            socket.emit('chat_message', {'display_name': u, 'message': m.val(), 'token': getCookie('access_token')});
             m.val('');
         }
         return false;
@@ -100,13 +109,23 @@ $('document').ready(function () {
         }
         $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
-//show usercount in navbar
+// show usercount in navbar
+// enable/disable username
     socket.on('status', function (status) {
         if (status.hasOwnProperty('count')) {
             setUserCount(status['count']);
         }
         if (status.hasOwnProperty('newemote')) {
 
+        }
+        if (status.hasOwnProperty('loginmode')){
+            if(status['loginmode']){
+                document.getElementById('username-item').style.display = 'none';
+                loginmode = true;
+            } else {
+                document.getElementById('username-item').style.display = 'block';
+                loginmode = false;
+            }
         }
     });
 });
