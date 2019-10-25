@@ -240,3 +240,7 @@ function resizeNavbar() {
         x.className = "navbar";
     }
 }
+
+function openNavMenu() {
+    // TODO overlayed status info and maybe make username big
+}
