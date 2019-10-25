@@ -14,6 +14,26 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
   },
+  "FaFoSerious": {
+    "replace": "<img src='/public/img/fafoconcentrated.png' style='height:35px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/fafoconcentrated.png' style='height:35px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>"
+  },
+  "Fuck1": {
+    "replace": "<img src='/public/img/uwot.png' style='height:35px; width:auto;' alt='Fuck1' title='Fuck1'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/uwot.png' style='height:35px; width:auto;' alt='Fuck1' title='Fuck1'>"
+  },
+  "Creep": {
+    "replace": "<img src='/public/img/creep.png' style='height:35px; width:auto;' alt='Creep' title='Creep'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/creep.png' style='height:35px; width:auto;' alt='Creep' title='Creep'>"
+  },
+  "DerMoment": {
+    "replace": "<img src='/public/img/the_moment.png' style='height:35px; width:auto;' alt='DerMoment' title='DerMoment'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/the_moment.png' style='height:35px; width:auto;' alt='DerMoment' title='DerMoment'>"
+  },
   "FeelsGoodMan": {
     "replace": "<img src='/public/img/FeelsGoodMan1.png' style='height:35px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
     "menuDisplay": true,
