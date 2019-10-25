@@ -259,6 +259,11 @@
     "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/danke.png' style='height:32px; width:auto;' alt='Danke' title='Danke'>"
   },
+  "Bitte": {
+    "replace": "<img src='/public/img/bitte.png' style='height:32px; width:82px;' alt='Bitte' title='Bitte'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/bitte.png' style='height:32px; width:auto;' alt='Bitte' title='Bitte'>"
+  },
   "Kuchen": {
     "replace": "<img src='/public/img/kuchen.png' style='height:auto; width:250px;' alt='Kuchen' title='Kuchen'>",
     "menuDisplay": false,
