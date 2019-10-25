@@ -80,12 +80,15 @@ $('document').ready(function () {
     });
 //build html-div which will be shown
     socket.on('chat_message', function (msg) {
-        let item = $('<div class="message-container border-bottom pt-1 pb-2 px-2">');    //div which contains the message
+        let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
+        let content = $('<div>');    //div which contains header and message content
         let header = $('<h2 class="message-header d-inline-flex align-items-baseline">');      //div which contains username and timestamp
         header.append($('<div class="message-name">').prop('title', msg['timestamp']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
-        header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                        //append timestamp to header-div
-        item.append(header);                                                                                //append header to message-container-div
-        item.append($('<div class="message-content">').html(msg['message']));                               //append message content to message-container-div
+        header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                  //append timestamp to header-div
+        content.append(header);                                                                               //append header to message-container-div
+        content.append($('<div class="message-content">').html(msg['message']));                              //append message content to message-container-div
+        item.append($('<img class="message-profile-image mr-1 rounded-circle" src="' + msg['avatar'] + '">'))                //prepend profile picture to message-container-div
+        item.append(content);
         $('#messages').append(item);    //append message to chat-div
         if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
             $('.nano').nanoScroller();

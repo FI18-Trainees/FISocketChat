@@ -46,12 +46,19 @@ def handle_message(message):
         user = safe_tags_replace(user)
         msg = link_replacer(msg)
         msg = safe_emote_replace(msg)
+
+        if logindisabled:
+            avatar = "/public/img/emote1.PNG"
+        else:
+            avatar = "https://profile.zaanposni.com/pictures/" + \
+                     socketio.server.environ[request.sid]["username"] + ".png"
         emit('chat_message',
              {
                  'timestamp': timestamp,
                  'display_name': user,
                  'message': msg,
-                 'user_color': color
+                 'user_color': color,
+                 'avatar': avatar
              }, broadcast=True)
     else:
         SHL.output(f"{yellow2}Invalid message length: {len(msg)}{white}", "S.ON chat_message")
