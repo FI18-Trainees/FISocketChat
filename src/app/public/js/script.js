@@ -1,10 +1,14 @@
 //localStorage.debug = '*';
-    var socket = null;
-    var focused = true;
-    var unread = 0;
-    var emotecheck = null;
-    var emotelist = null;
-    var loginmode = true;
+var socket = null;
+var focused = true;
+var unread = 0;
+var emotecheck = null;
+var emotelist = null;
+var loginmode = true;
+
+var messages = [];
+var message_pointer = 0;
+
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
         {
@@ -26,14 +30,50 @@ $('document').ready(function () {
     window.onblur = function () {
         focused = false;
     };
+
+    document.getElementById("m").onkeydown = function (e) {
+        e = e || window.event;
+
+        console.log(message_pointer);
+        console.log(messages);
+        if (e.keyCode == '38') {
+            // up arrow
+            message_pointer -= 1;
+            if (message_pointer < 0) {
+                message_pointer = 0;
+            }
+            $('#m').val(messages[message_pointer]);
+
+        } else if (e.keyCode == '40') {
+            // down arrow
+            message_pointer += 1;
+            if (message_pointer > messages.length - 1) {
+                message_pointer = messages.length - 1;
+            }
+            $('#m').val(messages[message_pointer]);
+        }
+        ;
+    };
+
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         let m = $('#m');
-        if (loginmode == false){
+        if (loginmode == false) {
             let u = $('#user_name').val();
             if (u != '') {
-                socket.emit('chat_message', {'display_name': u, 'message': m.val(), 'token': getCookie('access_token')});
-                m.val('');
+                if (m.val() != "") {
+                    messages.push(m.val());
+                    message_pointer = messages.length;
+
+                    socket.emit('chat_message', {
+                        'display_name': u,
+                        'message': m.val(),
+                        'token': getCookie('access_token')
+                    });
+                    m.val('');
+                } else {
+                    showError('Invalid message.');
+                }
             } else {
                 showError('Username must be given.');
             }
@@ -121,8 +161,8 @@ $('document').ready(function () {
         if (status.hasOwnProperty('newemote')) {
 
         }
-        if (status.hasOwnProperty('loginmode')){
-            if(status['loginmode']){
+        if (status.hasOwnProperty('loginmode')) {
+            if (status['loginmode']) {
                 document.getElementById('username-item').style.display = 'none';
                 loginmode = true;
             } else {
@@ -160,17 +200,17 @@ function hideError() {
 }
 
 function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + " " +  emote + " " );
+    $('#m').val($('#m').val() + " " + emote + " ");
     toggleEmoteMenu();
     $("#m").focus();
 }
 
 function updateEmoteMenu() {
     // retrieving the emotes as JSON from the API
-    $.getJSON('/api/emotes', function(result){
+    $.getJSON('/api/emotes', function (result) {
         // checking if the JSON even contains emotes.
-        if(Object.keys(result).length > 0) {
-            if( JSON.stringify(emotelist) === JSON.stringify(result)) {
+        if (Object.keys(result).length > 0) {
+            if (JSON.stringify(emotelist) === JSON.stringify(result)) {
                 return;
             }
             emotelist = result
@@ -179,13 +219,15 @@ function updateEmoteMenu() {
             // clearing the emote menu
             menu.empty();
             // iterate over the emotes from the JSON
-            for (let emote in result){
+            for (let emote in result) {
                 // jumping over the hidden ones.
-                if(result[emote]["menuDisplay"]){
+                if (result[emote]["menuDisplay"]) {
                     emoteitem = document.createElement('a');
                     emoteitem.href = "#";
                     emoteitem.innerHTML = result[emote]["menuDisplayCode"];
-                    emoteitem.onclick = function() {addEmoteCode(emote); };
+                    emoteitem.onclick = function () {
+                        addEmoteCode(emote);
+                    };
                     emoteMenu.append(emoteitem);
                     emoteMenu.append(document.createElement('wbr'));
                 }
@@ -193,17 +235,18 @@ function updateEmoteMenu() {
         }
     });
 }
+
 function setCheckInterval() {
     emotecheck = setInterval(updateEmoteMenu, 60 * 60 * 1000);
 }
 
-function setup(){
+function setup() {
     updateEmoteMenu();
     document.getElementById("emotebtn").addEventListener("click", toggleEmoteMenu);
 }
 
 function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + " " +  emote + " ");
+    $('#m').val($('#m').val() + " " + emote + " ");
     toggleEmoteMenu();
     $("#m").focus();
 }
@@ -222,9 +265,9 @@ function addEmoteCode(emote) {
     document.querySelector('#m').focus();
 }
 
-function toggleEmoteMenu(){
+function toggleEmoteMenu() {
     var object = document.getElementById("emoteMenu");
-    if(object.style.display == "none" || object.style.display == ""){
+    if (object.style.display == "none" || object.style.display == "") {
         object.style.display = "block";
     } else {
         object.style.display = "none";
