@@ -33,9 +33,6 @@ $('document').ready(function () {
 
     document.getElementById("m").onkeydown = function (e) {
         e = e || window.event;
-
-        console.log(message_pointer);
-        console.log(messages);
         if (e.keyCode == '38') {
             // up arrow
             message_pointer -= 1;
@@ -78,9 +75,19 @@ $('document').ready(function () {
                 showError('Username must be given.');
             }
         } else {
-            let u = 'Shawn'; // username will be replaced with value from userconfig
-            socket.emit('chat_message', {'display_name': u, 'message': m.val(), 'token': getCookie('access_token')});
-            m.val('');
+            if (m.val() != "") {
+                messages.push(m.val());
+                message_pointer = messages.length;
+                let u = 'Shawn'; // username will be replaced with value from userconfig
+                socket.emit('chat_message', {
+                    'display_name': u,
+                    'message': m.val(),
+                    'token': getCookie('access_token')
+                });
+                m.val('');
+            } else {
+                showError('Invalid message.');
+            }
         }
         return false;
     });
