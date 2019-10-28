@@ -27,7 +27,7 @@ body {
     background: var(--discord-dark) !important;
 }
 
-/* Hide the link that should open and close thenav on small screens */
+/* Hide the link that should open and close the nav on small screens */
 #navbar .icon {
     display: none;
 }
@@ -47,7 +47,6 @@ body {
 
 #messages .message-profile-image {
     height: 40px;
-
 }
 
 #messages .message-name {
@@ -130,8 +129,7 @@ form button {
 
 }
 
-a:hover, a:visited, a:link, a:active
-{
+a:hover, a:visited, a:link, a:active {
     text-decoration: none;
 }
 
@@ -156,11 +154,11 @@ a:hover, a:visited, a:link, a:active
     margin: 2px;
 }
 
-.bg-lighter-01{
+.bg-lighter-01 {
     background-color: rgba(255,255,255,0.05);
 }
 
-.bg-lighter-01:hover{
+.bg-lighter-01:hover {
     background-color: rgba(255,255,255,0.1);
 }
 

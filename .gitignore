@@ -106,3 +106,4 @@ venv.bak/
 
 .idea/
 /.vs/
+/windows_patch_proxy.cmd
