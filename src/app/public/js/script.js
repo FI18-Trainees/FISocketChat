@@ -34,25 +34,25 @@ $('document').ready(function () {
     document.getElementById("m").onkeydown = function (e) {
         e = e || window.event;
         if (e.keyCode == '38') {
-            // up arrow
-            message_pointer -= 1;
-            if (message_pointer < 0) {
-                message_pointer = 0;
+            if($('#m').val() == "" || $('#m').val() == messages[message_pointer]) {
+                // up arrow
+                message_pointer -= 1;
+                if (message_pointer < 0) {
+                    message_pointer = 0;
+                }
+                $('#m').val(messages[message_pointer]);
             }
-            $('#m').val(messages[message_pointer]);
-
         } else if (e.keyCode == '40') {
-            // down arrow
-            message_pointer += 1;
-            if (message_pointer > messages.length - 1) {
-                message_pointer = messages.length - 1;
+            if($('#m').val() == "" || $('#m').val() == messages[message_pointer]) {
+                // down arrow
+                message_pointer += 1;
+                if (message_pointer > messages.length - 1) {
+                    message_pointer = messages.length - 1;
+                }
+                $('#m').val(messages[message_pointer]);
             }
-            $('#m').val(messages[message_pointer]);
         }
-    };
-
-    document.getElementById('m').onkeydown = function(e){
-    // Enter was pressed without shift key
+        // Enter was pressed without shift key
         if (e.keyCode == 13 && !e.shiftKey)
         {
             // prevent default behavior
