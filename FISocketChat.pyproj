@@ -1,0 +1,133 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>080a9b67-4a8f-4137-b643-c8d7152b0376</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>src/server.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>src/</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>FISocketChat</Name>
+    <RootNamespace>FISocketChat</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <InterpreterId>Global|PythonCore|3.7</InterpreterId>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>-disablelogin</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+    <Folder Include="src\app\" />
+    <Folder Include="src\app\public\" />
+    <Folder Include="src\app\public\css\" />
+    <Folder Include="src\app\public\img\" />
+    <Folder Include="src\app\public\js\" />
+    <Folder Include="src\app\templates\" />
+    <Folder Include="src\app\__pycache__\" />
+    <Folder Include="src\__pycache__\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\app\emotes.json" />
+    <Content Include="src\app\public\css\general.css" />
+    <Content Include="src\app\public\css\nanoscroller.css" />
+    <Content Include="src\app\public\img\3Head.png" />
+    <Content Include="src\app\public\img\4Head.png" />
+    <Content Include="src\app\public\img\5Head.png" />
+    <Content Include="src\app\public\img\blaulicht.gif" />
+    <Content Include="src\app\public\img\bongoCat.gif" />
+    <Content Include="src\app\public\img\bosch1.png" />
+    <Content Include="src\app\public\img\changeMyMind.png" />
+    <Content Include="src\app\public\img\Clap.gif" />
+    <Content Include="src\app\public\img\CrabPls.gif" />
+    <Content Include="src\app\public\img\discordloadhangds.gif" />
+    <Content Include="src\app\public\img\emote1.PNG" />
+    <Content Include="src\app\public\img\face-with-stuck-out-tongue.png" />
+    <Content Include="src\app\public\img\facepalm.png" />
+    <Content Include="src\app\public\img\FeelsBadMan1.png" />
+    <Content Include="src\app\public\img\FeelsGoodMan1.png" />
+    <Content Include="src\app\public\img\forsenCD.png" />
+    <Content Include="src\app\public\img\forsenPls.gif" />
+    <Content Include="src\app\public\img\gnomed.png" />
+    <Content Include="src\app\public\img\hackerman.jpg" />
+    <Content Include="src\app\public\img\hullo.gif" />
+    <Content Include="src\app\public\img\hypeE.gif" />
+    <Content Include="src\app\public\img\Kappa1.png" />
+    <Content Include="src\app\public\img\kappagold.png" />
+    <Content Include="src\app\public\img\kappahd.png" />
+    <Content Include="src\app\public\img\klugerschachzug.png" />
+    <Content Include="src\app\public\img\loading.gif" />
+    <Content Include="src\app\public\img\LuL.png" />
+    <Content Include="src\app\public\img\monkaHmm.png" />
+    <Content Include="src\app\public\img\monkaRun.gif" />
+    <Content Include="src\app\public\img\monkaS.png" />
+    <Content Include="src\app\public\img\monkaT.png" />
+    <Content Include="src\app\public\img\monkaW.png" />
+    <Content Include="src\app\public\img\OMEGALUL.png" />
+    <Content Include="src\app\public\img\OMG1.png" />
+    <Content Include="src\app\public\img\pedalo.png" />
+    <Content Include="src\app\public\img\peepoClap.gif" />
+    <Content Include="src\app\public\img\peepoStrongest.gif" />
+    <Content Include="src\app\public\img\peepoWide.png" />
+    <Content Include="src\app\public\img\Pepega.png" />
+    <Content Include="src\app\public\img\pepeJAM.gif" />
+    <Content Include="src\app\public\img\phonereceiver.png" />
+    <Content Include="src\app\public\img\pikaP.png" />
+    <Content Include="src\app\public\img\Pog.png" />
+    <Content Include="src\app\public\img\pooh.png" />
+    <Content Include="src\app\public\img\progressbar.gif" />
+    <Content Include="src\app\public\img\REEE.png" />
+    <Content Include="src\app\public\img\ricadoFlick.gif" />
+    <Content Include="src\app\public\img\SourPls.gif" />
+    <Content Include="src\app\public\img\sumSmash.gif" />
+    <Content Include="src\app\public\img\thinking-face.png" />
+    <Content Include="src\app\public\img\thinkink.gif" />
+    <Content Include="src\app\public\img\thonking.png" />
+    <Content Include="src\app\public\img\upside-down-face.png" />
+    <Content Include="src\app\public\img\weSmart.png" />
+    <Content Include="src\app\public\img\windowsload.gif" />
+    <Content Include="src\app\public\js\checkOverflow.js" />
+    <Content Include="src\app\public\js\jquery.nanoscroller.min.js" />
+    <Content Include="src\app\public\js\notify.js" />
+    <Content Include="src\app\public\js\script.js" />
+    <Content Include="src\app\templates\index.html" />
+    <Content Include="src\app\__pycache__\emotes.cpython-37.pyc" />
+    <Content Include="src\app\__pycache__\global_values.cpython-37.pyc" />
+    <Content Include="src\app\__pycache__\routes.cpython-37.pyc" />
+    <Content Include="src\app\__pycache__\sockets.cpython-37.pyc" />
+    <Content Include="src\app\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="src\linux_start.sh" />
+    <Content Include="src\win_start.bat" />
+    <Content Include="src\__pycache__\__init__.cpython-37.pyc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\app\emotes.py" />
+    <Compile Include="src\app\global_values.py" />
+    <Compile Include="src\app\routes.py" />
+    <Compile Include="src\app\sockets.py" />
+    <Compile Include="src\app\__init__.py" />
+    <Compile Include="src\server.py" />
+    <Compile Include="src\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.7" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
