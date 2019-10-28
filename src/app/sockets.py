@@ -46,6 +46,8 @@ def handle_message(message):
         user = safe_tags_replace(user)
         msg = link_replacer(msg)
         msg = safe_emote_replace(msg)
+        regex = re.compile(r'[\n\r\t]')
+        msg = regex.sub("<br>", msg)
 
         if logindisabled:
             avatar = "/public/img/emote1.PNG"

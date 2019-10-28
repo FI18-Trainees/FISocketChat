@@ -71,11 +71,14 @@ body {
 .message-box {
     background: var(--discord-dark);
     color: var(--discord-white);
+    resize: none;
 }
 
-form input {
+form textarea {
     border: 0;
     padding: 10px;
+    wrap: hard;
+    rows: 2;
 }
 
 form button, form .btn {
