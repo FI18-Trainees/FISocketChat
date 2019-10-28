@@ -64,7 +64,6 @@ $('document').ready(function () {
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         let m = $('#m');
-        console.log(m.val());
         if (loginmode == false) {
             let u = $('#user_name').val();
             if (u != '') {
