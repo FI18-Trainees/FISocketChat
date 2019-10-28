@@ -49,12 +49,22 @@ $('document').ready(function () {
             }
             $('#m').val(messages[message_pointer]);
         }
-        ;
+    };
+
+    document.getElementById('m').onkeydown = function(e){
+    // Enter was pressed without shift key
+        if (e.keyCode == 13 && !e.shiftKey)
+        {
+            // prevent default behavior
+            e.preventDefault();
+            $('form').submit();
+        }
     };
 
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         let m = $('#m');
+        console.log(m.val());
         if (loginmode == false) {
             let u = $('#user_name').val();
             if (u != '') {
@@ -280,4 +290,3 @@ function toggleEmoteMenu() {
         object.style.display = "none";
     }
 }
-
