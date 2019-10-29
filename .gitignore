@@ -107,3 +107,6 @@ venv.bak/
 .idea/
 /.vs/
 /windows_patch_proxy.cmd
+/FISocketChat.pyproj
+/FISocketChat.sln
+/obj/x86/Debug
