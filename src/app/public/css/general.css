@@ -125,6 +125,9 @@ form button {
     margin: 0 0 0 0;
 }
 
+    sitebar div {
+        min-width: 105px;
+    }
 .content-wrapper {
     display: flex;
 
