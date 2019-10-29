@@ -21,22 +21,19 @@
 <body class="bg-dark text-white d-flex flex-column justify-content-start">
     <nav class="navbar navbar-dark bg-dark border-bottom d-flex flex-nowrap" id="navbar">
         <div class="navbar-brand">
-            <div id="online-status">
-                <span class="badge badge-pill badge-danger">Disconnected</span>
+            <div class="d-block" id="online-status">
+                <span class="badge badge-pill badge-danger ">Disconnected</span>
             </div>
         </div>
-        <div class="nav-item rounded ml-2 mr-auto" id="username-item"><input type="text" placeholder="username"
+        <div class="nav-item rounded ml-2 mr-auto d-block" id="username-item"><input type="text" placeholder="username"
                                                                              id="user_name"></div>
-        <div class="navbar-brand ml-2">
-            <i class="fab fa-skype fa-spin d-inline-block align-center" style="color: #00aff0;" title="Skype rotiert"></i>
+        <div class="navbar-brand ml-2 d-none d-lg-block">
+            <i class="fab fa-skype fa-spin align-center d-inline-block" style="color: #00aff0;" title="Skype rotiert"></i>
             Super cheap chat with sock(et)?s <i class="fas fa-socks d-inline-block align-center"></i>
         </div>
-        <div class="nav-item mr-4 ml-auto text-nowrap" id="usercount">Usercount: 0</div>
-        <div class="nav-link text-white text-nowrap" id="powered-by">Powered by <a href="https://python.org" target="_blank"
+        <div class="nav-item mr-4 ml-auto text-nowrap d-none d-sm-block" id="usercount">Usercount: 0</div>
+        <div class="nav-link text-white text-nowrap d-none d-md-block" id="powered-by">Powered by <a href="https://python.org" target="_blank"
                                                                        class="text-white">Python</a></div>
-        <a href="javascript:void(0);" class="icon" onclick="resizeNavbar()">
-            <i class="fa-2x fa-bars box-shadow-menu"></i>
-        </a>
     </nav>
     <div class="content-wrapper h-100">
         <div class="container sitebar col-2">
