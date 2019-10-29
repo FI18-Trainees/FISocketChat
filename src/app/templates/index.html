@@ -15,38 +15,41 @@
         <meta property="og:description" content="Better than Skype">
         <meta property="og:image"
               content="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Skype-for-Business.svg/1200px-Skype-for-Business.svg.png">
-
-    </head>
-    <body class="bg-dark text-white d-flex flex-column justify-content-start">
-        <nav class="navbar navbar-dark bg-dark border-bottom d-flex flex-nowrap">
-            <div class="navbar-brand">
-                <div id="online-status">
-                    <span class="badge badge-pill badge-danger">Disconnected</span>
-                </div>
+</head>
+<body class="bg-dark text-white d-flex flex-column justify-content-start">
+    <nav class="navbar navbar-dark bg-dark border-bottom d-flex flex-nowrap" id="navbar">
+        <div class="navbar-brand">
+            <div class="d-block" id="online-status">
+                <span class="badge badge-pill badge-danger ">Disconnected</span>
             </div>
-            <div class="nav-item rounded ml-2 mr-auto" id="username-item"><input type="text" placeholder="username"
-                                                                                 id="user_name"></div>
-            <div class="navbar-brand">
-                <i class="fab fa-skype fa-spin d-inline-block align-center" style="color: #00aff0;" title="Skype rotiert"></i>
-                Super cheap chat with sock(et)?s <i class="fas fa-socks d-inline-block align-center"></i>
-            </div>
-            <div class="nav-item mr-4 ml-auto " id="usercount">Usercount: 0</div>
-            <div class="nav-link text-white" id="powered-by">Powered by <a href="https://python.org" target="_blank"
-                                                                           class="text-white">Python</a></div>
-        </nav>
-        <div class="content-wrapper h-100">
-            <div class="container sitebar">
-                <ul>
-                    <a href="https://github.com/FI18-Trainees/FISocketChat" target="_blank">
-                        <div class="media text-decoration-none bg-lighter-01 rounded p-1">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1 text-white">GitHub</h5>
-                                Check out our Repo.
-                            </div>
-                            <i class="fab fa-github fa-2x text-white"></i>
+        </div>
+        <div class="nav-item rounded ml-2 mr-auto d-block" id="username-item"><input type="text" placeholder="username"
+                                                                             id="user_name"></div>
+        <div class="navbar-brand ml-2 d-none d-lg-block">
+            <i class="fab fa-skype fa-spin align-center d-inline-block" style="color: #00aff0;" title="Skype rotiert"></i>
+            Super cheap chat with sock(et)?s <i class="fas fa-socks d-inline-block align-center"></i>
+        </div>
+        <div class="nav-item mr-4 ml-auto text-nowrap d-none d-sm-block" id="usercount">Usercount: 0</div>
+        <div class="nav-link text-white text-nowrap d-none d-md-block" id="powered-by">Powered by <a href="https://python.org" target="_blank"
+                                                                       class="text-white">Python</a></div>
+    </nav>
+    <div class="content-wrapper h-100">
+        <div class="container sitebar">
+            <div class="sitebar-content">
+                <a href="https://github.com/FI18-Trainees/FISocketChat" target="_blank">
+                    <div class="media text-decoration-none bg-lighter-01 rounded p-2">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1 text-white">GitHub</h5>
+                            Check out our Repo.
                         </div>
-                    </a>
-                </ul>
+                        <i class="fab fa-github fa-2x text-white"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="container d-flex flex-column h-100">
+            <div class="chat mb-2 mt-2 nano">
+                <div class="nano-content" id="messages"></div>
             </div>
             <div class="container d-flex flex-column h-100">
                 <div class="chat mb-2 mt-2 nano">
