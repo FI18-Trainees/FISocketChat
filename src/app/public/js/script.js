@@ -48,6 +48,9 @@ $('document').ready(function () {
                 message_pointer = messages.length - 1;
             }
             $('#m').val(messages[message_pointer]);
+        } else if (e.keyCode == '9') {
+            e.preventDefault();
+            tabComplete(document.getElementById('m').selectionStart);
         }
         ;
     };
@@ -279,5 +282,24 @@ function toggleEmoteMenu() {
     } else {
         object.style.display = "none";
     }
+}
+
+function tabComplete(CursorPos) {
+    // emote Only right now
+    let m = document.getElementById('m');
+    let messageSplit = m.value.substring(0, CursorPos);
+    let lastSplit = messageSplit.lastIndexOf(' ') + 1
+    let toComplete = messageSplit.substring(lastSplit);
+
+    for (let emote in emotelist) {
+        if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
+            console.log(emote);
+            let mIn = m.value.substr(0, lastSplit) + emote + " ";
+            m.value = mIn + m.value.substr(CursorPos + 1);
+            m.setSelectionRange(mIn.length, mIn.length);
+            break;
+        }
+    }
+
 }
 
