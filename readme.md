@@ -3,6 +3,7 @@
 <a href="https://github.com/FI18-Trainees/FISocketChat/blob/dev/LICENSE"><img src="https://img.shields.io/github/license/FI18-Trainees/FISocketChat.svg"/></a>
 <img src="http://hits.dwyl.io/FI18-Trainees/FISocketChat.svg)](http://hits.dwyl.io/FI18-Trainees/FISocketChat"/>
   <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/BasicCheckup/badge.svg" alt="GitHub Action"/>
+  <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/UnitTestSockets/badge.svg" alt="GitHub Action"/>
 </p>
 
 ## Requirements

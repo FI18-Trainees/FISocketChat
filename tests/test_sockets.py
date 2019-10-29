@@ -78,6 +78,7 @@ class TestClass(unittest.TestCase):
         y = {"display_name": "test_user", "message": "test_message"}  # expected
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
+        self.assertIn("avatar", x)
 
         print("Sending message with invalid username")
         sockets.send_message("", "test_message")
