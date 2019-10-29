@@ -34,25 +34,34 @@ $('document').ready(function () {
     document.getElementById("m").onkeydown = function (e) {
         e = e || window.event;
         if (e.keyCode == '38') {
-            // up arrow
-            message_pointer -= 1;
-            if (message_pointer < 0) {
-                message_pointer = 0;
+            if($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
+                // up arrow
+                message_pointer -= 1;
+                if (message_pointer < 0) {
+                    message_pointer = 0;
+                }
+                $('#m').val(messages[message_pointer]);
             }
-            $('#m').val(messages[message_pointer]);
-
         } else if (e.keyCode == '40') {
-            // down arrow
-            message_pointer += 1;
-            if (message_pointer > messages.length - 1) {
-                message_pointer = messages.length - 1;
+            if($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
+                // down arrow
+                message_pointer += 1;
+                if (message_pointer > messages.length - 1) {
+                    message_pointer = messages.length - 1;
+                }
+                $('#m').val(messages[message_pointer]);
             }
-            $('#m').val(messages[message_pointer]);
         } else if (e.keyCode == '9') {
             e.preventDefault();
             tabComplete(document.getElementById('m').selectionStart);
         }
-        ;
+        // Enter was pressed without shift key
+        if (e.keyCode == 13 && !e.shiftKey)
+        {
+            // prevent default behavior
+            e.preventDefault();
+            $('form').submit();
+        }
     };
 
     $('form').submit(function (e) {
@@ -133,7 +142,7 @@ $('document').ready(function () {
         let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
         let content = $('<div>');    //div which contains header and message content
         let header = $('<h2 class="message-header d-inline-flex align-items-baseline">');      //div which contains username and timestamp
-        header.append($('<div class="message-name">').prop('title', msg['timestamp']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
+        header.append($('<div class="message-name">').prop('title', msg['username']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
         header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                  //append timestamp to header-div
         content.append(header);                                                                               //append header to message-container-div
         content.append($('<div class="message-content">').html(msg['message']));                              //append message content to message-container-div
@@ -302,4 +311,3 @@ function tabComplete(CursorPos) {
     }
 
 }
-

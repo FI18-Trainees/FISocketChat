@@ -24,6 +24,21 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/uwot.png' style='height:35px; width:auto;' alt='Fuck1' title='Fuck1'>"
   },
+  "Bruh1": {
+    "replace": "<img src='/public/img/bruh.png' style='height:35px; width:auto;' alt='Bruh1' title='Bruh1'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/bruh.png' style='height:35px; width:auto;' alt='Bruh1' title='Bruh1'>"
+  },
+  "ded": {
+    "replace": "<img src='/public/img/ded.png' style='height:35px; width:auto;' alt='ded' title='ded'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/ded.png' style='height:35px; width:auto;' alt='ded' title='ded'>"
+  },
+  "Enthusiast": {
+    "replace": "<img src='/public/img/happy.png' style='height:35px; width:auto;' alt='Enthusiast' title='Enthusiast'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/happy.png' style='height:35px; width:auto;' alt='Enthusiast' title='Enthusiast'>"
+  },
   "Creep": {
     "replace": "<img src='/public/img/creep.png' style='height:35px; width:auto;' alt='Creep' title='Creep'>",
     "menuDisplay": true,
@@ -214,6 +229,16 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/klugerschachzug.png' style='height:50px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>"
   },
+  "X": {
+    "replace": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+  },
+  "F": {
+    "replace": "<img src='/public/img/F.png' style='height:50px; width:auto;' alt='F' title='F'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/F.png' style='height:50px; width:auto;' alt='F' title='F'>"
+  },
   "discordload": {
     "replace": "<img src='/public/img/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
     "menuDisplay": true,
@@ -222,7 +247,7 @@
   "gnomed": {
     "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'></a>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed, links to the gnomed video on Youtube'>"
+    "menuDisplayCode": "<img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'>"
   },
   "Björn": {
     "replace": "PjÖrN",
@@ -360,7 +385,7 @@
     "menuDisplayCode": "???"
   },
   "!!!": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=7KPDSYskJo4\">Kim Jülich, Franziska Winkler, Marie Grevenbroich</a>",
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=7KPDSYskJo4\" style=\"color:white\">Kim Jülich, Franziska Winkler, Marie Grevenbroich</a>",
     "menuDisplay": true,
     "menuDisplayCode": "!!!"
   }
