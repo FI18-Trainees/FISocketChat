@@ -230,17 +230,3 @@ function toggleEmoteMenu(){
         object.style.display = "none";
     }
 }
-
-function resizeNavbar() {
-    /* Toggle between adding and removing the "responsive" class to nav when the user clicks on the icon */
-    var x = document.getElementById("navbar");
-    if (x.className === "navbar") {
-        x.className += " responsive";
-    } else {
-        x.className = "navbar";
-    }
-}
-
-function openNavMenu() {
-    // TODO overlayed status info and maybe make username big
-}

@@ -128,6 +128,24 @@ form button {
     sitebar div {
         min-width: 105px;
     }
+
+.sitebar-content {
+    margin: 2%;
+    padding: 3%;
+    width: 96%;
+    background-color: var(--discord-dark);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-around;
+    text-decoration: none;
+}
+
+.sitebar-content:hover {
+    cursor: pointer;
+}
+
 .content-wrapper {
     display: flex;
 
