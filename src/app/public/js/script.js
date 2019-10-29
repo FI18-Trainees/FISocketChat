@@ -296,18 +296,19 @@ function toggleEmoteMenu() {
 function tabComplete(CursorPos) {
     // emote Only right now
     let m = document.getElementById('m');
+    if (m.value.length == 0)
+        return;
     let messageSplit = m.value.substring(0, CursorPos);
     let lastSplit = messageSplit.lastIndexOf(' ') + 1
     let toComplete = messageSplit.substring(lastSplit);
-
+    if (toComplete.length < 1) 
+        return;
     for (let emote in emotelist) {
         if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
-            console.log(emote);
             let mIn = m.value.substr(0, lastSplit) + emote + " ";
             m.value = mIn + m.value.substr(CursorPos + 1);
             m.setSelectionRange(mIn.length, mIn.length);
             break;
         }
     }
-
 }
