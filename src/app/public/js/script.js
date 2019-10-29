@@ -34,22 +34,34 @@ $('document').ready(function () {
     document.getElementById("m").onkeydown = function (e) {
         e = e || window.event;
         if (e.keyCode == '38') {
-            // up arrow
-            message_pointer -= 1;
-            if (message_pointer < 0) {
-                message_pointer = 0;
+            if($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
+                // up arrow
+                message_pointer -= 1;
+                if (message_pointer < 0) {
+                    message_pointer = 0;
+                }
+                $('#m').val(messages[message_pointer]);
             }
-            $('#m').val(messages[message_pointer]);
-
         } else if (e.keyCode == '40') {
-            // down arrow
-            message_pointer += 1;
-            if (message_pointer > messages.length - 1) {
-                message_pointer = messages.length - 1;
+            if($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
+                // down arrow
+                message_pointer += 1;
+                if (message_pointer > messages.length - 1) {
+                    message_pointer = messages.length - 1;
+                }
+                $('#m').val(messages[message_pointer]);
             }
-            $('#m').val(messages[message_pointer]);
+        } else if (e.keyCode == '9') {
+            e.preventDefault();
+            tabComplete(document.getElementById('m').selectionStart);
         }
-        ;
+        // Enter was pressed without shift key
+        if (e.keyCode == 13 && !e.shiftKey)
+        {
+            // prevent default behavior
+            e.preventDefault();
+            $('form').submit();
+        }
     };
 
     $('form').submit(function (e) {
@@ -279,4 +291,23 @@ function toggleEmoteMenu() {
     } else {
         object.style.display = "none";
     }
+}
+
+function tabComplete(CursorPos) {
+    // emote Only right now
+    let m = document.getElementById('m');
+    let messageSplit = m.value.substring(0, CursorPos);
+    let lastSplit = messageSplit.lastIndexOf(' ') + 1
+    let toComplete = messageSplit.substring(lastSplit);
+
+    for (let emote in emotelist) {
+        if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
+            console.log(emote);
+            let mIn = m.value.substr(0, lastSplit) + emote + " ";
+            m.value = mIn + m.value.substr(CursorPos + 1);
+            m.setSelectionRange(mIn.length, mIn.length);
+            break;
+        }
+    }
+
 }

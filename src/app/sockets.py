@@ -15,53 +15,56 @@ others.new_emotes = False
 @socketio.on('chat_message')
 def handle_message(message):
     SHL.output(f"Received message {message}", "S.ON chat_message")
-    timestamp = datetime.now().strftime("%H:%M:%S")
     try:
-        user = message['display_name'].strip()
-        msg = message['message'].strip()
+        display_name = message['display_name'].strip()
+        msg_body = message['message'].strip()
     except KeyError:
         SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_message")
         emit("error", "bad request")
         return
-    color = "#FF0000"
+    # defaults
+    username = display_name
+    display_color = "#FF0000"
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    avatar = "/public/img/emote1.PNG"
 
     if not logindisabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
             if socketio.server.environ[request.sid]["userconfig"]["display_name"].strip() != "":
-                user = socketio.server.environ[request.sid]["userconfig"]["display_name"]
-                color = socketio.server.environ[request.sid]["userconfig"]["chat_color"]
+                username = socketio.server.environ[request.sid]["username"]
+                display_name = socketio.server.environ[request.sid]["userconfig"]["display_name"]
+                display_color = socketio.server.environ[request.sid]["userconfig"]["chat_color"]
+                avatar = f"https://profile.zaanposni.com/pictures/{socketio.server.environ[request.sid]['username']}.png"
         except KeyError:
             SHL.output("Invalid userconfig", "S.ON chat_message")
             emit('error', {'message': 'invalid userconfig'})
             return
 
-    if user.find('Server') == 0 or len(user) not in range(1, 100):  # only allow username with length 1-100
-        SHL.output(f"{yellow2}Invalid username {user}{white}", "S.ON chat_message")
+    if display_name.find('Server') == 0 or len(display_name) not in range(1, 100):  # only allow username with length 1-100
+        SHL.output(f"{yellow2}Invalid username {display_name}{white}", "S.ON chat_message")
         emit('error', {"timestamp": timestamp, "message": "invalid username"})
         return
 
-    if 0 < len(msg) < 5000:
-        msg = safe_tags_replace(msg)
-        user = safe_tags_replace(user)
-        msg = link_replacer(msg)
-        msg = safe_emote_replace(msg)
+    if 0 < len(msg_body) < 5000:
+        display_name = safe_tags_replace(display_name)
+        msg_body = safe_tags_replace(msg_body)
+        msg_body = link_replacer(msg_body)
+        msg_body = safe_emote_replace(msg_body)
+        regex = re.compile(r'[\n\r\t]')
+        msg_body = regex.sub("<br>", msg_body)
 
-        if logindisabled:
-            avatar = "/public/img/emote1.PNG"
-        else:
-            avatar = "https://profile.zaanposni.com/pictures/" + \
-                     socketio.server.environ[request.sid]["username"] + ".png"
         emit('chat_message',
              {
                  'timestamp': timestamp,
-                 'display_name': user,
-                 'message': msg,
-                 'user_color': color,
-                 'avatar': avatar
+                 'display_name': display_name,
+                 'username': username,
+                 'user_color': display_color,
+                 'avatar': avatar,
+                 'message': msg_body
              }, broadcast=True)
     else:
-        SHL.output(f"{yellow2}Invalid message length: {len(msg)}{white}", "S.ON chat_message")
+        SHL.output(f"{yellow2}Invalid message length: {len(msg_body)}{white}", "S.ON chat_message")
         emit('error', {"timestamp": timestamp, "message": "invalid message"})
 
 
@@ -172,16 +175,13 @@ def link_preview(text):
         return None
 
 
-def set_new_emote():
-    others.new_emotes = True
-
-
 def get_embed_youtube_code(link):
     matches = youtuberegex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
         return f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{match.group(1)}" ' \
                f'frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" ' \
                f'allowfullscreen></iframe>'
+    return None
 
 
 def get_embed_image_link(link):
