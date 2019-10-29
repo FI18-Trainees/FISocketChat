@@ -106,3 +106,6 @@ venv.bak/
 
 .idea/
 /.vs/
+/FISocketChat.pyproj
+/FISocketChat.sln
+/obj/x86/Debug
