@@ -129,7 +129,7 @@ $('document').ready(function () {
         let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
         let content = $('<div>');    //div which contains header and message content
         let header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');      //div which contains username and timestamp
-        header.append($('<div class="message-name">').prop('title', msg['timestamp']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
+        header.append($('<div class="message-name">').prop('title', msg['username']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
         header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                  //append timestamp to header-div
         content.append(header);                                                                               //append header to message-container-div
         content.append($('<div class="message-content">').html(msg['message']));                              //append message content to message-container-div
