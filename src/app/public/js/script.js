@@ -107,7 +107,6 @@ $('document').ready(function () {
     socket.on('error', function (msg) {
         showError(msg['message']);
     });
-
     socket.on('connect', function () {
         changeOnlineStatus(true);
     });
@@ -275,7 +274,6 @@ function getCookie(name) {
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
-
 
 function addEmoteCode(emote) {
     document.getElementById('m').value = document.getElementById('m').value + " " + emote + " ";
