@@ -109,7 +109,6 @@ $('document').ready(function () {
     socket.on('error', function (msg) {
         showError(msg['message']);
     });
-
     socket.on('connect', function () {
         changeOnlineStatus(true);
     });
@@ -197,6 +196,7 @@ $('document').ready(function () {
                 }
             } else {
                 document.getElementById('username-item').style.display = 'block';
+                document.getElementById('user_name').value = 'DebugUser';
                 loginmode = false;
             }
         }
@@ -276,24 +276,10 @@ function setup() {
     //document.getElementById("navbar").addEventListener('resize', resizeNavbar);
 }
 
-function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + " " + emote + " ");
-    toggleEmoteMenu();
-    $("#m").focus();
-}
-
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
-}
-
-
-function addEmoteCode(emote) {
-    document.getElementById('m').value = document.getElementById('m').value + " " + emote + " ";
-    toggleEmoteMenu();
-    document.querySelector('#messages').focus();
-    document.querySelector('#m').focus();
 }
 
 function toggleEmoteMenu() {
@@ -308,13 +294,15 @@ function toggleEmoteMenu() {
 function tabComplete(CursorPos) {
     // emote Only right now
     let m = document.getElementById('m');
+    if (m.value.length == 0)
+        return;
     let messageSplit = m.value.substring(0, CursorPos);
     let lastSplit = messageSplit.lastIndexOf(' ') + 1
     let toComplete = messageSplit.substring(lastSplit);
-
+    if (toComplete.length < 1) 
+        return;
     for (let emote in emotelist) {
         if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
-            console.log(emote);
             let mIn = m.value.substr(0, lastSplit) + emote + " ";
             m.value = mIn + m.value.substr(CursorPos + 1);
             m.setSelectionRange(mIn.length, mIn.length);
