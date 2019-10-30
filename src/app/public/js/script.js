@@ -5,6 +5,7 @@ var unread = 0;
 var emotecheck = null;
 var emotelist = null;
 var loginmode = true;
+var ownusername = null;
 
 var messages = [];
 var message_pointer = 0;
@@ -69,6 +70,7 @@ $('document').ready(function () {
         let m = $('#m');
         if (loginmode == false) {
             let u = $('#user_name').val();
+            ownusername = u.toLowerCase();
             if (u != '') {
                 if (m.val() != "") {
                     messages.push(m.val());
@@ -138,13 +140,20 @@ $('document').ready(function () {
     });
 //build html-div which will be shown
     socket.on('chat_message', function (msg) {
+        msgcontent = msg['message'];
+        mentionIndex = msgcontent.toLowerCase().search('@' + ownusername);
+        if (mentionIndex != -1) {
+            replacement = '<em>@' + ownusername + '</em>';
+            length = ownusername.length + 1;
+            msgcontent = replaceSubStr(msgcontent, mentionIndex, replacement, length);
+        }
         let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
         let content = $('<div>');    //div which contains header and message content
         let header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');      //div which contains username and timestamp
         header.append($('<div class="message-name">').prop('title', msg['username']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
         header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                  //append timestamp to header-div
         content.append(header);                                                                               //append header to message-container-div
-        content.append($('<div class="message-content">').html(msg['message']));                              //append message content to message-container-div
+        content.append($('<div class="message-content">').html(msgcontent));                              //append message content to message-container-div
         item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + msg['avatar'] + '">'))                //prepend profile picture to message-container-div
         item.append(content);
         $('#messages').append(item);    //append message to chat-div
@@ -183,6 +192,9 @@ $('document').ready(function () {
             if (status['loginmode']) {
                 document.getElementById('username-item').style.display = 'none';
                 loginmode = true;
+                if (status.hasOwnProperty('username')) {
+                    ownusername = status['username'].toLowerCase();
+                }
             } else {
                 document.getElementById('username-item').style.display = 'block';
                 loginmode = false;
@@ -309,5 +321,8 @@ function tabComplete(CursorPos) {
             break;
         }
     }
+}
 
+function replaceSubStr(text, index, replacement, length) {
+    return text.substr(0, index) + replacement + text.substr(index + length);
 }
