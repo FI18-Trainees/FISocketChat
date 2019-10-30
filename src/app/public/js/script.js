@@ -264,23 +264,10 @@ function setup() {
     document.getElementById("emotebtn").addEventListener("click", toggleEmoteMenu);
 }
 
-function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + " " + emote + " ");
-    toggleEmoteMenu();
-    $("#m").focus();
-}
-
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
-}
-
-function addEmoteCode(emote) {
-    document.getElementById('m').value = document.getElementById('m').value + " " + emote + " ";
-    toggleEmoteMenu();
-    document.querySelector('#messages').focus();
-    document.querySelector('#m').focus();
 }
 
 function toggleEmoteMenu() {
