@@ -79,10 +79,25 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>"
   },
+  "monkaShred": {
+    "replace": "<img src='/public/img/monkaShred.gif' style='height:32px; width:auto;' alt='monkaShred' title='monkaShred'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaShred.gif' style='height:32px; width:auto;' alt='monkaShred' title='monkaShred'>"
+  },
   "pepeJAM": {
     "replace": "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>"
+  },
+  "pepeJAMJAM": {
+    "replace": "<img src='/public/img/pepeJAMJAM.gif' style='height:32px; width:auto;' alt='pepeJAMJAM' title='pepeJAMJAM'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/pepeJAMJAM.gif' style='height:32px; width:auto;' alt='pepeJAMJAM' title='pepeJAMJAM'>"
+  },
+  "pepeFastJam": {
+    "replace": "<img src='/public/img/pepefast.gif' style='height:32px; width:auto;' alt='pepeFastJam' title='pepeFastJam'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/pepefast.gif' style='height:32px; width:auto;' alt='pepeFastJam' title='pepeFastJam'>"
   },
   "monkaHmm": {
     "replace": "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>",
@@ -118,16 +133,6 @@
     "replace": "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>"
-  },
-  "pepeFastJam": {
-    "replace": "<img src='/public/img/pepefast.gif' style='height:32px; width:auto;' alt='pepeFastJam' title='pepeFastJam'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pepefast.gif' style='height:32px; width:auto;' alt='pepeFastJam' title='pepeFastJam'>"
-  },
-  "monkaShred": {
-    "replace": "<img src='/public/img/monkaShred.gif' style='height:32px; width:auto;' alt='monkaShred' title='monkaShred'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaShred.gif' style='height:32px; width:auto;' alt='monkaShred' title='monkaShred'>"
   },
   "D:": {
     "replace": "<img src='/public/img/OMG1.png' style='height:32px; width:auto;' alt='D:' title='D:'>",
