@@ -409,6 +409,11 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>"
   },
+  "simonW": {
+    "replace": "<img src='/public/img/simonW.png' style='height:48px; width:auto;' alt='simonW' title='simonW'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/simonW.png' style='height:32px; width:auto;' alt='simonW' title='simonW'>"
+  },
   "/shrug": {
     "replace": "¯\\_(ツ)_/¯",
     "menuDisplay": true,
