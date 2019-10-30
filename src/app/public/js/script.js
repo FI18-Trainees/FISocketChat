@@ -185,6 +185,7 @@ $('document').ready(function () {
                 loginmode = true;
             } else {
                 document.getElementById('username-item').style.display = 'block';
+                document.getElementById('user_name').value = 'DebugUser';
                 loginmode = false;
             }
         }

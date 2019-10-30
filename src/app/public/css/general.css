@@ -175,7 +175,7 @@ a:hover, a:visited, a:link, a:active
 .emote-dropmenu {
     position: absolute;
     min-width: 320px;
-    bottom: 50px;
+    bottom: 75px;
 }
 
 .emote-dropmenu a {
