@@ -1,19 +1,26 @@
 # -*- coding: utf-8 -*-
 from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
-    logindisabled, others, imageregex
+    logindisabled, others, imageregex, request
 from .shell import *
 from flask_socketio import emit
-import re
+import re, time
 from validators import url as val_url
 from datetime import datetime
-from flask import request
 import requests
 SHL = Console("Init")
 others.new_emotes = False
-
+userdict = {}
 
 @socketio.on('chat_message')
 def handle_message(message):
+    if request.sid in userdict:
+        print (float(userdict[request.sid]))
+        print (float(time.time()))
+        if float(time.time() - userdict[request.sid]) <= 0.7:
+            SHL.output(f"Spam protection triggered for SID: {request.sid}", "S.ON chat_message")
+            return
+
+    userdict[request.sid] = time.time()
     SHL.output(f"Received message {message}", "S.ON chat_message")
     try:
         display_name = message['display_name'].strip()
@@ -104,6 +111,7 @@ def connect(data=""):
 
 @socketio.on('disconnect')
 def disconnect():
+    userdict.pop(request.sid)
     SHL.output("User disconnected.", "S.ON Disconnect")
     user_count.rem()
     SHL.output(f"User count: {user_count.count}.", "S.ON Disconnect")
