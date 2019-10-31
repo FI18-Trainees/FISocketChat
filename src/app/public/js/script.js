@@ -5,7 +5,7 @@ var unread = 0;
 var emotecheck = null;
 var emotelist = null;
 var loginmode = true;
-
+var cooldown = 0;
 var messages = [];
 var message_pointer = 0;
 
@@ -66,6 +66,11 @@ $('document').ready(function () {
 
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
+        if (cooldown != 0) {
+            showError("Sending messages to fast!");
+            return;
+        }
+        cooldown = setTimeout(function(){ cooldown=0 }, 800);
         let m = $('#m');
         if (loginmode == false) {
             let u = $('#user_name').val();
