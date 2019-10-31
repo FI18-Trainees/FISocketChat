@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
-    logindisabled, others, imageregex
+    logindisabled, others, imageregex, newlinehtmlregex
 from .shell import *
 from flask_socketio import emit
 import re
@@ -51,8 +51,7 @@ def handle_message(message):
         msg_body = safe_tags_replace(msg_body)
         msg_body = link_replacer(msg_body)
         msg_body = safe_emote_replace(msg_body)
-        regex = re.compile(r'[\n\r\t]')
-        msg_body = regex.sub("<br>", msg_body)
+        msg_body = newlinehtmlregex.sub("<br>", msg_body)
 
         emit('chat_message',
              {
