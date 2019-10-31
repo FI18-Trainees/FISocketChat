@@ -14,10 +14,8 @@ userdict = {}
 @socketio.on('chat_message')
 def handle_message(message):
     if request.sid in userdict:
-        print (float(userdict[request.sid]))
-        print (float(time.time()))
         if float(time.time() - userdict[request.sid]) <= 0.7:
-            SHL.output(f"Spam protection triggered for SID: {request.sid}", "S.ON chat_message")
+            SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_message")
             return
 
     userdict[request.sid] = time.time()
