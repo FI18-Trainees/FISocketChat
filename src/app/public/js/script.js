@@ -191,14 +191,26 @@ $('document').ready(function () {
             if (status['loginmode']) {
                 document.getElementById('username-item').style.display = 'none';
                 loginmode = true;
-                if (status.hasOwnProperty('username')) {
-                    ownusername = status['username'].toLowerCase();
-                }
             } else {
                 document.getElementById('username-item').style.display = 'block';
                 document.getElementById('user_name').value = 'DebugUser';
                 loginmode = false;
             }
+        }
+    });
+
+    socket.on('username', function (username) {
+        ownusername = username;
+    });
+
+    socket.on('loginmode', function (loginmode) {
+        if (loginmode) {
+            document.getElementById('username-item').style.display = 'none';
+            loginmode = true;
+        } else {
+            document.getElementById('username-item').style.display = 'block';
+            document.getElementById('user_name').value = 'DebugUser';
+            loginmode = false;
         }
     });
 });
