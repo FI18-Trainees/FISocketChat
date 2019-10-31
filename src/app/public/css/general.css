@@ -20,6 +20,8 @@ body {
     --discord-white: #ffffff;
     --discord-blue: #7289da;
     --discord-red: rgba(240, 71, 71, 1);
+    --discord-pink: #FF1493;
+    --discord-orange: #fdad5c;
 
 	font: 13px "Comic Sans MS", Arial;
 }
@@ -65,6 +67,10 @@ body {
 
 #messages .message-content:link {
     color: var(--discord-blue);
+}
+
+#messages .message-content em {
+    color: var(--discord-orange);
 }
 
 .message-input {

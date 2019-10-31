@@ -93,10 +93,10 @@ def connect(data=""):
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
         socketio.server.environ[request.sid]["username"] = username
         socketio.server.environ[request.sid]["userconfig"] = r.json()
-        emit_status({'loginmode': True})
+        emit('status', {'loginmode': True, 'username': username})
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     else:
-        emit_status({'loginmode': False})
+        emit('status', {'loginmode': False})
     user_count.add()
     emit_status({'count': user_count.get_count()})
 
@@ -145,7 +145,7 @@ def link_replacer(text):
     for link in set(links):
         replace = link_preview(link)
         if replace:
-            text += replace + "<br/>"
+            text += replace + "<br />"
     return text
 
 
