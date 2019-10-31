@@ -187,16 +187,6 @@ $('document').ready(function () {
         if (status.hasOwnProperty('newemote')) {
 
         }
-        if (status.hasOwnProperty('loginmode')) {
-            if (status['loginmode']) {
-                document.getElementById('username-item').style.display = 'none';
-                loginmode = true;
-            } else {
-                document.getElementById('username-item').style.display = 'block';
-                document.getElementById('user_name').value = 'DebugUser';
-                loginmode = false;
-            }
-        }
     });
 
     socket.on('username', function (username) {
