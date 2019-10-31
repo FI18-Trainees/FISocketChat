@@ -38,7 +38,7 @@ class SocketIOConnection:
 
         @self.sio.on('status')
         async def on_error(data):
-            self.status = data
+            self.status.update(data)
 
         @self.sio.on('chat_message')
         async def on_message(data):
@@ -66,7 +66,8 @@ class TestClass(unittest.TestCase):
         sockets = SocketIOConnection()
         print("Testing connection")
         self.assertTrue(sockets.online_status)
-        self.assertEqual(sockets.status["count"], 1)
+        self.assertEqual(sockets.status.get("count", 0), 1)
+        self.assertFalse(sockets.status.get("loginmode", True))
 
         print("Sending message")
         sockets.send_message("test_user", "test_message")

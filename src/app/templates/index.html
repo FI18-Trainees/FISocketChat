@@ -23,7 +23,7 @@
                 <span class="badge badge-pill badge-danger ">Disconnected</span>
             </div>
         </div>
-        <div class="nav-item rounded ml-2 mr-auto d-block" id="username-item"><input type="text" placeholder="username"
+        <div class="nav-item rounded ml-2 mr-auto" id="username-item" style="display: block"><input type="text" placeholder="username"
                                                                              id="user_name"></div>
         <div class="navbar-brand ml-2 d-none d-lg-block">
             <i class="fab fa-skype fa-spin align-center d-inline-block" style="color: #00aff0;" title="Skype rotiert"></i>
@@ -48,9 +48,6 @@
             </div>
         </div>
         <div class="container d-flex flex-column h-100">
-            <div class="chat mb-2 mt-2 nano">
-                <div class="nano-content" id="messages"></div>
-            </div>
             <div class="container d-flex flex-column h-100">
                 <div class="chat mb-2 mt-2 nano">
                     <div class="nano-content" id="messages"></div>
@@ -65,13 +62,14 @@
                             </button>
                             <div class="emote-dropmenu bg-dark border border-info" id="emoteMenu">If you see this, the Javascript failed :(</div>
                         </div>
-                        <textarea class="message-box flex-fill" id="m" autofocus="true" autocomplete="off" placeholder="Your message..."></textarea>
+                        <textarea class="message-box flex-fill" id="m" autofocus="autofocus" autocomplete="off" placeholder="Your message..."></textarea>
                         <button class="rounded ml-2" style="visibility: hidden">Send</button>
                     </form>
                 </div>
             </div>
-            <div class="container sitebar border-none"></div>
+            <!--<div class="container sitebar border-none"></div>-->
         </div>
+    </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
