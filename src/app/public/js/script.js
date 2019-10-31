@@ -35,7 +35,7 @@ $('document').ready(function () {
     document.getElementById("m").onkeydown = function (e) {
         e = e || window.event;
         if (e.keyCode == '38') {
-            if($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
+            if ($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
                 // up arrow
                 message_pointer -= 1;
                 if (message_pointer < 0) {
@@ -44,7 +44,7 @@ $('document').ready(function () {
                 $('#m').val(messages[message_pointer]);
             }
         } else if (e.keyCode == '40') {
-            if($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
+            if ($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
                 // down arrow
                 message_pointer += 1;
                 if (message_pointer > messages.length - 1) {
@@ -57,8 +57,7 @@ $('document').ready(function () {
             tabComplete(document.getElementById('m').selectionStart);
         }
         // Enter was pressed without shift key
-        if (e.keyCode == 13 && !e.shiftKey)
-        {
+        if (e.keyCode == 13 && !e.shiftKey) {
             // prevent default behavior
             e.preventDefault();
             $('form').submit();
@@ -187,20 +186,18 @@ $('document').ready(function () {
         if (status.hasOwnProperty('newemote')) {
 
         }
-    });
-
-    socket.on('username', function (username) {
-        ownusername = username;
-    });
-
-    socket.on('loginmode', function (loginmode) {
-        if (loginmode) {
-            document.getElementById('username-item').style.display = 'none';
-            loginmode = true;
-        } else {
-            document.getElementById('username-item').style.display = 'block';
-            document.getElementById('user_name').value = 'DebugUser';
-            loginmode = false;
+        if (status.hasOwnProperty('username')) {
+            ownusername = status['username'];
+        }
+        if (status.hasOwnProperty('loginmode')) {
+            if (status['loginmode']) {
+                document.getElementById('username-item').style.display = 'none';
+                loginmode = true;
+            } else {
+                document.getElementById('username-item').style.display = 'block';
+                document.getElementById('user_name').value = 'DebugUser';
+                loginmode = false;
+            }
         }
     });
 });
@@ -301,7 +298,7 @@ function tabComplete(CursorPos) {
     let messageSplit = m.value.substring(0, CursorPos);
     let lastSplit = messageSplit.lastIndexOf(' ') + 1
     let toComplete = messageSplit.substring(lastSplit);
-    if (toComplete.length < 1) 
+    if (toComplete.length < 1)
         return;
     for (let emote in emotelist) {
         if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {

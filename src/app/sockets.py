@@ -94,11 +94,10 @@ def connect(data=""):
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
         socketio.server.environ[request.sid]["username"] = username
         socketio.server.environ[request.sid]["userconfig"] = r.json()
-        emit({'loginmode': True})
-        emit({'username': username})
+        emit('status', {'loginmode': True, 'username': username})
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     else:
-        emit({'loginmode': False})
+        emit('status', {'loginmode': False})
     user_count.add()
     emit_status({'count': user_count.get_count()})
 
