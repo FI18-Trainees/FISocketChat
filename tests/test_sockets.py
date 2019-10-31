@@ -67,7 +67,7 @@ class TestClass(unittest.TestCase):
         print("Testing connection")
         self.assertTrue(sockets.online_status)
         self.assertEqual(sockets.status.get("count", 0), 1)
-        self.assertTrue(sockets.status.get("loginmode", False))
+        self.assertFalse(sockets.status.get("loginmode", True))
 
         print("Sending message")
         sockets.send_message("test_user", "test_message")
