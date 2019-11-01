@@ -5,6 +5,7 @@ var unread = 0;
 var emotecheck = null;
 var emotelist = null;
 var loginmode = true;
+var cooldown = 0;
 var ownusername = null;
 
 var messages = [];
@@ -66,8 +67,13 @@ $('document').ready(function () {
 
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
+        if (cooldown !== 0) {
+            showError("Sending messages to fast!");
+            return;
+        }
+        cooldown = window.setTimeout(function(){ cooldown=0 }, 400);
         let m = $('#m');
-        if (loginmode == false) {
+        if (!loginmode) {
             let u = $('#user_name').val();
             ownusername = u.toLowerCase();
             if (u != '') {
@@ -140,10 +146,11 @@ $('document').ready(function () {
     socket.on('chat_message', function (msg) {
         msgcontent = msg['message'];
         mentionIndex = msgcontent.toLowerCase().search('@' + ownusername);
-        if (mentionIndex != -1) {
-            replacement = '<em>@' + ownusername + '</em>';
-            length = ownusername.length + 1;
-            msgcontent = replaceSubStr(msgcontent, mentionIndex, replacement, length);
+        if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
+            msgcontent = makeMention(msgcontent);
+            if (checkPermission()) {
+                newNotification("You have been mentioned");
+            }
         }
         let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
         let content = $('<div>');    //div which contains header and message content
@@ -151,7 +158,7 @@ $('document').ready(function () {
         header.append($('<div class="message-name">').prop('title', msg['username']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
         header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                  //append timestamp to header-div
         content.append(header);                                                                               //append header to message-container-div
-        content.append($('<div class="message-content">').html(msgcontent));                              //append message content to message-container-div
+        content.append($('<div class="message-content w-100">').html(msgcontent));                              //append message content to message-container-div
         item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + msg['avatar'] + '">'))                //prepend profile picture to message-container-div
         item.append(content);
         $('#messages').append(item);    //append message to chat-div
@@ -178,7 +185,6 @@ $('document').ready(function () {
         $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
 // show usercount in navbar
-// enable/disable username
     socket.on('status', function (status) {
         if (status.hasOwnProperty('count')) {
             setUserCount(status['count']);
@@ -187,7 +193,7 @@ $('document').ready(function () {
 
         }
         if (status.hasOwnProperty('username')) {
-            ownusername = status['username'];
+            ownusername = status['username'].toLowerCase();
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
@@ -310,6 +316,6 @@ function tabComplete(CursorPos) {
     }
 }
 
-function replaceSubStr(text, index, replacement, length) {
-    return text.substr(0, index) + replacement + text.substr(index + length);
+function makeMention(text) {
+    return '<em class="d-inline-flex w-100">' + text + '</em>';
 }
