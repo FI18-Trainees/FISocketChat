@@ -152,7 +152,7 @@ $('document').ready(function () {
         header.append($('<div class="message-name">').prop('title', msg['username']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
         header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                  //append timestamp to header-div
         content.append(header);                                                                               //append header to message-container-div
-        content.append($('<div class="message-content d-inline-flex w-100">').html(msgcontent));                              //append message content to message-container-div
+        content.append($('<div class="message-content w-100">').html(msgcontent));                              //append message content to message-container-div
         item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + msg['avatar'] + '">'))                //prepend profile picture to message-container-div
         item.append(content);
         $('#messages').append(item);    //append message to chat-div
