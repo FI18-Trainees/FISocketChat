@@ -67,7 +67,7 @@ $('document').ready(function () {
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         let m = $('#m');
-        if (loginmode) {
+        if (!loginmode) {
             let u = $('#user_name').val();
             ownusername = u.toLowerCase();
             if (u != '') {
