@@ -187,7 +187,7 @@ $('document').ready(function () {
 
         }
         if (status.hasOwnProperty('username')) {
-            ownusername = status['username'];
+            ownusername = status['username'].toLowerCase();
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
