@@ -67,11 +67,11 @@ $('document').ready(function () {
 
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
-        if (cooldown != 0) {
+        if (cooldown !== 0) {
             showError("Sending messages to fast!");
             return;
         }
-        cooldown = setTimeout(function(){ cooldown=0 }, 800);
+        cooldown = window.setTimeout(function(){ cooldown=0 }, 400);
         let m = $('#m');
         if (!loginmode) {
             let u = $('#user_name').val();
