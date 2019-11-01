@@ -190,7 +190,7 @@ $('document').ready(function () {
     });
 
     socket.on('username', function (username) {
-        ownusername = username;
+        ownusername = username.toLowerCase();
     });
 // enable/disable username input
     socket.on('loginmode', function (loginmode) {
