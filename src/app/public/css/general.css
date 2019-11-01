@@ -5,10 +5,10 @@
 }
 
 html, body {
-	overflow: hidden;
-	height: 100%;
-	min-width: 350px;
-	width: 100%;
+    overflow: hidden;
+    height: 100%;
+    min-width: 350px;
+    width: 100%;
 }
 
 body {
@@ -22,8 +22,7 @@ body {
     --discord-red: rgba(240, 71, 71, 1);
     --discord-pink: #FF1493;
     --discord-orange: #fdad5c;
-
-	font: 13px "Comic Sans MS", Arial;
+    font: 13px "Comic Sans MS", Arial;
 }
 
 .bg-dark {
@@ -36,45 +35,47 @@ body {
 }
 
 .chat {
-	overflow: hidden;
-	height: 100%;
+    overflow: hidden;
+    height: 100%;
 }
 
 #messages {
     word-wrap: break-word;
 }
 
-#messages .message-container {
-    border-bottom-color: var(--discord-lightgrey) !important;
-}
+    #messages .message-container {
+        border-bottom-color: var(--discord-lightgrey) !important;
+    }
 
-#messages .message-profile-image {
-    height: 40px;
-}
+    #messages .message-profile-image {
+        height: 40px;
+    }
 
-#messages .message-name {
-    font: 13px "Comic Sans MS", Arial;
-}
+    #messages .message-name {
+        font: 13px "Comic Sans MS", Arial;
+    }
 
-#messages .message-timestamp {
-    color: var(--discord-grey);
-    font: 9px "Comic Sans MS", Arial;
-}
+    #messages .message-timestamp {
+        color: var(--discord-grey);
+        font: 9px "Comic Sans MS", Arial;
+    }
 
-#messages .message-content {
-    color: var(--discord-white);
-}
+    #messages .message-content {
+        color: var(--discord-white);
+        width: 100%;
+    }
 
-#messages .message-content:link {
-    color: var(--discord-blue);
-}
+        #messages .message-content:link {
+            color: var(--discord-blue);
+        }
 
-#messages .message-content em {
-    color: var(--discord-orange);
-}
+        #messages .message-content em {
+            background: var(--discord-orange);
+            font-style: normal;
+        }
 
 .message-input {
-	bottom: 10px;
+    bottom: 10px;
     padding: 5px;
     border-top: 1px solid var(--discord-lightgrey);
 }
@@ -88,8 +89,6 @@ body {
 form textarea {
     border: 0;
     padding: 10px;
-    wrap: hard;
-    rows: 2;
 }
 
 form button, form .btn {
@@ -134,9 +133,9 @@ form button {
     margin: 0 0 0 0;
 }
 
-    sitebar div {
-        min-width: 105px;
-    }
+sitebar div {
+    min-width: 105px;
+}
 
 .sitebar-content {
     margin: 2%;
@@ -151,13 +150,12 @@ form button {
     text-decoration: none;
 }
 
-.sitebar-content:hover {
-    cursor: pointer;
-}
+    .sitebar-content:hover {
+        cursor: pointer;
+    }
 
 .content-wrapper {
     display: flex;
-
 }
 
 a:hover, a:visited, a:link, a:active {
@@ -179,23 +177,23 @@ a:hover, a:visited, a:link, a:active {
     bottom: 75px;
 }
 
-.emote-dropmenu a {
-    white-space: nowrap;
-    display: inline;
-    margin: 2px;
-}
+    .emote-dropmenu a {
+        white-space: nowrap;
+        display: inline;
+        margin: 2px;
+    }
 
 .bg-lighter-01 {
     background-color: rgba(255,255,255,0.05);
 }
 
-.bg-lighter-01:hover {
-    background-color: rgba(255,255,255,0.1);
-}
+    .bg-lighter-01:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
 
 .image-preview {
     width: 100%;
     max-width: 600px;
-    height:100%;
+    height: 100%;
     max-height: 600px;
 }
