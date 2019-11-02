@@ -150,10 +150,11 @@ def safe_emote_replace(text):
 
 
 def link_replacer(text):
+    rawtext = text
     text = link_display(text)
-    links = re.findall(linkregex, text)
-    for link in set(links):
-        replace = link_preview(link)
+    matches = linkregex.finditer(rawtext)
+    for matchNum, match in enumerate(matches, start=0):
+        replace = link_preview(match.group())
         if replace:
             text += replace + "<br />"
     return text
