@@ -5,9 +5,9 @@
     "menuDisplayCode": "<img src='/public/img/bosch1.png' style='height: 32px; width: auto;' alt='Bosch' title='Bosch'>"
   },
   "Shawn": {
-    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=v2kV6pgJxuo\"><img src='/public/img/emote1.PNG' style='height:35px; width:auto;' alt='Shawn' title='Shawn'></a>",
+    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=v2kV6pgJxuo\"><img src='/public/img/emote1.PNG' style='height:32px; width:auto;' alt='Shawn' title='Shawn'></a>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/emote1.PNG' style='height:35px; width:auto;' alt='Shawn' title='Shawn'>"
+    "menuDisplayCode": "<img src='/public/img/emote1.PNG' style='height:32px; width:auto;' alt='Shawn' title='Shawn'>"
   },
   "Hackerman": {
     "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=K7Hn1rPQouU\"><img src='/public/img/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'></a>",
@@ -15,54 +15,59 @@
     "menuDisplayCode": "<img src='/public/img/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
   },
   "FaFoSerious": {
-    "replace": "<img src='/public/img/fafoconcentrated.png' style='height:35px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>",
+    "replace": "<img src='/public/img/fafoconcentrated.png' style='height:32px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/fafoconcentrated.png' style='height:35px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>"
+    "menuDisplayCode": "<img src='/public/img/fafoconcentrated.png' style='height:32px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>"
   },
   "Fuck1": {
-    "replace": "<img src='/public/img/uwot.png' style='height:35px; width:auto;' alt='Fuck1' title='Fuck1'>",
+    "replace": "<img src='/public/img/uwot.png' style='height:32px; width:auto;' alt='Fuck1' title='Fuck1'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/uwot.png' style='height:35px; width:auto;' alt='Fuck1' title='Fuck1'>"
+    "menuDisplayCode": "<img src='/public/img/uwot.png' style='height:32px; width:auto;' alt='Fuck1' title='Fuck1'>"
   },
   "Bruh1": {
-    "replace": "<img src='/public/img/bruh.png' style='height:35px; width:auto;' alt='Bruh1' title='Bruh1'>",
+    "replace": "<img src='/public/img/bruh.png' style='height:32px; width:auto;' alt='Bruh1' title='Bruh1'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/bruh.png' style='height:35px; width:auto;' alt='Bruh1' title='Bruh1'>"
+    "menuDisplayCode": "<img src='/public/img/bruh.png' style='height:32px; width:auto;' alt='Bruh1' title='Bruh1'>"
   },
   "ded": {
-    "replace": "<img src='/public/img/ded.png' style='height:35px; width:auto;' alt='ded' title='ded'>",
+    "replace": "<img src='/public/img/ded.png' style='height:32px; width:auto;' alt='ded' title='ded'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/ded.png' style='height:35px; width:auto;' alt='ded' title='ded'>"
+    "menuDisplayCode": "<img src='/public/img/ded.png' style='height:32px; width:auto;' alt='ded' title='ded'>"
   },
   "Enthusiast": {
-    "replace": "<img src='/public/img/happy.png' style='height:35px; width:auto;' alt='Enthusiast' title='Enthusiast'>",
+    "replace": "<img src='/public/img/happy.png' style='height:32px; width:auto;' alt='Enthusiast' title='Enthusiast'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/happy.png' style='height:35px; width:auto;' alt='Enthusiast' title='Enthusiast'>"
+    "menuDisplayCode": "<img src='/public/img/happy.png' style='height:32px; width:auto;' alt='Enthusiast' title='Enthusiast'>"
   },
   "Creep": {
-    "replace": "<img src='/public/img/creep.png' style='height:35px; width:auto;' alt='Creep' title='Creep'>",
+    "replace": "<img src='/public/img/creep.png' style='height:32px; width:auto;' alt='Creep' title='Creep'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/creep.png' style='height:35px; width:auto;' alt='Creep' title='Creep'>"
+    "menuDisplayCode": "<img src='/public/img/creep.png' style='height:32px; width:auto;' alt='Creep' title='Creep'>"
   },
   "DerMoment": {
-    "replace": "<img src='/public/img/the_moment.png' style='height:35px; width:auto;' alt='DerMoment' title='DerMoment'>",
+    "replace": "<img src='/public/img/the_moment.png' style='height:32px; width:auto;' alt='DerMoment' title='DerMoment'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/the_moment.png' style='height:35px; width:auto;' alt='DerMoment' title='DerMoment'>"
+    "menuDisplayCode": "<img src='/public/img/the_moment.png' style='height:32px; width:auto;' alt='DerMoment' title='DerMoment'>"
+  },
+  "simonW": {
+    "replace": "<img src='/public/img/simonW.png' style='height:32px; width:auto;' alt='simonW' title='simonW'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/simonW.png' style='height:32px; width:auto;' alt='simonW' title='simonW'>"
   },
   "FeelsGoodMan": {
-    "replace": "<img src='/public/img/FeelsGoodMan1.png' style='height:35px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
+    "replace": "<img src='/public/img/FeelsGoodMan1.png' style='height:32px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/FeelsGoodMan1.png' style='height:35px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>"
+    "menuDisplayCode": "<img src='/public/img/FeelsGoodMan1.png' style='height:32px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>"
   },
   "FeelsBadMan": {
-    "replace": "<img src='/public/img/FeelsBadMan1.png' style='height:35px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>",
+    "replace": "<img src='/public/img/FeelsBadMan1.png' style='height:32px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/FeelsBadMan1.png' style='height:35px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>"
+    "menuDisplayCode": "<img src='/public/img/FeelsBadMan1.png' style='height:32px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>"
   },
   "peepoWide": {
-    "replace": "<img src='/public/img/peepoWide.png' style='height:35px; width:auto;' alt='peepoWide' title='peepoWide'>",
+    "replace": "<img src='/public/img/peepoWide.png' style='height:32px; width:auto;' alt='peepoWide' title='peepoWide'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/peepoWide.png' style='height:35px; width:auto;' alt='peepoWide' title='peepoWide'>"
+    "menuDisplayCode": "<img src='/public/img/peepoWide.png' style='height:32px; width:auto;' alt='peepoWide' title='peepoWide'>"
   },
   "peepoClap": {
     "replace": "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>",
@@ -120,9 +125,9 @@
     "menuDisplayCode": "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
   },
   "monkaT": {
-    "replace": "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>",
+    "replace": "<img src='/public/img/monkaT.png' style='height:32px; width:auto;' alt='monkaT' title='monkaT'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>"
+    "menuDisplayCode": "<img src='/public/img/monkaT.png' style='height:32px; width:auto;' alt='monkaT' title='monkaT'>"
   },
   "peepoStrongest": {
     "replace": "<img src='/public/img/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>",
@@ -235,9 +240,9 @@
     "menuDisplayCode": "<img src='/public/img/Clap.gif' style='height:32px; width:auto;' alt='Clap' title='Clap'>"
   },
   "hullo": {
-    "replace": "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='hullo' title='hullo'>",
+    "replace": "<img src='/public/img/hullo.gif' style='height:32px; width:auto;' alt='hullo' title='hullo'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/hullo.gif' style='height:45px; width:auto;' alt='hullo' title='hullo'>"
+    "menuDisplayCode": "<img src='/public/img/hullo.gif' style='height:32px; width:auto;' alt='hullo' title='hullo'>"
   },
   "ChangeMyMind": {
     "replace": "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>",
@@ -245,34 +250,34 @@
     "menuDisplayCode": "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>"
   },
   "Pedalo": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=NTxdEc3pUJc\"><img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'></a>",
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=NTxdEc3pUJc\"><img src='/public/img/pedalo.png' style='height:32px; width:auto;' alt='Pedalo' title='Pedalo'></a>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'>"
+    "menuDisplayCode": "<img src='/public/img/pedalo.png' style='height:32px; width:auto;' alt='Pedalo' title='Pedalo'>"
   },
   ":P": {
-    "replace": "<img src='/public/img/face-with-stuck-out-tongue.png' style='height:28px; width:auto;' alt=':P' title=':P'>",
+    "replace": "<img src='/public/img/face-with-stuck-out-tongue.png' style='height:32px; width:auto;' alt=':P' title=':P'>",
     "menuDisplay": false,
     "menuDisplayCode": ""
   },
   ":thinking:": {
-    "replace": "<img src='/public/img/thinking-face.png' style='height:28px; width:auto;' alt=':thinking:' title=':thinking:'>",
+    "replace": "<img src='/public/img/thinking-face.png' style='height:32px; width:auto;' alt=':thinking:' title=':thinking:'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/thinking-face.png' style='height:28px; width:auto;' alt=':thinking:' title=':thinking:'>"
+    "menuDisplayCode": "<img src='/public/img/thinking-face.png' style='height:32px; width:auto;' alt=':thinking:' title=':thinking:'>"
   },
   ":upsidedown:": {
-    "replace": "<img src='/public/img/upside-down-face.png' style='height:28px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>",
+    "replace": "<img src='/public/img/upside-down-face.png' style='height:32px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/upside-down-face.png' style='height:28px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>"
+    "menuDisplayCode": "<img src='/public/img/upside-down-face.png' style='height:32px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>"
   },
   ":thinkink:": {
-    "replace": "<img src='/public/img/thinkink.gif' style='height:28px; width:auto;' alt=':thinkink:' title=':thinkink:'>",
+    "replace": "<img src='/public/img/thinkink.gif' style='height:32px; width:auto;' alt=':thinkink:' title=':thinkink:'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/thinkink.gif' style='height:28px; width:auto;' alt=':thinkink:' title=':thinkink:'>"
+    "menuDisplayCode": "<img src='/public/img/thinkink.gif' style='height:32px; width:auto;' alt=':thinkink:' title=':thinkink:'>"
   },
   ":thonking:": {
-    "replace": "<img src='/public/img/thonking.png' style='height:28px; width:auto;' alt=':thonking:' title=':thonking:'>",
+    "replace": "<img src='/public/img/thonking.png' style='height:32px; width:auto;' alt=':thonking:' title=':thonking:'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/thonking.png' style='height:28px; width:auto;' alt=':thonking:' title=':thonking:'>"
+    "menuDisplayCode": "<img src='/public/img/thonking.png' style='height:32px; width:auto;' alt=':thonking:' title=':thonking:'>"
   },
   "pikaP": {
     "replace": "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>",
@@ -295,14 +300,14 @@
     "menuDisplayCode": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>"
   },
   "discordload": {
-    "replace": "<img src='/public/img/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
+    "replace": "<img src='/public/img/discordloadhangds.gif' style='height:32px; width:auto;' alt='discordload' title='discordload'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>"
+    "menuDisplayCode": "<img src='/public/img/discordloadhangds.gif' style='height:32px; width:auto;' alt='discordload' title='discordload'>"
   },
   "gnomed": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'></a>",
+    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/img/gnomed.png' style='height:32px; width:auto;' alt='gnomed' title='gnomed'></a>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'>"
+    "menuDisplayCode": "<img src='/public/img/gnomed.png' style='height:32px; width:auto;' alt='gnomed' title='gnomed'>"
   },
   "Björn": {
     "replace": "PjÖrN",
@@ -310,9 +315,9 @@
     "menuDisplayCode": ""
   },
   "poohRead": {
-    "replace": "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>",
+    "replace": "<img src='/public/img/pooh.png' style='height:32px; width:auto;' alt='poohRead' title='poohRead'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>"
+    "menuDisplayCode": "<img src='/public/img/pooh.png' style='height:32px; width:auto;' alt='poohRead' title='poohRead'>"
   },
   "3Head": {
     "replace": "<img src='/public/img/3Head.png' style='height:32px; width:auto;' alt='3Head' title='3Head'>",
@@ -385,9 +390,9 @@
     "menuDisplayCode": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>"
   },
   "Kappa": {
-    "replace": "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>",
+    "replace": "<img src='/public/img/Kappa1.png' style='height: 32px; width: auto;' alt='Kappa' title='Kappa'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Kappa1.png' style='height: 28px; width: auto;' alt='Kappa' title='Kappa'>"
+    "menuDisplayCode": "<img src='/public/img/Kappa1.png' style='height: 32px; width: auto;' alt='Kappa' title='Kappa'>"
   },
   "KappaG": {
     "replace": "<img src='/public/img/kappagold.png' style='height:32px; width:auto;' alt='KappaG' title='KappaG'>",
@@ -413,11 +418,6 @@
     "replace": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>"
-  },
-  "simonW": {
-    "replace": "<img src='/public/img/simonW.png' style='height:48px; width:auto;' alt='simonW' title='simonW'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/simonW.png' style='height:32px; width:auto;' alt='simonW' title='simonW'>"
   },
   "/shrug": {
     "replace": "¯\\_(ツ)_/¯",
