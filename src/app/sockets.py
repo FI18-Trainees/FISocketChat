@@ -7,7 +7,7 @@ import time
 from flask_socketio import emit
 from validators import url as val_url
 
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_manager, verify_token, \
     logindisabled, others, imageregex, request, user_limit
 from .shell import *
 from . import handle_command as command_handler
@@ -59,6 +59,8 @@ def handle_command(command):
         return
 
     user_limit.update_cooldown(request.sid)
+
+    SHL.output(f"Received message {command}", "S.ON chat_message")
 
     try:
         display_name = str(command['display_name']).strip()
@@ -162,36 +164,42 @@ def connect(data=""):
             SHL.output(f"{yellow2}Invalid session.{white}", "S.ON Connect")
             emit('error', {'message': 'invalid token'})
             return
+
         ip = socketio.server.environ[request.sid]["HTTP_CF_CONNECTING_IP"]
         SHL.output(f"IP: {ip}", "S.ON Connect")
         SHL.output(f"Username: {username}", "S.ON Connect")
+
         r = requests.get(f"https://profile.zaanposni.com/get/{username}.json",
                          headers={
                              'Cache-Control': 'no-cache',
                              'Authorization': f'Bearer {request.cookies.get("access_token", "")}'
                          })
+
         if r.status_code != 200:
             SHL.output(f"{yellow2}Error on receiving userconfig: {r.status_code}{white}", "S.ON Connect")
             emit('error', {'status_code': r.status_code, 'message': r.text})
             return
+
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
-        socketio.server.environ[request.sid]["username"] = username
+        socketio.server.environ[request.sid]["username"] = username  # TODO: use user_manager
         socketio.server.environ[request.sid]["userconfig"] = r.json()
+
+        user_manager.add(request.sid, username, r.json())
         emit('status', {'loginmode': True, 'username': username})
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     else:
         emit('status', {'loginmode': False})
-    user_count.add()
-    emit_status({'count': user_count.get_count()})
+        user_manager.add(request.sid)
+    emit_status({'count': user_manager.get_count()})
 
 
 @socketio.on('disconnect')
 def disconnect():
     SHL.output("User disconnected.", "S.ON Disconnect")
-    user_count.rem()
+    user_manager.rem(request.sid)
     user_limit.remove_sid(request.sid)
-    SHL.output(f"User count: {user_count.count}.", "S.ON Disconnect")
-    emit_status({'count': user_count.get_count()})
+    SHL.output(f"User count: {user_manager.count}.", "S.ON Disconnect")
+    emit_status({'count': user_manager.get_count()})
 
 
 def emit_status(status):

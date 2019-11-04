@@ -69,7 +69,6 @@ def register_all():
     for importer, modname, ispkg in pkgutil.walk_packages(path=__path__, prefix=__name__ + '.'):
         try:
             command = importlib.import_module(modname)
-            SHL.output(f"Register command {command.settings.get('invoke', '-')}.")
             register(command.main, command.settings)
         except:
             pass
