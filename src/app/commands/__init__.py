@@ -57,6 +57,8 @@ def handle_command(system, author, command_body):
     try:
         if params[0].lower() in commands.keys():
             commands[params[0].lower()](system, author, command_body, params[1:])
+        else:
+            emit('error', {"message": "unknown command"})
     except IndexError:
         emit('error', {"message": "invalid syntax"})
     return
