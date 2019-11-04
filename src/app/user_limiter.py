@@ -14,11 +14,7 @@ class UserLimiter:
         self.users[sid] = time.time()
 
     def remove_sid(self, sid):
-        try:
-            self.users.pop(sid)
-        except KeyError:
-            return False
-        return True
+        self.users.pop(sid, None)
 
     def __str__(self):
         return self.users
