@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 import requests
 import re
-import time
 
 from flask_socketio import emit
-import re, time
 from validators import url as val_url
 
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_manager, verify_token, \
-    logindisabled, others, imageregex, request, user_limit
+from . import socketio, emotehandler,  user_manager, verify_token, \
+    emoteregex, htmlregex, newlinehtmlregex, linkregex, youtuberegex, imageregex, videoregex, audioregex, \
+    logindisabled, others, request, user_limit
 from .shell import *
 from . import handle_command as command_handler
 
@@ -285,20 +283,20 @@ def get_embed_youtube_code(link):
 def get_embed_image_link(link):
     matches = imageregex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<img class="image-preview" src="{link}"/>'
+        return f'<img class="image-preview" src="{match.group()}"/>'
     return None
 
 
 def get_embed_video_link(link):
     matches = videoregex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<video class="video-embed" src="{link}" controls preload="metadata"/>'
+        return f'<video class="video-embed" src="{match.group()}" controls preload="metadata"/>'
     return None
 
 
 def get_embed_audio_link(link):
     matches = audioregex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<br /><audio class="audio-embed" src="{link}" controls preload="metadata"/>'
+        return f'<br /><audio class="audio-embed" src="{match.group()}" controls preload="metadata"/>'
     return None
 

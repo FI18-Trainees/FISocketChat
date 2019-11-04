@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 from .shell import *
-from flask import Flask
-from flask_socketio import SocketIO
 from .emotes import Emotes
 import sys
-from re import compile, MULTILINE, IGNORECASE
-from .global_values import UserCount, Others
 import requests
-from re import compile, MULTILINE
+from re import compile, MULTILINE, IGNORECASE
 
 from flask import Flask
 from flask_socketio import SocketIO
