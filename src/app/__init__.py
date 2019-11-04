@@ -1,21 +1,26 @@
 # -*- coding: utf-8 -*-
-from .shell import *
+import sys
+import requests
+from re import compile, MULTILINE
+
 from flask import Flask
 from flask_socketio import SocketIO
-from .emotes import Emotes
-import sys
-from re import compile, MULTILINE
-from .global_values import UserCount, Others
 from flask_httpauth import HTTPTokenAuth
-import requests
 from flask import redirect, request
-SHL = Console("Init", cls=True)
+
+from .shell import *
+from .emotes import Emotes
+from .user_limiter import UserLimiter
+from .global_values import UserManager, Others
+
+SHL = Console("Init")
 auth = HTTPTokenAuth()
 others = Others()
-user_count = UserCount()
+user_manager = UserManager()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 emotehandler = Emotes(True)
+user_limit = UserLimiter()
 
 emoteregex = compile(r"[\"'/]?[/?!:\w]+[\"'/]?", MULTILINE)
 htmlregex = compile(r"[&<>]", MULTILINE)
@@ -63,6 +68,7 @@ def verify_token(token):
 
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
 
-from .sockets import emit_status
+from .commands import handle_command
+from .sockets import emit_status  # TODO: dafuq is this, send help
 emotehandler.set_emit_socket(emit_status)
 from . import routes

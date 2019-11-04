@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
-from app import app, socketio
-from app.shell import *
 import sys
+import os
+
+os.system("cls" if os.name == "nt" else "clear")
+
+from app.shell import *
+from app import app, socketio
+
 SHL = Console("Start")
 
 
@@ -10,13 +15,12 @@ def run():
     if "-port" in [x.strip().lower() for x in sys.argv]:
         try:
             port = int(sys.argv[sys.argv.index("-port") + 1])
-            SHL.output(f"{red}Using custom port: {port}{white}")
-            print("using custom port: " + str(port))
         except IndexError:
             pass
         except ValueError:
             sys.exit(f'Invalid port "{sys.argv[sys.argv.index("-port") + 1]}"')
     SHL.output("Starting up.")
+    SHL.output(f"Using port: {port}")
     socketio.run(app, host='0.0.0.0', port=port)
 
 
