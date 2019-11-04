@@ -181,7 +181,7 @@ def connect(data=""):
             return
 
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
-        socketio.server.environ[request.sid]["username"] = username
+        socketio.server.environ[request.sid]["username"] = username  # TODO: use user_manager
         socketio.server.environ[request.sid]["userconfig"] = r.json()
 
         user_manager.add(request.sid, username, r.json())
