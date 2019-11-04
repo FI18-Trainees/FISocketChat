@@ -121,6 +121,16 @@ class TestClass(unittest.TestCase):
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
 
+        print("Execute invalid command and test response")
+        sockets.send_command("test_user", "//ping")
+        loop.run_until_complete(sockets.sleep())
+        self.assertEqual(len(sockets.messages), 3)
+        self.assertEqual(len(sockets.errors), 3)
+        x = sockets.errors[2]
+        y = {"message": "unknown command"}  # expected
+        shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
+        self.assertEqual(shared_items, y)
+
 
 if __name__ == '__main__':
     time.sleep(3)
