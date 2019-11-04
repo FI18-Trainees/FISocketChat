@@ -1,20 +1,88 @@
 # -*- coding: utf-8 -*-
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
-    logindisabled, others, imageregex, request
-from .shell import *
-from flask_socketio import emit
-import re, time
-from validators import url as val_url
 from datetime import datetime
 import requests
+import re
+import time
+
+from flask_socketio import emit
+from validators import url as val_url
+
+from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
+    logindisabled, others, imageregex, request, user_limit
+from .shell import *
+from . import handle_command as command_handler
+
 SHL = Console("Init")
 others.new_emotes = False
-user_limiter = {}
+
+
+class System:
+    display_name = "System"
+    username = "System"
+    user_color = "#FF0000"
+    avatar = "/public/img/system.png"
+    system = True
+
+    def system_emit(self, message):
+        emit('chat_message',
+             {
+                 'timestamp': datetime.now().strftime("%H:%M:%S"),
+                 'display_name': self.display_name,
+                 'username': self.username,
+                 'user_color': self.avatar,
+                 'avatar': self.avatar,
+                 'message': message,
+                 'system': self.system
+             })
+
+    def system_broadcast(self, message):
+        emit('chat_message',
+             {
+                 'timestamp': datetime.now().strftime("%H:%M:%S"),
+                 'display_name': self.display_name,
+                 'username': self.username,
+                 'user_color': self.avatar,
+                 'avatar': self.avatar,
+                 'message': message,
+                 'system': self.system
+             }, broadcast=True)
+
+
+@socketio.on('chat_command')
+def handle_command(command):
+    if user_limit.check_cooldown(request.sid):
+        if logindisabled:
+            SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_command")
+        else:
+            SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
+                       f"{socketio.server.environ[request.sid]['username']}", "S.ON chat_command")
+        return
+
+    user_limit.update_cooldown(request.sid)
+
+    try:
+        display_name = str(command['display_name']).strip()
+        command_body = str(command['message']).strip()
+    except KeyError:
+        SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_command")
+        emit("error", "bad request")
+        return
+    except ValueError:
+        SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_command")
+        emit("error", "bad request")
+        return
+
+    if display_name.find('Server') == 0 or len(display_name) not in range(1, 100):  # only allow username with length 1-100
+        SHL.output(f"{yellow2}Invalid username {display_name}{white}", "S.ON chat_message")
+        emit('error', {"message": "invalid username"})
+        return
+
+    command_handler(system=System(), author=display_name, command_body=command_body)
 
 
 @socketio.on('chat_message')
 def handle_message(message):
-    if float(time.time() - user_limiter.get(request.sid, 0)) <= 0.4:
+    if user_limit.check_cooldown(request.sid):
         if logindisabled:
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_message")
         else:
@@ -22,15 +90,21 @@ def handle_message(message):
                        f"{socketio.server.environ[request.sid]['username']}", "S.ON chat_message")
         return
 
-    user_limiter[request.sid] = time.time()
+    user_limit.update_cooldown(request.sid)
+
     SHL.output(f"Received message {message}", "S.ON chat_message")
     try:
-        display_name = message['display_name'].strip()
-        msg_body = message['message'].strip()
+        display_name = str(message['display_name']).strip()
+        msg_body = str(message['message']).strip()
     except KeyError:
         SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_message")
         emit("error", "bad request")
         return
+    except ValueError:
+        SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_command")
+        emit("error", "bad request")
+        return
+
     # defaults
     username = display_name
     display_color = "#FF0000"
@@ -50,9 +124,9 @@ def handle_message(message):
             emit('error', {'message': 'invalid userconfig'})
             return
 
-    if display_name.find('Server') == 0 or len(display_name) not in range(1, 100):  # only allow username with length 1-100
+    if any(x in display_name for x in ["System", "Server"]) or len(display_name) not in range(1, 100):  # only allow username with length 1-100
         SHL.output(f"{yellow2}Invalid username {display_name}{white}", "S.ON chat_message")
-        emit('error', {"timestamp": timestamp, "message": "invalid username"})
+        emit('error', {"message": "invalid username"})
         return
 
     if 0 < len(msg_body) < 5000:
@@ -74,7 +148,7 @@ def handle_message(message):
              }, broadcast=True)
     else:
         SHL.output(f"{yellow2}Invalid message length: {len(msg_body)}{white}", "S.ON chat_message")
-        emit('error', {"timestamp": timestamp, "message": "invalid message"})
+        emit('error', {"message": "invalid message"})
 
 
 @socketio.on('connect')
@@ -113,12 +187,9 @@ def connect(data=""):
 
 @socketio.on('disconnect')
 def disconnect():
-    try:
-        user_limiter.pop(request.sid)
-    except KeyError:
-        pass
     SHL.output("User disconnected.", "S.ON Disconnect")
     user_count.rem()
+    user_limit.remove_sid(request.sid)
     SHL.output(f"User count: {user_count.count}.", "S.ON Disconnect")
     emit_status({'count': user_count.get_count()})
 
