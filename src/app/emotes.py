@@ -3,7 +3,9 @@ import json
 import time
 import threading
 import platform
+
 from .shell import Console
+
 SHL = Console("EmotesHandler")
 
 
