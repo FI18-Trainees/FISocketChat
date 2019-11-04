@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, send_from_directory, request, make_response
-from . import app, emotehandler, auth
 from json import dumps as jdumps
+
+from flask import render_template, send_from_directory, request, make_response
+
+from . import app, emotehandler, auth
 
 
 @app.route('/')

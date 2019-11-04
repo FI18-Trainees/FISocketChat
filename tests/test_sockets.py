@@ -53,6 +53,9 @@ class SocketIOConnection:
     def send_message(self, user, message):
         loop.run_until_complete(self.sio.emit('chat_message', {"display_name": user, "message": message}))
 
+    def send_command(self, user, command):
+        loop.run_until_complete(self.sio.emit('chat_command', {"display_name": user, "message": command}))
+
     async def wait(self):
         await self.sio.wait()
 
@@ -107,6 +110,26 @@ class TestClass(unittest.TestCase):
         self.assertEqual(len(sockets.messages), 2)
         self.assertEqual(len(sockets.errors), 2)
         self.assertIn("img", sockets.messages[1]["message"])
+
+        print("Execute test command and test response")
+        sockets.send_command("test_user", "/ping")
+        loop.run_until_complete(sockets.sleep())
+        self.assertEqual(len(sockets.messages), 3)
+        self.assertEqual(len(sockets.errors), 2)
+        x = sockets.messages[2]
+        y = {"message": "Pong!", "username": "System", "system": True}  # expected
+        shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
+        self.assertEqual(shared_items, y)
+
+        print("Execute invalid command and test response")
+        sockets.send_command("test_user", "//ping")
+        loop.run_until_complete(sockets.sleep())
+        self.assertEqual(len(sockets.messages), 3)
+        self.assertEqual(len(sockets.errors), 3)
+        x = sockets.errors[2]
+        y = {"message": "unknown command"}  # expected
+        shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
+        self.assertEqual(shared_items, y)
 
 
 if __name__ == '__main__':
