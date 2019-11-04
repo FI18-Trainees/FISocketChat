@@ -8,8 +8,8 @@ var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
 
-var messages = [];
-var message_pointer = 0;
+var message_history = [];
+var history_pointer = 0;
 
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
@@ -36,22 +36,22 @@ $('document').ready(function () {
     document.getElementById("m").onkeydown = function (e) {
         e = e || window.event;
         if (e.keyCode == '38') {
-            if ($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
+            if ($('#m').val().trim() == "" || $('#m').val() == message_history[history_pointer]) {
                 // up arrow
-                message_pointer -= 1;
-                if (message_pointer < 0) {
-                    message_pointer = 0;
+                history_pointer -= 1;
+                if (history_pointer < 0) {
+                    history_pointer = 0;
                 }
-                $('#m').val(messages[message_pointer]);
+                $('#m').val(message_history[history_pointer]);
             }
         } else if (e.keyCode == '40') {
-            if ($('#m').val().trim() == "" || $('#m').val() == messages[message_pointer]) {
+            if ($('#m').val().trim() == "" || $('#m').val() == message_history[history_pointer]) {
                 // down arrow
-                message_pointer += 1;
-                if (message_pointer > messages.length - 1) {
-                    message_pointer = messages.length - 1;
+                history_pointer += 1;
+                if (history_pointer > message_history.length - 1) {
+                    history_pointer = message_history.length - 1;
                 }
-                $('#m').val(messages[message_pointer]);
+                $('#m').val(message_history[history_pointer]);
             }
         } else if (e.keyCode == '9') {
             e.preventDefault();
@@ -71,43 +71,38 @@ $('document').ready(function () {
             showError("Sending messages to fast!");
             return;
         }
-        cooldown = window.setTimeout(function(){ cooldown=0 }, 400);
+        cooldown = window.setTimeout(function () {
+            cooldown = 0
+        }, 400);
         let m = $('#m');
-        if (!loginmode) {
-            let u = $('#user_name').val();
-            ownusername = u.toLowerCase();
-            if (u != '') {
-                if (m.val() != "") {
-                    messages.push(m.val());
-                    message_pointer = messages.length;
+        if (m.val().trim() == "") {
+            showError('Invalid message.');
+            return false;
+        }
 
-                    socket.emit('chat_message', {
-                        'display_name': u,
-                        'message': m.val(),
-                        'token': getCookie('access_token')
-                    });
-                    m.val('');
-                } else {
-                    showError('Invalid message.');
-                }
-            } else {
+        history_pointer = message_history.length;
+        message_history.push(m.val());
+        let u = $('#user_name').val();
+        ownusername = u.toLowerCase();
+        let event_name = "chat_message";
+
+        if (m.val().startsWith("/")) {
+            event_name = "chat_command";
+        }
+
+        if (!loginmode) {
+            if (u.trim() === '') {
                 showError('Username must be given.');
             }
         } else {
-            if (m.val() != "") {
-                messages.push(m.val());
-                message_pointer = messages.length;
-                let u = 'Shawn'; // username will be replaced with value from userconfig
-                socket.emit('chat_message', {
-                    'display_name': u,
-                    'message': m.val(),
-                    'token': getCookie('access_token')
-                });
-                m.val('');
-            } else {
-                showError('Invalid message.');
-            }
+            u = 'Shawn'; // username will be replaced with value from userconfig
         }
+        socket.emit(event_name, {
+            'display_name': u,
+            'message': m.val(),
+            'token': getCookie('access_token')
+        });
+        m.val('');
         return false;
     });
 
@@ -144,7 +139,13 @@ $('document').ready(function () {
     });
 //build html-div which will be shown
     socket.on('chat_message', function (msg) {
-        msgcontent = msg['message'];
+        let msgcontent = msg['message'];
+        let username = msg['username'];
+        let display_name = msg['display_name'];
+        let user_color = msg['user_color'];
+        let user_avatar = msg['avatar'];
+        let timestamp = msg['timestamp'];
+
         mentionIndex = msgcontent.toLowerCase().search('@' + ownusername);
         if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
             msgcontent = makeMention(msgcontent);
@@ -152,22 +153,24 @@ $('document').ready(function () {
                 newNotification("You have been mentioned");
             }
         }
+
         let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
         let content = $('<div>');    //div which contains header and message content
         let header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');      //div which contains username and timestamp
-        header.append($('<div class="message-name">').prop('title', msg['username']).text(msg['display_name']).css('color', msg['user_color']));   //append username and timestamp as title to header-div
-        header.append($('<time class="message-timestamp ml-1">').text(msg['timestamp']));                  //append timestamp to header-div
+        header.append($('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color));   //append username and timestamp as title to header-div
+        header.append($('<time class="message-timestamp ml-1">').text(timestamp));                  //append timestamp to header-div
         content.append(header);                                                                               //append header to message-container-div
         content.append($('<div class="message-content w-100">').html(msgcontent));                              //append message content to message-container-div
-        item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + msg['avatar'] + '">'))                //prepend profile picture to message-container-div
+        item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">'))                //prepend profile picture to message-container-div
         item.append(content);
         $('#messages').append(item);    //append message to chat-div
+
         if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
             $('.nano').nanoScroller();
             chatdiv = document.querySelector('#messages');
             chatdiv.scrollTop = chatdiv.scrollHeight;
         }
-        if (msg['display_name'] !== "Server" && !focused) {     //if user is not server and chat is not focused, increase unread message count in the tab menu
+        if (!focused) {
             unread++;
             document.title = "Socket.IO chat" + " (" + unread + ")";
             if (checkPermission()) {
@@ -184,7 +187,7 @@ $('document').ready(function () {
         }
         $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
-// show usercount in navbar
+
     socket.on('status', function (status) {
         if (status.hasOwnProperty('count')) {
             setUserCount(status['count']);
