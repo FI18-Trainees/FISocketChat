@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
-    logindisabled, others, imageregex, newlinehtmlregex, request
+    logindisabled, others, imageregex, newlinehtmlregex, videoregex, audioregex, request
 from .shell import *
 from flask_socketio import emit
-import re, time
+import re, time, requests
 from validators import url as val_url
 from datetime import datetime
-import requests
 SHL = Console("Init")
 others.new_emotes = False
 user_limiter = {}
@@ -61,7 +60,6 @@ def handle_message(message):
         msg_body = link_replacer(msg_body)
         msg_body = safe_emote_replace(msg_body)
         msg_body = newlinehtmlregex.sub("<br>", msg_body)
-
         emit('chat_message',
              {
                  'timestamp': timestamp,
@@ -178,10 +176,16 @@ def link_preview(text):
     if val_url(text):
         youtube_embeded = get_embed_youtube_code(text)
         image_embeded = get_embed_image_link(text)
+        audio_embeded = get_embed_audio_link(text)
+        video_embeded = get_embed_video_link(text)
         if youtube_embeded is not None:
             return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{youtube_embeded}'
         elif image_embeded is not None:
             return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{image_embeded}'
+        elif audio_embeded is not None:
+            return audio_embeded
+        elif video_embeded is not None:
+            return video_embeded
         else:
             return None
     else:
@@ -202,3 +206,18 @@ def get_embed_image_link(link):
     for matchNum, match in enumerate(matches, start=1):
         return f'<img class="image-preview" src="{link}"/>'
     return None
+
+
+def get_embed_video_link(link):
+    matches = videoregex.finditer(link)
+    for matchNum, match in enumerate(matches, start=1):
+        return f'<video class="video-embed" src="{link}" controls preload="metadata"/>'
+    return None
+
+
+def get_embed_audio_link(link):
+    matches = audioregex.finditer(link)
+    for matchNum, match in enumerate(matches, start=1):
+        return f'<br /><audio class="audio-embed" src="{link}" controls preload="metadata"/>'
+    return None
+

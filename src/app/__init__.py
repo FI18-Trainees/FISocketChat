@@ -4,7 +4,7 @@ from flask import Flask
 from flask_socketio import SocketIO
 from .emotes import Emotes
 import sys
-from re import compile, MULTILINE
+from re import compile, MULTILINE, IGNORECASE
 from .global_values import UserCount, Others
 from flask_httpauth import HTTPTokenAuth
 import requests
@@ -21,8 +21,10 @@ emoteregex = compile(r"(?<![\"\'\w/:_!?])[!?:_/\w]+", MULTILINE)
 htmlregex = compile(r"[&<>]", MULTILINE)
 linkregex = compile(r"(?:(http|ftp|https)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?", MULTILINE)
 youtuberegex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?")
-imageregex = compile(r"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)")
-newlinehtmlregex = compile(r'[\n\r\t]')
+imageregex = compile(r".+\.(?:jpg|gif|png|jpeg|bmp)", IGNORECASE)
+audioregex = compile(r".+\.(?:mp3|wav|ogg)", IGNORECASE)
+videoregex = compile(r".+\.(?:mp4|ogg|webm)", IGNORECASE)
+newlinehtmlregex = compile(r'[\n\r]')
 
 
 
