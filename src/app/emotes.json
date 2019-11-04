@@ -304,6 +304,11 @@
     "menuDisplay": false,
     "menuDisplayCode": ""
   },
+  "Simon": {
+    "replace": "<img src='/public/img/simon.jpg' style='height:240px; width:auto;' alt='simon' title='Simon'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/simon.jpg' style='height:50px; width:auto;' alt='simon' title='Simon'>"
+  },
   "poohRead": {
     "replace": "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>",
     "menuDisplay": true,
