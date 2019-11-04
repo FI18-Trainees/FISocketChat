@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+import re, time, requests
 from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_count, verify_token, \
     logindisabled, others, imageregex, newlinehtmlregex, videoregex, audioregex, request
 from .shell import *
 from flask_socketio import emit
-import re, time, requests
 from validators import url as val_url
 from datetime import datetime
 SHL = Console("Init")
