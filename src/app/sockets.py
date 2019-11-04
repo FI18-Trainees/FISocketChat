@@ -29,7 +29,7 @@ class System:
                  'timestamp': datetime.now().strftime("%H:%M:%S"),
                  'display_name': self.display_name,
                  'username': self.username,
-                 'user_color': self.avatar,
+                 'user_color': self.user_color,
                  'avatar': self.avatar,
                  'message': message,
                  'system': self.system
@@ -41,7 +41,7 @@ class System:
                  'timestamp': datetime.now().strftime("%H:%M:%S"),
                  'display_name': self.display_name,
                  'username': self.username,
-                 'user_color': self.avatar,
+                 'user_color': self.user_color,
                  'avatar': self.avatar,
                  'message': message,
                  'system': self.system
