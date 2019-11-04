@@ -112,7 +112,10 @@ def connect(data=""):
 
 @socketio.on('disconnect')
 def disconnect():
-    user_limiter.pop(request.sid)
+    try:
+        user_limiter.pop(request.sid)
+    except KeyError:
+        pass
     SHL.output("User disconnected.", "S.ON Disconnect")
     user_count.rem()
     SHL.output(f"User count: {user_count.count}.", "S.ON Disconnect")
