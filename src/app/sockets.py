@@ -261,7 +261,7 @@ def link_preview(text):
             return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{youtube_embeded}'
         elif image_embeded is not None:
             return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{image_embeded}'
-        elif audio_embeded is not None:
+        elif audio_embeded is not None:  # TODO: use one design for this xd
             return audio_embeded
         elif video_embeded is not None:
             return video_embeded
