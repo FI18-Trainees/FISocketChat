@@ -197,3 +197,17 @@ a:hover, a:visited, a:link, a:active {
     height: 100%;
     max-height: 600px;
 }
+
+.video-embed {
+    /* !# NOTICE: Just Copy pasted from .image-preview for now.*/
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    max-height: 600px;
+}
+
+.audio-embed {
+    /* !# NOTICE: The server injects a br before the audio tag at the moment! 
+        using default HTML5 Player controls, looks shit in Google Chrome.
+    */
+}

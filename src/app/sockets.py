@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 import requests
 import re
-import time
 
 from flask_socketio import emit
 from validators import url as val_url
 
-from . import socketio, emotehandler, emoteregex, htmlregex, linkregex, youtuberegex, user_manager, verify_token, \
-    logindisabled, others, imageregex, request, user_limit
+from . import socketio, emote_handler,  user_manager, verify_token, \
+    emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
+    logindisabled, others, request, user_limit
 from .shell import *
 from . import handle_command as command_handler
 
@@ -136,9 +135,7 @@ def handle_message(message):
         msg_body = safe_tags_replace(msg_body)
         msg_body = link_replacer(msg_body)
         msg_body = safe_emote_replace(msg_body)
-        regex = re.compile(r'[\n\r\t]')
-        msg_body = regex.sub("<br />", msg_body)
-
+        msg_body = newline_html_regex.sub("<br />", msg_body)
         emit('chat_message',
              {
                  'timestamp': timestamp,
@@ -218,32 +215,33 @@ def replace_tag(tag):
 
 
 def safe_tags_replace(text):
-    return re.sub(htmlregex, lambda x: replace_tag(x.group()), text, 0)
+    return re.sub(html_regex, lambda x: replace_tag(x.group()), text, 0)
 
 
 def replace_emote(emote):
-    if emote in emotehandler.emotes:
-        return emotehandler.emotes[emote]["replace"]
+    if emote in emote_handler.emotes:
+        return emote_handler.emotes[emote]["replace"]
     else:
         return emote
 
 
 def safe_emote_replace(text):
-    return re.sub(emoteregex, lambda x: replace_emote(x.group()), text, 0)
+    return re.sub(emote_regex, lambda x: replace_emote(x.group()), text, 0)
 
 
 def link_replacer(text):
+    rawtext = text
     text = link_display(text)
-    links = re.findall(linkregex, text)
-    for link in set(links):
-        replace = link_preview(link)
+    matches = link_regex.finditer(rawtext)
+    for matchNum, match in enumerate(matches, start=0):
+        replace = link_preview(match.group())
         if replace:
             text += replace + "<br />"
     return text
 
 
 def link_display(text):
-    return re.sub(linkregex, lambda x: change_link(x.group()), text, 0)
+    return re.sub(link_regex, lambda x: change_link(x.group()), text, 0)
 
 
 def change_link(text):
@@ -257,10 +255,16 @@ def link_preview(text):
     if val_url(text):
         youtube_embeded = get_embed_youtube_code(text)
         image_embeded = get_embed_image_link(text)
+        audio_embeded = get_embed_audio_link(text)
+        video_embeded = get_embed_video_link(text)
         if youtube_embeded is not None:
             return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{youtube_embeded}'
         elif image_embeded is not None:
             return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{image_embeded}'
+        elif audio_embeded is not None:  # TODO: use one design for this xd
+            return audio_embeded
+        elif video_embeded is not None:
+            return video_embeded
         else:
             return None
     else:
@@ -268,7 +272,7 @@ def link_preview(text):
 
 
 def get_embed_youtube_code(link):
-    matches = youtuberegex.finditer(link)
+    matches = youtube_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
         return f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{match.group(1)}" ' \
                f'frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" ' \
@@ -277,7 +281,22 @@ def get_embed_youtube_code(link):
 
 
 def get_embed_image_link(link):
-    matches = imageregex.finditer(link)
+    matches = image_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<img class="image-preview" src="{link}"/>'
+        return f'<img class="image-preview" src="{match.group()}"/>'
     return None
+
+
+def get_embed_video_link(link):
+    matches = video_regex.finditer(link)
+    for matchNum, match in enumerate(matches, start=1):
+        return f'<br /><video class="video-embed" src="{match.group()}" controls preload="metadata"/>'
+    return None
+
+
+def get_embed_audio_link(link):
+    matches = audio_regex.finditer(link)
+    for matchNum, match in enumerate(matches, start=1):
+        return f'<br /><audio class="audio-embed" src="{match.group()}" controls preload="metadata"/>'
+    return None
+
