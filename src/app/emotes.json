@@ -34,6 +34,11 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/ded.png' style='height:32px; width:auto;' alt='ded' title='ded'>"
   },
+  "DBahn": {
+    "replace": "<img src='/public/img/deutschebahn.png' style='height:32px; width:auto;' alt='DBahn' title='DBahn'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/deutschebahn.png' style='height:32px; width:auto;' alt='DBahn' title='DBahn'>"
+  },
   "Enthusiast": {
     "replace": "<img src='/public/img/happy.png' style='height:32px; width:auto;' alt='Enthusiast' title='Enthusiast'>",
     "menuDisplay": true,
@@ -320,9 +325,19 @@
     "menuDisplayCode": ""
   },
   "Simon": {
-    "replace": "<img src='/public/img/simon.jpg' style='height:240px; width:auto;' alt='simon' title='Simon'>",
+    "replace": "Sieemon",
     "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/simon.jpg' style='height:50px; width:auto;' alt='simon' title='Simon'>"
+    "menuDisplayCode": ""
+  },
+  "Yannick": {
+    "replace": "YOAnnick",
+    "menuDisplay": false,
+    "menuDisplayCode": ""
+  },
+  "gitForce": {
+    "replace": "<img src='/public/img/gitForce.jpg' style='height:240px; width:auto;' alt='gitForce' title='gitForce'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/gitForce.jpg' style='height:50px; width:auto;' alt='gitForce' title='gitForce'>"
   },
   "poohRead": {
     "replace": "<img src='/public/img/pooh.png' style='height:32px; width:auto;' alt='poohRead' title='poohRead'>",
@@ -423,6 +438,21 @@
     "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=PhMDDF0WxSs\"><img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'></a>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'>"
+  },
+  "WayTooDank": {
+    "replace": "<img src='/public/img/waytoodank.gif' style='height:32px; width:auto;' alt='WayTooDank' title='WayTooDank'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/waytoodank.gif' style='height:32px; width:auto;' alt='WayTooDank' title='WayTooDank'>"
+  },
+  "iron95Pls": {
+    "replace": "<img src='/public/img/iron95Pls.gif' style='height:32px; width:auto;' alt='iron95Pls' title='iron95Pls'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/iron95Pls.gif' style='height:32px; width:auto;' alt='iron95Pls' title='iron95Pls'>"
+  },
+  "ppPoof": {
+    "replace": "<img src='/public/img/ppPoof.gif' style='height:32px; width:auto;' alt='ppPoof' title='ppPoof'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/ppPoof.gif' style='height:32px; width:auto;' alt='ppPoof' title='ppPoof'>"
   },
   "nymnCorn": {
     "replace": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>",
