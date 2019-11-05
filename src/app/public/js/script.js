@@ -74,6 +74,7 @@ $('document').ready(function () {
         cooldown = window.setTimeout(function () {
             cooldown = 0
         }, 400);
+
         let m = $('#m');
         if (m.val().trim() == "") {
             showError('Invalid message.');
@@ -83,8 +84,8 @@ $('document').ready(function () {
         history_pointer = message_history.length;
         message_history.push(m.val());
         let u = $('#user_name').val();
-        let event_name = "chat_message";
 
+        let event_name = "chat_message";
         if (m.val().startsWith("/")) {
             event_name = "chat_command";
         }
@@ -92,11 +93,14 @@ $('document').ready(function () {
         if (!loginmode) {
             if (u.trim() === '') {
                 showError('Username must be given.');
+                return false;
+            } else {
+                ownusername = u.toLowerCase();
             }
-            ownusername = u.toLowerCase();
         } else {
             u = 'Shawn'; // username will be replaced with value from userconfig
         }
+
         socket.emit(event_name, {
             'display_name': u,
             'message': m.val(),
