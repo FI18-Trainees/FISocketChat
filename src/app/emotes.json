@@ -324,16 +324,6 @@
     "menuDisplay": false,
     "menuDisplayCode": ""
   },
-  "Simon": {
-    "replace": "Sieemon",
-    "menuDisplay": false,
-    "menuDisplayCode": ""
-  },
-  "Yannick": {
-    "replace": "YOAnnick",
-    "menuDisplay": false,
-    "menuDisplayCode": ""
-  },
   "gitForce": {
     "replace": "<img src='/public/img/gitForce.jpg' style='height:240px; width:auto;' alt='gitForce' title='gitForce'>",
     "menuDisplay": false,
