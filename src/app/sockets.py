@@ -290,7 +290,7 @@ def get_embed_image_link(link):
 def get_embed_video_link(link):
     matches = video_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<video class="video-embed" src="{match.group()}" controls preload="metadata"/>'
+        return f'<br /><video class="video-embed" src="{match.group()}" controls preload="metadata"/>'
     return None
 
 
