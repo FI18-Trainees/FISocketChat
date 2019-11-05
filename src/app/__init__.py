@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from .shell import *
-from .emotes import Emotes
 import sys
 import requests
 from re import compile, MULTILINE, IGNORECASE
@@ -24,14 +22,14 @@ app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 emotehandler = Emotes(True)
 user_limit = UserLimiter()
 
-emoteregex = compile(r"(?<![\"\'\w/:_!?])[!?:_/\w]+", MULTILINE)
-htmlregex = compile(r"[&<>]", MULTILINE)
-linkregex = compile(r"(?:(http|ftp|https)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?", MULTILINE)
-youtuberegex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?")
-imageregex = compile(r".+\.(?:jpg|gif|png|jpeg|bmp)", IGNORECASE)
-audioregex = compile(r".+\.(?:mp3|wav|ogg)", IGNORECASE)
-videoregex = compile(r".+\.(?:mp4|ogg|webm)", IGNORECASE)
-newlinehtmlregex = compile(r'[\n\r]')
+emote_regex = compile(r"(?<![\"\'\w/:_!?])[!?:_/\w]+", MULTILINE)
+html_regex = compile(r"[&<>]", MULTILINE)
+link_regex = compile(r"(?:(http|ftp|https)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?", MULTILINE)
+youtube_regex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?")
+image_regex = compile(r".+\.(?:jpg|gif|png|jpeg|bmp)", IGNORECASE)
+audio_regex = compile(r".+\.(?:mp3|wav|ogg)", IGNORECASE)
+video_regex = compile(r".+\.(?:mp4|ogg|webm)", IGNORECASE)
+newline_html_regex = compile(r'[\n\r]')
 
 
 
