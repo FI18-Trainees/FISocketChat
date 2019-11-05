@@ -83,7 +83,7 @@ $('document').ready(function () {
         history_pointer = message_history.length;
         message_history.push(m.val());
         let u = $('#user_name').val();
-        ownusername = u.toLowerCase();
+
         let event_name = "chat_message";
 
         if (m.val().startsWith("/")) {
@@ -94,6 +94,7 @@ $('document').ready(function () {
             if (u.trim() === '') {
                 showError('Username must be given.');
             }
+            ownusername = u.toLowerCase();
         } else {
             u = 'Shawn'; // username will be replaced with value from userconfig
         }
