@@ -5,7 +5,7 @@ import re
 from flask_socketio import emit
 from validators import url as val_url
 
-from . import socketio, emotehandler,  user_manager, verify_token, \
+from . import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
     logindisabled, others, request, user_limit
 from .shell import *
@@ -219,8 +219,8 @@ def safe_tags_replace(text):
 
 
 def replace_emote(emote):
-    if emote in emotehandler.emotes:
-        return emotehandler.emotes[emote]["replace"]
+    if emote in emote_handler.emotes:
+        return emote_handler.emotes[emote]["replace"]
     else:
         return emote
 

@@ -19,7 +19,7 @@ others = Others()
 user_manager = UserManager()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
-emotehandler = Emotes(True)
+emote_handler = Emotes(True)
 user_limit = UserLimiter()
 
 emote_regex = compile(r"(?<![\"\'\w/:_!?])[!?:_/\w]+", MULTILINE)
@@ -75,5 +75,5 @@ socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins
 
 from .commands import handle_command
 from .sockets import emit_status  # TODO: dafuq is this, send help
-emotehandler.set_emit_socket(emit_status)
+emote_handler.set_emit_socket(emit_status)
 from . import routes
