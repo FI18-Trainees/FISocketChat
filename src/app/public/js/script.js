@@ -83,7 +83,6 @@ $('document').ready(function () {
         history_pointer = message_history.length;
         message_history.push(m.val());
         let u = $('#user_name').val();
-
         let event_name = "chat_message";
 
         if (m.val().startsWith("/")) {
