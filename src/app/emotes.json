@@ -79,6 +79,11 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>"
   },
+  "Pr0": {
+    "replace": "<img src='/public/img/pr0gramm.png' style='height:32px; width:auto;' alt='Pr0' title='Pr0'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/pr0gramm.png' style='height:32px; width:auto;' alt='Pr0' title='Pr0'>"
+  },
   "monkaS": {
     "replace": "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>",
     "menuDisplay": true,
