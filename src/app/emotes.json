@@ -449,22 +449,22 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>"
   },
-  "/shrug": {
+  ":shrug": {
     "replace": "¯\\_(ツ)_/¯",
     "menuDisplay": true,
-    "menuDisplayCode": "/shrug"
+    "menuDisplayCode": ":shrug"
   },
-  "/flip": {
+  ":flip": {
     "replace": "(╯°□°）╯︵ ┻━┻",
     "menuDisplay": true,
-    "menuDisplayCode": "/flip"
+    "menuDisplayCode": ":flip"
   },
-  "/unflip": {
+  ":unflip": {
     "replace": "┬─┬ノ( º _ ºノ) ",
     "menuDisplay": true,
-    "menuDisplayCode": "/unflip"
+    "menuDisplayCode": ":unflip"
   },
-  "/lenny": {
+  ":lenny": {
     "replace": "( ͡° ͜ʖ ͡°)",
     "menuDisplay": true,
     "menuDisplayCode": "( ͡° ͜ʖ ͡°)"
