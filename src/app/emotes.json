@@ -314,7 +314,7 @@
     "menuDisplay": false,
     "menuDisplayCode": ""
   },
-  "Simon": {
+  "simonGit": {
     "replace": "<img src='/public/img/simon.jpg' style='height:240px; width:auto;' alt='simon' title='Simon'>",
     "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/simon.jpg' style='height:50px; width:auto;' alt='simon' title='Simon'>"
