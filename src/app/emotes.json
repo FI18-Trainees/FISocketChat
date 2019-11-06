@@ -225,9 +225,9 @@
     "menuDisplayCode": "<img src='/public/img/triggered.png' style='height:32px; width:auto;' alt='triggered' title='triggered'>"
   },
   "triggered2": {
-    "replace": "<img src='/public/img/triggered.gif' style='height:32px; width:auto;' alt='triggered2' title='triggered2'>",
+    "replace": "<img src='/public/img/triggered2.gif' style='height:32px; width:auto;' alt='triggered2' title='triggered2'>",
     "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/triggered.gif' style='height:32px; width:auto;' alt='triggered2' title='triggered2'>"
+    "menuDisplayCode": "<img src='/public/img/triggered2.gif' style='height:32px; width:auto;' alt='triggered2' title='triggered2'>"
   },
   "rooSnap": {
     "replace": "<img src='/public/img/rooSnap.gif' style='height:32px; width:auto;' alt='rooSnap' title='rooSnap'>",
@@ -324,10 +324,10 @@
     "menuDisplay": false,
     "menuDisplayCode": ""
   },
-  "gitForce": {
-    "replace": "<img src='/public/img/gitForce.jpg' style='height:240px; width:auto;' alt='gitForce' title='gitForce'>",
+  "simonGit": {
+    "replace": "<img src='/public/img/simon.jpg' style='height:240px; width:auto;' alt='simon' title='Simon'>",
     "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/gitForce.jpg' style='height:50px; width:auto;' alt='gitForce' title='gitForce'>"
+    "menuDisplayCode": "<img src='/public/img/simon.jpg' style='height:50px; width:auto;' alt='simon' title='Simon'>"
   },
   "poohRead": {
     "replace": "<img src='/public/img/pooh.png' style='height:32px; width:auto;' alt='poohRead' title='poohRead'>",
