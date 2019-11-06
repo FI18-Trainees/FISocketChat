@@ -128,7 +128,8 @@ form button {
 
 .sitebar {
     padding-top: 2%;
-    width: 12%;
+    min-width: 12%;
+    max-width: 20%;
     border-right: 1px solid var(--discord-lightgrey);
     margin: 0 0 0 0;
 }
