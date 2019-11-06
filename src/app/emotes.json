@@ -34,6 +34,11 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/ded.png' style='height:32px; width:auto;' alt='ded' title='ded'>"
   },
+  "DBahn": {
+    "replace": "<img src='/public/img/deutschebahn.png' style='height:32px; width:auto;' alt='DBahn' title='DBahn'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/deutschebahn.png' style='height:32px; width:auto;' alt='DBahn' title='DBahn'>"
+  },
   "Enthusiast": {
     "replace": "<img src='/public/img/happy.png' style='height:32px; width:auto;' alt='Enthusiast' title='Enthusiast'>",
     "menuDisplay": true,
@@ -78,6 +83,11 @@
     "replace": "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>"
+  },
+  "Pr0": {
+    "replace": "<img src='/public/img/pr0gramm.png' style='height:32px; width:auto;' alt='Pr0' title='Pr0'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/pr0gramm.png' style='height:32px; width:auto;' alt='Pr0' title='Pr0'>"
   },
   "monkaS": {
     "replace": "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>",
@@ -419,27 +429,42 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'>"
   },
+  "WayTooDank": {
+    "replace": "<img src='/public/img/waytoodank.gif' style='height:32px; width:auto;' alt='WayTooDank' title='WayTooDank'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/waytoodank.gif' style='height:32px; width:auto;' alt='WayTooDank' title='WayTooDank'>"
+  },
+  "iron95Pls": {
+    "replace": "<img src='/public/img/iron95Pls.gif' style='height:32px; width:auto;' alt='iron95Pls' title='iron95Pls'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/iron95Pls.gif' style='height:32px; width:auto;' alt='iron95Pls' title='iron95Pls'>"
+  },
+  "ppPoof": {
+    "replace": "<img src='/public/img/ppPoof.gif' style='height:32px; width:auto;' alt='ppPoof' title='ppPoof'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/ppPoof.gif' style='height:32px; width:auto;' alt='ppPoof' title='ppPoof'>"
+  },
   "nymnCorn": {
     "replace": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>"
   },
-  "/shrug": {
+  ":shrug": {
     "replace": "¯\\_(ツ)_/¯",
     "menuDisplay": true,
-    "menuDisplayCode": "/shrug"
+    "menuDisplayCode": ":shrug"
   },
-  "/flip": {
+  ":flip": {
     "replace": "(╯°□°）╯︵ ┻━┻",
     "menuDisplay": true,
-    "menuDisplayCode": "/flip"
+    "menuDisplayCode": ":flip"
   },
-  "/unflip": {
+  ":unflip": {
     "replace": "┬─┬ノ( º _ ºノ) ",
     "menuDisplay": true,
-    "menuDisplayCode": "/unflip"
+    "menuDisplayCode": ":unflip"
   },
-  "/lenny": {
+  ":lenny": {
     "replace": "( ͡° ͜ʖ ͡°)",
     "menuDisplay": true,
     "menuDisplayCode": "( ͡° ͜ʖ ͡°)"
