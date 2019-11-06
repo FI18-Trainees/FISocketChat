@@ -13,7 +13,7 @@ settings = {
 def main(system, author, message, params):
     msg = f"There are {user_manager.get_count()} user(s) connected.<br />"
     if not logindisabled:
-        for sid in user_manager.sids:
-            msg += f"{user_manager.configs[sid]['username']}: " \
-                   f"{user_manager.configs[sid]['userconfig']['display_name']} <br />"
+        for sid, cfg in user_manager.configs.items():
+            msg += f"{cfg['username']}: " \
+                   f"{cfg['userconfig']['display_name']} <br />"
     system.system_emit(msg)
