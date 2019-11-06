@@ -54,7 +54,7 @@ def handle_command(command):
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_command")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
-                       f"{socketio.server.environ[request.sid]['username']}", "S.ON chat_command")
+                       f"{user_manager.configs[request.sid]['username']}", "S.ON chat_command")
         return
 
     user_limit.update_cooldown(request.sid)
@@ -88,7 +88,7 @@ def handle_message(message):
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_message")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
-                       f"{socketio.server.environ[request.sid]['username']}", "S.ON chat_message")
+                       f"{user_manager.configs[request.sid]['username']}", "S.ON chat_message")
         return
 
     user_limit.update_cooldown(request.sid)
@@ -115,11 +115,11 @@ def handle_message(message):
     if not logindisabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
-            if socketio.server.environ[request.sid]["userconfig"]["display_name"].strip() != "":
-                username = socketio.server.environ[request.sid]["username"]
-                display_name = socketio.server.environ[request.sid]["userconfig"]["display_name"]
-                display_color = socketio.server.environ[request.sid]["userconfig"]["chat_color"]
-                avatar = f"https://profile.zaanposni.com/pictures/{socketio.server.environ[request.sid]['username']}.png"
+            if user_manager.configs[request.sid]["userconfig"]["display_name"].strip() != "":
+                username = user_manager.configs[request.sid]["username"]
+                display_name = user_manager.configs[request.sid]["userconfig"]["display_name"]
+                display_color = user_manager.configs[request.sid]["userconfig"]["chat_color"]
+                avatar = f"https://profile.zaanposni.com/pictures/{username}.png"
         except KeyError:
             SHL.output("Invalid userconfig", "S.ON chat_message")
             emit('error', {'message': 'invalid userconfig'})
@@ -176,12 +176,9 @@ def connect(data=""):
             SHL.output(f"{yellow2}Error on receiving userconfig: {r.status_code}{white}", "S.ON Connect")
             emit('error', {'status_code': r.status_code, 'message': r.text})
             return
-
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
-        socketio.server.environ[request.sid]["username"] = username  # TODO: use user_manager
-        socketio.server.environ[request.sid]["userconfig"] = r.json()
 
-        user_manager.add(request.sid, username, r.json())
+        user_manager.add(request.sid, username=username, userconfig=r.json())
         emit('status', {'loginmode': True, 'username': username})
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     else:
@@ -204,7 +201,6 @@ def emit_status(status):
 
 
 tagsToReplace = {
-    '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;'
 }
@@ -253,28 +249,18 @@ def change_link(text):
 
 def link_preview(text):
     if val_url(text):
-        youtube_embeded = get_embed_youtube_code(text)
-        image_embeded = get_embed_image_link(text)
-        audio_embeded = get_embed_audio_link(text)
-        video_embeded = get_embed_video_link(text)
-        if youtube_embeded is not None:
-            return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{youtube_embeded}'
-        elif image_embeded is not None:
-            return f'<a target="_blank" rel="noopener noreferrer" href="{text}"/><br/>{image_embeded}'
-        elif audio_embeded is not None:  # TODO: use one design for this xd
-            return audio_embeded
-        elif video_embeded is not None:
-            return video_embeded
-        else:
-            return None
-    else:
-        return None
+        for func in [get_embed_image_link, get_embed_video_link, get_embed_audio_link, get_embed_youtube_code]:
+            result = func(text)
+            if result:
+                return result
+    return None
 
 
 def get_embed_youtube_code(link):
     matches = youtube_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{match.group(1)}" ' \
+        return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/>' \
+               f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{match.group(1)}" ' \
                f'frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" ' \
                f'allowfullscreen></iframe>'
     return None
@@ -283,7 +269,7 @@ def get_embed_youtube_code(link):
 def get_embed_image_link(link):
     matches = image_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<img class="image-preview" src="{match.group()}"/>'
+        return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}"/>'
     return None
 
 
