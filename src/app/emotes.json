@@ -385,7 +385,7 @@
     "menuDisplayCode": "<img src='/public/img/windowsload.gif' style='height:32px; width:auto;' alt='winloading' title='winloading'>"
   },
   "progressbar": {
-    "replace": "<img src='/public/img/progressbar.gif' style='height:40px; width:208px;' alt='progressbar' title='progressbar'>",
+    "replace": "<img src='/public/img/progressbar.gif' alt='progressbar' title='progressbar'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/progressbar.gif' style='height:32px; width:100px;' alt='progressbar' title='progressbar'>"
   },
