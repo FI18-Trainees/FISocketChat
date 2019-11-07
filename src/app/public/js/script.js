@@ -54,6 +54,7 @@ $('document').ready(function () {
                 $('#m').val(message_history[history_pointer]);
             }
         } else if (e.keyCode == '9') {
+                //tab key
             e.preventDefault();
             tabComplete(document.getElementById('m').selectionStart);
         }
@@ -81,8 +82,8 @@ $('document').ready(function () {
             return false;
         }
 
-        history_pointer = message_history.length;
         message_history.push(m.val());
+        history_pointer = message_history.length;
         let u = $('#user_name').val();
 
         let event_name = "chat_message";
@@ -149,6 +150,7 @@ $('document').ready(function () {
         let user_color = msg['user_color'];
         let user_avatar = msg['avatar'];
         let timestamp = msg['timestamp'];
+        let last_message = document.getElementById('messages')
 
         mentionIndex = msgcontent.toLowerCase().search('@' + ownusername);
         if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
@@ -158,16 +160,24 @@ $('document').ready(function () {
             }
         }
 
-        let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
-        let content = $('<div>');    //div which contains header and message content
-        let header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');      //div which contains username and timestamp
-        header.append($('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color));   //append username and timestamp as title to header-div
-        header.append($('<time class="message-timestamp ml-1">').text(timestamp));                  //append timestamp to header-div
-        content.append(header);                                                                               //append header to message-container-div
-        content.append($('<div class="message-content w-100">').html(msgcontent));                              //append message content to message-container-div
-        item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">'))                //prepend profile picture to message-container-div
-        item.append(content);
-        $('#messages').append(item);    //append message to chat-div
+        // check if username of last message is identical to new message
+        if($('#messages :last-child div h2 div').prop('title') == username) {
+            $('#messages :last-child .message-content').last().append($('<div class="message-content w-100">').html(msgcontent));
+            $('#messages .message-header').last().children('time').text(timestamp);
+        } else {
+            let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
+            let content = $('<div>');    //div which contains header and message content
+            let header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');      //div which contains username and timestamp
+            header.append($('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color));   //append username and timestamp as title to header-div
+            header.append($('<time class="message-timestamp ml-1">').text(timestamp));                  //append timestamp to header-div
+            content.append(header);                                                                               //append header to message-container-div
+            content.append($('<div class="message-content w-100">').html(msgcontent));                              //append message content to message-container-div
+            item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">'))                //prepend profile picture to message-container-div
+            item.append(content);
+            $('#messages').append(item);    //append message to chat-div
+        }
+
+
 
         if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
             $('.nano').nanoScroller();
