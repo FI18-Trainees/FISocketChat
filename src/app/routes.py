@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from json import dumps as jdumps
+from json import dumps as json_dumps
 
-from flask import render_template, send_from_directory, request, make_response
+from flask import render_template, send_from_directory, request, make_response, Response
 
 from . import app, emote_handler, auth
 
@@ -27,5 +27,5 @@ def send_public(path):
 
 @app.route('/api/emotes')
 def send_emotes():
-    return jdumps(emote_handler.emotes, sort_keys=False)
+    return Response(json_dumps(emote_handler.emotes, sort_keys=False), mimetype='application/json') 
 
