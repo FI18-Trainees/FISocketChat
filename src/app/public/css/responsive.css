@@ -1,0 +1,6 @@
+@media only screen and (max-width: 1475px) {
+    .sitebar {
+        width: 420px;
+        max-width: inherit;
+    }
+}
