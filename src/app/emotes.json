@@ -1,8 +1,8 @@
 {
   "Bosch": {
-    "replace": "<img src='/public/img/bosch1.png' style='height: 32px; width: auto;' alt='Bosch' title='Bosch'>",
+    "replace": "<img src='/public/img/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/bosch1.png' style='height: 32px; width: auto;' alt='Bosch' title='Bosch'>"
+    "menuDisplayCode": "<img src='/public/img/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>"
   },
   "Shawn": {
     "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=v2kV6pgJxuo\"><img src='/public/img/emote1.PNG' style='height:32px; width:auto;' alt='Shawn' title='Shawn'></a>",
@@ -390,12 +390,12 @@
     "menuDisplayCode": "<img src='/public/img/progressbar.gif' style='height:32px; width:100px;' alt='progressbar' title='progressbar'>"
   },
   "Danke": {
-    "replace": "<img src='/public/img/danke.png' style='height:40px; width:82px;' alt='Danke' title='Danke'>",
+    "replace": "<img src='/public/img/danke.png' style='height:40px; width:auto;' alt='Danke' title='Danke'>",
     "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/danke.png' style='height:32px; width:auto;' alt='Danke' title='Danke'>"
   },
   "Bitte": {
-    "replace": "<img src='/public/img/bitte.png' style='height:40px; width:82px;' alt='Bitte' title='Bitte'>",
+    "replace": "<img src='/public/img/bitte.png' style='height:40px; width:auto;' alt='Bitte' title='Bitte'>",
     "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/bitte.png' style='height:32px; width:auto;' alt='Bitte' title='Bitte'>"
   },
@@ -420,9 +420,9 @@
     "menuDisplayCode": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>"
   },
   "Kappa": {
-    "replace": "<img src='/public/img/Kappa1.png' style='height: 32px; width: auto;' alt='Kappa' title='Kappa'>",
+    "replace": "<img src='/public/img/Kappa1.png' style='height: 32px; width:auto;' alt='Kappa' title='Kappa'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Kappa1.png' style='height: 32px; width: auto;' alt='Kappa' title='Kappa'>"
+    "menuDisplayCode": "<img src='/public/img/Kappa1.png' style='height: 32px; width:auto;' alt='Kappa' title='Kappa'>"
   },
   "KappaG": {
     "replace": "<img src='/public/img/kappagold.png' style='height:40px; width:auto;' alt='KappaG' title='KappaG'>",
