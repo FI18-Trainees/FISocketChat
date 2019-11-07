@@ -319,9 +319,11 @@ function tabComplete(CursorPos) {
     if (m.value.length == 0)
         return;
     let messageSplit = m.value.substring(0, CursorPos);
-    let spliter = /\s/gm;
-    spliter.exec(messageSplit);
-    let lastSplit = spliter.lastIndex;
+    let matches = Array.from(messageSplit.matchAll(/[\r\n\t ]/gm));
+    let lastSplit = 0;
+    if (matches.length > 0) {
+        lastSplit = matches[matches.length - 1].index + 1;
+    }
     let toComplete = messageSplit.substring(lastSplit);
     if (toComplete.length < 1)
         return;
