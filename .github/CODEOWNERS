@@ -1,0 +1,15 @@
+# default
+* @zaanposni @monkmitrad
+
+# python
+*.py @zaanposni
+
+# unittest
+/tests/ @zaanposni
+
+#webdev
+*.css *.html @monkmitrad
+*.js @monkmitrad @SFFan123
+
+#emotes
+emotes.json @ArPiiX
