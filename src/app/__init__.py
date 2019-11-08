@@ -40,11 +40,19 @@ video_regex = compile(r".+\.(?:mp4|ogg|webm)", IGNORECASE)
 newline_html_regex = compile(r'[\n\r]')
 
 
-if "-disablelogin" in [x.strip().lower() for x in sys.argv]:
+# Startup parameters
+start_args = [x.strip().lower() for x in sys.argv]
+
+logindisabled = False
+if "-disablelogin" in start_args:
     SHL.output(f"{red}Disabled authentication.{white}")
     logindisabled = True
-else:
-    logindisabled = False
+
+dummyuser = False
+if "-dummyuser" in start_args:
+    SHL.output(f"{red}Adding Dummy User{white}")
+    dummyuser = True
+
 
 
 @auth.error_handler
@@ -84,7 +92,7 @@ from .import routes
 
 
 # I left this for testing
-if logindisabled:
+if dummyuser:
     user_manager.add("qwertzuiopasdfghjk", "ArPiiX", "null")
     user_manager.add("asdfghjklqwertzuio", "monkmitrad", "null")
     user_manager.add("asdfgqwertzhjklzui", "zaanposni", "null")
