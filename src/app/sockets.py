@@ -7,7 +7,7 @@ from validators import url as val_url
 
 from . import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, logindisabled, others, request, user_limit
+    code_regex, quote_regex, logindisabled, others, request, user_limit
 from .shell import *
 from . import handle_command as command_handler
 
@@ -135,8 +135,10 @@ def handle_message(message):
         msg_body = safe_tags_replace(msg_body)
         msg_body = link_replacer(msg_body)
         msg_body = safe_emote_replace(msg_body)
+        msg_body = quote_replacer(msg_body)
         msg_body = newline_html_regex.sub("<br />", msg_body)
         msg_body = codeblock_replacer(msg_body)
+
         emit('chat_message',
              {
                  'timestamp': timestamp,
@@ -290,5 +292,9 @@ def get_embed_audio_link(link):
 
 def codeblock_replacer(text):
     return re.sub(code_regex, '<em class="code my-1 w-100">\g<2></em>', text, 0)
-
+                       
+                       
+def quote_replacer(text):
+    return re.sub(quote_regex, '<em class="quote font-weight-light pl-1">\g<1></em>', text, 0)
 # LuL
+
