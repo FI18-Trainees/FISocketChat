@@ -230,8 +230,6 @@ $('document').ready(function () {
             $('.message-name').css('cursor', 'default');
         }
     });
-
-
 });
 
 function setUserCount(count) {
