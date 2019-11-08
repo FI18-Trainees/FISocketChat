@@ -83,7 +83,7 @@ from .sockets import emit_status  # TODO: dafuq is this, send help
 from .import routes
 
 
-# I left this for testing Remove this
+# I left this for testing
 if logindisabled:
     user_manager.add("qwertzuiopasdfghjk", "ArPiiX", "null")
     user_manager.add("asdfghjklqwertzuio", "monkmitrad", "null")

@@ -46,4 +46,5 @@ class Emotes:
             else:
                 if cache != self.emotes:
                     SHL.output(f"Setting new emotes!")
+                    self.emotes = self.get_emotes()
             time.sleep(60)
