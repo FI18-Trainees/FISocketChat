@@ -1,5 +1,1 @@
-* @zaanposni @monkmitrad @SFFan123
-*.py @zaanposni
-/tests/ @zaanposni
-*.css *.html @monkmitrad
-*.js @monkmitrad @SFFan123
+*.js @monkmitrad
