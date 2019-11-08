@@ -39,6 +39,7 @@ audio_regex = compile(r".+\.(?:mp3|wav|ogg)", IGNORECASE)
 video_regex = compile(r".+\.(?:mp4|ogg|webm)", IGNORECASE)
 newline_html_regex = compile(r'[\n\r]')
 code_regex = compile(r"(```)(.+?|[\r\n]+?)(```)", MULTILINE)
+quote_regex = compile(r"^&gt; (.+)", MULTILINE)
 
 
 # Startup parameters
