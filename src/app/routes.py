@@ -3,7 +3,7 @@ from json import dumps as json_dumps
 
 from flask import render_template, send_from_directory, request, make_response, Response
 
-from . import app, emote_handler, auth
+from . import app, emote_handler, auth, user_manager, logindisabled
 
 
 @app.route('/')
@@ -27,5 +27,12 @@ def send_public(path):
 
 @app.route('/api/emotes')
 def send_emotes():
-    return Response(json_dumps(emote_handler.emotes, sort_keys=False), mimetype='application/json') 
+    return Response(json_dumps(emote_handler.emotes, sort_keys=False), mimetype='application/json')
+
+
+@app.route('/api/user')
+def send_user():
+    if not logindisabled:
+        return dict(user_manager.configs.items())
+    return Response("Login disabled", status=503)
 

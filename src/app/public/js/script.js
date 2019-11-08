@@ -334,14 +334,22 @@ function tabComplete(CursorPos) {
     let toComplete = messageSplit.substring(lastSplit);
     if (toComplete.length < 1)
         return;
-    for (let emote in emotelist) {
-        if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
-            let mIn = m.value.substr(0, lastSplit) + emote + " ";
-            m.value = mIn + m.value.substr(CursorPos + 1);
-            m.setSelectionRange(mIn.length, mIn.length);
-            break;
+    if (toComplete.toLowerCase().startsWith("@")) {
+        let user = getUser();
+        //console.log(toComplete);
+        //console.log(user);
+    }
+    else {
+        for (let emote in emotelist) {
+            if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
+                let mIn = m.value.substr(0, lastSplit) + emote + " ";
+                m.value = mIn + m.value.substr(CursorPos + 1);
+                m.setSelectionRange(mIn.length, mIn.length);
+                break;
+            }
         }
     }
+
 }
 
 function makeMention(text) {
@@ -353,4 +361,12 @@ function uname_name_click(e){
         e.preventDefault();
         document.getElementById('m').value += '@' + e.target.title + ' ';
     }
+}
+
+function getUser(){
+    $.ajax({
+        url: "api/user",
+    }).done(function(data) {
+        console.log(data);
+    });
 }
