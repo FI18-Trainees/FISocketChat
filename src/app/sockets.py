@@ -291,3 +291,4 @@ def get_embed_audio_link(link):
 def codeblock_replacer(text):
     return re.sub(code_regex, '<em class="code my-1 w-100">\g<2></em>', text, 0)
 
+# LuL
