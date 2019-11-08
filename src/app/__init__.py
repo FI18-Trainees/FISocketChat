@@ -21,6 +21,7 @@ user_manager = UserManager()
 # APP
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
+app.config['JSON_SORT_KEYS'] = False
 
 # SOCKETS
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")

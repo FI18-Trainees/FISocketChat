@@ -340,9 +340,7 @@ function tabComplete(CursorPos) {
     if (toComplete.length < 1)
         return;
     if (toComplete.toLowerCase().startsWith("@") && toComplete.length > 1) {
-        let username = null
-        for (user in userlist) {
-             username = userlist[user]['username']
+        for (username in userlist) {
             if (username != null && username.toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
                 let mIn = m.value.substr(0, lastSplit) + "@" + username + " ";
                 m.value = mIn + m.value.substr(CursorPos + 1);
