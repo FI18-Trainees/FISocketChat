@@ -212,3 +212,6 @@ a:hover, a:visited, a:link, a:active {
         using default HTML5 Player controls, looks shit in Google Chrome.
     */
 }
+.message-name{
+    cursor: default;
+}
