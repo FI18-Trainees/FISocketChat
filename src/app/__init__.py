@@ -17,11 +17,19 @@ SHL = Console("Init")
 auth = HTTPTokenAuth()
 others = Others()
 user_manager = UserManager()
+
+# APP
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
+
+# SOCKETS
+socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
+
+# EMOTES
 emote_handler = Emotes(True)
 user_limit = UserLimiter()
 
+# REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
 html_regex = compile(r"[<>]", MULTILINE)
 link_regex = compile(r"(?:(http|ftp|https)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?", MULTILINE)
@@ -70,9 +78,15 @@ def verify_token(token):
     return False
 
 
-socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
-
 from .commands import handle_command
 from .sockets import emit_status  # TODO: dafuq is this, send help
-emote_handler.set_emit_socket(emit_status)
-from . import routes
+from .import routes
+
+
+# I left this for testing Remove this
+if logindisabled:
+    user_manager.add("qwertzuiopasdfghjk", "ArPiiX", "null")
+    user_manager.add("asdfghjklqwertzuio", "monkmitrad", "null")
+    user_manager.add("asdfgqwertzhjklzui", "zaanposni", "null")
+    user_manager.add("yxcvbnmasdfghjklqw", "SFFan123", "null")
+    user_manager.add("yxcvbnmasdfasdfghklqw", "Rüdiger", "null")

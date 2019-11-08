@@ -32,7 +32,7 @@ def send_emotes():
 
 @app.route('/api/user')
 def send_user():
-    if not logindisabled:
-        return dict(user_manager.configs.items())
-    return Response("Login disabled", status=503)
+    # if not logindisabled:
+    return dict(user_manager.configs.items())
+    # return Response("Login disabled", status=503)
 

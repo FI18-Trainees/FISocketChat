@@ -7,6 +7,7 @@ var emotelist = null;
 var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
+var userlist = [];
 
 var message_history = [];
 var history_pointer = 0;
@@ -234,6 +235,11 @@ $('document').ready(function () {
 
 function setUserCount(count) {
     $('#usercount').text('Usercount: ' + count);
+    $.ajax({
+        url: "api/user",
+    }).done(function(data) {
+        userlist = data;
+    });
 }
 
 function showError(message) {
@@ -334,10 +340,17 @@ function tabComplete(CursorPos) {
     let toComplete = messageSplit.substring(lastSplit);
     if (toComplete.length < 1)
         return;
-    if (toComplete.toLowerCase().startsWith("@")) {
-        let user = getUser();
-        //console.log(toComplete);
-        //console.log(user);
+    if (toComplete.toLowerCase().startsWith("@") && toComplete.length > 1) {
+        let username = null
+        for (user in userlist) {
+             username = userlist[user]['username']
+            if (username != null && username.toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                let mIn = m.value.substr(0, lastSplit) + "@" + username + " ";
+                m.value = mIn + m.value.substr(CursorPos + 1);
+                m.setSelectionRange(mIn.length, mIn.length);
+                return;
+            }
+        }
     }
     else {
         for (let emote in emotelist) {
@@ -361,12 +374,4 @@ function uname_name_click(e){
         e.preventDefault();
         document.getElementById('m').value += '@' + e.target.title + ' ';
     }
-}
-
-function getUser(){
-    $.ajax({
-        url: "api/user",
-    }).done(function(data) {
-        console.log(data);
-    });
 }

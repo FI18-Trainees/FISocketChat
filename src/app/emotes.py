@@ -46,10 +46,4 @@ class Emotes:
             else:
                 if cache != self.emotes:
                     SHL.output(f"Setting new emotes!")
-                    self.emotes = self.get_emotes()
-                    if self.emit_status is not None:
-                        self.emit_status({'newemote': 1})
             time.sleep(60)
-
-    def set_emit_socket(self, emit_status):
-        self.emit_status = emit_status
