@@ -219,6 +219,19 @@ $('document').ready(function () {
             }
         }
     });
+
+    $(document).on('keydown', function (event) {
+        if (event.keyCode === 17) {
+            $('.message-name').css('cursor', 'pointer');
+        }
+    });
+    $(document).on('keyup', function (event) {
+        if (event.keyCode === 17) {
+            $('.message-name').css('cursor', 'default');
+        }
+    });
+
+
 });
 
 function setUserCount(count) {
@@ -339,7 +352,7 @@ function makeMention(text) {
 
 function uname_name_click(e){
     if(e.originalEvent.ctrlKey){
-        document.getElementById('m').value += '@' + e.target.title + ' ';
         e.preventDefault();
+        document.getElementById('m').value += '@' + e.target.title + ' ';
     }
 }
