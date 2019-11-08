@@ -10,6 +10,3 @@
 #webdev
 *.css *.html @monkmitrad
 *.js @monkmitrad @SFFan123
-
-#emotes
-emotes.json @ArPiiX
