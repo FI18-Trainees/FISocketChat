@@ -152,11 +152,10 @@ $('document').ready(function () {
         let timestamp = msg['timestamp'];
         let last_message = document.getElementById('messages')
 
-        mentionIndex = msgcontent.toLowerCase().search('@' + ownusername);
         if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
             msgcontent = makeMention(msgcontent);
             if (checkPermission()) {
-                newNotification("You have been mentioned");
+                newNotification("You have been mentioned!");
             }
         }
 
@@ -338,5 +337,5 @@ function tabComplete(CursorPos) {
 }
 
 function makeMention(text) {
-    return '<em class="d-inline-flex w-100">' + text + '</em>';
+    return '<em class="d-inline-flex w-100 mention">' + text + '</em>';
 }

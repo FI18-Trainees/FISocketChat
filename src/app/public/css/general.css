@@ -69,8 +69,13 @@ body {
             color: var(--discord-blue);
         }
 
-        #messages .message-content em {
+        #messages .message-content .mention {
             background: var(--discord-orange);
+            font-style: normal;
+        }
+
+        #messages .message-content .code {
+            background: var(--discord-grey);
             font-style: normal;
         }
 
