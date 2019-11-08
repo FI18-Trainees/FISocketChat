@@ -1,4 +1,4 @@
-//localStorage.debug = '*';
+//localStorage.debug = '*';;
 var socket = null;
 var focused = true;
 var unread = 0;
