@@ -152,26 +152,25 @@ $('document').ready(function () {
         let timestamp = msg['timestamp'];
         let last_message = document.getElementById('messages')
 
-        mentionIndex = msgcontent.toLowerCase().search('@' + ownusername);
         if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
             msgcontent = makeMention(msgcontent);
             if (checkPermission()) {
-                newNotification("You have been mentioned");
+                newNotification("You have been mentioned!");
             }
         }
 
         // check if username of last message is identical to new message
         if($('#messages :last-child div h2 div').prop('title') == username) {
-            $('#messages :last-child .message-content').last().append($('<div class="message-content w-100">').html(msgcontent));
+            $('#messages .message-container').last().children().append($('<div class="message-content w-100 pb-1">').html(msgcontent));
             $('#messages .message-header').last().children('time').text(timestamp);
         } else {
             let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
-            let content = $('<div>');    //div which contains header and message content
+            let content = $('<div class="w-100">');    //div which contains header and message content
             let header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');      //div which contains username and timestamp
             header.append($('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click));   //append username and timestamp as title to header-div
             header.append($('<time class="message-timestamp ml-1">').text(timestamp));                  //append timestamp to header-div
             content.append(header);                                                                               //append header to message-container-div
-            content.append($('<div class="message-content w-100">').html(msgcontent));                              //append message content to message-container-div
+            content.append($('<div class="message-content w-100 pb-1">').html(msgcontent));                              //append message content to message-container-div
             item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">'))                //prepend profile picture to message-container-div
             item.append(content);
             $('#messages').append(item);    //append message to chat-div
@@ -345,7 +344,7 @@ function tabComplete(CursorPos) {
 }
 
 function makeMention(text) {
-    return '<em class="d-inline-flex w-100">' + text + '</em>';
+    return '<em class="d-flex w-100 mention">' + text + '</em>';
 }
 
 function uname_name_click(e){
