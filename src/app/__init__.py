@@ -26,7 +26,7 @@ app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
 
 # EMOTES
-emote_handler = Emotes(True)
+emote_handler = Emotes(False)
 user_limit = UserLimiter()
 
 # REGEX
