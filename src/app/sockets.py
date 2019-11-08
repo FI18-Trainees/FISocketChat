@@ -135,9 +135,9 @@ def handle_message(message):
         msg_body = safe_tags_replace(msg_body)
         msg_body = link_replacer(msg_body)
         msg_body = safe_emote_replace(msg_body)
+        msg_body = quote_replacer(msg_body)
         msg_body = newline_html_regex.sub("<br />", msg_body)
         msg_body = codeblock_replacer(msg_body)
-        msg_body = quote_replacer(msg_body)
 
         emit('chat_message',
              {
