@@ -1,12 +1,5 @@
-# default
-* @zaanposni @monkmitrad
-
-# python
+* @zaanposni @monkmitrad @SFFan123
 *.py @zaanposni
-
-# unittest
 /tests/ @zaanposni
-
-#webdev
 *.css *.html @monkmitrad
 *.js @monkmitrad @SFFan123
