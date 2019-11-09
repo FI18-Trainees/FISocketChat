@@ -9,13 +9,12 @@ from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
 from .shell import *
-from .emotes import Emotes
+from .emote_handling import Emotes
 from .user_limiter import UserLimiter
 from .global_values import UserManager, Others
 
 SHL = Console("Init")
 auth = HTTPTokenAuth()
-others = Others()
 user_manager = UserManager()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
