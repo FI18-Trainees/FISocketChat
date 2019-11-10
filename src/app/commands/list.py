@@ -1,5 +1,3 @@
-from flask_socketio import emit
-
 from ..shell import *
 from .. import user_manager, logindisabled
 from ..obj import SystemMessenger, User, Command
@@ -11,7 +9,7 @@ settings = {
 }
 
 
-def main(system: SystemMessenger, author: User, message: Command, params: list):
+def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     msg = f"There are {user_manager.get_count()} user(s) connected.<br />"
     if not logindisabled:
         for sid, cfg in user_manager.configs.items():
