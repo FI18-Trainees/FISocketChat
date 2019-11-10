@@ -11,7 +11,7 @@ from flask import redirect, request
 from .shell import *
 from .emote_handling import Emotes
 from .user_limiter import UserLimiter
-from .global_values import UserManager, Others
+from .global_values import UserManager
 
 SHL = Console("Init")
 auth = HTTPTokenAuth()

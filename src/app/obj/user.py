@@ -1,5 +1,9 @@
 class User:
-    def __init__(self, display_name: str, username: str, avatar: str, chat_color: str):
+    def __init__(self,
+                 display_name: str,
+                 username: str,
+                 avatar: str = "/public/img/emote1.PNG",
+                 chat_color: str = "#FF0000"):
         self.display_name = display_name
         self.username = username
         self.avatar = avatar
@@ -9,4 +13,5 @@ class User:
         return
 
 
+default_user = User(display_name=None, username=None)
 
