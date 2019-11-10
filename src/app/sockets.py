@@ -10,6 +10,7 @@ from . import socketio, emote_handler,  user_manager, verify_token, \
     code_regex, quote_regex, logindisabled, request, user_limit
 from .shell import *
 from . import handle_command as command_handler
+from obj import User, Command, Message, default_user
 
 SHL = Console("Init")
 
@@ -55,7 +56,6 @@ def handle_command(command):
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
                        f"{user_manager.configs[request.sid]['username']}", "S.ON chat_command")
         return
-
     user_limit.update_cooldown(request.sid)
 
     SHL.output(f"Received message {command}", "S.ON chat_message")
@@ -89,7 +89,6 @@ def handle_message(message):
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
                        f"{user_manager.configs[request.sid]['username']}", "S.ON chat_message")
         return
-
     user_limit.update_cooldown(request.sid)
 
     SHL.output(f"Received message {message}", "S.ON chat_message")
@@ -106,20 +105,26 @@ def handle_message(message):
         return
 
     # defaults
-    username = display_name
-    display_color = "#FF0000"
-    timestamp = datetime.now().strftime("%H:%M:%S")
-    avatar = "/public/img/emote1.PNG"
+    message = Message(author=default_user, msg_body=msg_body, system=False)
+    message.author.display_name = display_name
+    message.author.username = display_name
 
     if not logindisabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
             if user_manager.configs[request.sid]["userconfig"]["display_name"].strip() != "":
-                username = user_manager.configs[request.sid]["username"]
-                display_name = user_manager.configs[request.sid]["userconfig"]["display_name"]
-                display_color = user_manager.configs[request.sid]["userconfig"]["chat_color"]
-                avatar = f"https://profile.zaanposni.com/pictures/{username}.png"
+                author = User(
+                    display_name=user_manager.configs[request.sid]["userconfig"]["display_name"],
+                    username=user_manager.configs[request.sid]["username"],
+                    chat_color=user_manager.configs[request.sid]["userconfig"]["chat_color"]
+                )
+                author.avatar = f"https://profile.zaanposni.com/pictures/{author.username}.png"
+                message.author = author
         except KeyError:
+            SHL.output("Invalid userconfig", "S.ON chat_message")
+            emit('error', {'message': 'invalid userconfig'})
+            return
+        except AttributeError:
             SHL.output("Invalid userconfig", "S.ON chat_message")
             emit('error', {'message': 'invalid userconfig'})
             return
@@ -129,15 +134,11 @@ def handle_message(message):
         emit('error', {"message": "invalid username"})
         return
 
-    if 0 < len(msg_body) < 5000:
+    if 0 < len(message.msg_body) < 5000:
         display_name = safe_tags_replace(display_name)
-        msg_body = safe_tags_replace(msg_body)
-        msg_body = link_replacer(msg_body)
-        msg_body = safe_emote_replace(msg_body)
-        msg_body = quote_replacer(msg_body)
-        msg_body = newline_html_regex.sub("<br />", msg_body)
-        msg_body = codeblock_replacer(msg_body)
 
+        message.apply_func((safe_tags_replace, link_replacer, safe_emote_replace,
+                            replace_newline, quote_replacer, codeblock_replacer))
         emit('chat_message',
              {
                  'timestamp': timestamp,
@@ -208,6 +209,10 @@ tagsToReplace = {
 }
 
 
+def replace_newline(text: str, replace="<br />"):
+    return newline_html_regex.sub(replace, text)
+
+
 def replace_tag(tag):
     return tagsToReplace.get(tag, tag)
 
@@ -227,7 +232,7 @@ def safe_emote_replace(text):
     return re.sub(emote_regex, lambda x: replace_emote(x.group()), text, 0)
 
 
-def link_replacer(text):
+def link_replacer(text: str) -> str:
     rawtext = text
     text = link_display(text)
     matches = link_regex.finditer(rawtext)
@@ -238,60 +243,60 @@ def link_replacer(text):
     return text
 
 
-def link_display(text):
+def link_display(text: str) -> str:
     return re.sub(link_regex, lambda x: change_link(x.group()), text, 0)
 
 
-def change_link(text):
+def change_link(text: str) -> str:
     if val_url(text):
         return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a>'
     else:
         return text
 
 
-def link_preview(text):
+def link_preview(text: str) -> str:
     if val_url(text):
         for func in [get_embed_image_link, get_embed_video_link, get_embed_audio_link, get_embed_youtube_code]:
             result = func(text)
             if result:
                 return result
-    return None
+    return ""
 
 
-def get_embed_youtube_code(link):
+def get_embed_youtube_code(link: str) -> str:
     matches = youtube_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
         return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/>' \
                f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{match.group(1)}" ' \
                f'frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" ' \
                f'allowfullscreen></iframe>'
-    return None
+    return ""
 
 
-def get_embed_image_link(link):
+def get_embed_image_link(link: str) -> str:
     matches = image_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
         return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}"/>'
-    return None
+    return ""
 
 
-def get_embed_video_link(link):
+def get_embed_video_link(link: str) -> str:
     matches = video_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
         return f'<br /><video class="video-embed" src="{match.group()}" controls preload="metadata"/>'
-    return None
+    return ""
 
 
-def get_embed_audio_link(link):
+def get_embed_audio_link(link: str) -> str:
     matches = audio_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
         return f'<br /><audio class="audio-embed" src="{match.group()}" controls preload="metadata"/>'
-    return None
+    return ""
 
 
-def codeblock_replacer(text):
+def codeblock_replacer(text: str) -> str:
     return re.sub(code_regex, '<em class="code my-1 w-100">\g<2></em>', text, 0)
 
 
-def quote_replacer(text):
+def quote_replacer(text: str) -> str:
     return re.sub(quote_regex, '<em class="quote font-weight-light pl-1">\g<1></em>', text, 0)
