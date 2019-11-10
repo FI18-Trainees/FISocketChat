@@ -7,6 +7,7 @@ var emotelist = null;
 var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
+var userlist = [];
 
 var message_history = [];
 var history_pointer = 0;
@@ -233,6 +234,11 @@ $('document').ready(function () {
 
 function setUserCount(count) {
     $('#usercount').text('Usercount: ' + count);
+    $.ajax({
+        url: "api/user",
+    }).done(function(data) {
+        userlist = data;
+    });
 }
 
 function showError(message) {
@@ -333,14 +339,27 @@ function tabComplete(CursorPos) {
     let toComplete = messageSplit.substring(lastSplit);
     if (toComplete.length < 1)
         return;
-    for (let emote in emotelist) {
-        if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
-            let mIn = m.value.substr(0, lastSplit) + emote + " ";
-            m.value = mIn + m.value.substr(CursorPos + 1);
-            m.setSelectionRange(mIn.length, mIn.length);
-            break;
+    if (toComplete.toLowerCase().startsWith("@") && toComplete.length > 1) {
+        for (username in userlist) {
+            if (username != null && username.toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                let mIn = m.value.substr(0, lastSplit) + "@" + username + " ";
+                m.value = mIn + m.value.substr(CursorPos + 1);
+                m.setSelectionRange(mIn.length, mIn.length);
+                return;
+            }
         }
     }
+    else {
+        for (let emote in emotelist) {
+            if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
+                let mIn = m.value.substr(0, lastSplit) + emote + " ";
+                m.value = mIn + m.value.substr(CursorPos + 1);
+                m.setSelectionRange(mIn.length, mIn.length);
+                break;
+            }
+        }
+    }
+
 }
 
 function makeMention(text) {

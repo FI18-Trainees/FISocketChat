@@ -20,10 +20,16 @@ class Emotes:
     def __init__(self, start):
         self.emotes = {}
         self.runCheck = start
-        self.start_reloader()
         self.emit_status = None
+        if not self.runCheck:
+            SHL.output(f"Getting Emotes once!")
+            SHL.output(f"Setting new emotes!")
+            self.emotes = self.get_emotes()
+        else:
+            self.start_reloader()
 
-    def get_emotes(self):
+    @staticmethod
+    def get_emotes():
         if filename:
             with open(filename, encoding='utf-8', mode='r') as f:
                 return json.load(f)
@@ -47,9 +53,4 @@ class Emotes:
                 if cache != self.emotes:
                     SHL.output(f"Setting new emotes!")
                     self.emotes = self.get_emotes()
-                    if self.emit_status is not None:
-                        self.emit_status({'newemote': 1})
             time.sleep(60)
-
-    def set_emit_socket(self, emit_status):
-        self.emit_status = emit_status
