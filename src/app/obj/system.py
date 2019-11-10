@@ -1,30 +1,22 @@
+from typing import Union
+
 from flask_socketio import emit
 
 from . import SystemMessage
 
 
-class System:
-    def system_emit(self, message: SystemMessage):  # TODO: use to_json()
-        emit('chat_message',
-             {
-                 'timestamp': datetime.now().strftime("%H:%M:%S"),
-                 'display_name': self.display_name,
-                 'username': self.username,
-                 'user_color': self.user_color,
-                 'avatar': self.avatar,
-                 'message': message,
-                 'system': self.system
-             })
+class SystemMessenger:
+    @staticmethod
+    def send(message: Union[SystemMessage, str]):
+        if isinstance(message, str):
+            message = SystemMessage(msg_body=message)
+        emit('chat_message', message.to_json())
 
-    def system_broadcast(self, message: SystemMessage):
-        emit('chat_message',
-             {
-                 'timestamp': datetime.now().strftime("%H:%M:%S"),
-                 'display_name': self.display_name,
-                 'username': self.username,
-                 'user_color': self.user_color,
-                 'avatar': self.avatar,
-                 'message': message,
-                 'system': self.system
-             }, broadcast=True)
+    @staticmethod
+    def broadcast(message: Union[SystemMessage, str]):
+        if isinstance(message, str):
+            message = SystemMessage(msg_body=message)
+        emit('chat_message', message.to_json(), broadcast=True)
 
+
+system = SystemMessenger()
