@@ -9,11 +9,17 @@ class Message:
         self.author = author
         self.msg_body = msg_body
         self.system = system
-        self.timestamp = datetime.now()
-        self.format_timestamp = self.timestamp.strftime("%H:%M:%S")
+        self.full_timestamp = datetime.now()
+        self.timestamp = self.timestamp.strftime("%H:%M:%S")
 
     def to_json(self) -> dict:
-        return
+        return {
+            "author": self.author.to_json(),
+            "msg_body": self.msg_body,
+            "system": self.system,
+            "full_timestamp":  self.full_timestamp,
+            "timestamp": self.timestamp
+        }
 
     def apply_func(self, funcs: tuple):
         for x in funcs:

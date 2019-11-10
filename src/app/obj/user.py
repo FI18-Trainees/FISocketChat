@@ -10,7 +10,12 @@ class User:
         self.chat_color = chat_color
 
     def to_json(self) -> dict:
-        return
+        return {
+            "display_name": self.display_name,
+            "username": self.username,
+            "avatar": self.avatar,
+            "chat_color": self.chat_color
+        }
 
 
 default_user = User(display_name=None, username=None)

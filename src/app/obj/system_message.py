@@ -16,6 +16,3 @@ class SystemMessage(Message):
 
     def change_display_name(self, new: str):
         self.author.display_name = new
-
-    def to_json(self) -> dict:
-        return
