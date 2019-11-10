@@ -15,38 +15,6 @@ from obj import User, Command, Message, default_user
 SHL = Console("Init")
 
 
-class System:
-    display_name = "System"
-    username = "System"
-    user_color = "#FF0000"
-    avatar = "/public/img/system.png"
-    system = True
-
-    def system_emit(self, message):
-        emit('chat_message',
-             {
-                 'timestamp': datetime.now().strftime("%H:%M:%S"),
-                 'display_name': self.display_name,
-                 'username': self.username,
-                 'user_color': self.user_color,
-                 'avatar': self.avatar,
-                 'message': message,
-                 'system': self.system
-             })
-
-    def system_broadcast(self, message):
-        emit('chat_message',
-             {
-                 'timestamp': datetime.now().strftime("%H:%M:%S"),
-                 'display_name': self.display_name,
-                 'username': self.username,
-                 'user_color': self.user_color,
-                 'avatar': self.avatar,
-                 'message': message,
-                 'system': self.system
-             }, broadcast=True)
-
-
 @socketio.on('chat_command')
 def handle_command(command):
     if user_limit.check_cooldown(request.sid):
@@ -61,8 +29,9 @@ def handle_command(command):
     SHL.output(f"Received message {command}", "S.ON chat_message")
 
     try:
-        display_name = str(command['display_name']).strip()
-        command_body = str(command['message']).strip()
+        cmd = Command(author=default_user, msg_body=str(command['message']).strip(), system=False)
+        cmd.author.display_name = str(command['display_name']).strip()
+        cmd.author.username = cmd.author.display_name
     except KeyError:
         SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_command")
         emit("error", "bad request")
@@ -72,12 +41,32 @@ def handle_command(command):
         emit("error", "bad request")
         return
 
-    if display_name.find('Server') == 0 or len(display_name) not in range(1, 100):  # only allow username with length 1-100
-        SHL.output(f"{yellow2}Invalid username {display_name}{white}", "S.ON chat_message")
+    if not logindisabled:
+        SHL.output("Importing userconfig", "S.ON chat_message")
+        try:
+            if user_manager.configs[request.sid]["userconfig"]["display_name"].strip() != "":
+                author = User(
+                    display_name=user_manager.configs[request.sid]["userconfig"]["display_name"],
+                    username=user_manager.configs[request.sid]["username"],
+                    chat_color=user_manager.configs[request.sid]["userconfig"]["chat_color"]
+                )
+                author.avatar = f"https://profile.zaanposni.com/pictures/{author.username}.png"
+                cmd.author = author
+        except KeyError:
+            SHL.output("Invalid userconfig", "S.ON chat_message")
+            emit('error', {'message': 'invalid userconfig'})
+            return
+        except AttributeError:
+            SHL.output("Invalid userconfig", "S.ON chat_message")
+            emit('error', {'message': 'invalid userconfig'})
+            return
+
+    if cmd.author.display_name.find('Server') == 0 or len(cmd.author.display_name) not in range(1, 100):  # only allow username with length 1-100
+        SHL.output(f"{yellow2}Invalid username {cmd.author.display_name}{white}", "S.ON chat_message")
         emit('error', {"message": "invalid username"})
         return
 
-    command_handler(system=System(), author=display_name, command_body=command_body)
+    command_handler(author=cmd.author, command=cmd)
 
 
 @socketio.on('chat_message')
@@ -90,11 +79,12 @@ def handle_message(message):
                        f"{user_manager.configs[request.sid]['username']}", "S.ON chat_message")
         return
     user_limit.update_cooldown(request.sid)
-
     SHL.output(f"Received message {message}", "S.ON chat_message")
+
     try:
-        display_name = str(message['display_name']).strip()
-        msg_body = str(message['message']).strip()
+        msg = Message(author=default_user, msg_body=str(message['message']).strip(), system=False)
+        msg.author.display_name = str(message['display_name']).strip()
+        msg.author.username = msg.author.display_name
     except KeyError:
         SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_message")
         emit("error", "bad request")
@@ -103,11 +93,6 @@ def handle_message(message):
         SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_command")
         emit("error", "bad request")
         return
-
-    # defaults
-    message = Message(author=default_user, msg_body=msg_body, system=False)
-    message.author.display_name = display_name
-    message.author.username = display_name
 
     if not logindisabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
@@ -119,7 +104,7 @@ def handle_message(message):
                     chat_color=user_manager.configs[request.sid]["userconfig"]["chat_color"]
                 )
                 author.avatar = f"https://profile.zaanposni.com/pictures/{author.username}.png"
-                message.author = author
+                msg.author = author
         except KeyError:
             SHL.output("Invalid userconfig", "S.ON chat_message")
             emit('error', {'message': 'invalid userconfig'})
@@ -129,27 +114,19 @@ def handle_message(message):
             emit('error', {'message': 'invalid userconfig'})
             return
 
-    if any(x in display_name for x in ["System", "Server"]) or len(display_name) not in range(1, 100):  # only allow username with length 1-100
-        SHL.output(f"{yellow2}Invalid username {display_name}{white}", "S.ON chat_message")
+    if any(x in msg.author.display_name for x in ["System", "Server"]) or len(msg.author.display_name) not in range(1, 100):  # only allow username with length 1-100
+        SHL.output(f"{yellow2}Invalid username {msg.author.display_name}{white}", "S.ON chat_message")
         emit('error', {"message": "invalid username"})
         return
 
-    if 0 < len(message.msg_body) < 5000:
-        display_name = safe_tags_replace(display_name)
+    if 0 < len(msg.msg_body) < 5000:
+        msg.author.display_name = safe_tags_replace(msg.author.display_name)
+        msg.apply_func((safe_tags_replace, link_replacer, safe_emote_replace,
+                        replace_newline, quote_replacer, codeblock_replacer))
 
-        message.apply_func((safe_tags_replace, link_replacer, safe_emote_replace,
-                            replace_newline, quote_replacer, codeblock_replacer))
-        emit('chat_message',
-             {
-                 'timestamp': timestamp,
-                 'display_name': display_name,
-                 'username': username,
-                 'user_color': display_color,
-                 'avatar': avatar,
-                 'message': msg_body
-             }, broadcast=True)
+        emit('chat_message', msg.to_json(), broadcast=True)
     else:
-        SHL.output(f"{yellow2}Invalid message length: {len(msg_body)}{white}", "S.ON chat_message")
+        SHL.output(f"{yellow2}Invalid message length: {len(msg.msg_body)}{white}", "S.ON chat_message")
         emit('error', {"message": "invalid message"})
 
 
@@ -199,7 +176,7 @@ def disconnect():
     emit_status({'count': user_manager.get_count()})
 
 
-def emit_status(status):
+def emit_status(status: dict):
     socketio.emit('status', status)
 
 
@@ -209,26 +186,26 @@ tagsToReplace = {
 }
 
 
-def replace_newline(text: str, replace="<br />"):
+def replace_newline(text: str, replace="<br />") -> str:
     return newline_html_regex.sub(replace, text)
 
 
-def replace_tag(tag):
+def replace_tag(tag: str) -> str:
     return tagsToReplace.get(tag, tag)
 
 
-def safe_tags_replace(text):
+def safe_tags_replace(text: str) -> str:
     return re.sub(html_regex, lambda x: replace_tag(x.group()), text, 0)
 
 
-def replace_emote(emote):
+def replace_emote(emote: str) -> str:
     if emote in emote_handler.emotes:
         return emote_handler.emotes[emote]["replace"]
     else:
         return emote
 
 
-def safe_emote_replace(text):
+def safe_emote_replace(text: str) -> str:
     return re.sub(emote_regex, lambda x: replace_emote(x.group()), text, 0)
 
 
