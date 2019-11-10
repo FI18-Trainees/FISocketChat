@@ -10,7 +10,7 @@ class Message:
         self.msg_body = msg_body
         self.system = system
         self.full_timestamp = datetime.now()
-        self.timestamp = self.timestamp.strftime("%H:%M:%S")
+        self.timestamp = self.full_timestamp.strftime("%H:%M:%S")
 
     def to_json(self) -> dict:
         return {

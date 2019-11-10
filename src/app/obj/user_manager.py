@@ -9,7 +9,7 @@ class UserManager:
 
     def add(self, sid: str, user: User, username=None, userconfig=None):
         self.count += 1
-        self.configs[sid] = {
+        self.configs[sid] = {  # TODO: use user object
             "username": username,
             "userconfig": userconfig
         }
