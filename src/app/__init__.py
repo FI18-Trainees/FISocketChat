@@ -15,7 +15,7 @@ from .global_values import UserManager
 
 SHL = Console("Init")
 auth = HTTPTokenAuth()
-user_manager = UserManager()
+user_manager = UserManager()  # TODO: replace with obj.user_manager
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 emote_handler = Emotes(True)
