@@ -22,10 +22,9 @@ def handle_command(command):
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_command")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
-                       f"{user_manager.configs[request.sid]['username']}", "S.ON chat_command")
+                       f"{user_manager.configs[request.sid]['user'].username}", "S.ON chat_command")
         return
     user_limit.update_cooldown(request.sid)
-
     SHL.output(f"Received message {command}", "S.ON chat_message")
 
     try:
@@ -44,20 +43,13 @@ def handle_command(command):
     if not logindisabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
-            if user_manager.configs[request.sid]["userconfig"]["display_name"].strip() != "":
-                author = User(
-                    display_name=user_manager.configs[request.sid]["userconfig"]["display_name"],
-                    username=user_manager.configs[request.sid]["username"],
-                    chat_color=user_manager.configs[request.sid]["userconfig"]["chat_color"]
-                )
-                author.avatar = f"https://profile.zaanposni.com/pictures/{author.username}.png"
-                cmd.author = author
+            cmd.author = user_manager.configs[request.sid]["user"]
         except KeyError:
-            SHL.output("Invalid userconfig", "S.ON chat_message")
+            SHL.output("Invalid userconfig", "S.ON chat_command")
             emit('error', {'message': 'invalid userconfig'})
             return
         except AttributeError:
-            SHL.output("Invalid userconfig", "S.ON chat_message")
+            SHL.output("Invalid userconfig", "S.ON chat_command")
             emit('error', {'message': 'invalid userconfig'})
             return
 
@@ -97,14 +89,7 @@ def handle_message(message):
     if not logindisabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
-            if user_manager.configs[request.sid]["userconfig"]["display_name"].strip() != "":
-                author = User(
-                    display_name=user_manager.configs[request.sid]["userconfig"]["display_name"],
-                    username=user_manager.configs[request.sid]["username"],
-                    chat_color=user_manager.configs[request.sid]["userconfig"]["chat_color"]
-                )
-                author.avatar = f"https://profile.zaanposni.com/pictures/{author.username}.png"
-                msg.author = author
+            msg.author = user_manager.configs[request.sid]["user"]
         except KeyError:
             SHL.output("Invalid userconfig", "S.ON chat_message")
             emit('error', {'message': 'invalid userconfig'})
@@ -133,20 +118,20 @@ def handle_message(message):
 @socketio.on('connect')
 def connect(data=""):
     SHL.output(f"New connection with data: {data}", "S.ON Connect")
+    new_user = User(display_name="Shawn", username="Shawn")
     if not logindisabled:
         SHL.output("Validating session for new connection.", "S.ON Connect")
-        verify = verify_token(data)
-        username = verify
-        if not verify:
+        new_user.username = verify_token(data)
+        if not new_user.username:
             SHL.output(f"{yellow2}Invalid session.{white}", "S.ON Connect")
             emit('error', {'message': 'invalid token'})
             return
 
         ip = socketio.server.environ[request.sid]["HTTP_CF_CONNECTING_IP"]
         SHL.output(f"IP: {ip}", "S.ON Connect")
-        SHL.output(f"Username: {username}", "S.ON Connect")
+        SHL.output(f"Username: {new_user.username}", "S.ON Connect")
 
-        r = requests.get(f"https://profile.zaanposni.com/get/{username}.json",
+        r = requests.get(f"https://profile.zaanposni.com/get/{new_user.username}.json",
                          headers={
                              'Cache-Control': 'no-cache',
                              'Authorization': f'Bearer {request.cookies.get("access_token", "")}'
@@ -158,12 +143,28 @@ def connect(data=""):
             return
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
 
-        user_manager.add(request.sid, username=username, userconfig=r.json())
-        emit('status', {'loginmode': True, 'username': username})
+        try:
+            config = r.json()
+            if config["display_name"].strip() != "":
+                new_user.display_name = config["display_name"],
+                new_user.chat_color = config["chat_color"]
+                new_user.avatar = f"https://profile.zaanposni.com/pictures/{new_user.username}.png"
+        except KeyError:
+            SHL.output("Invalid userconfig", "S.ON Connect")
+            emit('error', {'message': 'invalid userconfig'})
+            return
+        except AttributeError:
+            SHL.output("Invalid userconfig", "S.ON Connect")
+            emit('error', {'message': 'invalid userconfig'})
+            return
+
+        emit('status', {'loginmode': True, 'username': new_user.username})
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     else:
         emit('status', {'loginmode': False})
-        user_manager.add(request.sid)
+
+    user_manager.add(request.sid, user=new_user)
+    SHL.output(f"User count: {user_manager.get_count()}.", "S.ON Connect")
     emit_status({'count': user_manager.get_count()})
 
 
@@ -172,7 +173,7 @@ def disconnect():
     SHL.output("User disconnected.", "S.ON Disconnect")
     user_manager.rem(request.sid)
     user_limit.remove_sid(request.sid)
-    SHL.output(f"User count: {user_manager.count}.", "S.ON Disconnect")
+    SHL.output(f"User count: {user_manager.get_count()}.", "S.ON Disconnect")
     emit_status({'count': user_manager.get_count()})
 
 
