@@ -18,4 +18,5 @@ class User:
         }
 
 
-default_user = User(display_name=None, username=None)
+def get_default_user() -> User:
+    return User(display_name=None, username=None)

@@ -11,7 +11,7 @@ from flask import redirect, request
 from .shell import *
 from .emote_handling import Emotes
 from .user_limiter import UserLimiter
-from .obj import UserManager, User
+from .obj import UserManager, get_default_user
 
 SHL = Console("Init")
 
@@ -96,8 +96,8 @@ from .import routes
 
 # I left this for testing
 if dummy_user:
-    def_user = User(display_name=None, username=None)
     for name in {"ArPiiX", "SFFan123", "monkmitrad", "zaanposni"}:
+        def_user = get_default_user()
         def_user.display_name = name
         def_user.username = name
         user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user)

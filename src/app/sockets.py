@@ -10,7 +10,7 @@ from . import socketio, emote_handler,  user_manager, verify_token, \
     code_regex, quote_regex, login_disabled, request, user_limit
 from .shell import *
 from . import handle_command as command_handler
-from .obj import User, Command, Message, default_user
+from .obj import User, Command, Message, get_default_user
 
 SHL = Console("Init")
 
@@ -28,7 +28,7 @@ def handle_command(command):
     SHL.output(f"Received message {command}", "S.ON chat_message")
 
     try:
-        cmd = Command(author=default_user, msg_body=str(command['message']).strip(), system=False)
+        cmd = Command(author=get_default_user(), msg_body=str(command['message']).strip(), system=False)
         cmd.author.display_name = str(command['display_name']).strip()
         cmd.author.username = cmd.author.display_name
     except KeyError:
@@ -74,7 +74,7 @@ def handle_message(message):
     SHL.output(f"Received message {message}", "S.ON chat_message")
 
     try:
-        msg = Message(author=default_user, msg_body=str(message['message']).strip(), system=False)
+        msg = Message(author=get_default_user(), msg_body=str(message['message']).strip(), system=False)
         msg.author.display_name = str(message['display_name']).strip()
         msg.author.username = msg.author.display_name
     except KeyError:
