@@ -1,7 +1,8 @@
-import socketio
 import asyncio
 import unittest
 import time
+
+import socketio
 
 loop = asyncio.get_event_loop()
 
