@@ -73,6 +73,7 @@ class TestClass(unittest.TestCase):
         self.assertEqual(sockets.status.get("count", 0), 1)
         self.assertFalse(sockets.status.get("loginmode", True))
 
+        # ===========================================================================
         print("Sending message")
         sockets.send_message("test_user", "test_message")
         loop.run_until_complete(sockets.sleep())
@@ -80,11 +81,18 @@ class TestClass(unittest.TestCase):
         self.assertEqual(len(sockets.messages), 1)
         self.assertEqual(len(sockets.errors), 0)
         x = sockets.messages[0]
-        y = {"username": "test_user", "display_name": "test_user", "message": "test_message"}  # expected
+        y = {"msg_body": "test_message"}  # expected
+        shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
+        self.assertEqual(shared_items, y)
+
+        x = sockets.messages[0].get("author", {})
+        y = {"username": "test_user", "display_name": "test_user"}  # expected
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
         self.assertIn("avatar", x)
+        self.assertIn("chat_color", x)
 
+        # ===========================================================================
         print("Sending message with invalid username")
         sockets.send_message("", "test_message")
         loop.run_until_complete(sockets.sleep())
@@ -95,6 +103,7 @@ class TestClass(unittest.TestCase):
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
 
+        # ===========================================================================
         print("Sending message with invalid message")
         sockets.send_message("test_user", "")
         loop.run_until_complete(sockets.sleep())
@@ -105,23 +114,34 @@ class TestClass(unittest.TestCase):
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
 
+        # ===========================================================================
         print("Sending message with emoji and test replacement")
         sockets.send_message("test_user", " Shawn abc")
         loop.run_until_complete(sockets.sleep())
         self.assertEqual(len(sockets.messages), 2)
         self.assertEqual(len(sockets.errors), 2)
-        self.assertIn("img", sockets.messages[1]["message"])
+        self.assertIn("img", sockets.messages[1].get("msg_body", ""))
 
+        # ===========================================================================
         print("Execute test command and test response")
         sockets.send_command("test_user", "/ping")
         loop.run_until_complete(sockets.sleep())
         self.assertEqual(len(sockets.messages), 3)
         self.assertEqual(len(sockets.errors), 2)
         x = sockets.messages[2]
-        y = {"message": "Pong!", "username": "System", "system": True}  # expected
+        y = {"system": True, "msg_body": "Pong!"}  # expected
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
+        self.assertIn("msg_body", x)
 
+        x = sockets.messages[2].get("author", {})
+        y = {"username": "System", "display_name": "System"}  # expected
+        shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
+        self.assertEqual(shared_items, y)
+        self.assertIn("avatar", x)
+        self.assertIn("chat_color", x)
+
+        # ===========================================================================
         print("Execute invalid command and test response")
         sockets.send_command("test_user", "//ping")
         loop.run_until_complete(sockets.sleep())
