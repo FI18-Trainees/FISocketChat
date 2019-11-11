@@ -75,7 +75,7 @@ class TestClass(unittest.TestCase):
         self.assertFalse(sockets.status.get("loginmode", True))
 
         # ===========================================================================
-        print("Testing /api/user endpoint")
+        print("Testing /api/user endpoint")  # TODO: move to api unittest
         r = requests.get("http://127.0.0.1:5000/api/user").json()
         self.assertEqual(len(r), 1)
         self.assertTrue(isinstance(r, list))
