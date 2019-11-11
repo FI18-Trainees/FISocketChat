@@ -340,9 +340,9 @@ function tabComplete(CursorPos) {
     if (toComplete.length < 1)
         return;
     if (toComplete.toLowerCase().startsWith("@") && toComplete.length > 1) {
-        for (username in userlist) {
-            if (username != null && username.toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
-                let mIn = m.value.substr(0, lastSplit) + "@" + username + " ";
+        for (username of userlist.entries()) {
+            if (username[1] !== null && username[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                let mIn = m.value.substr(0, lastSplit) + "@" + username[1] + " ";
                 m.value = mIn + m.value.substr(CursorPos + 1);
                 m.setSelectionRange(mIn.length, mIn.length);
                 return;
