@@ -1,7 +1,7 @@
 name: BasicCheckup
 on:
   push:
-    branches:    
+    branches:
       - master
 
 jobs:

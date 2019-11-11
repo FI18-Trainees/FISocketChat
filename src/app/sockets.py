@@ -146,7 +146,7 @@ def connect(data=""):
         try:
             config = r.json()
             if config["display_name"].strip() != "":
-                new_user.display_name = config["display_name"],
+                new_user.display_name = config["display_name"]
                 new_user.chat_color = config["chat_color"]
                 new_user.avatar = f"https://profile.zaanposni.com/pictures/{new_user.username}.png"
         except KeyError:
@@ -202,8 +202,7 @@ def safe_tags_replace(text: str) -> str:
 def replace_emote(emote: str) -> str:
     if emote in emote_handler.emotes:
         return emote_handler.emotes[emote]["replace"]
-    else:
-        return emote
+    return emote
 
 
 def safe_emote_replace(text: str) -> str:
@@ -228,8 +227,7 @@ def link_display(text: str) -> str:
 def change_link(text: str) -> str:
     if val_url(text):
         return f'<a target="_blank" rel="noopener noreferrer" href="{text}">{text}</a>'
-    else:
-        return text
+    return text
 
 
 def link_preview(text: str) -> str:
