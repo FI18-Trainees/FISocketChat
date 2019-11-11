@@ -1,6 +1,7 @@
 import asyncio
 import unittest
 import time
+import requests
 
 import socketio
 
@@ -72,6 +73,12 @@ class TestClass(unittest.TestCase):
         self.assertTrue(sockets.online_status)
         self.assertEqual(sockets.status.get("count", 0), 1)
         self.assertFalse(sockets.status.get("loginmode", True))
+
+        # ===========================================================================
+        print("Testing /api/user endpoint")
+        r = requests.get("http://127.0.0.1:5000/api/user").json()
+        self.assertEqual(len(r), 1)
+        self.assertTrue(isinstance(r, list))
 
         # ===========================================================================
         print("Sending message")
