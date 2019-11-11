@@ -2,18 +2,14 @@
 import json
 import time
 import threading
-import platform
+import os.path
 
 from .shell import Console
 
 SHL = Console("EmotesHandler")
 
 
-system = platform.system()
-if system == "Windows":
-    filename = "app\\emotes.json"
-if system == "Linux":
-    filename = "app/emotes.json"
+filename = os.path.join("app", "emotes.json")
 
 
 class Emotes:
