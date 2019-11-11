@@ -19,4 +19,3 @@ class User:
 
 
 default_user = User(display_name=None, username=None)
-
