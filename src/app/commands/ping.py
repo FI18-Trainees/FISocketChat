@@ -1,6 +1,5 @@
-from flask_socketio import emit
-
-from ..shell import *
+from app.obj import SystemMessenger, User, Command
+from utils.shell import Console
 
 SHL = Console("Command Ping")
 
@@ -9,5 +8,5 @@ settings = {
 }
 
 
-def main(system, author, message, params):
-    system.system_emit("Pong!")
+def main(system: SystemMessenger, author: User, cmd: Command, params: list):
+    system.send("Pong!")

@@ -3,18 +3,18 @@ import time
 
 class UserLimiter:
     def __init__(self):
-        self.users = {}
+        self.user_cooldowns = {}
 
     def check_cooldown(self, sid):
-        if float(time.time() - self.users.get(sid, 0)) <= 0.4:
+        if float(time.time() - self.user_cooldowns.get(sid, 0)) <= 0.4:
             return True
         return False
 
     def update_cooldown(self, sid):
-        self.users[sid] = time.time()
+        self.user_cooldowns[sid] = time.time()
 
     def remove_sid(self, sid):
-        self.users.pop(sid, None)
+        self.user_cooldowns.pop(sid, None)
 
     def __str__(self):
-        return self.users
+        return self.user_cooldowns
