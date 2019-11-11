@@ -3,7 +3,7 @@ import importlib
 
 from flask_socketio import emit
 
-from app.obj import system, User, Command
+from app.obj import SystemMessenger, User, Command
 from utils.shell import Console, red, white
 
 SHL = Console("CommandLoader")
@@ -23,6 +23,7 @@ optional:
 """
 
 commands = {}
+systems = {}
 
 
 def parse_param_list(content):
@@ -33,13 +34,15 @@ def parse_param_list(content):
 def register(func, settings):
     invoke = settings.get('invoke')
     log = settings.get('log', True)
+    default_display_name = settings.get('system_display_name', None)
 
-    def wrapper(author: User, cmd: Command, params: list) -> None:
+    def wrapper(author: User, cmd: Command, params: list, inv: str) -> None:
         if log:
             SHL.output(f"{str(author)} used {str(cmd.msg_body)}", "CommandHandler")  # logging
 
-        func(system=system, author=author, cmd=cmd, params=params)
+        func(system=systems[inv.lower()], author=author, cmd=cmd, params=params)
 
+    systems[invoke.lower()] = SystemMessenger(default_display_name)
     commands[invoke.lower()] = wrapper
     SHL.output(f"Registered {settings.get('invoke', 'unknown command')}")
 
@@ -57,7 +60,7 @@ def handle_command(author: User, command: Command) -> None:
 
     try:
         if params[0].lower() in commands.keys():
-            commands[params[0].lower()](author=author, cmd=command, params=params[1:])
+            commands[params[0].lower()](author=author, cmd=command, params=params[1:], inv=params[0])
         else:
             emit('error', {"message": "unknown command"})
     except IndexError:
