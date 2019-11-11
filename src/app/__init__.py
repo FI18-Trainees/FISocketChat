@@ -9,19 +9,27 @@ from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
 from .shell import *
-from .emotes import Emotes
+from .emote_handling import Emotes
 from .user_limiter import UserLimiter
-from .global_values import UserManager, Others
+from .obj import UserManager
 
 SHL = Console("Init")
 auth = HTTPTokenAuth()
-others = Others()
-user_manager = UserManager()
+user_manager = UserManager()  # TODO: replace with obj.user_manager
+
+# APP
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
-emote_handler = Emotes(True)
+app.config['JSON_SORT_KEYS'] = False
+
+# SOCKETS
+socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
+
+# EMOTES
+emote_handler = Emotes(False)
 user_limit = UserLimiter()
 
+# REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
 html_regex = compile(r"[<>]", MULTILINE)
 link_regex = compile(r"(?:(http|ftp|https)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?", MULTILINE)
@@ -34,11 +42,19 @@ code_regex = compile(r"(```)(.+?|[\r\n]+?)(```)", MULTILINE)
 quote_regex = compile(r"^&gt; (.+)", MULTILINE)
 
 
-if "-disablelogin" in [x.strip().lower() for x in sys.argv]:
+# Startup parameters
+start_args = [x.strip().lower() for x in sys.argv]
+
+logindisabled = False
+if "-disablelogin" in start_args:
     SHL.output(f"{red}Disabled authentication.{white}")
     logindisabled = True
-else:
-    logindisabled = False
+
+dummyuser = False
+if "-dummyuser" in start_args:
+    SHL.output(f"{red}Adding Dummy User{white}")
+    dummyuser = True
+
 
 
 @auth.error_handler
@@ -72,9 +88,15 @@ def verify_token(token):
     return False
 
 
-socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
-
 from .commands import handle_command
 from .sockets import emit_status  # TODO: dafuq is this, send help
-emote_handler.set_emit_socket(emit_status)
-from . import routes
+from .import routes
+
+
+# I left this for testing
+if dummyuser:
+    user_manager.add("qwertzuiopasdfghjk", "ArPiiX", "null")
+    user_manager.add("asdfghjklqwertzuio", "monkmitrad", "null")
+    user_manager.add("asdfgqwertzhjklzui", "zaanposni", "null")
+    user_manager.add("yxcvbnmasdfghjklqw", "SFFan123", "null")
+    user_manager.add("yxcvbnmasdfasdfghklqw", "Rüdiger", "null")
