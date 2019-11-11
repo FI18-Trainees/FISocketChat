@@ -4,7 +4,7 @@ import os
 
 os.system("cls" if os.name == "nt" else "clear")
 
-from app.shell import *
+from utils.shell import Console
 from app import app, socketio
 
 SHL = Console("Start")

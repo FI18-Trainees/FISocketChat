@@ -8,10 +8,10 @@ from flask_socketio import SocketIO
 from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
-from .shell import *
 from .emote_handling import Emotes
 from .user_limiter import UserLimiter
 from .obj import UserManager, get_default_user
+from utils.shell import Console, white, green2, red
 
 SHL = Console("Init")
 

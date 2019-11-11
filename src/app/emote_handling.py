@@ -4,7 +4,7 @@ import time
 import threading
 import os.path
 
-from .shell import Console
+from utils.shell import Console
 
 SHL = Console("EmotesHandler")
 
