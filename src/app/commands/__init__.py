@@ -3,7 +3,7 @@ import importlib
 
 from flask_socketio import emit
 
-from ..obj import system, User, Command
+from app.obj import system, User, Command
 from utils.shell import Console, red, white
 
 SHL = Console("CommandLoader")

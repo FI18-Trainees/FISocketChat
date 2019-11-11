@@ -1,5 +1,5 @@
-from .. import user_manager, login_disabled
-from ..obj import SystemMessenger, User, Command
+from app import user_manager, login_disabled
+from app.obj import SystemMessenger, User, Command
 from utils.shell import Console
 
 SHL = Console("Command List")
