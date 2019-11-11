@@ -11,13 +11,14 @@ from flask import redirect, request
 from .shell import *
 from .emote_handling import Emotes
 from .user_limiter import UserLimiter
-from .global_values import UserManager
+from .obj import UserManager, User
 
 SHL = Console("Init")
+
+
 auth = HTTPTokenAuth()
 user_manager = UserManager()  # TODO: replace with obj.user_manager
-others = Others()
-user_manager = UserManager()
+user_limit = UserLimiter()
 
 # APP
 app = Flask(__name__)
@@ -29,7 +30,6 @@ socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins
 
 # EMOTES
 emote_handler = Emotes(False)
-user_limit = UserLimiter()
 
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
@@ -52,11 +52,10 @@ if "-disablelogin" in start_args:
     SHL.output(f"{red}Disabled authentication.{white}")
     logindisabled = True
 
-dummyuser = False
+dummy_user = False
 if "-dummyuser" in start_args:
     SHL.output(f"{red}Adding Dummy User{white}")
-    dummyuser = True
-
+    dummy_user = True
 
 
 @auth.error_handler
@@ -96,9 +95,9 @@ from .import routes
 
 
 # I left this for testing
-if dummyuser:
-    user_manager.add("qwertzuiopasdfghjk", "ArPiiX", "null")
-    user_manager.add("asdfghjklqwertzuio", "monkmitrad", "null")
-    user_manager.add("asdfgqwertzhjklzui", "zaanposni", "null")
-    user_manager.add("yxcvbnmasdfghjklqw", "SFFan123", "null")
-    user_manager.add("yxcvbnmasdfasdfghklqw", "Rüdiger", "null")
+if dummy_user:
+    def_user = User(display_name=None, username=None)
+    for name in {"ArPiiX", "SFFan123", "monkmitrad", "zaanposni"}:
+        def_user.display_name = name
+        def_user.username = name
+        user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user)
