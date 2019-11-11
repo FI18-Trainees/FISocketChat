@@ -17,7 +17,7 @@ SHL = Console("Init")
 
 
 auth = HTTPTokenAuth()
-user_manager = UserManager()  # TODO: replace with obj.user_manager
+user_manager = UserManager()
 user_limit = UserLimiter()
 
 # APP

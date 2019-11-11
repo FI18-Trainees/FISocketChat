@@ -6,7 +6,7 @@ class UserManager:
         self.configs = {}
 
     def add(self, sid: str, user: User):
-        self.configs[sid] = {  # TODO: use user object
+        self.configs[sid] = {
             "user": user
         }
 
