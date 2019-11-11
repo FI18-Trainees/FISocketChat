@@ -9,7 +9,7 @@ from utils.shell import Console
 SHL = Console("EmotesHandler")
 
 
-filename = os.path.join("app", "emotes.json")
+filename = os.path.join("app", "emotes", "emotes.json")
 
 
 class Emotes:
