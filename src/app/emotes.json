@@ -349,8 +349,23 @@
     "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
   },
+  "grossesX": {
+    "replace": "<img src='/public/img/x-doubt.png' style='height:125px; width:auto;' alt='X' title='X'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+  },
+  "ganzgrossesX": {
+    "replace": "<img src='/public/img/x-doubt.png' style='height:250px; width:auto;' alt='X' title='X'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+  },
   "F": {
     "replace": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>"
+  },
+  "bigF": {
+    "replace": "<img src='/public/img/f.png' style='height:125px; width:auto;' alt='F' title='F'>",
     "menuDisplay": false,
     "menuDisplayCode": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>"
   },
@@ -513,6 +528,11 @@
     "replace": "( ͡° ͜ʖ ͡°)",
     "menuDisplay": true,
     "menuDisplayCode": "( ͡° ͜ʖ ͡°)"
+  },
+  ":success": {
+    "replace": "(•̀ᴗ•́)و ̑̑ ",
+    "menuDisplay": true,
+    "menuDisplayCode": "(•̀ᴗ•́)و ̑̑ "
   },
   "???": {
     "replace": "Justus Jonas, Peter Shaw, Bob Andrews",
