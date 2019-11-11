@@ -3,7 +3,7 @@ from json import dumps as json_dumps
 
 from flask import render_template, send_from_directory, request, make_response, Response, jsonify
 
-from . import app, emote_handler, auth, user_manager, logindisabled
+from . import app, emote_handler, auth, user_manager, login_disabled
 
 
 @app.route('/')

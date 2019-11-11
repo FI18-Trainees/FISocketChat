@@ -7,7 +7,7 @@ from validators import url as val_url
 
 from . import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, logindisabled, request, user_limit
+    code_regex, quote_regex, login_disabled, request, user_limit
 from .shell import *
 from . import handle_command as command_handler
 from obj import User, Command, Message, default_user
@@ -18,7 +18,7 @@ SHL = Console("Init")
 @socketio.on('chat_command')
 def handle_command(command):
     if user_limit.check_cooldown(request.sid):
-        if logindisabled:
+        if login_disabled:
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_command")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
@@ -40,7 +40,7 @@ def handle_command(command):
         emit("error", "bad request")
         return
 
-    if not logindisabled:
+    if not login_disabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
             cmd.author = user_manager.configs[request.sid]["user"]
@@ -64,7 +64,7 @@ def handle_command(command):
 @socketio.on('chat_message')
 def handle_message(message):
     if user_limit.check_cooldown(request.sid):
-        if logindisabled:
+        if login_disabled:
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_message")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
@@ -86,7 +86,7 @@ def handle_message(message):
         emit("error", "bad request")
         return
 
-    if not logindisabled:
+    if not login_disabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
             msg.author = user_manager.configs[request.sid]["user"]
@@ -119,7 +119,7 @@ def handle_message(message):
 def connect(data=""):
     SHL.output(f"New connection with data: {data}", "S.ON Connect")
     new_user = User(display_name="Shawn", username="Shawn")
-    if not logindisabled:
+    if not login_disabled:
         SHL.output("Validating session for new connection.", "S.ON Connect")
         new_user.username = verify_token(data)
         if not new_user.username:

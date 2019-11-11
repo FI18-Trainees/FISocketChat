@@ -47,10 +47,10 @@ quote_regex = compile(r"^&gt; (.+)", MULTILINE)
 # Startup parameters
 start_args = [x.strip().lower() for x in sys.argv]
 
-logindisabled = False
+login_disabled = False
 if "-disablelogin" in start_args:
     SHL.output(f"{red}Disabled authentication.{white}")
-    logindisabled = True
+    login_disabled = True
 
 dummy_user = False
 if "-dummyuser" in start_args:
@@ -65,7 +65,7 @@ def auth_error():
 
 @auth.verify_token
 def verify_token(token):
-    if logindisabled:
+    if login_disabled:
         return True
     token = request.cookies.get("access_token", token)
     SHL.output(f"Verify session with token: {token}.", "TokenAuth")
