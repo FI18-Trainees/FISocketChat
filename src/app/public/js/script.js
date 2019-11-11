@@ -145,11 +145,11 @@ $('document').ready(function () {
     });
 //build html-div which will be shown
     socket.on('chat_message', function (msg) {
-        let msgcontent = msg['message'];
-        let username = msg['username'];
-        let display_name = msg['display_name'];
-        let user_color = msg['user_color'];
-        let user_avatar = msg['avatar'];
+        let msgcontent = msg['msg_body'];
+        let username = msg['author']['username'];
+        let display_name = msg['author']['display_name'];
+        let user_color = msg['author']['chat_color'];
+        let user_avatar = msg['author']['avatar'];
         let timestamp = msg['timestamp'];
         let last_message = document.getElementById('messages')
 
