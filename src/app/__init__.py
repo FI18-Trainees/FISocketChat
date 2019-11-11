@@ -8,27 +8,26 @@ from flask_socketio import SocketIO
 from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
-from .shell import *
-from .emotes import Emotes
-from .user_limiter import UserLimiter
-from .global_values import UserManager, Others
+from .emotes.emote_handling import Emotes
+from .obj import UserManager, get_default_user, UserLimiter
+from utils.shell import Console, white, green2, red
 
 SHL = Console("Init")
-auth = HTTPTokenAuth()
-others = Others()
-user_manager = UserManager()
 
 # APP
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 app.config['JSON_SORT_KEYS'] = False
 
+auth = HTTPTokenAuth()
+user_manager = UserManager()
+user_limit = UserLimiter()
+
 # SOCKETS
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
 
 # EMOTES
 emote_handler = Emotes(False)
-user_limit = UserLimiter()
 
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
@@ -46,16 +45,15 @@ quote_regex = compile(r"^&gt; (.+)", MULTILINE)
 # Startup parameters
 start_args = [x.strip().lower() for x in sys.argv]
 
-logindisabled = False
+login_disabled = False
 if "-disablelogin" in start_args:
     SHL.output(f"{red}Disabled authentication.{white}")
-    logindisabled = True
+    login_disabled = True
 
-dummyuser = False
+dummy_user = False
 if "-dummyuser" in start_args:
     SHL.output(f"{red}Adding Dummy User{white}")
-    dummyuser = True
-
+    dummy_user = True
 
 
 @auth.error_handler
@@ -65,7 +63,7 @@ def auth_error():
 
 @auth.verify_token
 def verify_token(token):
-    if logindisabled:
+    if login_disabled:
         return True
     token = request.cookies.get("access_token", token)
     SHL.output(f"Verify session with token: {token}.", "TokenAuth")
@@ -95,9 +93,9 @@ from .import routes
 
 
 # I left this for testing
-if dummyuser:
-    user_manager.add("qwertzuiopasdfghjk", "ArPiiX", "null")
-    user_manager.add("asdfghjklqwertzuio", "monkmitrad", "null")
-    user_manager.add("asdfgqwertzhjklzui", "zaanposni", "null")
-    user_manager.add("yxcvbnmasdfghjklqw", "SFFan123", "null")
-    user_manager.add("yxcvbnmasdfasdfghklqw", "Rüdiger", "null")
+if dummy_user:
+    for name in {"ArPiiX", "SFFan123", "monkmitrad", "zaanposni"}:
+        def_user = get_default_user()
+        def_user.display_name = name
+        def_user.username = name
+        user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user)

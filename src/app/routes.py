@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-from json import dumps as json_dumps
+from flask import render_template, send_from_directory, make_response, jsonify, request
 
-from flask import render_template, send_from_directory, request, make_response, Response, jsonify
+from . import app, emote_handler, auth, user_manager
+from .obj import get_default_user
+from utils.shell import Console
 
-from . import app, emote_handler, auth, user_manager, logindisabled
+SHL = Console("Routes")
 
 
 @app.route('/')
@@ -32,4 +34,6 @@ def send_emotes():
 
 @app.route('/api/user')
 def send_user():
-    return jsonify([x.get("username", "-") for x in user_manager.configs.values()])
+    r = [x.get("user", get_default_user()).username for x in user_manager.configs.values()]
+    SHL.output(f"[{request.headers.get('X-Forwarded-For', request.remote_addr)}] Returning: {r}", "/api/user")
+    return jsonify(r)

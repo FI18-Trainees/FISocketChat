@@ -145,11 +145,11 @@ $('document').ready(function () {
     });
 //build html-div which will be shown
     socket.on('chat_message', function (msg) {
-        let msgcontent = msg['message'];
-        let username = msg['username'];
-        let display_name = msg['display_name'];
-        let user_color = msg['user_color'];
-        let user_avatar = msg['avatar'];
+        let msgcontent = msg['msg_body'];
+        let username = msg['author']['username'];
+        let display_name = msg['author']['display_name'];
+        let user_color = msg['author']['chat_color'];
+        let user_avatar = msg['author']['avatar'];
         let timestamp = msg['timestamp'];
         let last_message = document.getElementById('messages')
 
@@ -340,9 +340,9 @@ function tabComplete(CursorPos) {
     if (toComplete.length < 1)
         return;
     if (toComplete.toLowerCase().startsWith("@") && toComplete.length > 1) {
-        for (username in userlist) {
-            if (username != null && username.toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
-                let mIn = m.value.substr(0, lastSplit) + "@" + username + " ";
+        for (username of userlist.entries()) {
+            if (username[1] !== null && username[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                let mIn = m.value.substr(0, lastSplit) + "@" + username[1] + " ";
                 m.value = mIn + m.value.substr(CursorPos + 1);
                 m.setSelectionRange(mIn.length, mIn.length);
                 return;
