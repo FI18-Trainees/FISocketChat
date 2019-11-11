@@ -15,15 +15,14 @@ from .obj import UserManager, get_default_user
 
 SHL = Console("Init")
 
-
-auth = HTTPTokenAuth()
-user_manager = UserManager()
-user_limit = UserLimiter()
-
 # APP
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 app.config['JSON_SORT_KEYS'] = False
+
+auth = HTTPTokenAuth()
+user_manager = UserManager()
+user_limit = UserLimiter()
 
 # SOCKETS
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
