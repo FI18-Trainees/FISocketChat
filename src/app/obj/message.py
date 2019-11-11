@@ -1,7 +1,7 @@
 from datetime import datetime
 from collections import Callable
 
-from . import User
+from .user import User
 
 
 class Message:
@@ -17,8 +17,8 @@ class Message:
             "author": self.author.to_json(),
             "msg_body": self.msg_body,
             "system": self.system,
-            "full_timestamp":  self.full_timestamp,
-            "timestamp": self.timestamp
+            "full_timestamp":  str(self.full_timestamp),
+            "timestamp": str(self.timestamp)
         }
 
     def apply_func(self, funcs: tuple):

@@ -2,7 +2,7 @@
 from flask import render_template, send_from_directory, make_response, jsonify
 
 from . import app, emote_handler, auth, user_manager
-
+from.obj import default_user
 
 @app.route('/')
 @app.route('/index')
@@ -30,4 +30,4 @@ def send_emotes():
 
 @app.route('/api/user')
 def send_user():
-    return jsonify([x.username for x in user_manager.configs.values()])
+    return jsonify([x.get("user", default_user).username for x in user_manager.configs.values()])

@@ -1,5 +1,5 @@
-from . import Message
-from . import User
+from .message import Message
+from .user import User
 
 
 sys_user = User(

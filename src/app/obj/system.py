@@ -2,7 +2,7 @@ from typing import Union
 
 from flask_socketio import emit
 
-from . import SystemMessage
+from .system_message import SystemMessage
 
 
 class SystemMessenger:
