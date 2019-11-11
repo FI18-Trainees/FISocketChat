@@ -12,7 +12,7 @@ from .shell import *
 from . import handle_command as command_handler
 from .obj import User, Command, Message, get_default_user
 
-SHL = Console("Init")
+SHL = Console("Socket")
 
 
 @socketio.on('chat_command')
@@ -104,7 +104,7 @@ def handle_message(message):
         emit('error', {"message": "invalid username"})
         return
 
-    if 0 < len(msg.msg_body) < 5000:
+    if 0 < len(msg.msg_body) < 2000:
         msg.author.display_name = safe_tags_replace(msg.author.display_name)
         msg.apply_func((safe_tags_replace, link_replacer, safe_emote_replace,
                         replace_newline, quote_replacer, codeblock_replacer))
