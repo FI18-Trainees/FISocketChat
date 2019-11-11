@@ -32,4 +32,4 @@ def send_emotes():
 
 @app.route('/api/user')
 def send_user():
-    return jsonify([x.get("username", "-") for x in user_manager.configs.values()])
+    return jsonify([x.username for x in user_manager.configs.values()])
