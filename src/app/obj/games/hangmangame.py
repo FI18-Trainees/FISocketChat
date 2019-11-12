@@ -8,12 +8,12 @@ class HangmanGame:
         self.max_mistakes: int = 7
         self.failed: bool = False
 
-    def start(self, word: str):
+    def start(self, word: str) -> None:
         self.state = True
         self.word = [x for x in word]
         self.guessed = [False] * len(word)
 
-    def check_char(self, char: str):
+    def check_char(self, char: str) -> str:
         if not all(self.guessed):
             if not self.mistakes == self.max_mistakes-1:
                 if not char.lower() in self.tried:
@@ -33,7 +33,7 @@ class HangmanGame:
         self.state = False
         return self.success()
 
-    def check_word(self, word: str):
+    def check_word(self, word: str) -> str:
         if not all(self.guessed):
             if not self.mistakes == self.max_mistakes-1:
                 if [x for x in word] == self.word:
@@ -44,34 +44,34 @@ class HangmanGame:
             return self.fail()
         return self.success()
 
-    def success(self):
+    def success(self) -> str:
         return f'The word was Guessed!<br/>It was "{self.get_word_short()}".' \
                f'<br/>Please start a new game for another word!'
 
-    def compare_all(self):
+    def compare_all(self) -> str:
         if all(self.guessed):
             self.state = False
             return self.success()
         return self.get_word()
 
-    def get_word_short(self):
+    def get_word_short(self) -> str:
         return ''.join(self.word)
 
     def get_word(self):
         return f"{''.join([self.word[e] if guess else ' _' for e, guess in enumerate(self.guessed)])}<br/> \
                You have {self.max_mistakes-self.mistakes} tries left!"
 
-    def fail(self):
+    def fail(self) -> str:
         return f'You made it to: ' + ''.join([self.word[e] if guess else ' _' for e, guess in
                                               enumerate(self.guessed)]) + 'Please start a new game to try again!'
 
-    def get_state(self):
+    def get_state(self) -> str:
         return self.state
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.state
 
-    def reset_game(self):
+    def reset_game(self) -> None:
         self.state = False
         self.word = []
         self.guessed = []
