@@ -2,7 +2,6 @@
 var socket = null;
 var focused = true;
 var unread = 0;
-var emotecheck = null;
 var emotelist = null;
 var loginmode = true;
 var cooldown = 0;
@@ -128,6 +127,7 @@ $('document').ready(function () {
     });
     socket.on('connect_timeout', (timeout) => {
         changeOnlineStatus(false);
+        console.log(timeout);
         setTimeout(function () {
             socket.connect();
         }, 3000);
@@ -151,7 +151,6 @@ $('document').ready(function () {
         let user_color = msg['author']['chat_color'];
         let user_avatar = msg['author']['avatar'];
         let timestamp = msg['timestamp'];
-        let last_message = document.getElementById('messages')
 
         if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
             msgcontent = makeMention(msgcontent);
@@ -202,9 +201,6 @@ $('document').ready(function () {
         if (status.hasOwnProperty('count')) {
             setUserCount(status['count']);
         }
-        if (status.hasOwnProperty('newemote')) {
-
-        }
         if (status.hasOwnProperty('username')) {
             ownusername = status['username'].toLowerCase();
         }
@@ -230,6 +226,8 @@ $('document').ready(function () {
             $('.message-name').css('cursor', 'default');
         }
     });
+    updateEmoteMenu();
+    document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
 });
 
 function setUserCount(count) {
@@ -300,16 +298,6 @@ function updateEmoteMenu() {
     });
 }
 
-function setCheckInterval() {
-    emotecheck = setInterval(updateEmoteMenu, 60 * 60 * 1000);
-}
-
-function setup() {
-    updateEmoteMenu();
-    document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
-    //document.getElementById("navbar").addEventListener('resize', resizeNavbar);
-}
-
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
@@ -326,7 +314,6 @@ function toggleEmoteMenu() {
 }
 
 function tabComplete(CursorPos) {
-    // emote Only right now
     let m = document.getElementById('m');
     if (m.value.length == 0)
         return;
@@ -359,7 +346,6 @@ function tabComplete(CursorPos) {
             }
         }
     }
-
 }
 
 function makeMention(text) {
