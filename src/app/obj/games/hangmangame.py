@@ -23,13 +23,11 @@ class HangmanGame:
                 if not contained:
                     self.mistakes += 1
                 return self.compare_all()
-            else:
-                self.failed = True
-                self.state = False
-                return self.fail()
-        else:
+            self.failed = True
             self.state = False
-            return self.success()
+            return self.fail()
+        self.state = False
+        return self.success()
 
     def check_word(self, word):
         if not all(self.guessed):
@@ -37,12 +35,10 @@ class HangmanGame:
                 if [x for x in word] == self.word:
                     self.state = False
                     return self.success()
-                else:
-                    self.mistakes += 1
-                    return self.get_word()
+                self.mistakes += 1
+                return self.get_word()
             return self.fail()
-        else:
-            return self.success()
+        return self.success()
 
     def success(self):
         return f'The word was Guessed!<br/>It was "{self.get_word_short()}".' \
@@ -52,8 +48,7 @@ class HangmanGame:
         if all(self.guessed):
             self.state = False
             return self.success()
-        else:
-            return self.get_word()
+        return self.get_word()
 
     def get_word_short(self):
         return ''.join(self.word)
