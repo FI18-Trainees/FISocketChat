@@ -1,12 +1,12 @@
 class HangmanGame:
-    def __init__(self, state: bool=False):
-        self.state = state
-        self.word = []
-        self.guessed = []
-        self.tried = []
-        self.mistakes = 0
-        self.max_mistakes = 7
-        self.failed = False
+    def __init__(self, state: bool = False):
+        self.state: bool = state
+        self.word: list = []
+        self.guessed: list = []
+        self.tried: list = []
+        self.mistakes: int = 0
+        self.max_mistakes: int = 7
+        self.failed: bool = False
 
     def start(self, word: str):
         self.state = True
