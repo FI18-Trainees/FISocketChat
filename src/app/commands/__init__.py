@@ -20,6 +20,8 @@ mandatory:
 optional:
     log: a boolean that specifies if your command will log to the console when used
         default: True
+    system_display_name: default display_name for the system user sending your messages
+        default: None (gets replaced with "System" if None)
 """
 
 commands = {}
