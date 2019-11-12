@@ -40,6 +40,7 @@ def register(func, settings):
         if log:
             SHL.output(f"{str(author)} used {str(cmd.msg_body)}", "CommandHandler")  # logging
 
+        systems[inv.lower()].change_display_name(None)
         func(system=systems[inv.lower()], author=author, cmd=cmd, params=params)
 
     systems[invoke.lower()] = SystemMessenger(default_display_name)
