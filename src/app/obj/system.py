@@ -6,17 +6,22 @@ from .system_message import SystemMessage
 
 
 class SystemMessenger:
-    @staticmethod
-    def send(message: Union[SystemMessage, str]):
+    def __init__(self, display_name: str = None):
+        self.display_name = display_name
+
+    def send(self, message: Union[SystemMessage, str]):
         if isinstance(message, str):
             message = SystemMessage(msg_body=message)
+        if self.display_name:
+            message.change_display_name(self.display_name)
         emit('chat_message', message.to_json())
 
-    @staticmethod
-    def broadcast(message: Union[SystemMessage, str]):
+    def broadcast(self, message: Union[SystemMessage, str]):
         if isinstance(message, str):
             message = SystemMessage(msg_body=message)
+        if self.display_name:
+            message.change_display_name(self.display_name)
         emit('chat_message', message.to_json(), broadcast=True)
 
-
-system = SystemMessenger()
+    def change_display_name(self, new: str):
+        self.display_name = new
