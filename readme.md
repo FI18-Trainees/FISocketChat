@@ -4,7 +4,6 @@
   <img src="http://hits.dwyl.io/FI18-Trainees/FISocketChat.svg)](http://hits.dwyl.io/FI18-Trainees/FISocketChat"/>
   <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/BasicCheckup/badge.svg" alt="GitHub Action"/>
   <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/UnitTestSockets/badge.svg" alt="GitHub Action"/>
-  <img src="https://www.codefactor.io/repository/github/fi18-trainees/fisocketchat/badge" alt="CodeFactor"/>
 </p>
 
 ## Requirements
