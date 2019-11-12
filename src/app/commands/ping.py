@@ -4,7 +4,7 @@ from utils.shell import Console
 SHL = Console("Command Ping")
 
 settings = {
-    'invoke': 'ping',
+    'invoke': 'ping'
 }
 
 
