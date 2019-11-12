@@ -3,6 +3,7 @@ class HangmanGame:
         self.state = state
         self.word = []
         self.guessed = []
+        self.tried = []
         self.mistakes = 0
         self.max_mistakes = 7
         self.failed = False
@@ -15,14 +16,17 @@ class HangmanGame:
     def check_char(self, char: str):
         if not all(self.guessed):
             if not self.mistakes == self.max_mistakes-1:
-                contained = False
-                for e, item in enumerate(self.word):
-                    if item.lower() == char.lower():
-                        contained = True
-                        self.guessed[e] = True
-                if not contained:
-                    self.mistakes += 1
-                return self.compare_all()
+                if not char.lower() in self.tried:
+                    contained = False
+                    self.tried += char
+                    for e, item in enumerate(self.word):
+                        if item.lower() == char.lower():
+                            contained = True
+                            self.guessed[e] = True
+                    if not contained:
+                        self.mistakes += 1
+                    return self.compare_all()
+                return "You already tried that character!"
             self.failed = True
             self.state = False
             return self.fail()

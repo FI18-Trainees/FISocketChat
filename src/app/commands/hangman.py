@@ -41,3 +41,4 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             system.send(hangman_game.get_word())
             return
         return
+    system.send("Welcome to hangman!<br/>To start a game type '/hangman start *word*'")
