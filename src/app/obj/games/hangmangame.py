@@ -75,6 +75,7 @@ class HangmanGame:
         self.state = False
         self.word = []
         self.guessed = []
+        self.tried = []
         self.mistakes = 0
         self.max_mistakes = 7
         self.failed = False
