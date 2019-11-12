@@ -1,5 +1,5 @@
 class HangmanGame:
-    def __init__(self, state=False):
+    def __init__(self, state: bool=False):
         self.state = state
         self.word = []
         self.guessed = []
@@ -7,12 +7,12 @@ class HangmanGame:
         self.max_mistakes = 7
         self.failed = False
 
-    def start(self, word):
+    def start(self, word: str):
         self.state = True
         self.word = [x for x in word]
         self.guessed = [False] * len(word)
 
-    def check_char(self, char):
+    def check_char(self, char: str):
         if not all(self.guessed):
             if not self.mistakes == self.max_mistakes-1:
                 contained = False
@@ -29,7 +29,7 @@ class HangmanGame:
         self.state = False
         return self.success()
 
-    def check_word(self, word):
+    def check_word(self, word: str):
         if not all(self.guessed):
             if not self.mistakes == self.max_mistakes-1:
                 if [x for x in word] == self.word:
