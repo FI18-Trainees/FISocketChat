@@ -31,7 +31,7 @@ emote_handler = Emotes(False)
 
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
-html_regex = compile(r"[<>]", MULTILINE)
+html_regex = compile(r"[<>]|&(?=[#\w]{1,5};)", MULTILINE)
 link_regex = compile(r"(?:(http|ftp|https)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?", MULTILINE)
 youtube_regex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?")
 image_regex = compile(r".+\.(?:jpg|gif|png|jpeg|bmp)", IGNORECASE)

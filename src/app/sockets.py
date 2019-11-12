@@ -182,6 +182,7 @@ def emit_status(status: dict):
 
 
 tagsToReplace = {
+    '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;'
 }
@@ -271,7 +272,9 @@ def get_embed_audio_link(link: str) -> str:
 
 
 def codeblock_replacer(text: str) -> str:
-    return re.sub(code_regex, '<em class="code my-1 w-100">\g<2></em>', text, 0)
+    codereplace = re.sub(code_regex, '<em class="code my-1 w-100">\g<2></em>', text, 0)
+    codereplace = re.sub(r"\t", "&nbsp;&nbsp;&nbsp;&nbsp;", codereplace, 0, re.MULTILINE)
+    return re.sub(r" {4}", "&nbsp;&nbsp;&nbsp;&nbsp;", codereplace, 0, re.MULTILINE)
 
 
 def quote_replacer(text: str) -> str:
