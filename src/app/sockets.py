@@ -68,7 +68,7 @@ def handle_message(message):
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_message")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
-                       f"{user_manager.configs[request.sid]['user']['username']}", "S.ON chat_message")
+                       f"{user_manager.configs[request.sid]['user'].username}", "S.ON chat_message")
         return
     user_limit.update_cooldown(request.sid)
     SHL.output(f"Received message {message}", "S.ON chat_message")

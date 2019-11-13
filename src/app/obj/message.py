@@ -27,3 +27,6 @@ class Message:
                 new = x(self.msg_body)
                 if new:
                     self.msg_body = new
+
+    def __str__(self):
+        return f"[{self.timestamp}] {self.author}: {self.msg_body}"
