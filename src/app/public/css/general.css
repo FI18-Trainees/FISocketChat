@@ -185,10 +185,10 @@ sitebar div {
         -webkit-appearance: none;
         appearance: none;
         height: 40px;
-        background: url('/public/img/select-bg.png') repeat;
+        background: var(--discord-dark) repeat;
         color: var(--discord-white);
         padding-left: 10px;
-        box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
+        box-shadow: 2px 2px 5px 1px var(--discord-black);
         border-radius: 3px;
         outline: none;
         cursor: pointer;
@@ -203,7 +203,7 @@ sitebar div {
     }
 
     .sitebar-content select option {
-        background: var(--discord-black);
+        background: var(--discord-dark);
         color: var(--discord-white);
     }
 .content-wrapper {
