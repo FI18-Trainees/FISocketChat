@@ -65,10 +65,7 @@ class HangmanGame:
         return f'You made it to: ' + ''.join([self.word[e] if guess else ' _' for e, guess in
                                               enumerate(self.guessed)]) + 'Please start a new game to try again!'
 
-    def get_state(self) -> str:
-        return self.state
-
-    def __str__(self) -> str:
+    def get_state(self) -> bool:
         return self.state
 
     def reset_game(self) -> None:
