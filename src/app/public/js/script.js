@@ -57,7 +57,13 @@ $('document').ready(function () {
         } else if (e.keyCode == '9') {
                 //tab key
             e.preventDefault();
-            tabComplete(document.getElementById('m').selectionStart);
+            if(e.shiftKey) {
+                document.getElementById('m').value += "\t";
+            }
+            else {
+                tabComplete(document.getElementById('m').selectionStart);
+            }
+
         }
         // Enter was pressed without shift key
         if (e.keyCode == 13 && !e.shiftKey) {
