@@ -58,12 +58,13 @@ class HangmanGame:
         return ''.join(self.word)
 
     def get_word(self):
-        return f"{''.join([self.word[e] if guess else ' _' for e, guess in enumerate(self.guessed)])}<br/> \
-               You have {self.max_mistakes-self.mistakes} tries left!"
+        return f"{self.join_word_blanks()}<br/>You have {self.max_mistakes-self.mistakes} tries left!"
 
     def fail(self) -> str:
-        return f'You made it to: ' + ''.join([self.word[e] if guess else ' _' for e, guess in
-                                              enumerate(self.guessed)]) + 'Please start a new game to try again!'
+        return f"You made it to: {self.join_word_blanks()}<br/>Please start a new game to try again!"
+
+    def join_word_blanks(self) -> str:
+        return f"{''.join([self.word[e] if guess else ' _' for e, guess in enumerate(self.guessed)])}"
 
     def get_state(self) -> bool:
         return self.state
