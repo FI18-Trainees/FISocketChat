@@ -206,6 +206,7 @@ sitebar div {
         background: var(--discord-dark);
         color: var(--discord-white);
     }
+
 .content-wrapper {
     display: flex;
 }
