@@ -1,16 +1,18 @@
 class HangmanGame:
     def __init__(self, state: bool = False):
-        self.state: bool = state
-        self.word: list = []
-        self.guessed: list = []
-        self.tried: list = []
-        self.mistakes: int = 0
-        self.max_mistakes: int = 7
-        self.failed: bool = False
+        self.state = state
+        self.word = []
+        self.word_clear = ""
+        self.guessed = []
+        self.tried = []
+        self.mistakes = 0
+        self.max_mistakes = 7
+        self.failed = False
 
     def start(self, word: str) -> None:
         self.state = True
         self.word = [x for x in word]
+        self.word_clear = word
         self.guessed = [False] * len(word)
 
     def check_char(self, char: str) -> str:
