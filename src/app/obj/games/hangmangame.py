@@ -57,7 +57,7 @@ class HangmanGame:
     def get_word_short(self) -> str:
         return ''.join(self.word)
 
-    def get_word(self):
+    def get_word(self) -> str:
         return f"{self.join_word_blanks()}<br/>You have {self.max_mistakes-self.mistakes} tries left!"
 
     def fail(self) -> str:
