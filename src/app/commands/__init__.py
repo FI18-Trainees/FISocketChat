@@ -1,5 +1,6 @@
 import pkgutil
 import importlib
+import traceback
 
 from flask_socketio import emit
 
@@ -66,9 +67,9 @@ def handle_command(author: User, command: Command) -> None:
             commands[params[0].lower()](author=author, cmd=command, params=params[1:], inv=params[0])
         else:
             emit('error', {"message": "unknown command"})
-    except IndexError:
-        emit('error', {"message": "invalid syntax"})
-    return
+    except Exception as e:
+        SHL.output(f"Exception in {params[0]}\n{traceback.print_exc()}", "CommandHandler")
+        emit('error', {"message": "Something went wrong."})
 
 
 def register_all():
