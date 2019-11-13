@@ -7,6 +7,7 @@ var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
 var userlist = [];
+var notificationmode = 0;
 
 var message_history = [];
 var history_pointer = 0;
@@ -154,7 +155,7 @@ $('document').ready(function () {
 
         if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
             msgcontent = makeMention(msgcontent);
-            if (checkPermission()) {
+            if (checkPermission() && notificationmode != 0) {
                 newNotification("You have been mentioned!");
             }
         }
@@ -183,7 +184,7 @@ $('document').ready(function () {
         if (!focused) {
             unread++;
             document.title = "Socket.IO chat" + " (" + unread + ")";
-            if (checkPermission()) {
+            if (checkPermission() && notificationmode == 2) {
                 if (unread === 1) {
                     newNotification(unread + " unread message!");
                 } else if (unread % 5 === 0) {
@@ -221,10 +222,15 @@ $('document').ready(function () {
             $('.message-name').css('cursor', 'pointer');
         }
     });
+
     $(document).on('keyup', function (event) {
         if (event.keyCode === 17) {
             $('.message-name').css('cursor', 'default');
         }
+    });
+
+    $('#notification-mode').change(function () {
+        notificationmode = this.value;
     });
     updateEmoteMenu();
     document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
