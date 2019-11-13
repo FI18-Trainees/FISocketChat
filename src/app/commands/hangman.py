@@ -26,7 +26,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         if params[0].lower() == "start" and params[1].lower != "":
             hangman_game.reset_game()
             hangman_game.start(params[1])
-            SHL.output(f"{str(author)} started a game with: {params[1]}", "HangmanGame")
+            SHL.output(f"{str(author)} started a game with: {params[1]}", "HangmanGame")  # log
             system.broadcast(f"{author} is challenging everyone to a hangman game!")
             system.broadcast(f"The word searched is: {hangman_game.get_word()}")
             return
@@ -36,16 +36,16 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                 system.send("invalid guess length! guess has to be single char!")
                 return
             system.broadcast(f"{author} has tried {params[1]}")
-            SHL.output(f"{str(author)} hast tried to guess {params[1]} as a char", "HangmanGame")
+            SHL.output(f"{str(author)} hast tried to guess {params[1]} as a char", "HangmanGame")  # log
             system.broadcast(hangman_game.check_char(params[1]))
             return
         if params[0].lower() == "solve":
-            SHL.output(f"{str(author)} tried to solve {hangman_game.word_clear} with {params[1]}", "HangmanGame")
+            SHL.output(f"{str(author)} tried to solve {hangman_game.word_clear} with {params[1]}", "HangmanGame")  # log
             system.broadcast(hangman_game.check_word(params[1]))
             return
         if params[0].lower() == "state":
             system.send(hangman_game.get_word())
-            SHL.output(f"{str(author)} fetched the state of the game.", "HangmanGame")
+            SHL.output(f"{str(author)} fetched the state of the game.", "HangmanGame")  # log
             return
         return
     system.send("Welcome to hangman!<br/>To start a game type '/hangman start *word*'")
