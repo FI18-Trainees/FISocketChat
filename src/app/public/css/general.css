@@ -168,6 +168,45 @@ sitebar div {
         cursor: pointer;
     }
 
+    .sitebar-content .select-wrapper::before {
+        font-family: 'FontAwesome', 'Comic Sans MS';
+        content: "\f0ab";
+        font-size: 20px;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        pointer-events: none;
+    }
+
+    .sitebar-content select {
+        font-family: 'FontAwesome', 'Comic Sans MS';
+        font-size: 14px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 40px;
+        background: var(--discord-dark) repeat;
+        color: var(--discord-white);
+        padding-left: 10px;
+        box-shadow: 2px 2px 5px 1px var(--discord-black);
+        border-radius: 3px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .sitebar-content select::ms-expand {
+        display: none;
+    }
+
+    .sitebar-content select:focus::-ms-value {
+        background-color: transparent;
+    }
+
+    .sitebar-content select option {
+        background: var(--discord-dark);
+        color: var(--discord-white);
+    }
+
 .content-wrapper {
     display: flex;
 }
