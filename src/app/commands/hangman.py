@@ -23,9 +23,14 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     if not len(params):
         system.send("/hangman starts a game of hangman with your own word.")
         return
-    if params[0].lower() == "info" or params[0].lower() == "help":
+    if params[0].lower() == "help":
         system.send("Usable commands:<br/>'/hangman start *word*'<br/>'/hangman guess *char*'<br/>"
-                    "'/hangman solve *word*'<br/>'state'")
+                    "'/hangman solve *word*'<br/>'/hangman state'<br/>/hangman info")
+        return
+    if params[0].lower() == "info":
+        system.send("In hangman you get to guess a word being set by the starter of the game. You will see how many"
+                    "letters are in the word and then have to either guess each character with 7 possible mistakes"
+                    "or you can try to guess the word at once making only one try possible.")
         return
     if params[0].lower() == "start" and params[1].lower != "":
         if not hangman_game.get_state():
