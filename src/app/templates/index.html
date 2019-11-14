@@ -38,6 +38,10 @@
             <i class="fab fa-skype fa-spin align-center d-inline-block" style="color: #00aff0;" title="Skype rotiert"></i>
             Super cheap chat with sock(et)?s <i class="fas fa-socks d-inline-block align-center"></i>
         </div>
+        <div class="nav-item mr-4 ml-auto text-nowrap d-none d-sm-block form-check-inline">
+            <label class="form-check-label" for="autoscroll">Autoscroll:</label>
+            <input type="checkbox" id="autoscroll" class="form-check-input" checked="true" onclick="setautoscroll(this.checked);">
+        </div>
         <div class="nav-item mr-4 ml-auto text-nowrap d-none d-sm-block" id="usercount">Usercount: 0</div>
         <div class="nav-link text-white text-nowrap d-none d-md-block" id="powered-by">Powered by <a href="https://python.org" target="_blank"
                                                                        class="text-white">Python</a></div>
@@ -95,7 +99,7 @@
         <div class="container d-flex flex-column h-100">
             <div class="container d-flex flex-column h-100">
                 <div class="chat mb-2 mt-2 h-100 overflow-hidden nano">
-                    <div class="text-break nano-content" id="messages">
+                    <div class="text-break nano-content" id="messages" onwheel="messagesScroll(event);">
                         <!--messages go here-->
                     </div>
                 </div>
