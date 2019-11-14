@@ -417,3 +417,13 @@ function mobileAndTabletcheck() {
         $('#sendbtn').css('display', 'none');
     }
 }
+
+function imgloaded() {
+    if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
+        $('.nano').nanoScroller();
+        if(autoscroll) {
+            chatdiv = document.querySelector('#messages');
+            chatdiv.scrollTop = chatdiv.scrollHeight;
+        }
+    }
+}
