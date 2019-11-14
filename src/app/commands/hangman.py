@@ -21,7 +21,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     # then it should be                                 /hangman guess *char*
     # to check game state when connection lost try     /hangman state
     if not len(params):
-        system.send("/hangman starts a game of hangman with your own word.")
+        system.send("'/hangman start *word*' starts a game of hangman with your own word.")
         return
     if params[0].lower() == "help":
         system.send("Usable commands:<br/>'/hangman start *word*'<br/>'/hangman guess *char*'<br/>"
