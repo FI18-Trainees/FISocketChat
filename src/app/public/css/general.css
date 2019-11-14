@@ -5,10 +5,7 @@
 }
 
 html, body {
-    overflow: hidden;
-    height: 100%;
     min-width: 350px;
-    width: 100%;
 }
 
 body {
@@ -29,18 +26,8 @@ body {
     background: var(--discord-dark) !important;
 }
 
-/* Hide the link that should open and close the nav on small screens */
-#navbar .icon {
-    display: none;
-}
-
-.chat {
-    overflow: hidden;
-    height: 100%;
-}
-
-#messages {
-    word-wrap: break-word;
+.text-white {
+    color: var(--discord-white) !important;
 }
 
     #messages .message-container {
@@ -58,11 +45,6 @@ body {
     #messages .message-timestamp {
         color: var(--discord-grey);
         font: 9px "Comic Sans MS", Arial;
-    }
-
-    #messages .message-content {
-        color: var(--discord-white);
-        width: 100%;
     }
 
         #messages .message-content:link {
@@ -83,24 +65,20 @@ body {
         }
 
         #messages .message-content .quote {
-            padding-left: 1em;
             border-left: 0.25em solid var(--discord-grey);
         }
 
 .message-input {
     bottom: 10px;
     padding: 5px;
-    border-top: 1px solid var(--discord-lightgrey);
+    border-color: var(--discord-lightgrey);
 }
 
 .message-box {
-    background: var(--discord-dark);
-    color: var(--discord-white);
     resize: none;
 }
 
 form textarea {
-    border: 0;
     padding: 10px;
 }
 
@@ -110,28 +88,21 @@ form button, form .btn {
 }
 
 form button {
-    border: none;
     padding: 10px;
-    color: var(--discord-white);
-    font-weight: bolder;
 }
 
 .notification-box {
-    background-color: var(--discord-dark);
     border-radius: 15px;
     box-shadow: inset 0 0 1em var(--discord-black);
     height: 50px;
-    width: 100%;
-    position: sticky;
     bottom: 5em;
     padding: 10px 10px 10px 20px;
-    color: white;
     z-index: 1000;
     display: none;
 }
 
 .bg-discord-red {
-    background-color: var(--discord-red);
+    background: var(--discord-red);
     box-shadow: none;
 }
 
@@ -168,43 +139,17 @@ sitebar div {
         cursor: pointer;
     }
 
-    .sitebar-content .select-wrapper::before {
-        font-family: 'FontAwesome', 'Comic Sans MS';
-        content: "\f0ab";
-        font-size: 20px;
-        position: absolute;
-        right: 15px;
-        top: 10px;
-        pointer-events: none;
-    }
-
-    .sitebar-content select {
-        font-family: 'FontAwesome', 'Comic Sans MS';
-        font-size: 14px;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        appearance: none;
-        height: 40px;
-        background: var(--discord-dark) repeat;
+    .sitebar-content .select-wrapper .dropdown-toggle {
+        background: var(--discord-black);
         color: var(--discord-white);
-        padding-left: 10px;
-        box-shadow: 2px 2px 5px 1px var(--discord-black);
-        border-radius: 3px;
-        outline: none;
-        cursor: pointer;
     }
 
-    .sitebar-content select::ms-expand {
-        display: none;
-    }
-
-    .sitebar-content select:focus::-ms-value {
-        background-color: transparent;
-    }
-
-    .sitebar-content select option {
+    .sitebar-content .select-wrapper .bg-grey, .sitebar-content .select-wrapper .dropdown-menu {
         background: var(--discord-dark);
-        color: var(--discord-white);
+    }
+
+    .sitebar-content .select-wrapper .dropdown-menu a:hover {
+        background: var(--discord-grey);
     }
 
 .content-wrapper {
@@ -217,11 +162,6 @@ a:hover, a:visited, a:link, a:active {
 
 #emoteMenu {
     display: none;
-}
-
-.emote-dropup {
-    position: relative;
-    display: inline-block;
 }
 
 .emote-dropmenu {
