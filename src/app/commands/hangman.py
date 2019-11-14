@@ -23,7 +23,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     if not len(params):
         system.send("/hangman starts a game of hangman with your own word.")
         return
-    if params[0].lower() == "info":
+    if params[0].lower() == "info" or params[0].lower() == "help":
         system.send("Usable commands:<br/>'/hangman start *word*'<br/>'/hangman guess *char*'<br/>"
                     "'/hangman solve *word*'<br/>'state'")
         return
