@@ -38,7 +38,7 @@ class HangmanGame:
     def check_word(self, word: str) -> str:
         if not all(self.guessed):
             if not self.mistakes == self.max_mistakes-1:
-                if [x for x in word] == self.word:
+                if [x for x in word.lower()] == self.word:
                     self.state = False
                     return self.success()
                 self.mistakes += 1

@@ -60,3 +60,5 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             SHL.output(f"{author} fetched the state of the game.", "HangmanGame")  # log
             return
         system.send(no_game())
+    system.send("Usable commands:<br/>'/hangman start *word*'<br/>'/hangman guess *char*'<br/>"
+                "'/hangman solve *word*'<br/>'state'")
