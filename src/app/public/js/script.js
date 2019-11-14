@@ -382,10 +382,9 @@ function setautoscroll(value) {
 }
 
 function messagesScroll(event) {
- let messagediv = document.getElementById('messages');
-    if(event.deltaY>0) {
-        //Down
+    if(event.deltaY>0) { //Down
         if(lastScrollDirection === 1) {
+        let messagediv = document.getElementById('messages');
             if(messagediv.scrollTop === (messagediv.scrollHeight - messagediv.offsetHeight)) {
                 setautoscroll(true);
                 lastScrollDirection = 0;
@@ -395,9 +394,7 @@ function messagesScroll(event) {
             lastScrollDirection = 1;
         }
     }
-    else
-    {
-        //Up
+    else { //Up
         if(lastScrollDirection === -1) {
             setautoscroll(false);
             lastScrollDirection = 0;
