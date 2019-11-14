@@ -8,7 +8,8 @@ var cooldown = 0;
 var ownusername = null;
 var userlist = [];
 var notificationmode = 0;
-var autoscroll = false;
+var autoscroll = true;
+var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 
 var message_history = [];
 var history_pointer = 0;
@@ -377,4 +378,32 @@ function uname_name_click(e){
 
 function setautoscroll(value) {
     autoscroll = value;
+    document.getElementById('autoscroll').checked = value;
+}
+
+function messagesScroll(event) {
+ let messagediv = document.getElementById('messages');
+    if(event.deltaY>0) {
+        //Down
+        if(lastScrollDirection === 1) {
+            if(messagediv.scrollTop === (messagediv.scrollHeight - messagediv.offsetHeight)) {
+                setautoscroll(true);
+                lastScrollDirection = 0;
+            }
+        }
+        else {
+            lastScrollDirection = 1;
+        }
+    }
+    else
+    {
+        //Up
+        if(lastScrollDirection === -1) {
+            setautoscroll(false);
+            lastScrollDirection = 0;
+        }
+        else {
+            lastScrollDirection = -1;
+        }
+    }
 }
