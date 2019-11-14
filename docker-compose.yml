@@ -1,0 +1,22 @@
+  
+version: '3'
+
+services:
+  application:
+    build:
+      context: ./
+      dockerfile: ./src/Dockerfile
+    ports:
+     - "5000:5000"
+    restart: always
+
+  webserver:
+    build:
+      context: ./
+      dockerfile: ./Web.Dockerfile
+    ports:
+     - "5055:80"
+    restart: always
+    depends_on:
+     - application
+    
