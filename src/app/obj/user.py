@@ -17,6 +17,9 @@ class User:
             "chat_color": self.chat_color
         }
 
+    def __str__(self):
+        return f"{self.display_name} ({self.username})"
+
 
 def get_default_user() -> User:
     return User(display_name=None, username=None)

@@ -19,6 +19,7 @@ window.onload = function () {
         Notification.requestPermission().then(function (permission) {
             // If the user accepts, let's create a notification
             if (checkPermission()) {
+                displayNotifyMode();
                 new Notification("This is how a notification would appear!");
             }
         });
@@ -56,4 +57,12 @@ function closeAllNotifications() {
 
 function closeNotification(item){
     item.close();
+}
+
+function displayNotifyMode() {
+    if(checkPermission() == true){
+        $('#notify-mode').css('display', 'flex');
+    } else {
+        $('#notify-mode').css('display', 'none');
+    }
 }

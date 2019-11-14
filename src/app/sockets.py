@@ -68,7 +68,7 @@ def handle_message(message):
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_message")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
-                       f"{user_manager.configs[request.sid]['user']['username']}", "S.ON chat_message")
+                       f"{user_manager.configs[request.sid]['user'].username}", "S.ON chat_message")
         return
     user_limit.update_cooldown(request.sid)
     SHL.output(f"Received message {message}", "S.ON chat_message")
@@ -278,4 +278,4 @@ def codeblock_replacer(text: str) -> str:
 
 
 def quote_replacer(text: str) -> str:
-    return re.sub(quote_regex, '<em class="quote font-weight-light pl-1">\g<1></em>', text, 0)
+    return re.sub(quote_regex, '<em class="quote font-weight-light pl-3">\g<1></em>', text, 0)

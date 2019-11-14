@@ -5,7 +5,7 @@
     "menuDisplayCode": "<img src='/public/img/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>"
   },
   "Shawn": {
-    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=v2kV6pgJxuo\"><img src='/public/img/emote1.PNG' style='height:32px; width:auto;' alt='Shawn' title='Shawn'></a>",
+    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=v2kV6pgJxuo\"><img src='/public/img/emote1.PNG' style='height:40px; width:auto;' alt='Shawn' title='Shawn'></a>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/emote1.PNG' style='height:32px; width:auto;' alt='Shawn' title='Shawn'>"
   },
@@ -15,17 +15,17 @@
     "menuDisplayCode": "<img src='/public/img/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
   },
   "FaFoSerious": {
-    "replace": "<img src='/public/img/fafoconcentrated.png' style='height:32px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>",
+    "replace": "<img src='/public/img/fafoconcentrated.png' style='height:40px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/fafoconcentrated.png' style='height:32px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>"
   },
   "Fuck1": {
-    "replace": "<img src='/public/img/uwot.png' style='height:32px; width:auto;' alt='Fuck1' title='Fuck1'>",
+    "replace": "<img src='/public/img/uwot.png' style='height:40px; width:auto;' alt='Fuck1' title='Fuck1'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/uwot.png' style='height:32px; width:auto;' alt='Fuck1' title='Fuck1'>"
   },
   "Bruh1": {
-    "replace": "<img src='/public/img/bruh.png' style='height:32px; width:auto;' alt='Bruh1' title='Bruh1'>",
+    "replace": "<img src='/public/img/bruh.png' style='height:40px; width:auto;' alt='Bruh1' title='Bruh1'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/bruh.png' style='height:32px; width:auto;' alt='Bruh1' title='Bruh1'>"
   },
@@ -350,14 +350,14 @@
     "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
   },
   "grossesX": {
-    "replace": "<img src='/public/img/x-doubt.png' style='height:125px; width:auto;' alt='X' title='X'>",
+    "replace": "<img src='/public/img/x-doubt.png' style='height:125px; width:auto;' alt='grossesX' title='grossesX'>",
     "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='grossesX' title='grossesX'>"
   },
   "ganzgrossesX": {
-    "replace": "<img src='/public/img/x-doubt.png' style='height:250px; width:auto;' alt='X' title='X'>",
+    "replace": "<img src='/public/img/x-doubt.png' style='height:250px; width:auto;' alt='ganzgrossesX' title='ganzgrossesX'>",
     "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='ganzgrossesX' title='ganzgrossesX'>"
   },
   "F": {
     "replace": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>",
@@ -365,9 +365,9 @@
     "menuDisplayCode": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>"
   },
   "bigF": {
-    "replace": "<img src='/public/img/f.png' style='height:125px; width:auto;' alt='F' title='F'>",
+    "replace": "<img src='/public/img/f.png' style='height:125px; width:auto;' alt='bigF' title='bigF'>",
     "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>"
+    "menuDisplayCode": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='bigF' title='bigF'>"
   },
   "discordload": {
     "replace": "<img src='/public/img/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
@@ -385,9 +385,9 @@
     "menuDisplayCode": ""
   },
   "simonGit": {
-    "replace": "<img src='/public/img/simon.jpg' style='height:240px; width:auto;' alt='simon' title='Simon'>",
+    "replace": "<img src='/public/img/simon.jpg' style='height:240px; width:auto;' alt='simonGit' title='SimonGit'>",
     "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/simon.jpg' style='height:50px; width:auto;' alt='simon' title='Simon'>"
+    "menuDisplayCode": "<img src='/public/img/simon.jpg' style='height:50px; width:auto;' alt='simonGit' title='SimonGit'>"
   },
   "poohRead": {
     "replace": "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>",
@@ -465,7 +465,7 @@
     "menuDisplayCode": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>"
   },
   "Kappa": {
-    "replace": "<img src='/public/img/Kappa1.png' style='height: 32px; width:auto;' alt='Kappa' title='Kappa'>",
+    "replace": "<img src='/public/img/Kappa1.png' style='height: 40px; width:auto;' alt='Kappa' title='Kappa'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/Kappa1.png' style='height: 32px; width:auto;' alt='Kappa' title='Kappa'>"
   },
