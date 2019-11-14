@@ -278,4 +278,4 @@ def codeblock_replacer(text: str) -> str:
 
 
 def quote_replacer(text: str) -> str:
-    return re.sub(quote_regex, '<em class="quote font-weight-light pl-1">\g<1></em>', text, 0)
+    return re.sub(quote_regex, '<em class="quote font-weight-light pl-3">\g<1></em>', text, 0)
