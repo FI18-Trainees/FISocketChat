@@ -294,7 +294,7 @@ function updateEmoteMenu() {
             // getting the emote menu
             let menu = $('#emoteMenu');
             // clearing the emote menu
-            menu.empty();7
+            menu.empty();
             // iterate over the emotes from the JSON
             for (let emote in result) {
                 // jumping over the hidden ones.
