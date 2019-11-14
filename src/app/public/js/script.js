@@ -8,6 +8,7 @@ var cooldown = 0;
 var ownusername = null;
 var userlist = [];
 var notificationmode = 0;
+var autoscroll = false;
 
 var message_history = [];
 var history_pointer = 0;
@@ -184,8 +185,11 @@ $('document').ready(function () {
         }
         if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
             $('.nano').nanoScroller();
-            chatdiv = document.querySelector('#messages');
-            chatdiv.scrollTop = chatdiv.scrollHeight;
+            if(autoscroll) {
+                chatdiv = document.querySelector('#messages');
+                chatdiv.scrollTop = chatdiv.scrollHeight;
+            }
+
         }
         if (!focused) {
             unread++;
@@ -369,4 +373,8 @@ function uname_name_click(e){
         e.preventDefault();
         document.getElementById('m').value += '@' + e.target.title + ' ';
     }
+}
+
+function setautoscroll(value) {
+    autoscroll = value;
 }
