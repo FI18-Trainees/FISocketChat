@@ -16,7 +16,7 @@ try:
 
     SHL.output(f"{white}Found local version: {git_version_short_hash}", "gitversion")
 
-    __generated_link = git_remote_url + "/commit/" + git_version_hash
+    __generated_link = git_remote_url + "/commits/" + git_version_hash
     __msg = f"Current Version is <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{__generated_link}\">{git_version_short_hash}</a>.<br />"
 
 except subprocess.CalledProcessError:
