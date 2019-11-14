@@ -26,8 +26,13 @@ except UnicodeDecodeError:
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
-    if __msg is not None:
-        system.send(__msg)
+    if len(params) > 0:
+        if params[0] == "help":
+            system.send("[gitversion help]: Displays the hash of the commit the chat is currently running of. "
+                        "It also links to the commit on the Repo site where you can view the code.")
     else:
-        system.send("Error fetching version.")
+        if __msg is not None:
+            system.send(__msg)
+        else:
+            system.send("Error fetching version.")
 
