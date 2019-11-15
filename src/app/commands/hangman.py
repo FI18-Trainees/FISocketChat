@@ -38,15 +38,14 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "start" and params[1].lower() != "":
         if not hangman_game.get_state():
-            if not params[1].lower() == " ":
-                hangman_game.reset_game()
-                hangman_game.start(params[1], author)
-                SHL.output(f"{author} started a game with: {params[1]}", "HangmanGame")  # log
-                system.broadcast(f"{author} is challenging everyone to a hangman game!")
-                system.broadcast(f"The word searched is: {hangman_game.get_word()}")
-                return
-            system.send("Not only spaces!")
+            hangman_game.reset_game()
+            hangman_game.start(params[1], author)
+            SHL.output(f"{author} started a game with: {params[1]}", "HangmanGame")  # log
+            system.broadcast(f"{author} is challenging everyone to a hangman game!")
+            system.broadcast(f"The word searched is: {hangman_game.get_word()}")
+            return
         system.send(f"Game already running!<br/>{hangman_game.get_word()}")
+        return
 
     if params[0].lower() == "guess":
         if hangman_game.get_state():
@@ -61,6 +60,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             system.send("You filthy cheater can't try to guess on your own word!")
             return
         system.send(no_game())
+        return
 
     if params[0].lower() == "solve":
         if hangman_game.get_state():
@@ -71,6 +71,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             system.send("You filthy cheater can't try to guess on your own word!")
             return
         system.send(no_game())
+        return
 
     if params[0].lower() == "state":
         if hangman_game.get_state():
@@ -78,6 +79,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             SHL.output(f"{author} fetched the state of the game.", "HangmanGame")  # log
             return
         system.send(no_game())
+        return
 
     system.send("Usable commands:<br/>'/hangman start *word*'<br/>'/hangman guess *char*'<br/>"
                 "'/hangman solve *word*'<br/>'state'")

@@ -15,19 +15,19 @@ class HangmanGame:
 
     def start(self, word: str, initiator: User) -> None:
         self.state = True
-        self.word = [x for x in word]
+        self.word = [x for x in word.lower()]
         self.word_clear = word
         self.guessed = [False] * len(word)
         self.initiator = initiator
 
     def check_char(self, char: str) -> str:
         if not all(self.guessed):
-            if not self.mistakes == self.max_mistakes-1:
+            if not self.mistakes >= self.max_mistakes-1:
                 if not char.lower() in self.tried:
                     contained = False
-                    self.tried += char
+                    self.tried.append(char.lower())
                     for e, item in enumerate(self.word):
-                        if item.lower() == char.lower():
+                        if item == char.lower():
                             contained = True
                             self.guessed[e] = True
                     if not contained:
@@ -42,7 +42,7 @@ class HangmanGame:
 
     def check_word(self, word: str) -> str:
         if not all(self.guessed):
-            if not self.mistakes == self.max_mistakes-1:
+            if not self.mistakes >= self.max_mistakes-1:
                 if [x for x in word.lower()] == self.word:
                     self.state = False
                     return self.success()
@@ -79,8 +79,10 @@ class HangmanGame:
     def reset_game(self) -> None:
         self.state = False
         self.word = []
+        self.word_clear = ""
         self.guessed = []
         self.tried = []
         self.mistakes = 0
         self.max_mistakes = 7
         self.failed = False
+        self.initiator = None
