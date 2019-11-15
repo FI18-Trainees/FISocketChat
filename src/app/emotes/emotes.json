@@ -39,6 +39,11 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/bjoernW.png' style='height:32px; width:auto;' alt='björnW' title='björnW'>"
   },
+  "oaHmm": {
+    "replace": "<img src='/public/img/oaHmm.png' style='height:40px; width:auto;' alt='oaHmm' title='oaHmm'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/oaHmm.png' style='height:32px; width:auto;' alt='oaHmm' title='oaHmm'>"
+  },
   "yKool": {
     "replace": "<img src='/public/img/yannick1.png' style='height:40px; width:auto;' alt='yKool' title='yKool'>",
     "menuDisplay": true,
