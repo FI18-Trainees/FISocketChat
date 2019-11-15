@@ -348,8 +348,9 @@ function tabComplete(CursorPos) {
         for (username of userlist.entries()) {
             if (username[1] !== null && username[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
                 let mIn = messagefield.val().substr(0, lastSplit) + "@" + username[1] + " ";
-                messagefield.val(mIn + messagefield.val().substr(CursorPos + 1));
-                messagefield.prop('SelectionStart', mIn.length);
+                messagefield.val(mIn + messagefield.val().substr(CursorPos));
+                messagefield.prop('selectionStart', mIn.length);
+                messagefield.prop('selectionEnd', mIn.length);
                 return;
             }
         }
@@ -358,8 +359,9 @@ function tabComplete(CursorPos) {
         for (let emote in emotelist) {
             if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
                 let mIn = messagefield.val().substr(0, lastSplit) + emote + " ";
-                messagefield.val(mIn + messagefield.val().substr(CursorPos + 1));
+                messagefield.val(mIn + messagefield.val().substr(CursorPos));
                 messagefield.prop('selectionStart', mIn.length);
+                messagefield.prop('selectionEnd', mIn.length);
                 break;
             }
         }
