@@ -50,7 +50,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "guess":
         if hangman_game.get_state():
-            if hangman_game.initiator != author:
+            if not hangman_game.initiator == author:
                 if len(params[1]) != 1:
                     system.send("invalid guess length! guess has to be single char!")
                     return
@@ -64,7 +64,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "solve":
         if hangman_game.get_state():
-            if hangman_game.initiator != author:
+            if not hangman_game.initiator == author:
                 SHL.output(f"{author} tried to solve {hangman_game.word_clear} with {params[1]}", "HangmanGame")  # log
                 system.broadcast(hangman_game.check_word(params[1]))
                 return
