@@ -354,8 +354,7 @@ function tabComplete(CursorPos) {
                 return;
             }
         }
-    }
-    else {
+    } else {
         for (let emote in emotelist) {
             if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
                 let mIn = messagefield.val().substr(0, lastSplit) + emote + " ";
@@ -392,12 +391,10 @@ function messagesScroll(event) {
                 setautoscroll(true);
                 lastScrollDirection = 0;
             }
-        }
-        else {
+        } else {
             lastScrollDirection = 1;
         }
-    }
-    else { //Up
+    } else { //Up
         if(lastScrollDirection === -1) {
             setautoscroll(false);
             lastScrollDirection = 0;
