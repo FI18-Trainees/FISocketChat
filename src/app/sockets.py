@@ -243,6 +243,11 @@ def link_preview(text: str) -> str:
 def get_embed_youtube_code(link: str) -> str:
     matches = youtube_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
+        if match.group(2) is not None:
+            return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/>' \
+                   f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{match.group(1)}?start={match.group(2)}" ' \
+                   f'frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" ' \
+                   f'allowfullscreen></iframe>'
         return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/>' \
                f'<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{match.group(1)}" ' \
                f'frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" ' \
@@ -253,7 +258,7 @@ def get_embed_youtube_code(link: str) -> str:
 def get_embed_image_link(link: str) -> str:
     matches = image_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}"/>'
+        return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}" onload="imgloaded();"/>'
     return ""
 
 
