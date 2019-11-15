@@ -6,6 +6,7 @@ var emotelist = null;
 var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
+var messagefield = null;
 var userlist = [];
 var notificationmode = 0;
 var autoscroll = true;
@@ -35,45 +36,45 @@ $('document').ready(function () {
     window.onblur = function () {
         focused = false;
     };
+    messagefield = $('#m');
 
-    document.getElementById("m").onkeydown = function (e) {
+    messagefield.keydown(function (e) {
         e = e || window.event;
-        if (e.keyCode == '38') {
-            if ($('#m').val().trim() == "" || $('#m').val() == message_history[history_pointer]) {
+        if (e.keyCode === 38) {
+            if (messagefield.val().trim() === "" || messagefield.val() === message_history[history_pointer]) {
                 // up arrow
                 history_pointer -= 1;
                 if (history_pointer < 0) {
                     history_pointer = 0;
                 }
-                $('#m').val(message_history[history_pointer]);
+                messagefield.val(message_history[history_pointer]);
             }
-        } else if (e.keyCode == '40') {
-            if ($('#m').val().trim() == "" || $('#m').val() == message_history[history_pointer]) {
+        } else if (e.keyCode === 40) {
+            if (messagefield.val().trim() === "" || messagefield.val() === message_history[history_pointer]) {
                 // down arrow
                 history_pointer += 1;
                 if (history_pointer > message_history.length - 1) {
                     history_pointer = message_history.length - 1;
                 }
-                $('#m').val(message_history[history_pointer]);
+                messagefield.val(message_history[history_pointer]);
             }
-        } else if (e.keyCode == '9') {
+        } else if (e.keyCode === 9) {
                 //tab key
             e.preventDefault();
             if(e.shiftKey) {
-                document.getElementById('m').value += "\t";
+                messagefield.val(messagefield.val() + "\t");
             }
             else {
-                tabComplete(document.getElementById('m').selectionStart);
+                tabComplete(messagefield.prop('selectionStart'));
             }
-
         }
         // Enter was pressed without shift key
-        if (e.keyCode == 13 && !e.shiftKey) {
+        if (e.keyCode === 13 && !e.shiftKey) {
             // prevent default behavior
             e.preventDefault();
             $('form').submit();
         }
-    };
+    });
 
     $('form').submit(function (e) {
         e.preventDefault(); // prevents page reloading
@@ -85,18 +86,17 @@ $('document').ready(function () {
             cooldown = 0
         }, 400);
 
-        let m = $('#m');
-        if (m.val().trim() == "") {
+        if (messagefield.val().trim() === "") {
             showError('Invalid message.');
             return false;
         }
 
-        message_history.push(m.val());
+        message_history.push(messagefield.val());
         history_pointer = message_history.length;
         let u = $('#user_name').val();
 
         let event_name = "chat_message";
-        if (m.val().startsWith("/")) {
+        if (messagefield.val().startsWith("/")) {
             event_name = "chat_command";
         }
 
@@ -113,10 +113,10 @@ $('document').ready(function () {
 
         socket.emit(event_name, {
             'display_name': u,
-            'message': m.val(),
+            'message': messagefield.val(),
             'token': getCookie('access_token')
         });
-        m.val('');
+        messagefield.val('');
         return false;
     });
 
@@ -161,15 +161,15 @@ $('document').ready(function () {
         let user_avatar = msg['author']['avatar'];
         let timestamp = msg['timestamp'];
 
-        if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
+        if (msgcontent.toLowerCase().search('@' + ownusername) !== -1) {
             msgcontent = makeMention(msgcontent);
-            if (checkPermission() && notificationmode != 0) {
+            if (checkPermission() && notificationmode !== 0) {
                 newNotification("You have been mentioned!");
             }
         }
 
         // check if username of last message is identical to new message
-        if($('#messages :last-child div h2 div').prop('title') == username) {
+        if($('#messages :last-child div h2 div').prop('title') === username) {
             $('#messages .message-container').last().children().append($('<div class="message-content w-100 pb-1">').html(msgcontent));
             $('#messages .message-header').last().children('time').text(timestamp);
         } else {
@@ -190,7 +190,6 @@ $('document').ready(function () {
                 chatdiv = document.querySelector('#messages');
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
-
         }
         if (!focused) {
             unread++;
@@ -282,9 +281,9 @@ function hideError() {
 }
 
 function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + " " + emote + " ");
+    messagefield.val(messagefield.val() + " " + emote + " ");
     toggleEmoteMenu();
-    $("#m").focus();
+    messagefield.focus();
 }
 
 function updateEmoteMenu() {
@@ -319,14 +318,14 @@ function updateEmoteMenu() {
 }
 
 function getCookie(name) {
-    var value = "; " + document.cookie;
-    var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
+    let value = "; " + document.cookie;
+    let parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
 function toggleEmoteMenu() {
-    var object = document.getElementById("emoteMenu");
-    if (object.style.display == "none" || object.style.display == "") {
+    let object = document.getElementById("emoteMenu");
+    if (object.style.display === "none" || object.style.display === "") {
         object.style.display = "block";
     } else {
         object.style.display = "none";
@@ -334,10 +333,9 @@ function toggleEmoteMenu() {
 }
 
 function tabComplete(CursorPos) {
-    let m = document.getElementById('m');
-    if (m.value.length == 0)
+    if (messagefield.val().length === 0)
         return;
-    let messageSplit = m.value.substring(0, CursorPos);
+    let messageSplit = messagefield.val().substring(0, CursorPos);
     let matches = Array.from(messageSplit.matchAll(/[\r\n\t ]/gm));
     let lastSplit = 0;
     if (matches.length > 0) {
@@ -359,9 +357,9 @@ function tabComplete(CursorPos) {
     else {
         for (let emote in emotelist) {
             if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
-                let mIn = m.value.substr(0, lastSplit) + emote + " ";
-                m.value = mIn + m.value.substr(CursorPos + 1);
-                m.setSelectionRange(mIn.length, mIn.length);
+                let mIn = messagefield.val().substr(0, lastSplit) + emote + " ";
+                messagefield.val(mIn + messagefield.val().substr(CursorPos + 1));
+                messagefield.prop('selectionStart', mIn.length);
                 break;
             }
         }
@@ -409,7 +407,7 @@ function messagesScroll(event) {
 }
 
 function mobileAndTabletcheck() {
-    var check = false;
+    let check = false;
     (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
     if(check) {
         $('#sendbtn').css('display', 'block');
