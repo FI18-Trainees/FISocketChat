@@ -154,15 +154,12 @@ $('document').ready(function () {
     });
 //build html-div which will be shown
     socket.on('chat_message', function (msg) {
-        let msgcontent = msg['msg_body'];
+        let content = msg['msg_body'];
         let username = msg['author']['username'];
-        let display_name = msg['author']['display_name'];
-        let user_color = msg['author']['chat_color'];
-        let user_avatar = msg['author']['avatar'];
         let timestamp = msg['timestamp'];
 
-        if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
-            msgcontent = makeMention(msgcontent);
+        if (content.toLowerCase().search('@' + ownusername) != -1) {
+            msg['msg_body'] = makeMention(content);
             if (checkPermission() && notificationmode != 0) {
                 newNotification("You have been mentioned!");
             }
@@ -170,27 +167,17 @@ $('document').ready(function () {
 
         // check if username of last message is identical to new message
         if($('#messages :last-child div h2 div').prop('title') == username) {
-            $('#messages .message-container').last().children().append($('<div class="message-content w-100 pb-1">').html(msgcontent));
-            $('#messages .message-header').last().children('time').text(timestamp);
+            appendMessage(content, timestamp);
         } else {
-            let item = $('<div class="message-container d-flex border-bottom pt-2 pb-2 px-2">');
-            let content = $('<div class="w-100">');    //div which contains header and message content
-            let header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');      //div which contains username and timestamp
-            header.append($('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click));   //append username and timestamp as title to header-div
-            header.append($('<time class="message-timestamp ml-1">').text(timestamp));                  //append timestamp to header-div
-            content.append(header);                                                                               //append header to message-container-div
-            content.append($('<div class="message-content text-white w-100 pb-1">').html(msgcontent));                              //append message content to message-container-div
-            item.append($('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">'))                //prepend profile picture to message-container-div
-            item.append(content);
-            $('#messages').append(item);    //append message to chat-div
+            addMessage(msg);
         }
+
         if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
             $('.nano').nanoScroller();
             if(autoscroll) {
                 chatdiv = document.querySelector('#messages');
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
-
         }
         if (!focused) {
             unread++;
@@ -249,6 +236,35 @@ $('document').ready(function () {
     mobileAndTabletcheck();
     displayNotifyMode();
 });
+
+function addMessage(msg) {
+    let message_container, message_header, message_body, message_thumbnail, message_username, message_timestamp, message_content;
+
+    let content = msg['msg_body'];
+    let username = msg['author']['username'];
+    let display_name = msg['author']['display_name'];
+    let user_color = msg['author']['chat_color'];
+    let user_avatar = msg['author']['avatar'];
+    let timestamp = msg['timestamp'];
+
+    message_container = $('<div class="message-container d-flex border-bottom p-2">');
+    message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
+    message_body = $('<div class="message-body w-100"');
+    message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
+    message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
+    message_timestamp = $('<time class="message-timestamp ml-1">').text(timestamp);
+    message_content = $('<div class="message-content text-white w-100 pb-1">').html(content);
+
+    message_container.append(message_thumbnail, message_header, message_body);
+    message_header.append(message_username, message_timestamp);
+    message_body.append(message_content);
+    $('#messages').append(message_container);
+}
+
+function appendMessage(content, timestamp) {
+    $('#messages .message-container').last().children().append($('<div class="message-content w-100 pb-1">').html(content));
+    $('#messages .message-header').last().children('time').text(timestamp);
+}
 
 function setUserCount(count) {
     $('#usercount').text('Usercount: ' + count);
