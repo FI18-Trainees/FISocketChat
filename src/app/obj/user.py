@@ -22,7 +22,7 @@ class User:
 
     def __eq__(self, other):
         if isinstance(other, User):
-            return self.username == other.display_name
+            return self.username == other.username
         if isinstance(other, str):
             return self.username == other
         return False
