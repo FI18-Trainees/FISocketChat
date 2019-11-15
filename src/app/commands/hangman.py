@@ -47,7 +47,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         system.send(f"Game already running!<br/>{hangman_game.get_word()}")
         return
 
-    if params[0].lower() == "guess":
+    if params[0].lower() == "guess" and len(params) >= 2:
         if hangman_game.get_state():
             if not hangman_game.initiator == author:
                 if len(params[1]) != 1:
@@ -62,7 +62,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         system.send(no_game())
         return
 
-    if params[0].lower() == "solve":
+    if params[0].lower() == "solve" and len(params) >= 2:
         if hangman_game.get_state():
             if not hangman_game.initiator == author:
                 SHL.output(f"{author} tried to solve {hangman_game.word_clear} with {params[1]}", "HangmanGame")  # log

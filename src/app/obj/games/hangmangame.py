@@ -45,6 +45,7 @@ class HangmanGame:
             if not self.mistakes >= self.max_mistakes-1:
                 if [x for x in word.lower()] == self.word:
                     self.state = False
+                    self.failed = True
                     return self.success()
                 self.mistakes += 1
                 return self.get_word()
@@ -68,7 +69,8 @@ class HangmanGame:
         return f"{self.join_word_blanks()}<br/>You have {self.max_mistakes-self.mistakes} tries left!"
 
     def fail(self) -> str:
-        return f"You made it to: {self.join_word_blanks()}<br/>Please start a new game to try again!"
+        return f"You made it to: {self.join_word_blanks()}<br/>The word was {self.word_clear}" \
+               f"<br/>Please start a new game to try again!"
 
     def join_word_blanks(self) -> str:
         return f"{''.join([self.word[e] if guess else ' _' for e, guess in enumerate(self.guessed)])}"
