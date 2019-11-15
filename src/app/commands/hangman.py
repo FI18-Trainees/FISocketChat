@@ -38,12 +38,13 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "start" and params[1].lower() != "":
         if not hangman_game.get_state():
-            hangman_game.reset_game()
-            hangman_game.start(params[1], author)
-            SHL.output(f"{author} started a game with: {params[1]}", "HangmanGame")  # log
-            system.broadcast(f"{author} is challenging everyone to a hangman game!")
-            system.broadcast(f"The word searched is: {hangman_game.get_word()}")
-            return
+            if "-" in params[1] or "_" in params[1]:
+                hangman_game.reset_game()
+                hangman_game.start(params[1], author)
+                SHL.output(f"{author} started a game with: {params[1]}", "HangmanGame")  # log
+                system.broadcast(f"{author} is challenging everyone to a hangman game!")
+                system.broadcast(f"The word searched is: {hangman_game.get_word()}")
+                return
         system.send(f"Game already running!<br/>{hangman_game.get_word()}")
         return
 
