@@ -106,8 +106,8 @@ def handle_message(message):
 
     if 0 < len(msg.msg_body) < 2000:
         msg.author.display_name = safe_tags_replace(msg.author.display_name)
-        msg.apply_func((safe_tags_replace, link_replacer, safe_emote_replace,
-                        replace_newline, quote_replacer, codeblock_replacer))
+        msg.apply_func((safe_tags_replace, link_replacer, safe_emote_replace, quote_replacer,
+                        replace_newline, codeblock_replacer))
 
         emit('chat_message', msg.to_json(), broadcast=True)
     else:
