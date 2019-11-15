@@ -161,7 +161,8 @@ $('document').ready(function () {
         let user_avatar = msg['author']['avatar'];
         let timestamp = msg['timestamp'];
 
-        if (msgcontent.toLowerCase().search('@' + ownusername) != -1) {
+        var mentioned = (msgcontent.toLowerCase().search('@' + ownusername) != -1) || (msgcontent.toLowerCase().search('@everyone') != -1);
+        if (mentioned) {
             msgcontent = makeMention(msgcontent);
             if (checkPermission() && notificationmode != 0) {
                 newNotification("You have been mentioned!");
@@ -256,6 +257,7 @@ function setUserCount(count) {
         url: "api/user",
     }).done(function(data) {
         userlist = data;
+        userlist.push('everyone');
     });
 }
 
