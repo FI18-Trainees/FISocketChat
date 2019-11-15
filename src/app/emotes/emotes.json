@@ -548,5 +548,15 @@
     "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=7KPDSYskJo4\" style=\"color:white\">Kim Jülich, Franziska Winkler, Marie Grevenbroich</a>",
     "menuDisplay": true,
     "menuDisplayCode": "!!!"
+  },
+  "true": {
+    "replace": "<a style='font-family: Consolas; color:rgb(46,171,254);'>true</a>",
+    "menuDisplay": false,
+    "menuDisplayCode": ""
+  },
+  "false": {
+    "replace": "<a style='font-family: Consolas; color:rgb(46,171,254);'>false</a>",
+    "menuDisplay": false,
+    "menuDisplayCode": ""
   }
 }
