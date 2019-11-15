@@ -20,6 +20,13 @@ class User:
     def __str__(self):
         return f"{self.display_name} ({self.username})"
 
+    def __eq__(self, other):
+        if isinstance(other, User):
+            return self.username == other.username
+        if isinstance(other, str):
+            return self.username == other
+        return False
+
 
 def get_default_user() -> User:
     return User(display_name=None, username=None)
