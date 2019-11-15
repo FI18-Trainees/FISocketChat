@@ -38,46 +38,55 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "start" and params[1].lower() != "":
         if not hangman_game.get_state():
-            if "-" in params[1] or "_" in params[1]:
+            if not ("-" in params[1] or "_" in params[1]):
                 hangman_game.reset_game()
                 hangman_game.start(params[1], author)
-                SHL.output(f"{author} started a game with: {params[1]}", "HangmanGame")  # log
-                system.broadcast(f"{author} is challenging everyone to a hangman game!")
+                SHL.output(f"{author.display_name} started a game with: {params[1]}", "HangmanGame")  # log
+                system.broadcast(f"{author.display_name} is challenging everyone to a hangman game!")
                 system.broadcast(f"The word searched is: {hangman_game.get_word()}")
                 return
         system.send(f"Game already running!<br/>{hangman_game.get_word()}")
         return
 
-    if params[0].lower() == "guess" and len(params) >= 2:
-        if hangman_game.get_state():
-            if not hangman_game.initiator == author:
-                if len(params[1]) != 1:
-                    system.send("invalid guess length! guess has to be single char!")
+    if params[0].lower() == "guess":
+        try:
+            if hangman_game.get_state():
+                if not hangman_game.initiator == author:
+                    if len(params[1]) != 1:
+                        system.send("Invalid guess length! Guess has to be single char!")
+                        return
+                    system.broadcast(f"{author.display_name} has tried {params[1]}")
+                    SHL.output(f"{author.display_name} hast tried to guess {params[1]} as a char", "HangmanGame")  # log
+                    system.broadcast(hangman_game.check_char(params[1]))
                     return
-                system.broadcast(f"{author} has tried {params[1]}")
-                SHL.output(f"{author} hast tried to guess {params[1]} as a char", "HangmanGame")  # log
-                system.broadcast(hangman_game.check_char(params[1]))
+                system.send("You filthy cheater can't try to guess on your own word!")
                 return
-            system.send("You filthy cheater can't try to guess on your own word!")
+            system.send(no_game())
             return
-        system.send(no_game())
-        return
+        except IndexError:
+            system.send("Invalid guess! Guess needs to have at least one char!")
+            return
 
-    if params[0].lower() == "solve" and len(params) >= 2:
-        if hangman_game.get_state():
-            if not hangman_game.initiator == author:
-                SHL.output(f"{author} tried to solve {hangman_game.word_clear} with {params[1]}", "HangmanGame")  # log
-                system.broadcast(hangman_game.check_word(params[1]))
+    if params[0].lower() == "solve":
+        try:
+            if hangman_game.get_state():
+                if not hangman_game.initiator == author:
+                    SHL.output(f"{author.display_name} tried to solve {hangman_game.word_clear} with {params[1]}",
+                               "HangmanGame")  # log
+                    system.broadcast(hangman_game.check_word(params[1]))
+                    return
+                system.send("You filthy cheater can't try to guess on your own word!")
                 return
-            system.send("You filthy cheater can't try to guess on your own word!")
+            system.send(no_game())
             return
-        system.send(no_game())
-        return
+        except IndexError:
+            system.send("Invalid guess! Solve needs to have at least one char!")
+            return
 
     if params[0].lower() == "state":
         if hangman_game.get_state():
             system.send(hangman_game.get_word())
-            SHL.output(f"{author} fetched the state of the game.", "HangmanGame")  # log
+            SHL.output(f"{author.display_name} fetched the state of the game.", "HangmanGame")  # log
             return
         system.send(no_game())
         return
