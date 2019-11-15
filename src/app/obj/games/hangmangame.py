@@ -1,3 +1,6 @@
+from app.obj import User
+
+
 class HangmanGame:
     def __init__(self, state: bool = False):
         self.state = state
@@ -8,12 +11,14 @@ class HangmanGame:
         self.mistakes = 0
         self.max_mistakes = 7
         self.failed = False
+        self.initiator = None
 
-    def start(self, word: str) -> None:
+    def start(self, word: str, initiator: User) -> None:
         self.state = True
         self.word = [x for x in word]
         self.word_clear = word
         self.guessed = [False] * len(word)
+        self.initiator = initiator
 
     def check_char(self, char: str) -> str:
         if not all(self.guessed):
