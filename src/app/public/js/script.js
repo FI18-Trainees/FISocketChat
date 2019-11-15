@@ -347,9 +347,9 @@ function tabComplete(CursorPos) {
     if (toComplete.toLowerCase().startsWith("@") && toComplete.length > 1) {
         for (username of userlist.entries()) {
             if (username[1] !== null && username[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
-                let mIn = m.value.substr(0, lastSplit) + "@" + username[1] + " ";
-                m.value = mIn + m.value.substr(CursorPos + 1);
-                m.setSelectionRange(mIn.length, mIn.length);
+                let mIn = messagefield.val().substr(0, lastSplit) + "@" + username[1] + " ";
+                messagefield.val(mIn + messagefield.val().substr(CursorPos + 1));
+                messagefield.prop('SelectionStart', mIn.length);
                 return;
             }
         }
