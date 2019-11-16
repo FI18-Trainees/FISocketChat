@@ -37,24 +37,25 @@ $('document').ready(function () {
     };
 
     document.getElementById("m").onkeydown = function (e) {
+        let m = $('#m');
         e = e || window.event;
         if (e.keyCode == '38') {
-            if ($('#m').val().trim() == "" || $('#m').val() == message_history[history_pointer]) {
+            if (m.val().trim() == "" || m.val() == message_history[history_pointer]) {
                 // up arrow
                 history_pointer -= 1;
                 if (history_pointer < 0) {
                     history_pointer = 0;
                 }
-                $('#m').val(message_history[history_pointer]);
+                m.val(message_history[history_pointer]);
             }
         } else if (e.keyCode == '40') {
-            if ($('#m').val().trim() == "" || $('#m').val() == message_history[history_pointer]) {
+            if (m.val().trim() == "" || m.val() == message_history[history_pointer]) {
                 // down arrow
                 history_pointer += 1;
                 if (history_pointer > message_history.length - 1) {
                     history_pointer = message_history.length - 1;
                 }
-                $('#m').val(message_history[history_pointer]);
+                m.val(message_history[history_pointer]);
             }
         } else if (e.keyCode == '9') {
                 //tab key
@@ -171,8 +172,8 @@ $('document').ready(function () {
         } else {
             addMessage(msg);
         }
-
-        if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
+        //check if chat would overflow currentSize and refresh scrollbar
+        if (checkOverflow(document.querySelector('#messages'))) { 
             $('.nano').nanoScroller();
             if(autoscroll) {
                 chatdiv = document.querySelector('#messages');
@@ -249,7 +250,7 @@ function addMessage(msg) {
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
-    message_body = $('<div class="message-body w-100"');
+    message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
     message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
     message_timestamp = $('<time class="message-timestamp ml-1">').text(timestamp);
@@ -262,7 +263,7 @@ function addMessage(msg) {
 }
 
 function appendMessage(content, timestamp) {
-    $('#messages .message-container').last().children().append($('<div class="message-content w-100 pb-1">').html(content));
+    $('#messages .message-container').last().children().append($('<div class="message-content text-white w-100 pb-1">').html(content));
     $('#messages .message-header').last().children('time').text(timestamp);
 }
 
