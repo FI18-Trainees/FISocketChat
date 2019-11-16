@@ -130,16 +130,12 @@ $('document').ready(function () {
         showError("Connection failed.");
         console.log(error);
         changeOnlineStatus(false);
-        setTimeout(function () {
-            socket.connect();
-        }, 3000);
+        reconnect();
     });
     socket.on('connect_timeout', (timeout) => {
         changeOnlineStatus(false);
         console.log(timeout);
-        setTimeout(function () {
-            socket.connect();
-        }, 3000);
+        reconnect();
     });
     socket.on('disconnect', (reason) => {
         showError("Disconnected.");
@@ -147,9 +143,7 @@ $('document').ready(function () {
         changeOnlineStatus(false);
         if (reason === 'io server disconnect') {
             // the disconnection was initiated by the server, you need to reconnect manually
-            setTimeout(function () {
-                socket.connect();
-            }, 3000);
+            reconnect();
         }
     });
     socket.on('chat_message', function (msg) {
@@ -235,6 +229,12 @@ $('document').ready(function () {
     mobileAndTabletcheck();
     displayNotifyMode();
 });
+
+function reconnect() {
+    setTimeout(function () {
+        socket.connect();
+    }, 3000);
+}
 
 function addMessage(msg) {
     let message_container, message_header, message_body, message_thumbnail, message_username, message_timestamp, message_content;
