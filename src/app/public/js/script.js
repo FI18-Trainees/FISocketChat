@@ -14,7 +14,7 @@ var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 var message_history = [];
 var history_pointer = 0;
 
-const messagefield = $('#m');
+const messagefield = $('#messageinput');
 
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
@@ -350,7 +350,7 @@ function toggleEmoteMenu() {
 }
 
 function tabComplete(CursorPos) {
-    if (messagefield.val().length === 0
+    if (messagefield.val().length === 0)
         return;
     let messageSplit = messagefield.val().substring(0, CursorPos);
     let matches = Array.from(messageSplit.matchAll(/[\r\n\t ]/gm));
