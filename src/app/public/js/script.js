@@ -257,9 +257,9 @@ function addMessage(msg) {
     message_timestamp = $('<time class="message-timestamp ml-1">').text(timestamp);
     message_content = $('<div class="message-content text-white w-100 pb-1">').html(content);
 
-    message_container.append(message_thumbnail, message_header, message_body);
+    message_container.append(message_thumbnail, message_body);
+    message_body.append(message_header, message_content);
     message_header.append(message_username, message_timestamp);
-    message_body.append(message_content);
     $('#messages').append(message_container);
 }
 
@@ -301,9 +301,10 @@ function hideError() {
 }
 
 function addEmoteCode(emote) {
-    $('#m').val($('#m').val() + " " + emote + " ");
+    let m = $('m');
+    m.val(m.val() + " " + emote + " ");
     toggleEmoteMenu();
-    $("#m").focus();
+    m.focus();
 }
 
 function updateEmoteMenu() {
