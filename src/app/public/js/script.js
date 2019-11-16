@@ -155,7 +155,6 @@ $('document').ready(function () {
     socket.on('chat_message', function (msg) {
         let content = msg['msg_body'];
         let username = msg['author']['username'];
-        let timestamp = msg['timestamp'];
       
         let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
         if (mentioned) {
@@ -167,7 +166,7 @@ $('document').ready(function () {
 
         // check if username of last message is identical to new message
         if($('#messages :last-child div h2 div').prop('title') === username) {
-            appendMessage(msg['msg_body'], timestamp);
+            appendMessage(msg['msg_body'], msg['timestamp']);
         } else {
             addMessage(msg);
         }
