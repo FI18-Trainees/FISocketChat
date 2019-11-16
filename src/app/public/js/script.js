@@ -249,7 +249,7 @@ function addMessage(msg) {
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
-    message_body = $('<div class="message-body w-100">');
+    message_body = $('<div class="message-body w-100">'); // TODO closing tag was missing, on purpose?
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
     message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
     message_timestamp = $('<time class="message-timestamp ml-1">').text(timestamp);
