@@ -41,39 +41,45 @@ $('document').ready(function () {
 
     messagefield.keydown(function (e) {
         e = e || window.event;
-        if (e.keyCode === 38) {
-            if (messagefield.val().trim() === "" || messagefield.val() === message_history[history_pointer]) {
-                // up arrow
-                history_pointer -= 1;
-                if (history_pointer < 0) {
-                    history_pointer = 0;
-                }
-                messagefield.val(message_history[history_pointer]);
-            }
-        } else if (e.keyCode === 40) {
-            if (messagefield.val().trim() === "" || messagefield.val() === message_history[history_pointer]) {
-                // down arrow
-                history_pointer += 1;
-                if (history_pointer > message_history.length - 1) {
-                    history_pointer = message_history.length - 1;
-                }
-                messagefield.val(message_history[history_pointer]);
-            }
-        } else if (e.keyCode === 9) {
+        switch (e.keyCode) {
+            case 9:
                 //tab key
-            e.preventDefault();
-            if(e.shiftKey) {
-                messagefield.val(messagefield.val() + "\t");
-            }
-            else {
-                tabComplete(messagefield.prop('selectionStart'));
-            }
-        }
-        // Enter was pressed without shift key
-        if (e.keyCode === 13 && !e.shiftKey) {
-            // prevent default behavior
-            e.preventDefault();
-            $('form').submit();
+                e.preventDefault();
+                if (e.shiftKey) {
+                    messagefield.val(messagefield.val() + "\t");
+                }
+                else {
+                    tabComplete(messagefield.prop('selectionStart'));
+                }
+                break;
+            case 13:
+                if (e.keyCode !== e.shiftKey) {
+                    // Enter was pressed without shift key
+                    // prevent default behavior
+                    e.preventDefault();
+                    $('form').submit();
+                }
+                break;
+            case 38:
+                //up arrow
+                if (messagefield.val().trim() === "" || messagefield.val() === message_history[history_pointer]) {
+                    history_pointer -= 1;
+                    if (history_pointer < 0) {
+                        history_pointer = 0;
+                    }
+                    messagefield.val(message_history[history_pointer]);
+                }
+                break;
+            case 40:
+                // down arrow
+                if (messagefield.val().trim() === "" || messagefield.val() === message_history[history_pointer]) {
+                    history_pointer += 1;
+                    if (history_pointer > message_history.length - 1) {
+                        history_pointer = message_history.length - 1;
+                    }
+                    messagefield.val(message_history[history_pointer]);
+                }
+                break;
         }
     });
 
@@ -108,7 +114,7 @@ $('document').ready(function () {
                 ownusername = u.toLowerCase();
             }
         } else {
-            u = 'Shawn'; // username will be replaced with value from userconfig
+            u = 'Shawn'; // username will be replaced with value from userconfig, but must be given
         }
 
         socket.emit(event_name, {
