@@ -288,11 +288,9 @@ function showError(message) {
 
 function changeOnlineStatus(online) {
     if (online) {
-        document.getElementById("online-status").innerHTML =
-            "<span class=\"badge badge-pill badge-success\">Connected</span>"
+        $('#online-status').text('Connected').addClass('badge-success').removeClass('badge-danger');
     } else {
-        document.getElementById("online-status").innerHTML =
-            "<span class=\"badge badge-pill badge-danger\">Disconnected</span>"
+        $('#online-status').text('Disconnected').addClass('badge-danger').removeClass('badge-success');
     }
 }
 
