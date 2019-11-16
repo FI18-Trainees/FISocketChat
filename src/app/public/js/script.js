@@ -38,6 +38,7 @@ $('document').ready(function () {
         focused = false;
     };
 
+
     messagefield.keydown(function (e) {
         e = e || window.event;
         if (e.keyCode === 38) {
@@ -85,7 +86,6 @@ $('document').ready(function () {
         cooldown = window.setTimeout(function () {
             cooldown = 0
         }, 400);
-
         if (messagefield.val().trim() === "") {
             showError('Invalid message.');
             return false;
@@ -157,7 +157,7 @@ $('document').ready(function () {
         let content = msg['msg_body'];
         let username = msg['author']['username'];
         let timestamp = msg['timestamp'];
-
+      
         let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
         if (mentioned) {
             msg['msg_body'] = makeMention(content);
@@ -172,8 +172,8 @@ $('document').ready(function () {
         } else {
             addMessage(msg);
         }
-
-        if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
+        //check if chat would overflow currentSize and refresh scrollbar
+        if (checkOverflow(document.querySelector('#messages'))) { 
             $('.nano').nanoScroller();
             if(autoscroll) {
                 chatdiv = document.querySelector('#messages');
@@ -250,20 +250,20 @@ function addMessage(msg) {
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
-    message_body = $('<div class="message-body w-100">'); // TODO closing tag was missing, on purpose?
+    message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
     message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
     message_timestamp = $('<time class="message-timestamp ml-1">').text(timestamp);
     message_content = $('<div class="message-content text-white w-100 pb-1">').html(content);
 
-    message_container.append(message_thumbnail, message_header, message_body);
+    message_container.append(message_thumbnail, message_body);
+    message_body.append(message_header, message_content);
     message_header.append(message_username, message_timestamp);
-    message_body.append(message_content);
     $('#messages').append(message_container);
 }
 
 function appendMessage(content, timestamp) {
-    $('#messages .message-container').last().children().append($('<div class="message-content w-100 pb-1">').html(content));
+    $('#messages .message-container').last().children().append($('<div class="message-content text-white w-100 pb-1">').html(content));
     $('#messages .message-header').last().children('time').text(timestamp);
 }
 
@@ -287,11 +287,9 @@ function showError(message) {
 
 function changeOnlineStatus(online) {
     if (online) {
-        document.getElementById("online-status").innerHTML =
-            "<span class=\"badge badge-pill badge-success\">Connected</span>"
+        $('#online-status').text('Connected').addClass('badge-success').removeClass('badge-danger');
     } else {
-        document.getElementById("online-status").innerHTML =
-            "<span class=\"badge badge-pill badge-danger\">Disconnected</span>"
+        $('#online-status').text('Disconnected').addClass('badge-danger').removeClass('badge-success');
     }
 }
 
@@ -343,16 +341,16 @@ function getCookie(name) {
 }
 
 function toggleEmoteMenu() {
-    let object = document.getElementById("emoteMenu");
-    if (object.style.display === "none" || object.style.display === "") {
-        object.style.display = "block";
+    let object = $('#emoteMenu');
+    if (object.css('display') === 'none' || object.css('emoteMenu') === '') {
+        object.css('display', 'block');
     } else {
-        object.style.display = "none";
+        object.css('display', 'none');
     }
 }
 
 function tabComplete(CursorPos) {
-    if (messagefield.val().length === 0)
+    if (messagefield.val().length === 0
         return;
     let messageSplit = messagefield.val().substring(0, CursorPos);
     let matches = Array.from(messageSplit.matchAll(/[\r\n\t ]/gm));
@@ -393,7 +391,7 @@ function makeMention(text) {
 function uname_name_click(e){
     if(e.originalEvent.ctrlKey){
         e.preventDefault();
-        document.getElementById('m').value += '@' + e.target.title + ' ';
+        document.getElementById('messageinput').value += '@' + e.target.title + ' ';
     }
 }
 
@@ -442,4 +440,20 @@ function imgloaded() {
             chatdiv.scrollTop = chatdiv.scrollHeight;
         }
     }
+}
+
+// Determines if the passed element is overflowing its bounds, either vertically or horizontally.
+// Will temporarily modify the "overflow" style to detect this if necessary.
+function checkOverflow(el) {
+    var curOverflow = el.style.overflow;
+
+    if (!curOverflow || curOverflow === "visible")
+        el.style.overflow = "hidden";
+
+    var isOverflowing = el.clientWidth < el.scrollWidth
+        || el.clientHeight < el.scrollHeight;
+
+    el.style.overflow = curOverflow;
+
+    return isOverflowing;
 }
