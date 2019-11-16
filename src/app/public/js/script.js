@@ -353,7 +353,7 @@ function toggleEmoteMenu() {
 
 function tabComplete(CursorPos) {
     let m = document.getElementById('messageinput');
-    if (m.value.length == 0)
+    if (m.value.length ===// 0)
         return;
     let messageSplit = m.value.substring(0, CursorPos);
     let matches = Array.from(messageSplit.matchAll(/[\r\n\t ]/gm));
