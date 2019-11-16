@@ -152,7 +152,6 @@ $('document').ready(function () {
             }, 3000);
         }
     });
-//build html-div which will be shown
     socket.on('chat_message', function (msg) {
         let content = msg['msg_body'];
         let username = msg['author']['username'];
@@ -168,7 +167,7 @@ $('document').ready(function () {
 
         // check if username of last message is identical to new message
         if($('#messages :last-child div h2 div').prop('title') === username) {
-            appendMessage(content, timestamp);
+            appendMessage(msg['msg_body'], timestamp);
         } else {
             addMessage(msg);
         }
