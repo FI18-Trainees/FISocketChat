@@ -158,7 +158,7 @@ $('document').ready(function () {
         let username = msg['author']['username'];
         let timestamp = msg['timestamp'];
 
-        let mentioned = (msgcontent.toLowerCase().search('@' + ownusername) !== -1) || (msgcontent.toLowerCase().search('@everyone') !== -1);
+        let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
         if (mentioned) {
             msg['msg_body'] = makeMention(content);
             if (checkPermission() && notificationmode !== 0) {
