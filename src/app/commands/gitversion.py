@@ -32,6 +32,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             system.send(__msg)
         else:
             system.send("Error fetching version.")
+        return
 
     if params[0] == "help":
         system.send("[gitversion help]: Displays the hash of the commit the chat is currently running of. "
