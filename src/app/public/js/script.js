@@ -313,7 +313,7 @@ function updateEmoteMenu() {
             if (JSON.stringify(emotelist) === JSON.stringify(result)) {
                 return;
             }
-            emotelist = result
+            emotelist = result;
             // getting the emote menu
             let menu = $('#emoteMenu');
             // clearing the emote menu
