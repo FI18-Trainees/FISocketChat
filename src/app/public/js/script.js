@@ -6,7 +6,6 @@ var emotelist = null;
 var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
-var messagefield = null;
 var userlist = [];
 var notificationmode = 0;
 var autoscroll = true;
@@ -14,6 +13,8 @@ var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 
 var message_history = [];
 var history_pointer = 0;
+
+const messagefield = $('#m');
 
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
@@ -36,7 +37,6 @@ $('document').ready(function () {
     window.onblur = function () {
         focused = false;
     };
-    messagefield = $('#m');
 
     messagefield.keydown(function (e) {
         e = e || window.event;
