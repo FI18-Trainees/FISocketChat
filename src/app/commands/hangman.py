@@ -38,7 +38,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "start" and params[1].lower() != "":
         if not hangman_game.get_state():
-            if not ("-" in params[1] or "_" in params[1]):
+            if "-" in params[1] or "_" in params[1]:
                 hangman_game.reset_game()
                 hangman_game.start(params[1], author)
                 SHL.output(f"{author.display_name} started a game with: {params[1]}", "HangmanGame")  # log
