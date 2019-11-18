@@ -59,7 +59,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                         return
                     system.broadcast(f"{author.display_name} has tried {params[1]}")
                     SHL.output(f"{author.display_name} hast tried to guess {params[1]} as a char", "HangmanGame")  # log
-                    system.broadcast(hangman_game.check_char(params[1]))
+                    system.broadcast(hangman_game.check_char(params[1], author))
                     return
                 system.send("You filthy cheater can't try to guess on your own word!")
                 return
@@ -75,7 +75,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                 if hangman_game.initiator != author:
                     SHL.output(f"{author.display_name} tried to solve {hangman_game.word_clear} with {params[1]}",
                                "HangmanGame")  # log
-                    system.broadcast(hangman_game.check_word(params[1]))
+                    system.broadcast(hangman_game.check_word(params[1], author))
                     return
                 system.send("You filthy cheater can't try to guess on your own word!")
                 return
