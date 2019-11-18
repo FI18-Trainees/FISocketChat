@@ -28,8 +28,8 @@
 <body class="bg-dark text-white d-flex flex-column justify-content-start h-100 w-100 overflow-hidden">
     <nav class="navbar navbar-dark bg-dark border-bottom d-flex flex-nowrap" id="navbar">
         <div class="navbar-brand">
-            <div class="d-block" id="online-status">
-                <span class="badge badge-pill badge-danger ">Disconnected</span>
+            <div class="d-block">
+                <span class="badge badge-pill" id="online-status">Disconnected</span>
             </div>
         </div>
         <div class="nav-item rounded ml-2 mr-auto" id="username-item" style="display: block"><input type="text" placeholder="username"
@@ -40,7 +40,7 @@
         </div>
         <div class="nav-item mr-4 ml-auto text-nowrap d-none d-sm-block form-check-inline">
             <label class="form-check-label" for="autoscroll">Autoscroll:</label>
-            <input type="checkbox" id="autoscroll" class="form-check-input" checked="true" onclick="setautoscroll(this.checked);">
+            <input type="checkbox" id="autoscroll" class="form-check-input" checked onclick="setautoscroll(this.checked);">
         </div>
         <div class="nav-item mr-4 ml-auto text-nowrap d-none d-sm-block" id="usercount">Usercount: 0</div>
         <div class="nav-link text-white text-nowrap d-none d-md-block" id="powered-by">Powered by <a href="https://python.org" target="_blank"
@@ -113,7 +113,7 @@
                             </button>
                             <div class="emote-dropmenu bg-dark border border-info" id="emoteMenu">If you see this, the Javascript failed :(</div>
                         </div>
-                        <textarea class="message-box flex-fill border-0 text-white bg-dark " id="m" autofocus="autofocus" autocomplete="off" spellcheck="false" placeholder="Your message..."></textarea>
+                        <textarea class="message-box flex-fill border-0 text-white bg-dark " id="messageinput" autofocus="autofocus" autocomplete="off" spellcheck="false" placeholder="Your message..."></textarea>
                         <button class="btn rounded ml-2 text-white border-0" id="sendbtn">Send</button>
                     </form>
                 </div>
@@ -137,7 +137,6 @@
                 integrity="sha384-V2ETvVMpY0zaj0P3nwnqTUqHU19jQInctJYWqgEQE/5vFaU3fWdcMfufqV/8ISD7"
                 crossorigin="anonymous"></script>
         <script src="/public/js/script.js"></script>
-        <script src="/public/js/checkOverflow.js"></script>
         <script src="/public/js/jquery.nanoscroller.min.js"></script>
         <script>$(".nano").nanoScroller();</script>
         <script src="/public/js/notify.js"></script>
