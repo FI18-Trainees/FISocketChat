@@ -53,7 +53,7 @@ $('document').ready(function () {
                 }
                 break;
             case 13:
-                if (e.keyCode !== e.shiftKey) {
+                if (e.keyCode ===  13 && !e.shiftKey) {
                     // Enter was pressed without shift key
                     // prevent default behavior
                     e.preventDefault();
