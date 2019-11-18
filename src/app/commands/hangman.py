@@ -38,7 +38,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "start" and params[1].lower() != "":
         if not hangman_game.get_state():
-            if "-" in params[1] or "_" in params[1]:
+            if not ("-" in params[1] or "_" in params[1]):
                 hangman_game.reset_game()
                 hangman_game.start(params[1], author)
                 SHL.output(f"{author.display_name} started a game with: {params[1]}", "HangmanGame")  # log
@@ -51,7 +51,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     if params[0].lower() == "guess":
         try:
             if hangman_game.get_state():
-                if not hangman_game.initiator == author:
+                if hangman_game.initiator != author:
                     if len(params[1]) != 1:
                         system.send("Invalid guess length! Guess has to be single char!")
                         return
@@ -70,7 +70,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     if params[0].lower() == "solve":
         try:
             if hangman_game.get_state():
-                if not hangman_game.initiator == author:
+                if hangman_game.initiator != author:
                     SHL.output(f"{author.display_name} tried to solve {hangman_game.word_clear} with {params[1]}",
                                "HangmanGame")  # log
                     system.broadcast(hangman_game.check_word(params[1]))
