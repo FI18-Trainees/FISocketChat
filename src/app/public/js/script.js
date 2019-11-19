@@ -7,7 +7,7 @@ var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
 var userlist = [];
-var notificationmode = 0;
+var notificationmode = 'no';
 var autoscroll = true;
 var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 
@@ -158,7 +158,7 @@ $('document').ready(function () {
         let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
         if (mentioned) {
             msg['msg_body'] = makeMention(content);
-            if (checkPermission() && notificationmode !== 0) {
+            if (checkPermission() && notificationmode !== 'no') {
                 newNotification("You have been mentioned!");
             }
         }
@@ -180,7 +180,7 @@ $('document').ready(function () {
         if (!focused) {
             unread++;
             document.title = "Socket.IO chat" + " (" + unread + ")";
-            if (checkPermission() && notificationmode === 2) {
+            if (checkPermission() && notificationmode === 'all') {
                 if (unread === 1) {
                     newNotification(unread + " unread message!");
                 } else if (unread % 5 === 0) {
