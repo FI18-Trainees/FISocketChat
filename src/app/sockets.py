@@ -139,6 +139,9 @@ def connect(data=""):
 
         if r.status_code != 200:
             SHL.output(f"{yellow2}Error on receiving userconfig: {r.status_code}{white}", "S.ON Connect")
+            if "cloudflare" in r.text.lower():
+                emit('error', {'status_code': r.status_code, 'message': "authentication service offline"})
+                return
             emit('error', {'status_code': r.status_code, 'message': r.text})
             return
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
