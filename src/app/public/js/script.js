@@ -227,6 +227,7 @@ $('document').ready(function () {
 
     $('#notification-mode').change(function () {
         notificationmode = this.value;
+        document.cookie = `notificationmode=${notificationmode}; expires=Thu, 01 Jan 2023 00:00:00 UTC; path=/`;
     });
 
     updateEmoteMenu();
@@ -234,6 +235,8 @@ $('document').ready(function () {
 
     mobileAndTabletcheck();
     displayNotifyMode();
+    notificationmode = getCookie('notificationmode');
+    $('#notification-mode').val(notificationmode);
 });
 
 function reconnect() {
