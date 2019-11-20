@@ -62,13 +62,15 @@ class Embed:
         full_timestamp:  str,
         timestamp: str,
         url: str (url),
-        color: str (hex color)
+        color: str (hex color),
+        thumbnail: str (url)
     }
     """
     __content_type = "embed"
 
     def __init__(self, author: User = get_sys_user(), text: str = None, fields: List[Field] = None, media: Media = None,
-                 footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat", color: str = "#eb4034"):
+                 footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
+                 color: str = "#eb4034", thumbnail: str = None):
         self.__author = author
         self.__text = text
         self.__fields = fields
@@ -78,6 +80,7 @@ class Embed:
         self.__timestamp = self.__full_timestamp.strftime("%H:%M:%S")
         self.__url = url
         self.__color = color
+        self.__thumbnail = thumbnail
 
     def add_fields(self, fields):
         if isinstance(fields, Field):
@@ -113,6 +116,9 @@ class Embed:
     def set_color(self, new: str):
         self.__color = new
 
+    def set_thumbnail(self, new: str):
+        self.__thumbnail = new
+
     def to_json(self) -> dict:
         return {
             "content_type": self.__content_type,
@@ -124,5 +130,6 @@ class Embed:
             "full_timestamp":  str(self.__full_timestamp),
             "timestamp": str(self.__timestamp),
             "url": self.__url,
-            "color": self.__color
+            "color": self.__color,
+            "thumbnail": self.__thumbnail
         }
