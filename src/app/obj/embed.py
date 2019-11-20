@@ -43,7 +43,7 @@ class Embed:
                 "display_name": str,
                 "username": str,
                 "avatar": str (url),
-                "chat_color": str
+                "chat_color": str (hex color)
             }
         text: str,
         fields:
@@ -61,13 +61,14 @@ class Embed:
         footer: str,
         full_timestamp:  str,
         timestamp: str,
-        url: str (url)
+        url: str (url),
+        color: str (hex color)
     }
     """
     __content_type = "embed"
 
-    def __init__(self, author: User = get_sys_user(), text: str = None, fields: List[Field] = None,
-                 media: Media = None, footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat"):
+    def __init__(self, author: User = get_sys_user(), text: str = None, fields: List[Field] = None, media: Media = None,
+                 footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat", color: str = "#eb4034"):
         self.__author = author
         self.__text = text
         self.__fields = fields
@@ -76,6 +77,7 @@ class Embed:
         self.__full_timestamp = datetime.now()
         self.__timestamp = self.__full_timestamp.strftime("%H:%M:%S")
         self.__url = url
+        self.__color = color
 
     def add_fields(self, fields):
         if isinstance(fields, Field):
@@ -108,6 +110,9 @@ class Embed:
     def change_chat_color(self, new: str):
         self.__author.chat_color = new
 
+    def set_color(self, new: str):
+        self.__color = new
+
     def to_json(self) -> dict:
         return {
             "content_type": self.__content_type,
@@ -118,5 +123,6 @@ class Embed:
             "footer": self.__footer,
             "full_timestamp":  str(self.__full_timestamp),
             "timestamp": str(self.__timestamp),
-            "url": self.__url
+            "url": self.__url,
+            "color": self.__color
         }
