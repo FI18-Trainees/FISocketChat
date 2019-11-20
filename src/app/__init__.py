@@ -9,7 +9,7 @@ from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
 from .emotes.emote_handling import Emotes
-from .obj import UserManager, get_default_user, UserLimiter
+from .obj import UserManager, get_default_user, UserLimiter, ChatHistory
 from utils.shell import Console, white, green2, red
 
 SHL = Console("Init")
@@ -28,6 +28,9 @@ socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins
 
 # EMOTES
 emote_handler = Emotes(False)
+
+# CHAT
+chat_history = ChatHistory()
 
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)

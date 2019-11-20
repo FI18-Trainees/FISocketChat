@@ -1,0 +1,18 @@
+from .message import Message
+
+
+class ChatHistory:
+    def __init__(self):
+        self.__history = []
+        self.max_length = 100
+
+    def add_message(self, msg: Message):
+        self.__history.append(msg)
+        if len(self.__history) > 100:
+            self.__history.pop(0)
+
+    def to_json(self) -> list:
+        return [x.to_json() for x in self.__history]
+
+    def get_message(self):
+        return self.__history

@@ -7,7 +7,7 @@ from validators import url as val_url
 
 from . import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, login_disabled, request, user_limit
+    code_regex, quote_regex, login_disabled, request, user_limit, chat_history
 from . import handle_command as command_handler
 from .obj import User, Command, Message, get_default_user
 from utils.shell import Console, yellow2, white, green2
@@ -109,6 +109,7 @@ def handle_message(message):
         msg.apply_func((safe_tags_replace, link_replacer, safe_emote_replace, quote_replacer,
                         replace_newline, codeblock_replacer))
 
+        chat_history.add_message(msg=msg)  # log
         emit('chat_message', msg.to_json(), broadcast=True)
     else:
         SHL.output(f"{yellow2}Invalid message length: {len(msg.msg_body)}{white}", "S.ON chat_message")
