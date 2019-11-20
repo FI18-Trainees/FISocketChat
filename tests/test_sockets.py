@@ -88,7 +88,7 @@ class TestClass(unittest.TestCase):
         self.assertEqual(len(sockets.messages), 1)
         self.assertEqual(len(sockets.errors), 0)
         x = sockets.messages[0]
-        y = {"msg_body": "test_message"}  # expected
+        y = {"msg_body": "test_message", "content_type": "message"}  # expected
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
 
