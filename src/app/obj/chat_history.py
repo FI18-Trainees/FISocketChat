@@ -4,11 +4,11 @@ from .message import Message
 class ChatHistory:
     def __init__(self):
         self.__history = []
-        self.max_length = 100
+        self.__max_length = 100
 
     def add_message(self, msg: Message):
         self.__history.append(msg)
-        if len(self.__history) > 100:
+        if len(self.__history) > self.__max_length:
             self.__history.pop(0)
 
     def to_json(self) -> list:
