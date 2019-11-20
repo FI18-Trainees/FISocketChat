@@ -8,6 +8,10 @@ from utils.shell import Console
 SHL = Console("Routes")
 
 
+def get_ip(r) -> str:
+    return r.headers.get('X-Forwarded-For', r.remote_addr)
+
+
 @app.route('/')
 @app.route('/index')
 @auth.login_required
@@ -36,11 +40,12 @@ def send_emotes():
 @auth.login_required
 def send_user():
     r = [x.get("user", get_default_user()).username for x in user_manager.configs.values()]
-    SHL.output(f"[{request.headers.get('X-Forwarded-For', request.remote_addr)}] Returning: {r}", "/api/user")
+    SHL.output(f"[{get_ip(request)}] Returning: {r}", "/api/user")
     return jsonify(r)
 
 
 @app.route('/api/chathistory')
 @auth.login_required
 def send_chat_history():
+    SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
     return jsonify(chat_history.to_json())
