@@ -30,3 +30,12 @@ class User:
 
 def get_default_user() -> User:
     return User(display_name=None, username=None)
+
+
+def get_sys_user() -> User:
+    return User(
+        display_name="System",
+        username="System",
+        chat_color="#FF0000",
+        avatar="/public/img/system.png"
+    )
