@@ -5,6 +5,8 @@ from .user import User
 
 
 class Message:
+    __content_type = "message"
+
     def __init__(self, author: User, msg_body: str, system: bool):
         self.author = author
         self.msg_body = msg_body
@@ -14,6 +16,7 @@ class Message:
 
     def to_json(self) -> dict:
         return {
+            "content_type": self.__content_type,
             "author": self.author.to_json(),
             "msg_body": self.msg_body,
             "system": self.system,
