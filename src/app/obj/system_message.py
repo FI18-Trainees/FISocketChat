@@ -1,14 +1,5 @@
 from .message import Message
-from .user import User
-
-
-def get_sys_user() -> User:
-    return User(
-        display_name="System",
-        username="System",
-        chat_color="#FF0000",
-        avatar="/public/img/system.png"
-    )
+from .user import get_sys_user
 
 
 class SystemMessage(Message):

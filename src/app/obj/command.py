@@ -2,4 +2,4 @@ from .message import Message
 
 
 class Command(Message):
-    pass
+    __content_type = "command"

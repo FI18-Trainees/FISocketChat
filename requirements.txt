@@ -5,3 +5,5 @@ Flask_HTTPAuth==3.3.0
 Flask==1.1.1
 validators==0.14.0
 python-socketio==4.3.1
+aenum==2.2.3
+typing==3.7.4.1
