@@ -14,5 +14,5 @@ class ChatHistory:
     def to_json(self) -> list:
         return [x.to_json() for x in self.__history]
 
-    def get_message(self):
+    def get_messages(self):
         return self.__history
