@@ -5,7 +5,7 @@ import traceback
 from flask_socketio import emit
 
 from app.obj import SystemMessenger, User, Command
-from utils.shell import Console, red, white
+from utils import Console, red, white
 
 SHL = Console("CommandLoader")
 

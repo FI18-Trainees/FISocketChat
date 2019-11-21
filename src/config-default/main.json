@@ -1,0 +1,7 @@
+{
+  "logindisabled": false,
+  "port": 5000,
+  "save_chat_history": true,
+  "chat_history_length": 100,
+  "message_cooldown": true
+}

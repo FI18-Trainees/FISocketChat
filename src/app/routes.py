@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, send_from_directory, make_response, jsonify, request
 
-from . import app, emote_handler, auth, user_manager, chat_history
-from .obj import get_default_user
-from utils.shell import Console
+from app import app, emote_handler, auth, user_manager, chat_history
+from app.obj import get_default_user
+from utils import Console
 
 SHL = Console("Routes")
 
