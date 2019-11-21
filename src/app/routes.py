@@ -54,6 +54,7 @@ def send_chat_history():
 
 
 @app.route('/uploads/<filename>')
+@auth.login_required
 def uploaded_file(filename):
     return send_from_directory(os.path.join("storage", "uploads"), filename)
 
@@ -67,7 +68,7 @@ def upload_file():
             make_response("no file submitted", 400)
         file = request.files['file']
 
-        if file.filename == '':
+        if file.filename.strip() == '':
             make_response("no file submitted", 400)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
