@@ -3,7 +3,7 @@ from flask import render_template, send_from_directory, make_response, jsonify, 
 
 from . import app, emote_handler, auth, user_manager, chat_history
 from .obj import get_default_user
-from utils.shell import Console
+from utils import Console
 
 SHL = Console("Routes")
 

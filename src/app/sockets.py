@@ -10,7 +10,7 @@ from . import socketio, emote_handler,  user_manager, verify_token, \
     code_regex, quote_regex, login_disabled, request, user_limit, chat_history
 from . import handle_command as command_handler
 from .obj import User, Command, Message, get_default_user
-from utils.shell import Console, yellow2, white, green2
+from utils import Console, yellow2, white, green2
 
 SHL = Console("Socket")
 

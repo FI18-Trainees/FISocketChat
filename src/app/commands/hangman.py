@@ -1,6 +1,6 @@
 from app.obj import SystemMessenger, User, Command
 from app.obj.games.hangmangame import HangmanGame
-from utils.shell import Console
+from utils import Console
 
 hangman_game = HangmanGame()
 

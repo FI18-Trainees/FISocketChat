@@ -1,5 +1,5 @@
 from app.obj import SystemMessenger, User, Command
-from utils.shell import Console, white, red
+from utils import Console, white, red
 from app.obj import SystemMessage
 
 SHL = Console("Command Example")

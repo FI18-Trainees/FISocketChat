@@ -1,5 +1,5 @@
 from app.obj import SystemMessenger, User, Command
-from utils.shell import Console, white, red, yellow
+from utils import Console, white, red, yellow
 import subprocess
 
 SHL = Console("Command gitversion")
