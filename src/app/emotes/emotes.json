@@ -314,6 +314,11 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/pedalo.png' style='height:32px; width:auto;' alt='Pedalo' title='Pedalo'>"
   },
+  "uargh": {
+    "replace": "<img src='/public/img/uargh.png' style='height:40px; width:auto;' alt='Würg' title='Würg'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/uargh.png' style='height:32px; width:auto;' alt='Würg' title='Würg'>"
+  },
   ":P": {
     "replace": "<img src='/public/img/face-with-stuck-out-tongue.png' style='height:40px; width:auto;' alt=':P' title=':P'>",
     "menuDisplay": false,
