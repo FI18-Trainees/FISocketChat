@@ -8,8 +8,8 @@ from flask_socketio import SocketIO
 from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
-from .emotes.emote_handling import Emotes
-from .obj import UserManager, get_default_user, UserLimiter, ChatHistory
+from app.emotes import Emotes
+from app.obj import UserManager, get_default_user, UserLimiter, ChatHistory
 from utils import Console, white, green2, red, cfg
 
 SHL = Console("Init")

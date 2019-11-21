@@ -1,6 +1,7 @@
+import subprocess
+
 from app.obj import SystemMessenger, User, Command
 from utils import Console, white, red, yellow
-import subprocess
 
 SHL = Console("Command gitversion")
 
