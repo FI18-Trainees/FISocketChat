@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sys
+import sys, os
 import requests
 from re import compile, MULTILINE, IGNORECASE
 
@@ -18,6 +18,7 @@ SHL = Console("Init")
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 app.config['JSON_SORT_KEYS'] = False
+app.config['UPLOAD_FOLDER'] = os.path.join("app", "storage", "uploads")
 
 auth = HTTPTokenAuth()
 user_manager = UserManager()
