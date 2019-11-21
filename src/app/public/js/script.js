@@ -153,21 +153,29 @@ $('document').ready(function () {
         }
     });
     socket.on('chat_message', function (msg) {
-        let content = msg['msg_body'];
-      
-        let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
-        if (mentioned) {
-            msg['msg_body'] = makeMention(content);
-            if (checkPermission() && notificationmode !== 'no') {
-                newNotification("You have been mentioned!");
-            }
-        }
 
-        // check if username of last message is identical to new message
-        if($('#messages :last-child div h2 div').prop('title') === msg['author']['username']) {
-            appendMessage(msg['msg_body'], msg['timestamp']);
-        } else {
-            addMessage(msg);
+        switch (msg['content_type']) {
+            case 'message':
+                let content = msg['msg_body'];
+                let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
+                if (mentioned) {
+                    msg['msg_body'] = makeMention(content);
+                    if (checkPermission() && notificationmode !== 'no') {
+                        newNotification("You have been mentioned!");
+                    }
+                }
+
+                // check if username of last message is identical to new message
+                if($('#messages :last-child div h2 div').prop('title') === msg['author']['username']) {
+                    appendMessage(msg['msg_body'], msg['timestamp']);
+                } else {
+                    addMessage(msg);
+                }
+
+                break;
+            case 'embed':
+                addEmbed(msg);
+                break;
         }
         //check if chat would overflow currentSize and refresh scrollbar
         if (checkOverflow(document.querySelector('#messages'))) { 
@@ -282,6 +290,34 @@ function setUserCount(count) {
         userlist = data;
         userlist.push('everyone');
     });
+}
+
+function addEmbed(msg) {
+    /*TODO: Only append if content (e.g. img, text, field) is given*/
+    let author_name = msg['author']['username'];
+    let display_name = msg['author']['display_name'];
+    let author_color = msg['author']['chat-color'];
+    let author_avatar = msg['author']['avatar'];
+    let text = msg['text'];
+    let fields = msg['fields'];
+    let footer = msg['footer'];
+    let full_timestamp = msg['full_timestamp'];
+    let footer = msg['url'];
+    let color = msg['color'];
+    let thumbnail = msg['thumbnail'];
+
+    embed_container = $('<div class="embed-container d-flex border-bottom border-left p-2">');
+    embed_header = $('<div class="embed-header d-inline-flex align-items-baseline mb-1">');
+    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle" src="' + user_avatar + '">');
+    embed_author_name = $('<div class="embed-author-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
+    embed_topic_container = $('<div class="embed-topic-container">');
+    embed_footer_container = $('<div class="embed-footer-container d-inline-flex">');
+    embed_footer = $('<a class="embed-footer">').text(encodeURI(footer));
+    embed_timestamp = $('<p class="embed-timestamp">').text(full_timestamp);
+
+    embed_container.append(embed_header, embed_topic_container, embed_footer_container);
+    embed_header.append(embed_author_thumbnail, embed_author_name);
+    embed_footer_container.append(embed_footer, embed_timestamp);
 }
 
 function showError(message) {
