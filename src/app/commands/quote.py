@@ -16,7 +16,7 @@ if not os.path.exists(os.path.join("app", "storage", "quotes")):
     SHL.output(f"{green2}Quotes  folder was not present, created quotes folder.{white}", "Upload")
 
 filename = os.path.join("app", "storage", "quotes", "quotes.json")
-quotes = json.load(open(filename, encoding='utf-8', mode='a'))
+quotes = json.load(open(filename, encoding='utf-8', mode='r'))
 index = len(quotes)
 
 
