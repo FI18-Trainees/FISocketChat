@@ -200,9 +200,8 @@ $('document').ready(function () {
         }
         if (status.hasOwnProperty('username')) {
             ownusername = status['username'].toLowerCase();
-            document.getElementById('logininfo_name').innerHTML = "Logged in as " + status['username'];
-            document.getElementById('logininfo_picture').setAttribute("src",
-                "https://profile.zaanposni.com/pictures/" + ownusername + ".png");
+            $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color']);
+            $('#logininfo_picture').src(`https://profile.zaanposni.com/pictures/${ownusername}.png`);
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
