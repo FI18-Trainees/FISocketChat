@@ -200,6 +200,8 @@ $('document').ready(function () {
         }
         if (status.hasOwnProperty('username')) {
             ownusername = status['username'].toLowerCase();
+            $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color']);
+            $('#logininfo_picture').src(`https://profile.zaanposni.com/pictures/${ownusername}.png`);
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
@@ -208,6 +210,7 @@ $('document').ready(function () {
             } else {
                 document.getElementById('username-item').style.display = 'block';
                 document.getElementById('user_name').value = 'DebugUser';
+                document.getElementById('logininfo_sitebar').style.display = "none";
                 loginmode = false;
             }
         }

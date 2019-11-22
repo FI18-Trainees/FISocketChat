@@ -162,7 +162,7 @@ def connect(data=""):
             emit('error', {'message': 'invalid userconfig'})
             return
 
-        emit('status', {'loginmode': True, 'username': new_user.username})
+        emit('status', {'loginmode': True, 'username': new_user.username, 'chat_color': new_user.chat_color})
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     else:
         emit('status', {'loginmode': False})
