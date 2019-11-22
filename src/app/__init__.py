@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys
+import os
+import shutil
 import requests
 from re import compile, MULTILINE, IGNORECASE
 
@@ -18,6 +20,8 @@ SHL = Console("Init")
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 app.config['JSON_SORT_KEYS'] = False
+app.config['UPLOAD_FOLDER'] = os.path.join("app", "storage", "uploads")
+app.config['MAX_CONTENT_LENGTH'] = 3.5 * 1024 * 1024    # 3.5 Mb limit
 
 auth = HTTPTokenAuth()
 user_manager = UserManager()
@@ -95,6 +99,25 @@ def verify_token(token):
 from .commands import handle_command
 from .sockets import emit_status  # TODO: dafuq is this, send help
 from .import routes
+
+
+# checking and creating upload dir
+if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+    SHL.output(f"{green2}Upload folder was not present, created upload folder.{white}", "Upload")
+
+else:
+    # cleaning upload folder
+    SHL.output(f"{green2}Cleaning Upload folder.{white}", "Upload")
+    for the_file in os.listdir(app.config['UPLOAD_FOLDER']):
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            SHL.output(f"{red} ERROR: Cleaning Upload folder., Reason: {e}{white}", "Upload")
 
 
 # I left this for testing
