@@ -538,3 +538,9 @@ $('#fileinput').on('change', function () {
     }
   });
 });
+
+function inputButtonClick() {
+    let evt = document.createEvent('MouseEvent');
+    evt.initEvent('click', true, false);
+    document.getElementById('fileinput').dispatchEvent(evt);
+}
