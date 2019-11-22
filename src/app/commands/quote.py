@@ -11,27 +11,16 @@ settings = {
     'system_display_name': 'Quotinator'
 }
 
-path = ""
-
 if not os.path.exists(os.path.join("app", "storage", "quotes")):
     os.makedirs(os.path.join("app", "storage", "quotes"), exist_ok=True)
     SHL.output(f"{green2}Quotes  folder was not present, created quotes folder.{white}", "Upload")
 
 filename = os.path.join("app", "storage", "quotes", "quotes.json")
-
-
-def get_quotes():
-    if filename:
-        with open(filename, encoding='utf-8', mode='a') as f:
-            return json.load(f)
-
-
-quotes = get_quotes()
+quotes = json.load(open(filename, encoding='utf-8', mode='a'))
 index = len(quotes)
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
-
     if not len(params):
         system.send("'/quote can be either used to register or show quotes.")
         return
