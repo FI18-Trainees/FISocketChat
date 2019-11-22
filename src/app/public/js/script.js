@@ -502,7 +502,7 @@ $('#fileinput').on('change', function (e) {
     return false;
   }
   $.ajax({
-    url: '/api/upload',
+    url: '/api/upload/',
     type: 'POST',
 
     data: new FormData($('#form')[0]),
@@ -510,24 +510,10 @@ $('#fileinput').on('change', function (e) {
     contentType: false,
     processData: false,
 
-    xhr: function () {
-      var myXhr = $.ajaxSettings.xhr();
-      if (myXhr.upload) {
-        myXhr.upload.addEventListener('progress', function (e) {
-          if (e.lengthComputable) {
-            $('progress').attr({
-              value: e.loaded,
-              max: e.total,
-            });
-          }
-        }, false);
-      }
-      myXhr.onloadend = function(e){
-        if(myXhr.status === 200) {
-            messagefield.val(messagefield.val() + " " + window.location.protocol + "//" + window.location.host + "/" +  myXhr.responseText.substring(1));
+    success: function (data, b, jqXHR) {
+        if(jqXHR.status === 200) {
+            messagefield.val(messagefield.val() + " " + window.location.protocol + "//" + window.location.host + data);
         }
-      };
-      return myXhr;
     }
   });
 });
