@@ -494,10 +494,12 @@ function getMessageHistory() {
     });
 }
 
-$('#fileinput').on('change', function () {
+$('#fileinput').on('change', function (e) {
   let file = this.files[0];
   if (file.size > 1024*1024*3) {
     alert('max upload size is 3M');
+    e.preventDefault();
+    return false;
   }
   $.ajax({
     url: '/api/upload',
