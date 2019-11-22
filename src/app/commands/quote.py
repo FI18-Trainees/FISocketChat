@@ -13,7 +13,7 @@ settings = {
 
 if not os.path.exists(os.path.join("app", "storage", "quotes")):
     os.makedirs(os.path.join("app", "storage", "quotes"), exist_ok=True)
-    SHL.output(f"{green2}Quotes  folder was not present, created quotes folder.{white}", "Upload")
+    SHL.output(f"{green2}Quotes  folder was not present, created quotes folder.{white}", "Quotes")
 
 filename = os.path.join("app", "storage", "quotes", "quotes.json")
 with open(filename, 'r', encoding="utf-8") as c:
