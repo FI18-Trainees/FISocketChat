@@ -1,11 +1,10 @@
 from app.obj import SystemMessenger, User, Command
-from utils import Console, white, red
+from utils import Console, green2, white
 from random import randint as rand
-from app.obj import SystemMessage
 import json
 import os.path
 
-SHL = Console("Quotes")
+SHL = Console("Command quote")
 
 settings = {
     'invoke': 'quote',
@@ -13,12 +12,17 @@ settings = {
 }
 
 path = ""
-file = os.path.join("app", "storage", "quotes", "quotes.json")
+
+if not os.path.exists(os.path.join("app", "storage", "quotes")):
+    os.makedirs(os.path.join("app", "storage", "quotes"), exist_ok=True)
+    SHL.output(f"{green2}Quotes  folder was not present, created quotes folder.{white}", "Upload")
+
+filename = os.path.join("app", "storage", "quotes", "quotes.json")
 
 
 def get_quotes():
-    if file:
-        with open(file, encoding='utf-8', mode='r') as f:
+    if filename:
+        with open(filename, encoding='utf-8', mode='a') as f:
             return json.load(f)
 
 
@@ -50,10 +54,9 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         if len(params) > 2:
             quote = ' '.join(params[1:])
             quotes.update(index, quote)
-            with open(file, encoding='utf-8', mode='a') as x:
+            with open(filename, encoding='utf-8', mode='a') as x:
                 x.write(quotes)
-                x.close()
-                SHL.output(f"Quote registered! {index} : {quote} | Quote written to file.")
+            SHL.output(f"Quote registered! {index} : {quote} | Quote written to file.")
             system.send(f"Quote \"{quote}\" successfully registered")
             return
         system.send("Please also provide a sentence to register and not just type /quote register.")
