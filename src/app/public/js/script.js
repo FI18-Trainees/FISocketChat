@@ -302,8 +302,19 @@ function addEmbed(msg) {
     let full_timestamp = msg['full_timestamp'];
     let title = msg['title'];
 
-    embed_container.append(embed_header, embed_topic_container);
-    embed_header.append(embed_author_name, embed_title);
+    embed_container = $('<div class="embed-container d-flex border-bottom border-left p-2">');
+    embed_header = $('<div class="embed-header d-inline-flex align-items-baseline mb-1">');
+
+    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle" src="' + author_avatar + '">');
+    embed_author_name = $('<div class="embed-author-name">').prop('title', author_name).text(display_name).css('color', author_color).click(uname_name_click);
+    embed_title = $('<div class="embed-title">').text(title);
+
+    embed_footer_container = $('<div class="embed-footer-container d-inline-flex">');
+    embed_timestamp = $('<p class="embed-timestamp">').text(full_timestamp);
+
+    embed_container.append(embed_header, embed_topic_container, embed_footer_container);
+    embed_header.append(embed_author_thumbnail, embed_author_name, embed_title);
+    embed_footer_container.append(embed_timestamp);
 
     if msg.hasOwnProperty('text') {
         let text = msg['text'];
@@ -317,7 +328,7 @@ function addEmbed(msg) {
     }
     if msg.hasOwnProperty('footer') {
         let footer = msg['footer'];
-        embed_footer_container = $('<div class="embed-footer-container d-inline-flex">');
+
         embed_footer = $('<p class="embed-footer">').text(footer);
         embed_container.append(embed_footer_container);
         embed_footer_container.append(embed_footer, embed_timestamp);
@@ -332,15 +343,6 @@ function addEmbed(msg) {
         embed_thumbnail.onload = function () {imgloaded();};
         embed_header.append(embed_author_thumbnail);
     }
-
-    embed_container = $('<div class="embed-container d-flex border-bottom border-left p-2">');
-    embed_header = $('<div class="embed-header d-inline-flex align-items-baseline mb-1">');
-
-    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle" src="' + author_avatar + '">');
-    embed_author_name = $('<div class="embed-author-name">').prop('title', author_name).text(display_name).css('color', author_color).click(uname_name_click);
-    embed_title = $('<div class="embed-title">').text(title);
-
-    embed_timestamp = $('<p class="embed-timestamp">').text(full_timestamp);
 
     $('#messages').append(embed_container);
 }
