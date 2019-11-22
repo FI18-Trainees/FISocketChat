@@ -33,9 +33,19 @@ def status():
     return response
 
 
-@app.route('/public/<path:path>')
-def send_public(path):
-    return send_from_directory('public', path)
+@app.route('/public/js/<path:path>')
+def send_js(path):
+    return send_from_directory(os.path.join('public', 'js'), path, mimetype='text/javascript')
+
+
+@app.route('/public/img/<path:path>')
+def send_img(path):
+    return send_from_directory(os.path.join('public', 'img'), path, mimetype='image')
+
+
+@app.route('/public/css/<path:path>')
+def send_css(path):
+    return send_from_directory(os.path.join('public', 'css'), path, mimetype='text/css')
 
 
 @app.route('/api/emotes')
