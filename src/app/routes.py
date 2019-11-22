@@ -3,14 +3,12 @@ import os
 from datetime import datetime
 from hashlib import md5
 
-from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash, redirect
+from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash
 from werkzeug.utils import secure_filename
 
 from app import app, emote_handler, auth, user_manager, chat_history
 from app.obj import get_default_user
 from utils import Console
-
-
 
 SHL = Console("Routes")
 
@@ -105,4 +103,3 @@ def __gen_md5(fname):
         for chunk in iter(lambda: f.read(4096), b""):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
-
