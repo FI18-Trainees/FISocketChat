@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-import sys
 import os
 import shutil
-import requests
+import sys
 from re import compile, MULTILINE, IGNORECASE
 
+import requests
 from flask import Flask
-from flask_socketio import SocketIO
-from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
+from flask_httpauth import HTTPTokenAuth
+from flask_socketio import SocketIO
 
 from app.emotes import Emotes
 from app.obj import UserManager, get_default_user, UserLimiter, ChatHistory
@@ -94,11 +94,6 @@ def verify_token(token):
         return r.text
     SHL.output(f"{red}Returning False, invalid session.{white}", "TokenAuth")
     return False
-
-
-from .commands import handle_command
-from .sockets import emit_status  # TODO: dafuq is this, send help
-from .import routes
 
 
 # checking and creating upload dir
