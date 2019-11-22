@@ -298,26 +298,51 @@ function addEmbed(msg) {
     let display_name = msg['author']['display_name'];
     let author_color = msg['author']['chat-color'];
     let author_avatar = msg['author']['avatar'];
-    let text = msg['text'];
-    let fields = msg['fields'];
-    let footer = msg['footer'];
+
     let full_timestamp = msg['full_timestamp'];
-    let footer = msg['url'];
-    let color = msg['color'];
-    let thumbnail = msg['thumbnail'];
+    let title = msg['title'];
+
+    embed_container.append(embed_header, embed_topic_container);
+    embed_header.append(embed_author_name, embed_title);
+
+    if msg.hasOwnProperty('text') {
+        let text = msg['text'];
+    }
+    if msg.hasOwnProperty('fields') {
+        let fields = msg['fields'];
+        embed_topic_container = $('<div class="embed-topic-container">');
+    }
+    if msg.hasOwnProperty('media') {
+        let media = msg['media'];
+    }
+    if msg.hasOwnProperty('footer') {
+        let footer = msg['footer'];
+        embed_footer_container = $('<div class="embed-footer-container d-inline-flex">');
+        embed_footer = $('<p class="embed-footer">').text(footer);
+        embed_container.append(embed_footer_container);
+        embed_footer_container.append(embed_footer, embed_timestamp);
+    }
+    if msg.hasOwnProperty('color') {
+        let color = msg['color'];
+    }
+    if msg.hasOwnProperty('thumbnail') {
+        let thumbnail = msg['thumbnail'];
+        embed_thumbnail = new Image();
+        embed_thumbnail.src = thumbnail;
+        embed_thumbnail.onload = function () {imgloaded();};
+        embed_header.append(embed_author_thumbnail);
+    }
 
     embed_container = $('<div class="embed-container d-flex border-bottom border-left p-2">');
     embed_header = $('<div class="embed-header d-inline-flex align-items-baseline mb-1">');
-    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle" src="' + user_avatar + '">');
-    embed_author_name = $('<div class="embed-author-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
-    embed_topic_container = $('<div class="embed-topic-container">');
-    embed_footer_container = $('<div class="embed-footer-container d-inline-flex">');
-    embed_footer = $('<a class="embed-footer">').text(encodeURI(footer));
+
+    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle" src="' + author_avatar + '">');
+    embed_author_name = $('<div class="embed-author-name">').prop('title', author_name).text(display_name).css('color', author_color).click(uname_name_click);
+    embed_title = $('<div class="embed-title">').text(title);
+
     embed_timestamp = $('<p class="embed-timestamp">').text(full_timestamp);
 
-    embed_container.append(embed_header, embed_topic_container, embed_footer_container);
-    embed_header.append(embed_author_thumbnail, embed_author_name);
-    embed_footer_container.append(embed_footer, embed_timestamp);
+    $('#messages').append(embed_container);
 }
 
 function showError(message) {
