@@ -38,7 +38,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         return
 
     if params[0].lower() == "register":
-        if len(params) > 2:
+        if len(params) > 1:
             quote = ' '.join(params[1:])
             quotes.append(quote)
             with open(filename, 'w', encoding="utf-8") as f:
