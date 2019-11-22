@@ -59,8 +59,4 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         system.send("Please also provide a sentence to register and not just type /quote register.")
         return
 
-    if params[0].lower() == "log":
-        system.send("ok")
-        return
-
     system.send("For further information on /quote see '/quote help' or '/quote info'")
