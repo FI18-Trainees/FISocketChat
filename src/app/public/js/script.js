@@ -131,6 +131,7 @@ $('document').ready(function () {
     });
     socket.on('connect', function () {
         changeOnlineStatus(true);
+        getMessageHistory();
     });
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
@@ -466,6 +467,31 @@ function checkOverflow(el) {
     el.style.overflow = curOverflow;
 
     return isOverflowing;
+}
+
+function getMessageHistory() {
+    $.getJSON('/api/chathistory', function (result) {
+        // checking if the JSON even contains messages.
+        if (Object.keys(result).length > 0) {
+            // clearing chat
+            $('#messages').empty();
+            // iterate over each message from the JSON
+            for (let msg in result) {
+                if($('#messages :last-child div h2 div').prop('title') === result[msg]['author']['username']) {
+                    appendMessage(result[msg]['msg_body'], result[msg]['timestamp']);
+                } else {
+                    addMessage(result[msg]);
+                }
+            }
+            if (checkOverflow(document.querySelector('#messages'))) {
+            $('.nano').nanoScroller();
+            if(autoscroll) {
+                chatdiv = document.querySelector('#messages');
+                chatdiv.scrollTop = chatdiv.scrollHeight;
+            }
+        }
+        }
+    });
 }
 
 $('#fileinput').on('change', function () {
