@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 import os
+from datetime import datetime
+
 from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash, redirect
 
 from app import app, emote_handler, auth, user_manager, chat_history
 from app.obj import get_default_user
 from utils import Console
 from werkzeug.utils import secure_filename
+from hashlib import md5
 
 SHL = Console("Routes")
+
+UploadedFiles = dict()
 
 
 def get_ip(r) -> str:
@@ -59,7 +64,7 @@ def uploaded_file(filename):
     return send_from_directory(os.path.join("storage", "uploads"), filename)
 
 
-@app.route('/upload/', methods=['GET', 'POST'])
+@app.route('/upload/', methods=['POST'])
 @auth.login_required
 def upload_file():
     if request.method == 'POST':
@@ -72,10 +77,18 @@ def upload_file():
         if file.filename.strip() == '':
             make_response("no file submitted", 400)
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+
+            filename = secure_filename(str(datetime.now()) + "-" + file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return url_for('uploaded_file', filename=filename)
-    return make_response("unsupported method", 400)
+
+            filemd5 = __gen_md5(filename)
+            if filemd5 in UploadedFiles:
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                return UploadedFiles.get(filemd5)['url']
+            else:
+                file_url = url_for('uploaded_file', filename=filename)
+                UploadedFiles.update({filemd5: {'url': file_url, 'date': datetime.now()}})
+                return file_url
 
 
 def allowed_file(filename):
@@ -84,6 +97,10 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
 
-def check_file_exists(file):
-    pass
+def __gen_md5(fname):
+    hash_md5 = md5()
+    with open(os.path.join(app.config['UPLOAD_FOLDER'], fname), "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
 

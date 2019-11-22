@@ -501,7 +501,9 @@ $('#fileinput').on('change', function () {
         }, false);
       }
       myXhr.onloadend = function(e){
+        if(myXhr.status === 200) {
             messagefield.val(messagefield.val() + " " + window.location.href +  myXhr.responseText.substring(1));
+        }
       };
       return myXhr;
     }

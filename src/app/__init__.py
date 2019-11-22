@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-import sys, os
+import sys
+import os
+import shutil
 import requests
 from re import compile, MULTILINE, IGNORECASE
 
@@ -96,6 +98,18 @@ def verify_token(token):
 from .commands import handle_command
 from .sockets import emit_status  # TODO: dafuq is this, send help
 from .import routes
+
+# cleaning upload folder
+SHL.output(f"{green2}Cleaning Upload folder.{white}", "Upload")
+for the_file in os.listdir(app.config['UPLOAD_FOLDER']):
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], the_file)
+    try:
+        if os.path.isfile(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    except Exception as e:
+        SHL.output(f"{red} ERROR: Cleaning Upload folder., Reason: {e}{white}", "Upload")
 
 
 # I left this for testing
