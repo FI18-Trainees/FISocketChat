@@ -37,7 +37,8 @@ class Embed:
     """
     Structure:
     {
-        content_type = "embed"
+        content_type = "embed",
+        title: str
         author:
             {
                 "display_name": str,
@@ -68,9 +69,10 @@ class Embed:
     """
     __content_type = "embed"
 
-    def __init__(self, author: User = get_sys_user(), text: str = None, fields: List[Field] = None, media: Media = None,
+    def __init__(self, title: str, author: User = get_sys_user(), text: str = None, fields: List[Field] = None, media: Media = None,
                  footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
-                 color: str = "#eb4034", thumbnail: str = None):
+                 color: str = "#F04747", thumbnail: str = None):
+        self.__title = title
         self.__author = author
         self.__text = text
         self.__fields = fields
@@ -122,6 +124,7 @@ class Embed:
     def to_json(self) -> dict:
         return {
             "content_type": self.__content_type,
+            "title": self.__title,
             "author": self.__author.to_json(),
             "text": self.__text,
             "fields": [x.to_json() for x in self.__fields],
