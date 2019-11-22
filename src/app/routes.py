@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 import os
 from datetime import datetime
+from hashlib import md5
 
 from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash, redirect
+from werkzeug.utils import secure_filename
 
 from app import app, emote_handler, auth, user_manager, chat_history
 from app.obj import get_default_user
 from utils import Console
-from werkzeug.utils import secure_filename
-from hashlib import md5
+
+
 
 SHL = Console("Routes")
 
-UploadedFiles = dict()
+uploaded_files = dict()
 
 
 def get_ip(r) -> str:
@@ -82,12 +84,12 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             filemd5 = __gen_md5(filename)
-            if filemd5 in UploadedFiles:
+            if filemd5 in uploaded_files:
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                return UploadedFiles.get(filemd5)['url']
+                return uploaded_files.get(filemd5)['url']
             else:
                 file_url = url_for('uploaded_file', filename=filename)
-                UploadedFiles.update({filemd5: {'url': file_url, 'date': datetime.now()}})
+                uploaded_files.update({filemd5: {'url': file_url, 'date': datetime.now()}})
                 return file_url
 
 

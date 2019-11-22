@@ -21,6 +21,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 app.config['JSON_SORT_KEYS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join("app", "storage", "uploads")
+app.config['MAX_CONTENT_LENGTH'] = 3.5 * 1024 * 1024    # 3.5 Mb limit
 
 auth = HTTPTokenAuth()
 user_manager = UserManager()
