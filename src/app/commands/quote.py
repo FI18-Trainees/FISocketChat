@@ -26,8 +26,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         return
 
     if params[0].lower() == "help":
-        system.send("Usable commands:<br/>'/quote register \"sentence\"'<br/>'/quote random'<br/>"
-                    "'/quote X'<br/>/quote info")
+        system.send("Usable commands:<br/>/quote register sentence<br/>/quote random<br/>/quote info")
         return
 
     if params[0].lower() == "info":
@@ -50,4 +49,4 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         system.send("Please also provide a sentence to register and not just type /quote register.")
         return
 
-    system.send("For further information on /quote see '/quote help' or '/quote info'")
+    system.send("For further information on /quote see /quote help or /quote info")
