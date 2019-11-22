@@ -312,7 +312,7 @@ function addEmbed(msg) {
     embed_footer_container = $('<div class="embed-footer-container d-inline-flex">');
     embed_timestamp = $('<p class="embed-timestamp">').text(full_timestamp);
 
-    embed_container.append(embed_header, embed_topic_container, embed_footer_container);
+    embed_container.append(embed_header, embed_footer_container);
     embed_header.append(embed_author_thumbnail, embed_author_name, embed_title);
     embed_footer_container.append(embed_timestamp);
 
@@ -321,17 +321,25 @@ function addEmbed(msg) {
     }
     if msg.hasOwnProperty('fields') {
         let fields = msg['fields'];
-        embed_topic_container = $('<div class="embed-topic-container">');
+        embed_field_container = $('<div class="embed-field-container">');
+        embed_container.append(embed_field_container);
+        fields.forEach(function(item) {
+            embed_topic_container = $('<div class="embed-topic-container">');
+            embed_topic = $('<p class="embed-topic">').text(item['topic']);
+            embed_topic_value = $('<p class="embed-topic-value">').text(item['value']);
+
+            embed_field_container.append(embed_topic_container);
+            embed_topic_container.append(embed_topic, embed_topic_value);
+        });
+
     }
     if msg.hasOwnProperty('media') {
         let media = msg['media'];
     }
     if msg.hasOwnProperty('footer') {
         let footer = msg['footer'];
-
         embed_footer = $('<p class="embed-footer">').text(footer);
-        embed_container.append(embed_footer_container);
-        embed_footer_container.append(embed_footer, embed_timestamp);
+        embed_footer_container.prepend(embed_footer);
     }
     if msg.hasOwnProperty('color') {
         let color = msg['color'];
