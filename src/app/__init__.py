@@ -21,7 +21,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 app.config['JSON_SORT_KEYS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join("app", "storage", "uploads")
-app.config['MAX_CONTENT_LENGTH'] = 3.5 * 1024 * 1024    # 3.5 Mb limit
+app.config['MAX_CONTENT_LENGTH'] = 3.5 * 1024 * 1024  # 3.5 Mb limit
 
 auth = HTTPTokenAuth()
 user_manager = UserManager()
@@ -39,15 +39,16 @@ chat_history = ChatHistory()
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
 html_regex = compile(r"[<>]|&(?=[#\w]{1,5};)", MULTILINE)
-link_regex = compile(r"(?:(http|ftp|https)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?", MULTILINE)
-youtube_regex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?(?:(?:[&?])t=(\d+))?")
+link_regex = compile(r"(?:(http|ftp|https)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?",
+                     MULTILINE)
+youtube_regex = compile(
+    r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?(?:(?:[&?])t=(\d+))?")
 image_regex = compile(r".+\.(?:jpg|gif|png|jpeg|bmp)", IGNORECASE)
 audio_regex = compile(r".+\.(?:mp3|wav|ogg)", IGNORECASE)
 video_regex = compile(r".+\.(?:mp4|ogg|webm)", IGNORECASE)
 newline_html_regex = compile(r'[\n\r]')
 code_regex = compile(r"(```)(.+?|[\r\n]+?)(```)", MULTILINE)
 quote_regex = compile(r"^&gt; (.+)", MULTILINE)
-
 
 # Startup parameters
 start_args = [x.strip().lower() for x in sys.argv]
@@ -67,7 +68,9 @@ if "-dummyuser" in start_args:
 
 @auth.error_handler
 def auth_error():
-    return redirect(f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com/{request.script_root + request.path}", code=401)
+    return redirect(
+        f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com/{request.script_root + request.path}",
+        code=401)
 
 
 @auth.verify_token
@@ -87,7 +90,7 @@ def verify_token(token):
                          'Cache-Control': 'no-cache',
                          'X-Auth-For': ip,
                          'Authorization': f"Bearer {token}"
-                             })
+                     })
     SHL.output(f"Response from auth service: {r.text}", "TokenAuth")
     if r.status_code == 200:
         SHL.output(f"{green2}Returning True.{white}", "TokenAuth")
@@ -113,7 +116,6 @@ else:
                 shutil.rmtree(file_path)
         except Exception as e:
             SHL.output(f"{red} ERROR: Cleaning Upload folder., Reason: {e}{white}", "Upload")
-
 
 # I left this for testing
 if dummy_user:
