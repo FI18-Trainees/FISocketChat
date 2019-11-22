@@ -17,8 +17,7 @@ if not os.path.exists(os.path.join("app", "storage", "quotes")):
 
 filename = os.path.join("app", "storage", "quotes", "quotes.json")
 with open(filename, 'r', encoding="utf-8") as c:
-    quotes = set(json.load(c))
-quotes = list(quotes)
+    quotes = list(set(json.load(c)))
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
@@ -43,9 +42,8 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         if len(params) > 2:
             quote = ' '.join(params[1:])
             quotes.append(quote)
-            quotes_set = set(quotes)
             with open(filename, 'w', encoding="utf-8") as f:
-                json.dump(list(quotes_set), f)
+                json.dump(list(set(quotes)), f)
             SHL.output(f"Quote registered! : {quote} | Quote written to file.")
             system.send(f"Quote \"{quote}\" successfully registered")
             return
