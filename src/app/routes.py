@@ -68,13 +68,13 @@ def send_chat_history():
     return jsonify(chat_history.to_json())
 
 
-@app.route('/uploads/<filename>')
+@app.route('/api/uploads/<filename>')
 @auth.login_required
 def uploaded_file(filename):
     return send_from_directory(os.path.join("storage", "uploads"), filename)
 
 
-@app.route('/upload/', methods=['POST'])
+@app.route('/api/upload/', methods=['POST'])
 @auth.login_required
 def upload_file():
     if request.method == 'POST':

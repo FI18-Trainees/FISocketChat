@@ -331,7 +331,7 @@ function updateEmoteMenu() {
                 // jumping over the hidden ones.
                 if (result[emote]["menuDisplay"]) {
                     emoteitem = document.createElement('a');
-                    emoteitem.href = "#";
+                    emoteitem.classList.add('cursor-pointer');
                     emoteitem.innerHTML = result[emote]["menuDisplayCode"];
                     emoteitem.onclick = function () {
                         addEmoteCode(emote);
@@ -477,7 +477,7 @@ $('#fileinput').on('change', function () {
 
   $.ajax({
     // Your server script to process the upload
-    url: 'upload',
+    url: '/api/upload',
     type: 'POST',
 
     // Form data
@@ -505,7 +505,7 @@ $('#fileinput').on('change', function () {
       }
       myXhr.onloadend = function(e){
         if(myXhr.status === 200) {
-            messagefield.val(messagefield.val() + " " + window.location.href +  myXhr.responseText.substring(1));
+            messagefield.val(messagefield.val() + " " + window.location.protocol + "//" + window.location.host + "/" +  myXhr.responseText.substring(1));
         }
       };
       return myXhr;
