@@ -207,3 +207,6 @@ a:hover, a:visited, a:link, a:active {
 .message-name{
     cursor: default;
 }
+.cursor-pointer{
+  cursor: pointer;
+}

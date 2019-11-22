@@ -63,6 +63,7 @@ def uploaded_file(filename):
 @auth.login_required
 def upload_file():
     if request.method == 'POST':
+        SHL.output(f"[{get_ip(request)}] Uploads image", "/upload/")
         if 'file' not in request.files:
             flash('No file part')
             make_response("no file submitted", 400)
@@ -81,4 +82,8 @@ def allowed_file(filename):
     allowed_extensions = {'png', 'jpg', 'jpeg', 'gif'}
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
+
+def check_file_exists(file):
+    pass
 

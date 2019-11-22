@@ -106,6 +106,12 @@
                 <div class="notification-box position-sticky text-white bg-discord-red w-100" id="errorbox"></div>
                 <div class="message-input w-100 mb-2 border-top p-2">
                     <form class="align-items-top d-flex justify-content-between" id="form">
+                        <div class="btn-group mr-2 position-relative">
+                            <label class="btn btn-secondary rounded text-white border-0 font-weight-bolder cursor-pointer">
+                                <input type="file" name="file" style="display:none;" id="fileinput" accept="image/*"/> <!-- MUST BE FIRST FORM ITEM!-->
+                                <i class="far fa-file"></i>
+                            </label>
+                        </div>
                         <div class="btn-group emote-dropup mr-2 position-relative">
                             <button type="button" class="btn btn-secondary rounded text-white border-0 font-weight-bolder" id="emotebtn"
                                     aria-haspopup="true" aria-expanded="false">
