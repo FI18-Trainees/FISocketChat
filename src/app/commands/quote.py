@@ -1,6 +1,6 @@
 from app.obj import SystemMessenger, User, Command
 from utils import Console, green2, white
-from random import randint as rand
+import random
 import json
 import os.path
 
@@ -16,8 +16,9 @@ if not os.path.exists(os.path.join("app", "storage", "quotes")):
     SHL.output(f"{green2}Quotes  folder was not present, created quotes folder.{white}", "Upload")
 
 filename = os.path.join("app", "storage", "quotes", "quotes.json")
-quotes = json.load(open(filename, encoding='utf-8', mode='r'))
-index = len(quotes)
+with open(filename, 'r', encoding="utf-8") as c:
+    quotes = set(json.load(c))
+quotes = list(quotes)
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
@@ -27,7 +28,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "help":
         system.send("Usable commands:<br/>'/quote register \"sentence\"'<br/>'/quote random'<br/>"
-                    "'/quote #X'<br/>/quote info")
+                    "'/quote X'<br/>/quote info")
         return
 
     if params[0].lower() == "info":
@@ -35,17 +36,17 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         return
 
     if params[0].lower() == "random":
-        e = rand(0, len(quotes))
-        system.broadcast(f"<i>{quotes[e]}</i>")
+        system.broadcast(f"<i>{random.choice(quotes)}</i>")
         return
 
     if params[0].lower() == "register":
         if len(params) > 2:
             quote = ' '.join(params[1:])
-            quotes.update(index, quote)
-            with open(filename, encoding='utf-8', mode='a') as x:
-                x.write(quotes)
-            SHL.output(f"Quote registered! {index} : {quote} | Quote written to file.")
+            quotes.append(quote)
+            quotes_set = set(quotes)
+            with open(filename, 'w', encoding="utf-8") as f:
+                json.dump(list(quotes_set), f)
+            SHL.output(f"Quote registered! : {quote} | Quote written to file.")
             system.send(f"Quote \"{quote}\" successfully registered")
             return
         system.send("Please also provide a sentence to register and not just type /quote register.")
