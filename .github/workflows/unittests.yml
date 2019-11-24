@@ -1,8 +1,5 @@
-name: UnitTestSockets
-on:
-  push:
-    branches:
-      - master
+name: Unittests
+on: [pull_request]
 
 jobs:
   Py37_Ubuntu1804:
@@ -18,12 +15,12 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
-    - name: UnitTest Sockets
+    - name: Unittests
       run: |
         cd src
         python server.py -disablelogin &
         cd ..
-        python tests/test_sockets.py
+        python tests/start.py
 
   Py37_Ubuntu1604:
     runs-on: ubuntu-18.04
@@ -38,12 +35,12 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
-    - name: UnitTest Sockets
+    - name: Unittests
       run: |
         cd src
         python server.py -disablelogin &
         cd ..
-        python tests/test_sockets.py
+        python tests/start.py
 
   Py36_Ubuntu1804:
     runs-on: ubuntu-18.04
@@ -58,12 +55,12 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
-    - name: UnitTest Sockets
+    - name: Unittests
       run: |
         cd src
         python server.py -disablelogin &
         cd ..
-        python tests/test_sockets.py
+        python tests/start.py
 
   Py36_Ubuntu1604:
     runs-on: ubuntu-18.04
@@ -78,10 +75,9 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
-    - name: UnitTest Sockets
+    - name: Unittests
       run: |
         cd src
         python server.py -disablelogin &
         cd ..
-        python tests/test_sockets.py
-
+        python tests/start.py
