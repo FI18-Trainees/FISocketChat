@@ -23,7 +23,7 @@ jobs:
         cd src
         python server.py -disablelogin &
         cd ..
-        python tests/test_sockets.py
+        python tests/start.py
 
   Py37_Ubuntu1604:
     runs-on: ubuntu-18.04
@@ -43,7 +43,7 @@ jobs:
         cd src
         python server.py -disablelogin &
         cd ..
-        python tests/test_sockets.py
+        python tests/start.py
 
   Py36_Ubuntu1804:
     runs-on: ubuntu-18.04
@@ -63,7 +63,7 @@ jobs:
         cd src
         python server.py -disablelogin &
         cd ..
-        python tests/test_sockets.py
+        python tests/start.py
 
   Py36_Ubuntu1604:
     runs-on: ubuntu-18.04
@@ -83,5 +83,5 @@ jobs:
         cd src
         python server.py -disablelogin &
         cd ..
-        python tests/test_sockets.py
+        python tests/start.py
 
