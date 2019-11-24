@@ -159,6 +159,12 @@ class TestClass(unittest.TestCase):
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
 
+        # ===========================================================================
+        print("Testing /api/chathistory endpoint")  # TODO: move to api unittest
+        r = requests.get("http://127.0.0.1:5000/api/chathistory").json()
+        self.assertEqual(len(r), 2)
+        self.assertTrue(isinstance(r, list))
+
 
 if __name__ == '__main__':
     time.sleep(3)
