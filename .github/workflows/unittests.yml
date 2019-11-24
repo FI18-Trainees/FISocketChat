@@ -15,7 +15,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
-    - name: UnitTest Sockets
+    - name: Unittests
       run: |
         cd src
         python server.py -disablelogin &
@@ -35,7 +35,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
-    - name: UnitTest Sockets
+    - name: Unittests
       run: |
         cd src
         python server.py -disablelogin &
@@ -55,7 +55,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
-    - name: UnitTest Sockets
+    - name: Unittests
       run: |
         cd src
         python server.py -disablelogin &
@@ -75,7 +75,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
-    - name: UnitTest Sockets
+    - name: Unittests
       run: |
         cd src
         python server.py -disablelogin &
