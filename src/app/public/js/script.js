@@ -156,7 +156,7 @@ $('document').ready(function () {
     socket.on('chat_message', function (msg) {
         let content = msg['msg_body'];
       
-        let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
+        let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || ((msg['author']['username'].toLowerCase() != ownusername) && (content.toLowerCase().search('@everyone') !== -1));
         if (mentioned) {
             msg['msg_body'] = makeMention(content);
             if (checkPermission() && notificationmode !== 'no') {
