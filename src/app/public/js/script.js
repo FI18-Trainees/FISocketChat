@@ -131,6 +131,7 @@ $('document').ready(function () {
     });
     socket.on('connect', function () {
         changeOnlineStatus(true);
+        getMessageHistory();
     });
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
@@ -257,13 +258,14 @@ function addMessage(msg) {
     let user_color = msg['author']['chat_color'];
     let user_avatar = msg['author']['avatar'];
     let timestamp = msg['timestamp'];
+    let timestamp_full = msg['full_timestamp'];
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
     message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
     message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
-    message_timestamp = $('<time class="message-timestamp ml-1">').text(timestamp);
+    message_timestamp = $('<time class="message-timestamp ml-1">').prop('title', timestamp_full).text(timestamp);
     message_content = $('<div class="message-content text-white w-100 pb-1">').html(content);
 
     message_container.append(message_thumbnail, message_body);
@@ -466,6 +468,31 @@ function checkOverflow(el) {
     el.style.overflow = curOverflow;
 
     return isOverflowing;
+}
+
+function getMessageHistory() {
+    $.getJSON('/api/chathistory', function (result) {
+        // checking if the JSON even contains messages.
+        if (Object.keys(result).length > 0) {
+            // clearing chat
+            $('#messages').empty();
+            // iterate over each message from the JSON
+            for (let msg in result) {
+                if($('#messages :last-child div h2 div').prop('title') === result[msg]['author']['username']) {
+                    appendMessage(result[msg]['msg_body'], result[msg]['timestamp']);
+                } else {
+                    addMessage(result[msg]);
+                }
+            }
+            if (checkOverflow(document.querySelector('#messages'))) {
+            $('.nano').nanoScroller();
+            if(autoscroll) {
+                chatdiv = document.querySelector('#messages');
+                chatdiv.scrollTop = chatdiv.scrollHeight;
+            }
+        }
+        }
+    });
 }
 
 $('#fileinput').on('change', function () {

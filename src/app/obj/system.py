@@ -28,3 +28,6 @@ class SystemMessenger:
 
     def change_display_name(self, new: str):
         self.display_name = new
+
+    def send_error(self, error: str, additional_dict: dict = dict()):
+        emit('error', {**additional_dict, **{'message': error}})
