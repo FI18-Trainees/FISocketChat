@@ -159,7 +159,7 @@ $('document').ready(function () {
         let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
         if (mentioned) {
             msg['msg_body'] = makeMention(content);
-            if (checkPermission() && notificationmode !== 'no') {
+            if (checkPermission() && notificationmode !== 'no' && (msg['author']['username'].toLowerCase() != ownusername)) {
                 newNotification("You have been mentioned!");
             }
         }
