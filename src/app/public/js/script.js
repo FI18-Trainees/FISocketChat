@@ -239,8 +239,7 @@ $('document').ready(function () {
 
     mobileAndTabletcheck();
     displayNotifyMode();
-    notificationmode = getCookie('notificationmode');
-    $('#notification-mode').val(notificationmode);
+    $('#notification-mode').val(getCookie('notificationmode'));
 });
 
 function reconnect() {
