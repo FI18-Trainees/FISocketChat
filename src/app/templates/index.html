@@ -107,32 +107,30 @@
             </div>
         </div>
         <div class="container d-flex flex-column h-100">
-            <div class="container d-flex flex-column h-100">
-                <div class="chat mb-2 mt-2 h-100 overflow-hidden nano">
-                    <div class="text-break nano-content" id="messages" onwheel="messagesScroll(event);">
-                        <!--messages go here-->
+            <div class="chat mb-2 mt-2 h-100 overflow-hidden nano">
+                <div class="text-break nano-content" id="messages" onwheel="messagesScroll(event);">
+                    <!--messages go here-->
+                </div>
+            </div>
+            <div class="notification-box position-sticky text-white bg-discord-red w-100" id="errorbox"></div>
+            <div class="message-input w-100 mb-2 border-top p-2 d-inline-flex">
+                <div class="btn-group pr-2 position-relative d-inline-block overflow-hidden">
+                        <button class="btn btn-secondary rounded text-white border-0 font-weight-bolder cursor-pointer h-100" id="fileinput-btn">
+                            <i class="far fa-file"></i>
+                        </button>
+                        <input type="file" name="file" id="fileinput" accept="image/*"/> <!-- MUST BE FIRST FORM ITEM!-->
+                </div>
+                <form class="align-items-top d-flex justify-content-between w-100" id="form">
+                    <div class="btn-group emote-dropup mr-2 position-relative">
+                        <button type="button" class="btn btn-secondary rounded text-white border-0 font-weight-bolder" id="emotebtn"
+                                aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-smile"></i>
+                        </button>
+                        <div class="emote-dropmenu bg-dark border border-info" id="emoteMenu">If you see this, the Javascript failed :(</div>
                     </div>
-                </div>
-                <div class="notification-box position-sticky text-white bg-discord-red w-100" id="errorbox"></div>
-                <div class="message-input w-100 mb-2 border-top p-2">
-                    <form class="align-items-top d-flex justify-content-between" id="form">
-                        <div class="btn-group mr-2 position-relative">
-                            <label class="btn btn-secondary rounded text-white border-0 font-weight-bolder cursor-pointer h-100">
-                                <input type="file" name="file" style="display:none;" id="fileinput" accept="image/*"/> <!-- MUST BE FIRST FORM ITEM!-->
-                                <i class="far fa-file mt-4"></i>
-                            </label>
-                        </div>
-                        <div class="btn-group emote-dropup mr-2 position-relative">
-                            <button type="button" class="btn btn-secondary rounded text-white border-0 font-weight-bolder" id="emotebtn"
-                                    aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-smile"></i>
-                            </button>
-                            <div class="emote-dropmenu bg-dark border border-info" id="emoteMenu">If you see this, the Javascript failed :(</div>
-                        </div>
-                        <textarea class="message-box flex-fill border-0 text-white bg-dark " id="messageinput" autofocus="autofocus" autocomplete="off" spellcheck="false" placeholder="Your message..."></textarea>
-                        <button class="btn rounded ml-2 text-white border-0" id="sendbtn">Send</button>
-                    </form>
-                </div>
+                    <textarea class="message-box flex-fill border-0 text-white bg-dark" id="messageinput" autofocus="autofocus" autocomplete="off" spellcheck="false" placeholder="Your message..."></textarea>
+                    <button class="btn rounded ml-2 text-white border-0" id="sendbtn">Send</button>
+                </form>
             </div>
             <!--<div class="container sitebar border-none"></div>-->
         </div>
