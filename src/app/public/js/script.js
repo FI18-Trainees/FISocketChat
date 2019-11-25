@@ -502,11 +502,13 @@ $('#fileinput').on('change', function (e) {
     e.preventDefault();
     return false;
   }
+  let fd = new FormData();
+  fd.append('file', file);
   $.ajax({
     url: '/api/upload/',
     type: 'POST',
 
-    data: new FormData($('#form')[0]),
+    data: fd,
     cache: false,
     contentType: false,
     processData: false,
