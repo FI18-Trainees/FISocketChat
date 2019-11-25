@@ -1,6 +1,7 @@
 * @zaanposni @monkmitrad @SFFan123 @ArPiiX
-*.py @zaanposni
 
 *.css @monkmitrad
-*.html @monkmitrad
+*.html @monkmitrad @SFFan123
 *.js @monkmitrad @SFFan123
+
+*.py @zaanposni
