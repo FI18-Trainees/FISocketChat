@@ -258,13 +258,14 @@ function addMessage(msg) {
     let user_color = msg['author']['chat_color'];
     let user_avatar = msg['author']['avatar'];
     let timestamp = msg['timestamp'];
+    let timestamp_full = msg['full_timestamp'];
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
     message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
     message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
-    message_timestamp = $('<time class="message-timestamp ml-1">').text(timestamp);
+    message_timestamp = $('<time class="message-timestamp ml-1">').prop('title', timestamp_full).text(timestamp);
     message_content = $('<div class="message-content text-white w-100 pb-1">').html(content);
 
     message_container.append(message_thumbnail, message_body);

@@ -91,6 +91,14 @@ form button {
     padding: 10px;
 }
 
+input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
 .notification-box {
     border-radius: 15px;
     box-shadow: inset 0 0 1em var(--discord-black);
