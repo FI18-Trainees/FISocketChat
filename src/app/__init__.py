@@ -11,7 +11,7 @@ from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
 from app.emotes import Emotes
-from app.obj import UserManager, get_default_user, UserLimiter, ChatHistory
+from app.obj import UserManager, get_default_user, UserLimiter, SystemMessenger, SystemMessage, chat_history
 from utils import Console, white, green2, red, cfg
 
 SHL = Console("Init")
@@ -34,7 +34,8 @@ socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins
 emote_handler = Emotes(False)
 
 # CHAT
-chat_history = ChatHistory()
+announcer = SystemMessenger(display_name="Announcement", append_allow=False, save_in_history=True)
+announcer.broadcast("Chat initialised.")
 
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
