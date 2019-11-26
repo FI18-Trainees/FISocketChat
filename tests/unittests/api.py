@@ -7,7 +7,7 @@ class TestAPI(unittest.TestCase):
         # ===========================================================================
         print("Testing /api/chathistory endpoint")  # TODO: move to api unittest
         r = requests.get("http://127.0.0.1:5000/api/chathistory").json()
-        self.assertEqual(len(r), 2)
+        self.assertEqual(len(r), 3)
         self.assertTrue(isinstance(r, list))
 
         # ===========================================================================
