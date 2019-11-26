@@ -324,6 +324,11 @@
     "menuDisplay": false,
     "menuDisplayCode": ""
   },
+  "Skype": {
+    "replace": "<img src='/public/img/skype.png' style='height:32px; width:auto;' alt='Skype' title='Skype'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/skype.png' style='height:32px; width:auto;' alt='Skype' title='Skype'>"
+  },
   ":thinking:": {
     "replace": "<img src='/public/img/thinking-face.png' style='height:40px; width:auto;' alt=':thinking:' title=':thinking:'>",
     "menuDisplay": true,
