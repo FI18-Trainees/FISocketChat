@@ -28,7 +28,7 @@ def handle_command(command):
     SHL.output(f"Received message {command}", "S.ON chat_message")
 
     try:
-        cmd = Command(author=get_default_user(), msg_body=str(command['message']).strip(), system=False)
+        cmd = Command(author=get_default_user(), content=str(command['message']).strip(), system=False)
         cmd.author.display_name = str(command['display_name']).strip()
         cmd.author.username = cmd.author.display_name
     except KeyError:
@@ -74,7 +74,7 @@ def handle_message(message):
     SHL.output(f"Received message {message}", "S.ON chat_message")
 
     try:
-        msg = Message(author=get_default_user(), msg_body=str(message['message']).strip(), system=False)
+        msg = Message(author=get_default_user(), content=str(message['message']).strip(), system=False)
         msg.author.display_name = str(message['display_name']).strip()
         msg.author.username = msg.author.display_name
     except KeyError:
@@ -104,7 +104,7 @@ def handle_message(message):
         emit('error', {"message": "invalid username"})
         return
 
-    if 0 < len(msg.msg_body) < 2000:
+    if 0 < len(msg.content) < 2000:
         msg.author.display_name = safe_tags_replace(msg.author.display_name)
         msg.apply_func((safe_tags_replace, link_replacer, safe_emote_replace, quote_replacer,
                         replace_newline, codeblock_replacer))
@@ -112,7 +112,7 @@ def handle_message(message):
         chat_history.add_message(msg=msg)  # log
         emit('chat_message', msg.to_json(), broadcast=True)
     else:
-        SHL.output(f"{yellow2}Invalid message length: {len(msg.msg_body)}{white}", "S.ON chat_message")
+        SHL.output(f"{yellow2}Invalid message length: {len(msg.content)}{white}", "S.ON chat_message")
         emit('error', {"message": "invalid message"})
 
 
