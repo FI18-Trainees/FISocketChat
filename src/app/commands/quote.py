@@ -43,9 +43,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         return
 
     if params[0].lower() == "viewall":
-        msg = ""
-        for item in quotes:
-            msg += f"{item}<br/>"
+        msg = "<br/>".join(quotes)
         system.send(f"<i>{msg}</i>")
         return
 
