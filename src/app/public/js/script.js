@@ -154,22 +154,17 @@ $('document').ready(function () {
         }
     });
     socket.on('chat_message', function (msg) {
-        let content = msg['msg_body'];
+        let content = msg['content'];
       
         let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
         if (mentioned) {
-            msg['msg_body'] = makeMention(content);
+            msg['content'] = makeMention(content);
             if (checkPermission() && notificationmode !== 'no' && (msg['author']['username'].toLowerCase() != ownusername)) {
                 newNotification("You have been mentioned!");
             }
         }
+        newMessageHandler(msg);
 
-        // check if username of last message is identical to new message
-        if($('#messages :last-child div h2 div').prop('title') === msg['author']['username']) {
-            appendMessage(msg['msg_body'], msg['timestamp']);
-        } else {
-            addMessage(msg);
-        }
         //check if chat would overflow currentSize and refresh scrollbar
         if (checkOverflow(document.querySelector('#messages'))) { 
             $('.nano').nanoScroller();
@@ -249,16 +244,28 @@ function reconnect() {
     }, 3000);
 }
 
-function addMessage(msg) {
+function newMessageHandler(msg) {
+    if($('#messages :last-child div h2 div').prop('title') === msg['author']['username']) {
+        if (msg["append_allow"]) {
+            appendMessage(msg);
+            return
+        }
+    }
+    addNewMessage(msg);
+}
+
+function addNewMessage(msg) {
     let message_container, message_header, message_body, message_thumbnail, message_username, message_timestamp, message_content;
 
-    let content = msg['msg_body'];
+    let content = msg['content'];
     let username = msg['author']['username'];
     let display_name = msg['author']['display_name'];
     let user_color = msg['author']['chat_color'];
     let user_avatar = msg['author']['avatar'];
     let timestamp = msg['timestamp'];
     let timestamp_full = msg['full_timestamp'];
+    let append_allow = msg['append_allow'];
+    let priority = msg['priority'];
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
@@ -274,7 +281,10 @@ function addMessage(msg) {
     $('#messages').append(message_container);
 }
 
-function appendMessage(content, timestamp) {
+function appendMessage(msg) {
+    let content = msg['content'];
+    let timestamp = msg['timestamp'];
+
     $('#messages .message-container').last().children().append($('<div class="message-content text-white w-100 pb-1">').html(content));
     $('#messages .message-header').last().children('time').text(timestamp);
 }
@@ -478,11 +488,7 @@ function getMessageHistory() {
             $('#messages').empty();
             // iterate over each message from the JSON
             for (let msg in result) {
-                if($('#messages :last-child div h2 div').prop('title') === result[msg]['author']['username']) {
-                    appendMessage(result[msg]['msg_body'], result[msg]['timestamp']);
-                } else {
-                    addMessage(result[msg]);
-                }
+                newMessageHandler(msg);
             }
             if (checkOverflow(document.querySelector('#messages'))) {
             $('.nano').nanoScroller();
