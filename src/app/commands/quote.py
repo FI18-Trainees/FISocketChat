@@ -39,7 +39,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         return
 
     if params[0].lower() == "count":
-        system.broadcast(f"We currently have {len(quotes)} quotes registered.")
+        system.send(f"We currently have {len(quotes)} quotes registered.")
         return
 
     if params[0].lower() == "viewall":
@@ -56,7 +56,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             SHL.output(f"Quote registered! : {quote} | Quote written to file.")
             system.send(f"Quote \"{quote}\" successfully registered")
             return
-        system.send("Please also provide a sentence to register.")
+        system.send_error("Please also provide a sentence to register.")
         return
 
     if params[0].lower() == "#":
