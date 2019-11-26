@@ -26,8 +26,8 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         return
 
     if params[0].lower() == "help":
-        system.send("Usable commands:<br/>/quote register sentence<br/>/quote random<br/>/quote info<br/>"
-                    "/quote viewall<br/>/quote count<br/>/quote #")
+        system.send("Usable commands:<br/>/quote register<br/>/quote random<br/>/quote info<br/>/quote viewall<br/>"
+                    "/quote count<br/>/quote #")
         return
 
     if params[0].lower() == "info":
@@ -58,7 +58,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             SHL.output(f"Quote registered! : {quote} | Quote written to file.")
             system.send(f"Quote \"{quote}\" successfully registered")
             return
-        system.send("Please also provide a sentence to register and not just type /quote register.")
+        system.send("Please also provide a sentence to register.")
         return
 
     if params[0].lower() == "#":
