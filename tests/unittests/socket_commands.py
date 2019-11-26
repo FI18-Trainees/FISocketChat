@@ -11,10 +11,10 @@ class TestCommands(unittest.TestCase):
         self.assertEqual(len(self.sockets.messages), 1)
         self.assertEqual(len(self.sockets.errors), 0)
         x = self.sockets.messages[0]
-        y = {"system": True, "msg_body": "Pong!"}  # expected
+        y = {"system": True, "content": "Pong!"}  # expected
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
-        self.assertIn("msg_body", x)
+        self.assertIn("content", x)
 
         x = self.sockets.messages[0].get("author", {})
         y = {"username": "System", "display_name": "System"}  # expected

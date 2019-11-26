@@ -12,7 +12,7 @@ class SystemMessenger:
 
     def send(self, message: Union[SystemMessage, str, Embed]):
         if isinstance(message, str):
-            message = SystemMessage(msg_body=message)
+            message = SystemMessage(content=message)
         if self.display_name:
             message.change_display_name(self.display_name)
 
@@ -20,7 +20,7 @@ class SystemMessenger:
 
     def broadcast(self, message: Union[SystemMessage, str, Embed]):
         if isinstance(message, str):
-            message = SystemMessage(msg_body=message)
+            message = SystemMessage(content=message)
         if self.display_name:
             message.change_display_name(self.display_name)
 

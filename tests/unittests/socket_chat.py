@@ -19,7 +19,7 @@ class TestBasicChat(unittest.TestCase):
         self.assertEqual(len(sockets.messages), 1)
         self.assertEqual(len(sockets.errors), 0)
         x = sockets.messages[0]
-        y = {"msg_body": "test_message", "content_type": "message"}  # expected
+        y = {"content": "test_message", "content_type": "message"}  # expected
         shared_items = {k: x[k] for k in x if k in y and x[k] == y[k]}
         self.assertEqual(shared_items, y)
 
@@ -55,4 +55,4 @@ class TestBasicChat(unittest.TestCase):
         sockets.send_message("test_user", " Shawn abc")
         self.assertEqual(len(sockets.messages), 2)
         self.assertEqual(len(sockets.errors), 2)
-        self.assertIn("img", sockets.messages[1].get("msg_body", ""))
+        self.assertIn("img", sockets.messages[1].get("content", ""))

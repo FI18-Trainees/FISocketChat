@@ -38,7 +38,7 @@ class Embed:
     Structure:
     {
         content_type = "embed",
-        title: str
+        title: str,
         author:
             {
                 "display_name": str,
