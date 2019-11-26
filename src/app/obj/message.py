@@ -5,7 +5,6 @@ from aenum import Enum
 
 from .user import User
 
-
 prio_types = Enum("prio_types", "low default high critical")
 
 
