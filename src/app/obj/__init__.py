@@ -1,3 +1,4 @@
+from .chat_history import chat_history
 from .message import Message
 from .user import User, get_default_user, get_sys_user
 from .command import Command
@@ -6,4 +7,3 @@ from .system_message import SystemMessage
 from .system import SystemMessenger
 from .user_limiter import UserLimiter
 from .embed import Embed, Field, Media, media_types
-from .chat_history import ChatHistory

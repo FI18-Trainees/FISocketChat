@@ -7,9 +7,9 @@ from validators import url as val_url
 
 from app import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, login_disabled, request, user_limit, chat_history
+    code_regex, quote_regex, login_disabled, request, user_limit, chat_history, announcer
 from app import handle_command as command_handler
-from app.obj import User, Command, Message, get_default_user
+from app.obj import User, Command, Message, get_default_user, SystemMessage
 from utils import Console, yellow2, white, green2
 
 SHL = Console("Socket")
@@ -163,6 +163,7 @@ def connect(data=""):
             return
 
         emit('status', {'loginmode': True, 'username': new_user.username, 'chat_color': new_user.chat_color})
+        announcer.broadcast(f"{new_user.username} connected.")
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     else:
         emit('status', {'loginmode': False})

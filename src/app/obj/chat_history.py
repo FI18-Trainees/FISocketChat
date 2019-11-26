@@ -18,3 +18,6 @@ class ChatHistory:
 
     def get_messages(self):
         return self.__history
+
+
+chat_history = ChatHistory()

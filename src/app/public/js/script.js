@@ -234,8 +234,7 @@ $('document').ready(function () {
 
     mobileAndTabletcheck();
     displayNotifyMode();
-    notificationmode = getCookie('notificationmode');
-    $('#notification-mode').val(notificationmode);
+    $('#notification-mode').val(getCookie('notificationmode'));
 });
 
 function reconnect() {
@@ -488,15 +487,15 @@ function getMessageHistory() {
             $('#messages').empty();
             // iterate over each message from the JSON
             for (let msg in result) {
-                newMessageHandler(msg);
+                newMessageHandler(result[msg]);
             }
             if (checkOverflow(document.querySelector('#messages'))) {
-            $('.nano').nanoScroller();
-            if(autoscroll) {
-                chatdiv = document.querySelector('#messages');
-                chatdiv.scrollTop = chatdiv.scrollHeight;
+                $('.nano').nanoScroller();
+                if(autoscroll) {
+                    chatdiv = document.querySelector('#messages');
+                    chatdiv.scrollTop = chatdiv.scrollHeight;
+                }
             }
-        }
         }
     });
 }
