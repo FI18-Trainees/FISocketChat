@@ -22,11 +22,12 @@ with open(filename, 'r', encoding="utf-8") as c:
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     if not len(params):
-        system.send("'/quote can be either used to register or show quotes.")
+        system.send("/quote can be either used to register or show quotes.")
         return
 
     if params[0].lower() == "help":
-        system.send("Usable commands:<br/>/quote register sentence<br/>/quote random<br/>/quote info")
+        system.send("Usable commands:<br/>/quote register<br/>/quote random<br/>/quote info<br/>/quote viewall<br/>"
+                    "/quote count<br/>/quote #")
         return
 
     if params[0].lower() == "info":
@@ -35,6 +36,15 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
 
     if params[0].lower() == "random":
         system.broadcast(f"<i>{random.choice(quotes)}</i>")
+        return
+
+    if params[0].lower() == "count":
+        system.send(f"We currently have {len(quotes)} quotes registered.")
+        return
+
+    if params[0].lower() == "viewall":
+        msg = "<br/>".join(quotes)
+        system.send(f"<i>{msg}</i>")
         return
 
     if params[0].lower() == "register":
@@ -46,7 +56,20 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             SHL.output(f"Quote registered! : {quote} | Quote written to file.")
             system.send(f"Quote \"{quote}\" successfully registered")
             return
-        system.send("Please also provide a sentence to register and not just type /quote register.")
+        system.send_error("Please also provide a sentence to register.")
         return
 
-    system.send("For further information on /quote see /quote help or /quote info")
+    if params[0].lower() == "#":
+        if len(params) > 1:
+            if params[1].isdigit():
+                if len(quotes) > int(params[1]) >= 0:
+                    system.send(f"<i>{quotes[int(params[1])]}</i>")
+                    return
+                system.send_error("The number you provided is too large or below 0")
+                return
+            system.send_error("Character is not a number!")
+            return
+        system.send_error("Please provide a number you want to view")
+        return
+
+    system.send("For further information on /quote, see /quote help or /quote info")
