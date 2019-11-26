@@ -62,7 +62,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     if params[0].lower() == "#":
         if len(params) > 1:
             if params[1].isdigit():
-                if len(quotes) >= int(params[1]) >= 0:
+                if len(quotes) > int(params[1]) >= 0:
                     system.send(f"<i>{quotes[int(params[1])]}</i>")
                     return
                 system.send("The number you provided is too large or below 0")
