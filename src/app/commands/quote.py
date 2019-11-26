@@ -65,11 +65,11 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                 if len(quotes) > int(params[1]) >= 0:
                     system.send(f"<i>{quotes[int(params[1])]}</i>")
                     return
-                system.send("The number you provided is too large or below 0")
+                system.send_error("The number you provided is too large or below 0")
                 return
-            system.send("Character is not a number!")
+            system.send_error("Character is not a number!")
             return
-        system.send("Please provide a number you want to view")
+        system.send_error("Please provide a number you want to view")
         return
 
     system.send("For further information on /quote, see /quote help or /quote info")
