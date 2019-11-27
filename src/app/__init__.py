@@ -68,7 +68,9 @@ if "-dummyuser" in start_args:
 
 @auth.error_handler
 def auth_error():
-    return redirect(f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com/{request.script_root + request.path}", code=401)
+    if str(request.script_root + request.path).strip() != "/":
+        return redirect(f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com{request.script_root + request.path}")
+    return redirect(f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com")
 
 
 @auth.verify_token
