@@ -568,5 +568,10 @@
     "replace": "<a style='font-family: Consolas; color:rgb(46,171,254);'>false</a>",
     "menuDisplay": false,
     "menuDisplayCode": ""
+  },
+  "STONKS": {
+    "replace": "<img src='/public/img/stonks.png' style='height:200px; width:auto;' alt='STONKS' title='STONKS'>",
+    "menuDisplay": false,
+    "menuDisplayCode": ""
   }
 }
