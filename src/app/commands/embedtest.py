@@ -15,7 +15,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):  # 
     fields = [Field(topic="cooler titel des felds", value="text des felds<br/>auch mit newlines") for x in range(3)]
     media = Media(media_type=media_types.img, media_url="https://i.imgur.com/nTfijG2.jpg")
 
-    e = Embed(text="cooler text", fields=fields, media=media,
+    e = Embed(title="hammer geile überschrift", text="cooler text", fields=fields, media=media,
               footer="hier unten stehen auch coole dinge",
               thumbnail="https://www.gameswirtschaft.de/wp-content/uploads/2016/10/PietSmiet-Team-GamesWirtschaft.jpg")
 

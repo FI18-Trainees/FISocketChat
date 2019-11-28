@@ -68,9 +68,10 @@ class Embed:
     """
     __content_type = "embed"
 
-    def __init__(self, text: str, author: User = get_sys_user(), fields: List[Field] = None, media: Media = None,
-                 footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
+    def __init__(self, title: str, text: str = None, author: User = get_sys_user(), fields: List[Field] = None,
+                 media: Media = None, footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
                  color: str = "#eb4034", thumbnail: str = None):
+        self.__title = title
         self.__author = author
         self.__text = text
         self.__fields = fields
@@ -107,6 +108,9 @@ class Embed:
     def set_text(self, new: str):
         self.__text = new
 
+    def set_title(self, new: str):
+        self.__title = new
+
     def change_display_name(self, new: str):
         self.__author.display_name = new
 
@@ -122,6 +126,7 @@ class Embed:
     def to_json(self) -> dict:
         return {
             "content_type": self.__content_type,
+            "title": self.__title,
             "author": self.__author.to_json(),
             "text": self.__text,
             "fields": [x.to_json() for x in self.__fields],
