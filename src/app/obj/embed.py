@@ -64,14 +64,15 @@ class Embed:
         timestamp: str,
         url: str (url),
         color: str (hex color),
-        thumbnail: str (url)
+        thumbnail: str (url),
+        append_allow: bool (false)
     }
     """
     __content_type = "embed"
 
     def __init__(self, title: str, author: User = get_sys_user(), text: str = None, fields: List[Field] = None, media: Media = None,
                  footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
-                 color: str = "#F04747", thumbnail: str = None):
+                 color: str = "#F04747", thumbnail: str = None, append_allow: bool = False):
         self.__title = title
         self.__author = author
         self.__text = text
@@ -83,6 +84,7 @@ class Embed:
         self.__url = url
         self.__color = color
         self.__thumbnail = thumbnail
+        self.__append_allow = append_allow
 
     def add_fields(self, fields):
         if isinstance(fields, Field):
@@ -127,6 +129,9 @@ class Embed:
     def set_thumbnail(self, new: str):
         self.__thumbnail = new
 
+    def set_append_allow(self, new: bool):
+        self.__append_allow = new
+
     def to_json(self) -> dict:
         return {
             "content_type": self.__content_type,
@@ -140,5 +145,6 @@ class Embed:
             "timestamp": str(self.__timestamp),
             "url": self.__url,
             "color": self.__color,
-            "thumbnail": self.__thumbnail
+            "thumbnail": self.__thumbnail,
+            "append_allow": self.__append_allow
         }
