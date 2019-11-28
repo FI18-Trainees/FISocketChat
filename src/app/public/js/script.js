@@ -3,6 +3,7 @@ var socket = null;
 var focused = true;
 var unread = 0;
 var emotelist = null;
+var commandlist = null;
 var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
@@ -14,7 +15,11 @@ var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 var message_history = [];
 var history_pointer = 0;
 
+var imagecache;
+
 const messagefield = $('#messageinput');
+const infobox = $('#infobox');
+const errorbox = $('#errorbox');
 
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
@@ -180,6 +185,9 @@ $('document').ready(function () {
                 chatdiv = document.querySelector('#messages');
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
+            else {
+                showInfo("There are new Messages below. Click here to scroll down.", null, function(){ setautoscroll(true); hideInfo(); imgloaded()});
+            }
         }
         if (!focused) {
             unread++;
@@ -240,9 +248,13 @@ $('document').ready(function () {
     updateEmoteMenu();
     document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
 
+    getCommands();
+
     mobileAndTabletcheck();
     displayNotifyMode();
     $('#notification-mode').val(getCookie('notificationmode'));
+
+    document.getElementById('messageinput').addEventListener('paste', handlePaste);
 });
 
 function reconnect() {
@@ -400,11 +412,24 @@ function addEmbed(msg) {
 }
 
 function showError(message) {
-    document.getElementById("errorbox").innerText = message;
-    $("#errorbox").fadeIn("slow");
+    errorbox.text(message);
+    errorbox.fadeIn("slow");
     setTimeout(function () {
         hideError();
     }, 2000);
+}
+
+function showInfo(message, fadeoutdelay, onclick) {
+    infobox.text(message);
+    infobox.fadeIn("slow");
+    if(onclick != null) {
+        infobox.click(onclick);
+    }
+    if(fadeoutdelay > 0) {
+        setTimeout(function () {
+            hideInfo();
+        }, fadeoutdelay);
+    }
 }
 
 function changeOnlineStatus(online) {
@@ -416,7 +441,12 @@ function changeOnlineStatus(online) {
 }
 
 function hideError() {
-    $("#errorbox").fadeOut("slow");
+    errorbox.fadeOut("slow");
+}
+
+function hideInfo() {
+    infobox.fadeOut("slow");
+    infobox.off('click');
 }
 
 function addEmoteCode(emote) {
@@ -487,6 +517,17 @@ function tabComplete(CursorPos) {
         for (username of userlist.entries()) {
             if (username[1] !== null && username[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
                 let mIn = messagefield.val().substr(0, lastSplit) + "@" + username[1] + " ";
+                messagefield.val(mIn + messagefield.val().substr(CursorPos));
+                messagefield.prop('selectionStart', mIn.length);
+                messagefield.prop('selectionEnd', mIn.length);
+                return;
+            }
+        }
+    }
+    else if (toComplete.toLowerCase().startsWith("/") && toComplete.length > 1) {
+        for (commands of commandlist.entries()) {
+            if (commands !== null && commands[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                let mIn = messagefield.val().substr(0, lastSplit) + "/" + commands[1] + " ";
                 messagefield.val(mIn + messagefield.val().substr(CursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
@@ -608,9 +649,13 @@ $('#fileinput').on('change', function (e) {
     e.preventDefault();
     return false;
   }
-  let fd = new FormData();
-  fd.append('file', file);
-  $.ajax({
+  uploadImage(file);
+});
+
+function uploadImage(file){
+    let fd = new FormData();
+    fd.append('file', file);
+    $.ajax({
     url: '/api/upload/',
     type: 'POST',
 
@@ -624,11 +669,46 @@ $('#fileinput').on('change', function (e) {
             messagefield.val(messagefield.val() + " " + window.location.protocol + "//" + window.location.host + data);
         }
     }
-  });
-});
+    });
+}
+
 
 function inputButtonClick() {
     let evt = document.createEvent('MouseEvent');
     evt.initEvent('click', true, false);
     document.getElementById('fileinput').dispatchEvent(evt);
 }
+function getCommands(){
+    $.getJSON('/api/commands', function (result) {
+        if (Object.keys(result).length > 0) {
+            if (JSON.stringify(emotelist) === JSON.stringify(result)) {
+                return;
+            }
+            commandlist = result;
+        }
+    });
+}
+function handlePaste(e){
+    var clipboardData, pastedData;
+
+    e.stopPropagation();
+
+    clipboardData = e.clipboardData || window.clipboardData;
+    let items = clipboardData.items;
+    pastedData = clipboardData.getData('Text');
+
+    for (var i = 0; i < items.length; i++) {
+        // Skip content if not image
+        if (items[i].type.indexOf("image") == -1) continue;
+        e.preventDefault();
+        imagecache = items[i].getAsFile();
+        uploadImage(imagecache)
+        //finally try as text
+        if(items[i].type.indexOf("Text")>0){
+            console.log(items[i]);
+            break;
+        }
+    }
+}
+
+
