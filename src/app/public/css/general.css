@@ -15,8 +15,8 @@ body {
     --discord-grey: #99aab5;
     --discord-lightgrey: #72767d;
     --discord-white: #ffffff;
-    --discord-blue: rgba(114, 137, 218, 1);
-    --discord-red: rgba(240, 71, 71, 1);
+    --discord-blue: #7289da;
+    --discord-red: #f04747;
     --discord-pink: #FF1493;
     --discord-orange: #fdad5c;
     font: 13px "Comic Sans MS", Arial;
