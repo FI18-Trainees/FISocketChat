@@ -9,6 +9,7 @@ from werkzeug.utils import secure_filename
 from app import app, emote_handler, auth, user_manager, chat_history
 from app.obj import get_default_user
 from utils import Console
+from app.commands import commands
 
 SHL = Console("Routes")
 
@@ -51,6 +52,13 @@ def send_css(path):
 @app.route('/api/emotes')
 def send_emotes():
     return jsonify(emote_handler.emotes)
+
+
+@app.route('/api/commands')
+@auth.login_required
+def send_commands_list():
+    SHL.output(f"[{get_ip(request)}] Returning commands list", "/api/user")
+    return jsonify(list(commands.keys()))
 
 
 @app.route('/api/user')

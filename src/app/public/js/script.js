@@ -3,6 +3,7 @@ var socket = null;
 var focused = true;
 var unread = 0;
 var emotelist = null;
+var commandlist = null;
 var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
@@ -237,6 +238,8 @@ $('document').ready(function () {
     updateEmoteMenu();
     document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
 
+    getCommands();
+
     mobileAndTabletcheck();
     displayNotifyMode();
     $('#notification-mode').val(getCookie('notificationmode'));
@@ -415,6 +418,17 @@ function tabComplete(CursorPos) {
                 return;
             }
         }
+    }
+    else if (toComplete.toLowerCase().startsWith("/") && toComplete.length > 1) {
+        for (commands of commandlist.entries()) {
+            if (commands !== null && commands[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                let mIn = messagefield.val().substr(0, lastSplit) + "/" + commands[1] + " ";
+                messagefield.val(mIn + messagefield.val().substr(CursorPos));
+                messagefield.prop('selectionStart', mIn.length);
+                messagefield.prop('selectionEnd', mIn.length);
+                return;
+            }
+        }
     } else {
         for (let emote in emotelist) {
             if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
@@ -553,4 +567,14 @@ function inputButtonClick() {
     let evt = document.createEvent('MouseEvent');
     evt.initEvent('click', true, false);
     document.getElementById('fileinput').dispatchEvent(evt);
+}
+function getCommands(){
+    $.getJSON('/api/commands', function (result) {
+        if (Object.keys(result).length > 0) {
+            if (JSON.stringify(emotelist) === JSON.stringify(result)) {
+                return;
+            }
+            commandlist = result;
+        }
+    });
 }
