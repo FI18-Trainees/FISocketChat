@@ -315,10 +315,10 @@ function addEmbed(msg) {
     embed_header.append(embed_author_thumbnail, embed_author_name, embed_title);
     embed_footer_container.append(embed_timestamp);
 
-    if msg.hasOwnProperty('text') {
+    if(msg.hasOwnProperty('text')){
         let text = msg['text'];
     }
-    if msg.hasOwnProperty('fields') {
+    if(msg.hasOwnProperty('fields')){
         let fields = msg['fields'];
         embed_field_container = $('<div class="embed-field-container">');
         embed_container.append(embed_field_container);
@@ -332,18 +332,18 @@ function addEmbed(msg) {
         });
 
     }
-    if msg.hasOwnProperty('media') {
+    if(msg.hasOwnProperty('media')){
         let media = msg['media'];
     }
-    if msg.hasOwnProperty('footer') {
+    if(msg.hasOwnProperty('footer')){
         let footer = msg['footer'];
         embed_footer = $('<p class="embed-footer">').text(footer);
         embed_footer_container.prepend(embed_footer);
     }
-    if msg.hasOwnProperty('color') {
+    if(msg.hasOwnProperty('color')){
         let color = msg['color'];
     }
-    if msg.hasOwnProperty('thumbnail') {
+    if(msg.hasOwnProperty('thumbnail')){
         let thumbnail = msg['thumbnail'];
         embed_thumbnail = new Image();
         embed_thumbnail.src = thumbnail;

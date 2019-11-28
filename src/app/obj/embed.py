@@ -28,7 +28,7 @@ class Media:
 
     def to_json(self) -> dict:
         return {
-            "media_type": self.media_type,
+            "media_type": str(self.media_type),
             "media_url": self.media_url
         }
 
@@ -68,7 +68,7 @@ class Embed:
     """
     __content_type = "embed"
 
-    def __init__(self, author: User = get_sys_user(), text: str = None, fields: List[Field] = None, media: Media = None,
+    def __init__(self, text: str, author: User = get_sys_user(), fields: List[Field] = None, media: Media = None,
                  footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
                  color: str = "#eb4034", thumbnail: str = None):
         self.__author = author
