@@ -22,4 +22,9 @@ class TestAPI(unittest.TestCase):
         self.assertTrue(isinstance(r, dict))
 
         # ===========================================================================
+        print("Testing /api/commands endpoint")  # TODO: move to api unittest
+        r = requests.get("http://127.0.0.1:5000/api/commands").json()
+        self.assertTrue(isinstance(r, list))
+
+        # ===========================================================================
         # Please append tests for your api endpoints here
