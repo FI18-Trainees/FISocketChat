@@ -69,7 +69,12 @@ body {
     }
 
     #messages .embed-container {
+        border-left: 3.5px solid;
+        background: var(--discord-black);
+    }
 
+    #messages .embed-container .embed-thumbnail {
+        max-height: 70px;
     }
 
     #messages .embed-container .embed-profile-image {
@@ -82,6 +87,10 @@ body {
 
     #messages .embed-container .embed-topic {
         font-size: 18px;
+    }
+
+    #messages .embed-container .embed-footer-container {
+        font-size: 10px;
     }
 
 .message-input {

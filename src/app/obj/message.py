@@ -20,7 +20,7 @@ class Message:
             "author": self.author.to_json(),
             "msg_body": self.msg_body,
             "system": self.system,
-            "full_timestamp":  str(self.full_timestamp),
+            "full_timestamp": str(self.full_timestamp),
             "timestamp": str(self.timestamp)
         }
 

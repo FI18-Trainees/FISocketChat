@@ -28,7 +28,7 @@ class Media:
 
     def to_json(self) -> dict:
         return {
-            "media_type": str(self.media_type),
+            "media_type": self.media_type.name,
             "media_url": self.media_url
         }
 
