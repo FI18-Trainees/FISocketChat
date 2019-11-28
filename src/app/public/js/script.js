@@ -293,7 +293,6 @@ function setUserCount(count) {
 }
 
 function addEmbed(msg) {
-    /*TODO: Only append if content (e.g. img, text, field) is given*/
     let author_name = msg['author']['username'];
     let display_name = msg['author']['display_name'];
     let author_color = msg['author']['chat-color'];
