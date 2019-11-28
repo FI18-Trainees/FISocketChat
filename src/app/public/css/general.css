@@ -15,7 +15,7 @@ body {
     --discord-grey: #99aab5;
     --discord-lightgrey: #72767d;
     --discord-white: #ffffff;
-    --discord-blue: #7289da;
+    --discord-blue: rgba(114, 137, 218, 1);
     --discord-red: rgba(240, 71, 71, 1);
     --discord-pink: #FF1493;
     --discord-orange: #fdad5c;
@@ -111,6 +111,38 @@ input[type=file] {
 
 .bg-discord-red {
     background: var(--discord-red);
+    box-shadow: none;
+}
+.bg-discord-blue {
+    background: var(--discord-blue);
+    box-shadow: none;
+}
+.bg-discord-black {
+    background: var(--discord-black);
+    box-shadow: none;
+}
+.bg-discord-dark {
+    background: var(--discord-dark);
+    box-shadow: none;
+}
+.bg-discord-grey {
+    background: var(--discord-grey);
+    box-shadow: none;
+}
+.bg-discord-lightgrey {
+    background: var(--discord-lightgrey);
+    box-shadow: none;
+}
+.bg-discord-white {
+    background: var(--discord-white);
+    box-shadow: none;
+}
+.bg-discord-pink {
+    background: var(--discord-pink);
+    box-shadow: none;
+}
+.bg-discord-orange {
+    background: var(--discord-orange);
     box-shadow: none;
 }
 

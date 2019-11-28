@@ -15,6 +15,8 @@ var message_history = [];
 var history_pointer = 0;
 
 const messagefield = $('#messageinput');
+const infobox = $('#infobox');
+const errorbox = $('#errorbox');
 
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
@@ -172,6 +174,9 @@ $('document').ready(function () {
                 chatdiv = document.querySelector('#messages');
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
+            else {
+                showInfo("There are new Messages below. Click here to scroll down.", null, function(){ setautoscroll(true); hideInfo(); imgloaded()});
+            }
         }
         if (!focused) {
             unread++;
@@ -299,11 +304,24 @@ function setUserCount(count) {
 }
 
 function showError(message) {
-    document.getElementById("errorbox").innerText = message;
-    $("#errorbox").fadeIn("slow");
+    errorbox.text(message);
+    errorbox.fadeIn("slow");
     setTimeout(function () {
         hideError();
     }, 2000);
+}
+
+function showInfo(message, fadeoutdelay, onclick) {
+    infobox.text(message);
+    infobox.fadeIn("slow");
+    if(onclick != null) {
+        infobox.click(onclick);
+    }
+    if(fadeoutdelay > 0) {
+        setTimeout(function () {
+            hideInfo();
+        }, fadeoutdelay);
+    }
 }
 
 function changeOnlineStatus(online) {
@@ -315,7 +333,12 @@ function changeOnlineStatus(online) {
 }
 
 function hideError() {
-    $("#errorbox").fadeOut("slow");
+    errorbox.fadeOut("slow");
+}
+
+function hideInfo() {
+    infobox.fadeOut("slow");
+    infobox.off('click');
 }
 
 function addEmoteCode(emote) {
