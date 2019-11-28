@@ -350,6 +350,7 @@ function addEmbed(msg) {
         });
 
     }
+
     if(msg.hasOwnProperty('media')){
         let media = msg['media'];
         embed_media_container = $('<div class="embed-media-container">');
