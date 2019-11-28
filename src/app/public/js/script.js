@@ -131,6 +131,7 @@ $('document').ready(function () {
     });
     socket.on('connect', function () {
         changeOnlineStatus(true);
+        getMessageHistory();
     });
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
@@ -153,30 +154,25 @@ $('document').ready(function () {
         }
     });
     socket.on('chat_message', function (msg) {
-
         switch (msg['content_type']) {
             case 'message':
-                let content = msg['msg_body'];
+                let content = msg['content'];
                 let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
                 if (mentioned) {
-                    msg['msg_body'] = makeMention(content);
+                    msg['content'] = makeMention(content);
                     if (checkPermission() && notificationmode !== 'no') {
                         newNotification("You have been mentioned!");
                     }
                 }
 
                 // check if username of last message is identical to new message
-                if($('#messages :last-child div h2 div').prop('title') === msg['author']['username']) {
-                    appendMessage(msg['msg_body'], msg['timestamp']);
-                } else {
-                    addMessage(msg);
-                }
-
+                newMessageHandler(msg);
                 break;
             case 'embed':
                 addEmbed(msg);
                 break;
         }
+
         //check if chat would overflow currentSize and refresh scrollbar
         if (checkOverflow(document.querySelector('#messages'))) { 
             $('.nano').nanoScroller();
@@ -208,6 +204,8 @@ $('document').ready(function () {
         }
         if (status.hasOwnProperty('username')) {
             ownusername = status['username'].toLowerCase();
+            $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color']);
+            $('#logininfo_picture').attr('src',`https://profile.zaanposni.com/pictures/${ownusername}.png`);
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
@@ -216,6 +214,7 @@ $('document').ready(function () {
             } else {
                 document.getElementById('username-item').style.display = 'block';
                 document.getElementById('user_name').value = 'DebugUser';
+                document.getElementById('logininfo_sitebar').style.display = "none";
                 loginmode = false;
             }
         }
@@ -243,8 +242,7 @@ $('document').ready(function () {
 
     mobileAndTabletcheck();
     displayNotifyMode();
-    notificationmode = getCookie('notificationmode');
-    $('#notification-mode').val(notificationmode);
+    $('#notification-mode').val(getCookie('notificationmode'));
 });
 
 function reconnect() {
@@ -253,22 +251,35 @@ function reconnect() {
     }, 3000);
 }
 
-function addMessage(msg) {
+function newMessageHandler(msg) {
+    if($('#messages :last-child div h2 div').prop('title') === msg['author']['username']) {
+        if (msg["append_allow"]) {
+            appendMessage(msg);
+            return
+        }
+    }
+    addNewMessage(msg);
+}
+
+function addNewMessage(msg) {
     let message_container, message_header, message_body, message_thumbnail, message_username, message_timestamp, message_content;
 
-    let content = msg['msg_body'];
+    let content = msg['content'];
     let username = msg['author']['username'];
     let display_name = msg['author']['display_name'];
     let user_color = msg['author']['chat_color'];
     let user_avatar = msg['author']['avatar'];
     let timestamp = msg['timestamp'];
+    let timestamp_full = msg['full_timestamp'];
+    let append_allow = msg['append_allow'];
+    let priority = msg['priority'];
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
     message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
     message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
-    message_timestamp = $('<time class="message-timestamp ml-1">').text(timestamp);
+    message_timestamp = $('<time class="message-timestamp ml-1">').prop('title', timestamp_full).text(timestamp);
     message_content = $('<div class="message-content text-white w-100 pb-1">').html(content);
 
     message_container.append(message_thumbnail, message_body);
@@ -277,16 +288,19 @@ function addMessage(msg) {
     $('#messages').append(message_container);
 }
 
-function appendMessage(content, timestamp) {
+function appendMessage(msg) {
+    let content = msg['content'];
+    let timestamp = msg['timestamp'];
+
     $('#messages .message-container').last().children().append($('<div class="message-content text-white w-100 pb-1">').html(content));
     $('#messages .message-header').last().children('time').text(timestamp);
 }
 
 function setUserCount(count) {
-    $('#usercount').text('Usercount: ' + count);
     $.ajax({
         url: "api/user",
     }).done(function(data) {
+        $('#usercount').prop('title', data.join(', ')).text('Usercount: ' + count);
         userlist = data;
         userlist.push('everyone');
     });
@@ -428,7 +442,7 @@ function updateEmoteMenu() {
                 // jumping over the hidden ones.
                 if (result[emote]["menuDisplay"]) {
                     emoteitem = document.createElement('a');
-                    emoteitem.href = "#";
+                    emoteitem.classList.add('cursor-pointer');
                     emoteitem.innerHTML = result[emote]["menuDisplayCode"];
                     emoteitem.onclick = function () {
                         addEmoteCode(emote);
@@ -563,4 +577,57 @@ function checkOverflow(el) {
     el.style.overflow = curOverflow;
 
     return isOverflowing;
+}
+
+function getMessageHistory() {
+    $.getJSON('/api/chathistory', function (result) {
+        // checking if the JSON even contains messages.
+        if (Object.keys(result).length > 0) {
+            // clearing chat
+            $('#messages').empty();
+            // iterate over each message from the JSON
+            for (let msg in result) {
+                newMessageHandler(result[msg]);
+            }
+            if (checkOverflow(document.querySelector('#messages'))) {
+                $('.nano').nanoScroller();
+                if(autoscroll) {
+                    chatdiv = document.querySelector('#messages');
+                    chatdiv.scrollTop = chatdiv.scrollHeight;
+                }
+            }
+        }
+    });
+}
+
+$('#fileinput').on('change', function (e) {
+  let file = this.files[0];
+  if (file.size > 1024*1024*3) {
+    alert('max upload size is 3M');
+    e.preventDefault();
+    return false;
+  }
+  let fd = new FormData();
+  fd.append('file', file);
+  $.ajax({
+    url: '/api/upload/',
+    type: 'POST',
+
+    data: fd,
+    cache: false,
+    contentType: false,
+    processData: false,
+
+    success: function (data, b, jqXHR) {
+        if(jqXHR.status === 200) {
+            messagefield.val(messagefield.val() + " " + window.location.protocol + "//" + window.location.host + data);
+        }
+    }
+  });
+});
+
+function inputButtonClick() {
+    let evt = document.createEvent('MouseEvent');
+    evt.initEvent('click', true, false);
+    document.getElementById('fileinput').dispatchEvent(evt);
 }

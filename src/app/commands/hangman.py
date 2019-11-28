@@ -1,6 +1,6 @@
 from app.obj import SystemMessenger, User, Command
 from app.obj.games.hangmangame import HangmanGame
-from utils.shell import Console
+from utils import Console
 
 hangman_game = HangmanGame()
 
@@ -44,9 +44,9 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                 system.broadcast(f"{author.display_name} is challenging everyone to a hangman game!")
                 system.broadcast(f"The word searched is: {hangman_game.get_word()}")
                 return
-            system.send("No underscores or dashes in word allowed!")
+            system.send_error("No underscores or dashes in word allowed!")
             return
-        system.send(f"Game already running!<br/>{hangman_game.get_word()}")
+        system.send_error(f"Game already running!<br/>{hangman_game.get_word()}")
         return
 
     if params[0].lower() == "guess":
@@ -54,18 +54,18 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             if hangman_game.get_state():
                 if hangman_game.initiator != author:
                     if len(params[1]) != 1:
-                        system.send("Invalid guess length! Guess has to be single char!")
+                        system.send_error("Invalid guess length! Guess has to be single char!")
                         return
                     system.broadcast(f"{author.display_name} has tried {params[1]}")
                     SHL.output(f"{author} hast tried to guess {params[1]} as a char", "HangmanGame")  # log
                     system.broadcast(hangman_game.check_char(params[1], author))
                     return
-                system.send("You filthy cheater can't try to guess on your own word!")
+                system.broadcast(f"{author.display_name} the filthy cheater tried to guess their own word!")
                 return
-            system.send(no_game())
+            system.send_error(no_game())
             return
         except IndexError:
-            system.send("Invalid guess! Guess needs to have at least one char!")
+            system.send_error("Invalid guess! Guess needs to have at least one char!")
             return
 
     if params[0].lower() == "solve":
@@ -76,12 +76,12 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                                "HangmanGame")  # log
                     system.broadcast(hangman_game.check_word(params[1], author))
                     return
-                system.send("You filthy cheater can't try to guess on your own word!")
+                system.broadcast(f"{author.display_name} the filthy cheater tried to solve their own word!")
                 return
-            system.send(no_game())
+            system.send_error(no_game())
             return
         except IndexError:
-            system.send("Invalid guess! Solve needs to have at least one char!")
+            system.send_error("Invalid guess! Solve needs to have at least one char!")
             return
 
     if params[0].lower() == "state":
@@ -89,7 +89,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             system.send(hangman_game.get_word())
             SHL.output(f"{author} fetched the state of the game.", "HangmanGame")  # log
             return
-        system.send(no_game())
+        system.send_error(no_game())
         return
 
     system.send("Usable commands:<br/>'/hangman start *word*'<br/>'/hangman guess *char*'<br/>"

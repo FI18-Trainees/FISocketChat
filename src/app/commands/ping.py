@@ -1,5 +1,5 @@
 from app.obj import SystemMessenger, User, Command
-from utils.shell import Console
+from utils import Console
 
 SHL = Console("Command Ping")
 

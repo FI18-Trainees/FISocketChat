@@ -314,10 +314,20 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/pedalo.png' style='height:32px; width:auto;' alt='Pedalo' title='Pedalo'>"
   },
+  "uargh": {
+    "replace": "<img src='/public/img/uargh.png' style='height:40px; width:auto;' alt='Würg' title='Würg'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/uargh.png' style='height:32px; width:auto;' alt='Würg' title='Würg'>"
+  },
   ":P": {
     "replace": "<img src='/public/img/face-with-stuck-out-tongue.png' style='height:40px; width:auto;' alt=':P' title=':P'>",
     "menuDisplay": false,
     "menuDisplayCode": ""
+  },
+  "Skype": {
+    "replace": "<img src='/public/img/skype.png' style='height:32px; width:auto;' alt='Skype' title='Skype'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/skype.png' style='height:32px; width:auto;' alt='Skype' title='Skype'>"
   },
   ":thinking:": {
     "replace": "<img src='/public/img/thinking-face.png' style='height:40px; width:auto;' alt=':thinking:' title=':thinking:'>",
@@ -556,6 +566,11 @@
   },
   "false": {
     "replace": "<a style='font-family: Consolas; color:rgb(46,171,254);'>false</a>",
+    "menuDisplay": false,
+    "menuDisplayCode": ""
+  },
+  "STONKS": {
+    "replace": "<img src='/public/img/stonks.png' style='height:200px; width:auto;' alt='STONKS' title='STONKS'>",
     "menuDisplay": false,
     "menuDisplayCode": ""
   }

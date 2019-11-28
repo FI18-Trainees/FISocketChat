@@ -1,11 +1,15 @@
 import time
 
+from utils import cfg
+
 
 class UserLimiter:
     def __init__(self):
         self.user_cooldowns = {}
 
-    def check_cooldown(self, sid):
+    def check_cooldown(self, sid) -> bool:
+        if not cfg.options.get("message_cooldown", True):
+            return False
         if float(time.time() - self.user_cooldowns.get(sid, 0)) <= 0.4:
             return True
         return False

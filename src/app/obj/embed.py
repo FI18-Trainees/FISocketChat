@@ -37,7 +37,8 @@ class Embed:
     """
     Structure:
     {
-        content_type = "embed"
+        content_type = "embed",
+        title: str,
         author:
             {
                 "display_name": str,
@@ -68,9 +69,9 @@ class Embed:
     """
     __content_type = "embed"
 
-    def __init__(self, title: str, text: str = None, author: User = get_sys_user(), fields: List[Field] = None,
-                 media: Media = None, footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
-                 color: str = "#eb4034", thumbnail: str = None):
+    def __init__(self, title: str, author: User = get_sys_user(), text: str = None, fields: List[Field] = None, media: Media = None,
+                 footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
+                 color: str = "#F04747", thumbnail: str = None):
         self.__title = title
         self.__author = author
         self.__text = text
@@ -96,8 +97,12 @@ class Embed:
         if isinstance(fields, Iterable):
             self.__fields = list(fields)
 
-    def set_media(self, media: Media):
-        self.__media = media
+    def set_title(self, new: str):
+        if new.strip():
+            self.__title = new
+
+    def set_media(self, new: Media):
+        self.__media = new
 
     def set_footer(self, new: str):
         self.__footer = new
@@ -108,17 +113,16 @@ class Embed:
     def set_text(self, new: str):
         self.__text = new
 
-    def set_title(self, new: str):
-        self.__title = new
-
     def change_display_name(self, new: str):
-        self.__author.display_name = new
+        if new.strip():
+            self.__author.display_name = new
 
     def change_chat_color(self, new: str):
         self.__author.chat_color = new
 
     def set_color(self, new: str):
-        self.__color = new
+        if new.strip():
+            self.__color = new
 
     def set_thumbnail(self, new: str):
         self.__thumbnail = new

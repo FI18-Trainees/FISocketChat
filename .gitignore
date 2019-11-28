@@ -110,3 +110,6 @@ venv.bak/
 /FISocketChat.pyproj
 /FISocketChat.sln
 /obj/x86/Debug
+/src/app/storage/quotes/
+/src/app/storage/uploads/
+/src/config/

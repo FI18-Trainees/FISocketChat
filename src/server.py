@@ -4,14 +4,14 @@ import os
 
 os.system("cls" if os.name == "nt" else "clear")
 
-from utils.shell import Console
+from utils import Console, cfg
 from app import app, socketio
 
 SHL = Console("Start")
 
 
 def run():
-    port = 5000
+    port = cfg.options.get("port", 5000)
     if "-port" in [x.strip().lower() for x in sys.argv]:
         try:
             port = int(sys.argv[sys.argv.index("-port") + 1])

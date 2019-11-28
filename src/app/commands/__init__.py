@@ -5,7 +5,7 @@ import traceback
 from flask_socketio import emit
 
 from app.obj import SystemMessenger, User, Command
-from utils.shell import Console, red, white
+from utils import Console, red, white
 
 SHL = Console("CommandLoader")
 
@@ -41,7 +41,7 @@ def register(func, settings):
 
     def wrapper(author: User, cmd: Command, params: list, inv: str) -> None:
         if log:
-            SHL.output(f"{str(author)} used {str(cmd.msg_body)}", "CommandHandler")  # logging
+            SHL.output(f"{str(author)} used {str(cmd.content)}", "CommandHandler")  # logging
         systems[inv.lower()].change_display_name(default_display_name)
 
         func(system=systems[inv.lower()], author=author, cmd=cmd, params=params)
@@ -52,12 +52,12 @@ def register(func, settings):
 
 
 def handle_command(author: User, command: Command) -> None:
-    if not command.msg_body.startswith("/"):
+    if not command.content.startswith("/"):
         emit('error', {"message": "invalid syntax"})
         return
 
     try:
-        params = parse_param_list(command.msg_body)
+        params = parse_param_list(command.content)
     except IndexError:
         emit('error', {"message": "invalid invoke"})
         return

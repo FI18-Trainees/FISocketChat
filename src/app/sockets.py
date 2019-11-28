@@ -5,12 +5,12 @@ import re
 from flask_socketio import emit
 from validators import url as val_url
 
-from . import socketio, emote_handler,  user_manager, verify_token, \
+from app import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, login_disabled, request, user_limit, chat_history
-from . import handle_command as command_handler
-from .obj import User, Command, Message, get_default_user
-from utils.shell import Console, yellow2, white, green2
+    code_regex, quote_regex, login_disabled, request, user_limit, chat_history, announcer
+from app import handle_command as command_handler
+from app.obj import User, Command, Message, get_default_user, SystemMessage
+from utils import Console, yellow2, white, green2, cfg
 
 SHL = Console("Socket")
 
@@ -28,7 +28,7 @@ def handle_command(command):
     SHL.output(f"Received message {command}", "S.ON chat_message")
 
     try:
-        cmd = Command(author=get_default_user(), msg_body=str(command['message']).strip(), system=False)
+        cmd = Command(author=get_default_user(), content=str(command['message']).strip(), system=False)
         cmd.author.display_name = str(command['display_name']).strip()
         cmd.author.username = cmd.author.display_name
     except KeyError:
@@ -74,7 +74,7 @@ def handle_message(message):
     SHL.output(f"Received message {message}", "S.ON chat_message")
 
     try:
-        msg = Message(author=get_default_user(), msg_body=str(message['message']).strip(), system=False)
+        msg = Message(author=get_default_user(), content=str(message['message']).strip(), system=False)
         msg.author.display_name = str(message['display_name']).strip()
         msg.author.username = msg.author.display_name
     except KeyError:
@@ -104,7 +104,7 @@ def handle_message(message):
         emit('error', {"message": "invalid username"})
         return
 
-    if 0 < len(msg.msg_body) < 2000:
+    if 0 < len(msg.content) < 2000:
         msg.author.display_name = safe_tags_replace(msg.author.display_name)
         msg.apply_func((safe_tags_replace, link_replacer, safe_emote_replace, quote_replacer,
                         replace_newline, codeblock_replacer))
@@ -112,7 +112,7 @@ def handle_message(message):
         chat_history.add_message(msg=msg)  # log
         emit('chat_message', msg.to_json(), broadcast=True)
     else:
-        SHL.output(f"{yellow2}Invalid message length: {len(msg.msg_body)}{white}", "S.ON chat_message")
+        SHL.output(f"{yellow2}Invalid message length: {len(msg.content)}{white}", "S.ON chat_message")
         emit('error', {"message": "invalid message"})
 
 
@@ -162,7 +162,9 @@ def connect(data=""):
             emit('error', {'message': 'invalid userconfig'})
             return
 
-        emit('status', {'loginmode': True, 'username': new_user.username})
+        emit('status', {'loginmode': True, 'username': new_user.username, 'chat_color': new_user.chat_color})
+        if cfg.options.get("enable_connect_announcement", False):
+            announcer.broadcast(f"{new_user.username} connected.")
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")
     else:
         emit('status', {'loginmode': False})
