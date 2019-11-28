@@ -15,6 +15,8 @@ var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 var message_history = [];
 var history_pointer = 0;
 
+var imagecache;
+
 const messagefield = $('#messageinput');
 const infobox = $('#infobox');
 const errorbox = $('#errorbox');
@@ -243,6 +245,8 @@ $('document').ready(function () {
     mobileAndTabletcheck();
     displayNotifyMode();
     $('#notification-mode').val(getCookie('notificationmode'));
+
+    document.getElementById('messageinput').addEventListener('paste', handlePaste);
 });
 
 function reconnect() {
@@ -544,9 +548,13 @@ $('#fileinput').on('change', function (e) {
     e.preventDefault();
     return false;
   }
-  let fd = new FormData();
-  fd.append('file', file);
-  $.ajax({
+  uploadImage(file);
+});
+
+function uploadImage(file){
+    let fd = new FormData();
+    fd.append('file', file);
+    $.ajax({
     url: '/api/upload/',
     type: 'POST',
 
@@ -560,8 +568,9 @@ $('#fileinput').on('change', function (e) {
             messagefield.val(messagefield.val() + " " + window.location.protocol + "//" + window.location.host + data);
         }
     }
-  });
-});
+    });
+}
+
 
 function inputButtonClick() {
     let evt = document.createEvent('MouseEvent');
@@ -578,3 +587,27 @@ function getCommands(){
         }
     });
 }
+function handlePaste(e){
+    var clipboardData, pastedData;
+
+    e.stopPropagation();
+
+    clipboardData = e.clipboardData || window.clipboardData;
+    let items = clipboardData.items;
+    pastedData = clipboardData.getData('Text');
+
+    for (var i = 0; i < items.length; i++) {
+        // Skip content if not image
+        if (items[i].type.indexOf("image") == -1) continue;
+        e.preventDefault();
+        imagecache = items[i].getAsFile();
+        uploadImage(imagecache)
+        //finally try as text
+        if(items[i].type.indexOf("Text")>0){
+            console.log(items[i]);
+            break;
+        }
+    }
+}
+
+
