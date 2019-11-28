@@ -30,43 +30,59 @@ body {
     color: var(--discord-white) !important;
 }
 
-    #messages .message-container {
-        border-bottom-color: var(--discord-lightgrey) !important;
+#messages .message-container {
+    border-bottom-color: var(--discord-lightgrey) !important;
+}
+
+#messages .message-profile-image {
+    height: 40px;
+}
+
+#messages .message-name {
+    font: 13px "Comic Sans MS", Arial;
+}
+
+#messages .message-timestamp {
+    color: var(--discord-grey);
+    font: 9px "Comic Sans MS", Arial;
+}
+
+#messages .message-content:link {
+    color: var(--discord-blue);
+}
+
+    #messages .message-content em {
+        font-style: normal;
     }
 
-    #messages .message-profile-image {
+    #messages .message-content .mention {
+        background: var(--discord-orange);
+    }
+
+    #messages .message-content .code {
+        background: var(--discord-grey);
+        font: 14px "Monoid", Arial;
+    }
+
+    #messages .message-content .quote {
+        border-left: 0.25em solid var(--discord-grey);
+    }
+
+    #messages .embed-container {
+
+    }
+
+    #messages .embed-container .embed-profile-image {
         height: 40px;
     }
 
-    #messages .message-name {
-        font: 13px "Comic Sans MS", Arial;
+    #messages .embed-container .embed-title {
+        font-size: 20px;
     }
 
-    #messages .message-timestamp {
-        color: var(--discord-grey);
-        font: 9px "Comic Sans MS", Arial;
+    #messages .embed-container .embed-topic {
+        font-size: 18px;
     }
-
-        #messages .message-content:link {
-            color: var(--discord-blue);
-        }
-
-        #messages .message-content em {
-            font-style: normal;
-        }
-
-        #messages .message-content .mention {
-            background: var(--discord-orange);
-        }
-
-        #messages .message-content .code {
-            background: var(--discord-grey);
-            font: 14px "Monoid", Arial;
-        }
-
-        #messages .message-content .quote {
-            border-left: 0.25em solid var(--discord-grey);
-        }
 
 .message-input {
     bottom: 10px;

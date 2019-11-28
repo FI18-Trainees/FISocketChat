@@ -301,18 +301,20 @@ function addEmbed(msg) {
     let full_timestamp = msg['full_timestamp'];
     let title = msg['title'];
 
-    embed_container = $('<div class="embed-container d-flex border-bottom border-left p-2">');
-    embed_header = $('<div class="embed-header d-inline-flex align-items-baseline mb-1">');
+    embed_container = $('<div class="embed-container d-flex flex-column border-bottom border-left px-3">');
+    embed_header = $('<div class="embed-header d-flex flex-wrap align-items-baseline mb-1">');
 
-    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle" src="' + author_avatar + '">');
+    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle mr-2" src="' + author_avatar + '">');
     embed_author_name = $('<div class="embed-author-name">').prop('title', author_name).text(display_name).css('color', author_color).click(uname_name_click);
-    embed_title = $('<div class="embed-title">').text(title);
+    embed_title = $('<div class="embed-title py-2 w-100">').text(title);
 
-    embed_footer_container = $('<div class="embed-footer-container d-inline-flex">');
-    embed_timestamp = $('<p class="embed-timestamp">').text(full_timestamp);
+    embed_footer_container = $('<div class="embed-footer-container d-inline-flex pb-1 mt-3">');
+    embed_timestamp = $('<span class="embed-timestamp text-muted ml-1">').text(full_timestamp);
 
-    embed_container.append(embed_header, embed_footer_container);
-    embed_header.append(embed_author_thumbnail, embed_author_name, embed_title);
+    embed_container.append(embed_header);
+    embed_header.append(embed_author_thumbnail);
+    embed_header.append(embed_author_name);
+    embed_header.append(embed_title);
     embed_footer_container.append(embed_timestamp);
 
     if(msg.hasOwnProperty('text')){
@@ -320,7 +322,7 @@ function addEmbed(msg) {
     }
     if(msg.hasOwnProperty('fields')){
         let fields = msg['fields'];
-        embed_field_container = $('<div class="embed-field-container">');
+        embed_field_container = $('<div class="embed-field-container py-3">');
         embed_container.append(embed_field_container);
         fields.forEach(function(item) {
             embed_topic_container = $('<div class="embed-topic-container">');
@@ -337,7 +339,7 @@ function addEmbed(msg) {
     }
     if(msg.hasOwnProperty('footer')){
         let footer = msg['footer'];
-        embed_footer = $('<p class="embed-footer">').text(footer);
+        embed_footer = $('<span class="embed-footer">').text(footer);
         embed_footer_container.prepend(embed_footer);
     }
     if(msg.hasOwnProperty('color')){
@@ -348,8 +350,10 @@ function addEmbed(msg) {
         embed_thumbnail = new Image();
         embed_thumbnail.src = thumbnail;
         embed_thumbnail.onload = function () {imgloaded();};
-        embed_header.append(embed_author_thumbnail);
+        embed_container.append(embed_thumbnail);
     }
+
+    embed_container.append(embed_footer_container);
 
     $('#messages').append(embed_container);
 }
