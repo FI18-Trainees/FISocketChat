@@ -237,13 +237,6 @@ a:hover, a:visited, a:link, a:active {
     max-height: 600px;
 }
 
-.image-preview:hover{
-    z-index:1000;
-    transform-origin: top left;
-    transform: scale(2);
-    transition: transform 1s;
-}
-
 .video-embed {
     /* !# NOTICE: Just Copy pasted from .image-preview for now.*/
     width: 100%;
