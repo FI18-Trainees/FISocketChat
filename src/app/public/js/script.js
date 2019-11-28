@@ -289,10 +289,10 @@ function appendMessage(msg) {
 }
 
 function setUserCount(count) {
-    $('#usercount').text('Usercount: ' + count);
     $.ajax({
         url: "api/user",
     }).done(function(data) {
+        $('#usercount').prop('title', data.join(', ')).text('Usercount: ' + count);
         userlist = data;
         userlist.push('everyone');
     });
