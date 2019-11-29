@@ -567,6 +567,7 @@ function messagesScroll(event) {
         let messagediv = document.getElementById('messages');
             if(messagediv.scrollTop === (messagediv.scrollHeight - messagediv.offsetHeight)) {
                 setautoscroll(true);
+                hideInfo();
                 lastScrollDirection = 0;
             }
         } else {
