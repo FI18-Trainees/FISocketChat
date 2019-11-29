@@ -159,6 +159,16 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/monkaT.png' style='height:32px; width:auto;' alt='monkaT' title='monkaT'>"
   },
+  "monkaH": {
+    "replace": "<img src='/public/img/monkaH.png' style='height:40px; width:auto;' alt='monkaH' title='monkaH'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaH.png' style='height:32px; width:auto;' alt='monkaH' title='monkaH'>"
+  },
+  "monkaShoot": {
+    "replace": "<img src='/public/img/monkaShoot.gif' style='height:40px; width:auto;' alt='monkaShoot' title='monkaShoot'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaShoot.gif' style='height:32px; width:auto;' alt='monkaShoot' title='monkaShoot'>"
+  },
   "peepoStrongest": {
     "replace": "<img src='/public/img/peepoStrongest.gif' style='height:40px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>",
     "menuDisplay": true,
