@@ -1,4 +1,4 @@
-from app.obj import SystemMessenger, User, Command
+from app.obj import SystemMessenger, User, Command, Embed
 from utils import Console, green2, white
 import random
 import json
@@ -21,30 +21,38 @@ with open(filename, 'r', encoding="utf-8") as c:
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
+    embed = Embed(title="Quote", thumbnail="http://simpleicon.com/wp-content/uploads/users.png", color="#00ff00")
+
     if not len(params):
-        system.send("/quote can be either used to register or show quotes.")
+        embed.set_text("/quote can be either used to register or show quotes.")
+        system.send(embed)
         return
 
     if params[0].lower() == "help":
-        system.send("Usable commands:<br/>/quote register<br/>/quote random<br/>/quote info<br/>/quote viewall<br/>"
-                    "/quote count<br/>/quote #")
+        embed.set_text("Usable commands:<br/>/quote register<br/>/quote random<br/>/quote info<br/>/quote viewall<br/>"
+                       "/quote count<br/>/quote #")
+        system.send(embed)
         return
 
     if params[0].lower() == "info":
-        system.send("To register a quote type /quote register and then your sentence you want to register.")
+        embed.set_text("To register a quote type /quote register and then your sentence you want to register.")
+        system.send(embed)
         return
 
     if params[0].lower() == "random":
-        system.broadcast(f"<i>{random.choice(quotes)}</i>")
+        embed.set_text(f"<i>{random.choice(quotes)}</i>")
+        system.broadcast(embed)
         return
 
     if params[0].lower() == "count":
-        system.send(f"We currently have {len(quotes)} quotes registered.")
+        embed.set_text(f"We currently have {len(quotes)} quotes registered.")
+        system.send(embed)
         return
 
     if params[0].lower() == "viewall":
         msg = "<br/>".join(quotes)
-        system.send(f"<i>{msg}</i>")
+        embed.set_text(f"<i>{msg}</i>")
+        system.send(embed)
         return
 
     if params[0].lower() == "register":
@@ -54,7 +62,8 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             with open(filename, 'w', encoding="utf-8") as f:
                 json.dump(list(set(quotes)), f)
             SHL.output(f"Quote registered! : {quote} | Quote written to file.")
-            system.send(f"Quote \"{quote}\" successfully registered")
+            embed.set_text(f"Quote \"{quote}\" successfully registered")
+            system.send(embed)
             return
         system.send_error("Please also provide a sentence to register.")
         return
@@ -63,7 +72,8 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         if len(params) > 1:
             if params[1].isdigit():
                 if len(quotes) > int(params[1]) >= 0:
-                    system.send(f"<i>{quotes[int(params[1])]}</i>")
+                    embed.set_text(f"<i>{quotes[int(params[1])]}</i>")
+                    system.send(embed)
                     return
                 system.send_error("The number you provided is too large or below 0")
                 return
@@ -72,4 +82,5 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         system.send_error("Please provide a number you want to view")
         return
 
-    system.send("For further information on /quote, see /quote help or /quote info")
+    embed.set_text("For further information on /quote, see /quote help or /quote info")
+    system.send(embed)
