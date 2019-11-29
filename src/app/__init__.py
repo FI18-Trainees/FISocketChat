@@ -109,6 +109,10 @@ def verify_token(token):
 from .commands import handle_command
 from .sockets import emit_status  # TODO: dafuq is this, send help
 from .import routes
+from .obj.resource_manager import Resource_Manager
+
+resource_manager = Resource_Manager(routes.uploaded_files)
+resource_manager.start_reloader()
 
 
 # checking and creating upload dir

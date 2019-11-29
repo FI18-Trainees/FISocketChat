@@ -15,8 +15,6 @@ from app.obj.resource_manager import Resource_Manager
 SHL = Console("Routes")
 
 uploaded_files = dict()
-resource_manager = Resource_Manager(uploaded_files)
-resource_manager.start_reloader()
 
 
 def get_ip(r) -> str:
