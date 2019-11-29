@@ -400,7 +400,7 @@ function addEmbed(msg) {
         embed_thumbnail = new Image();
         embed_thumbnail.src = thumbnail;
         embed_thumbnail.onload = function () {imgloaded();};
-        embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto');
+        embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto', 'mt-3');
         embed_header.append(embed_thumbnail);
     }
 

@@ -75,6 +75,7 @@ body {
 
     #messages .embed-container .embed-thumbnail {
         max-height: 70px;
+        width: auto;
     }
 
     #messages .embed-container .embed-profile-image {
