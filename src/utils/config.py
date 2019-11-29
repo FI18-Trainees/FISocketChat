@@ -31,5 +31,8 @@ class __Config:
                 if debug:
                     SHL.output(f"[{key}]: {value}")
 
+    def get(self, key, default):
+        return self.options.get(key, default)
+
 
 cfg = __Config()

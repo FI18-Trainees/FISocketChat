@@ -30,7 +30,10 @@ class SystemMessenger:
         try:
             emit('chat_message', message.to_json(), broadcast=False)
         except RuntimeError:  # no connected clients
-            SHL.output(f"{red}Something went wrong while sending your message {message}{white}")
+            if not kwargs.get("predict_error", True):
+                SHL.output(f"{red}Something went wrong while sending your message {message}{white}")
+            else:
+                pass
 
     def broadcast(self, message: Union[SystemMessage, str, Embed], **kwargs):
         if isinstance(message, str):
@@ -46,10 +49,19 @@ class SystemMessenger:
         try:
             emit('chat_message', message.to_json(), broadcast=True)
         except RuntimeError:  # no connected clients
-            SHL.output(f"{red}Something went wrong while sending your message {message}{white}")
+            if not kwargs.get("predict_error", True):
+                SHL.output(f"{red}Something went wrong while sending your message {message}{white}")
+            else:
+                pass
 
     def change_display_name(self, new: str):
         self.__display_name = new
 
-    def send_error(self, error: str, additional_dict: dict = dict()):
-        emit('error', {**additional_dict, **{'message': error}})
+    def send_error(self, error: str, additional_dict: dict = dict(), **kwargs):
+        try:
+            emit('error', {**additional_dict, **{'message': error}})
+        except RuntimeError:
+            if not kwargs.get("predict_error", True):
+                SHL.output(f"{red}Something went wrong while sending your error {error}{white}")
+            else:
+                pass

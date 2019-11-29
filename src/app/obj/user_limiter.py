@@ -8,7 +8,7 @@ class UserLimiter:
         self.user_cooldowns = {}
 
     def check_cooldown(self, sid) -> bool:
-        if not cfg.options.get("message_cooldown", True):
+        if not cfg.get("message_cooldown", True):
             return False
         if float(time.time() - self.user_cooldowns.get(sid, 0)) <= 0.4:
             return True

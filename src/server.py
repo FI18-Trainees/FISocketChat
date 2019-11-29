@@ -11,7 +11,7 @@ SHL = Console("Start")
 
 
 def run():
-    port = cfg.options.get("port", 5000)
+    port = cfg.get("port", 5000)
     if "-port" in [x.strip().lower() for x in sys.argv]:
         try:
             port = int(sys.argv[sys.argv.index("-port") + 1])
