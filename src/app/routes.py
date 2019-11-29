@@ -10,10 +10,13 @@ from app import app, emote_handler, auth, user_manager, chat_history
 from app.obj import get_default_user
 from utils import Console
 from app.commands import commands
+from app.obj.resource_manager import Resource_Manager
 
 SHL = Console("Routes")
 
 uploaded_files = dict()
+resource_manager = Resource_Manager(uploaded_files)
+resource_manager.start_reloader()
 
 
 def get_ip(r) -> str:
@@ -95,7 +98,6 @@ def upload_file():
         if file.filename.strip() == '':
             make_response("no file submitted", 400)
         if file and allowed_file(file.filename):
-
             filename = secure_filename(str(datetime.now()) + "-" + file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
@@ -105,7 +107,7 @@ def upload_file():
                 return uploaded_files.get(filemd5)['url']
             else:
                 file_url = url_for('uploaded_file', filename=filename)
-                uploaded_files.update({filemd5: {'url': file_url, 'date': datetime.now()}})
+                uploaded_files.update({filemd5: {'url': file_url, 'date': datetime.now(), 'path': filename}})
                 return file_url
 
 
