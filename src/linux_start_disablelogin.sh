@@ -1,4 +1,4 @@
 #!/bin/bash
 clear
-python server.py -disablelogin
+python3 server.py -disablelogin
 read
