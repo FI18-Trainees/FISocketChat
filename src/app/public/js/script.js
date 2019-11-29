@@ -347,6 +347,7 @@ function addEmbed(msg) {
 
     if(msg.hasOwnProperty('text')){
         let text = msg['text'];
+        $('<p class="embed-text">').html(text).insertAfter(embed_title);
     }
     if(msg.hasOwnProperty('fields')){
         let fields = msg['fields'];
@@ -355,18 +356,16 @@ function addEmbed(msg) {
         fields.forEach(function(item) {
             embed_topic_container = $('<div class="embed-topic-container m-1">');
             embed_topic = $('<p class="embed-topic">').text(item['topic']);
-            embed_topic_value = $('<p class="embed-topic-value">').text(item['value']);
+            embed_topic_value = $('<p class="embed-topic-value">').html(item['value']);
 
             embed_field_container.append(embed_topic_container);
             embed_topic_container.append(embed_topic, embed_topic_value);
         });
-
     }
 
     if(msg.hasOwnProperty('media')){
         let media = msg['media'];
         embed_media_container = $('<div class="embed-media-container">');
-        console.log(media['media_type']);
         switch(media['media_type']) {
             case 'audio':
                 embed_audio = $('<audio class="audio-embed" controls preload="metadata"/>');
@@ -379,7 +378,6 @@ function addEmbed(msg) {
                 embed_media_container.append(embed_video);
                 break;
             case 'img':
-                alert('img');
                 embed_image = new Image();
                 embed_image.src = media['media_url'];
                 embed_image.onload = function () {imgloaded();};

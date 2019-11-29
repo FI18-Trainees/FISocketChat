@@ -70,8 +70,8 @@ class Embed:
     """
     __content_type = "embed"
 
-    def __init__(self, title: str, author: User = get_sys_user(), text: str = None, fields: List[Field] = None, media: Media = None,
-                 footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
+    def __init__(self, title: str, author: User = get_sys_user(), text: str = None, fields: List[Field] = None,
+                 media: Media = None, footer: str = None, url: str = "https://github.com/FI18-Trainees/FISocketChat",
                  color: str = "#F04747", thumbnail: str = None, append_allow: bool = False):
         self.__title = title
         self.__author = author
@@ -129,22 +129,33 @@ class Embed:
     def set_thumbnail(self, new: str):
         self.__thumbnail = new
 
-    def set_append_allow(self, new: bool):
+    def change_append_allow(self, new: bool):
         self.__append_allow = new
 
     def to_json(self) -> dict:
-        return {
+        basic_dict = {
             "content_type": self.__content_type,
             "title": self.__title,
             "author": self.__author.to_json(),
-            "text": self.__text,
-            "fields": [x.to_json() for x in self.__fields],
-            "media": self.__media.to_json(),
-            "footer": self.__footer,
-            "full_timestamp":  str(self.__full_timestamp),
+            "full_timestamp": str(self.__full_timestamp),
             "timestamp": str(self.__timestamp),
-            "url": self.__url,
-            "color": self.__color,
-            "thumbnail": self.__thumbnail,
-            "append_allow": self.__append_allow
         }
+
+        if self.__text:
+            basic_dict["text"] = self.__text
+        if self.__fields:
+            basic_dict["fields"] = [x.to_json() for x in self.__fields]
+        if self.__fields:
+            basic_dict["media"] = self.__media.to_json()
+        if self.__footer:
+            basic_dict["footer"] = self.__footer
+        if self.__url:
+            basic_dict["url"] = self.__url
+        if self.__color:
+            basic_dict["color"] = self.__color
+        if self.__thumbnail:
+            basic_dict["thumbnail"] = self.__thumbnail
+        if self.__append_allow is not None:
+            basic_dict["append_allow"] = self.__append_allow
+
+        return basic_dict

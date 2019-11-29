@@ -19,11 +19,11 @@ class SystemMessenger:
     def send(self, message: Union[SystemMessage, str, Embed], **kwargs):
         if isinstance(message, str):
             message = SystemMessage(content=message)
-            if kwargs.get("display_name", self.__display_name):
-                message.change_display_name(kwargs.get("display_name", self.__display_name))
-            if kwargs.get("append_allow", self.__append_allow) is not None:
-                message.change_append_allow(kwargs.get("append_allow", self.__append_allow))
 
+        if kwargs.get("display_name", self.__display_name):
+            message.change_display_name(kwargs.get("display_name", self.__display_name))
+        if kwargs.get("append_allow", self.__append_allow) is not None:
+            message.change_append_allow(kwargs.get("append_allow", self.__append_allow))
         if kwargs.get("save_in_history", self.__save_in_history):
             chat_history.add_message(message)
 
@@ -35,11 +35,11 @@ class SystemMessenger:
     def broadcast(self, message: Union[SystemMessage, str, Embed], **kwargs):
         if isinstance(message, str):
             message = SystemMessage(content=message)
-            if kwargs.get("display_name", self.__display_name):
-                message.change_display_name(kwargs.get("display_name", self.__display_name))
-            if kwargs.get("append_allow", self.__append_allow) is not None:
-                message.change_append_allow(kwargs.get("append_allow", self.__append_allow))
 
+        if kwargs.get("display_name", self.__display_name):
+            message.change_display_name(kwargs.get("display_name", self.__display_name))
+        if kwargs.get("append_allow", self.__append_allow) is not None:
+            message.change_append_allow(kwargs.get("append_allow", self.__append_allow))
         if kwargs.get("save_in_history", self.__save_in_history):
             chat_history.add_message(message)
 
