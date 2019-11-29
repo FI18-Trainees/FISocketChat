@@ -6,12 +6,12 @@ SHL = Console("Command Embed")
 
 settings = {
     'invoke': 'embedtest',  # user would have to use /example to call main function below
-    'system_display_name': 'System - Example'  # name of the system user you can send messages with (default: "System")
+    'system_display_name': 'System - Example',  # name of the system user you can send messages with (default: "System")
+    'debug_only': True
 }
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):  # gets called by commandhandler
-
     fields = [Field(topic="cooler titel des felds", value="text des felds<br/>auch mit newlines") for x in range(3)]
     media = Media(media_type=media_types.img, media_url="https://i.imgur.com/nTfijG2.jpg")
 
