@@ -11,10 +11,15 @@ settings = {
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
-    e = Embed(title="Userlist", thumbnail="http://simpleicon.com/wp-content/uploads/users.png", color="#00ff00")
-    if login_disabled:
-        e.set_text("not available in logindisabled mode.")
-    else:
-        e.set_text("<br />".join([f"{x['user'].username}: {x['user'].display_name}"
-                                  for x in user_manager.configs.values()]))
-    system.send(e)
+    if not len(params):
+        embed = Embed(title="Userlist", thumbnail="http://simpleicon.com/wp-content/uploads/users.png", color="#00ff00")
+        if login_disabled:
+            embed.set_text("not available in logindisabled mode.")
+        else:
+            embed.set_text("<br />".join([f"{x['user'].username}: {x['user'].display_name}"
+                                      for x in user_manager.configs.values()]))
+        system.send(embed)
+        return
+
+    if params[0] == "help":
+        system.send("[list help]: Displays a list of all connected users.")
