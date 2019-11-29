@@ -35,7 +35,7 @@ emote_handler = Emotes(False)
 
 # CHAT
 announcer = SystemMessenger(display_name="Announcement", append_allow=False, save_in_history=True)
-announcer.broadcast("Chat initialised.")
+announcer.broadcast("Chat initialised.", predict_error=True)  # most likely no user connected
 
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
