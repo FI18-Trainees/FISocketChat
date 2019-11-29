@@ -114,11 +114,11 @@ from .import routes
 # checking and creating upload dir
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    SHL.output(f"{green2}Upload folder was not present, created upload folder.{white}", "Upload")
+    SHL.output(f"Upload folder was not present, created upload folder.", "Upload")
 
 else:
     # cleaning upload folder
-    SHL.output(f"{green2}Cleaning Upload folder.{white}", "Upload")
+    SHL.output(f"Cleaning Upload folder.", "Upload")
     for the_file in os.listdir(app.config['UPLOAD_FOLDER']):
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], the_file)
         try:
