@@ -21,7 +21,8 @@ with open(filename, 'r', encoding="utf-8") as c:
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
-    embed = Embed(title="Quote", thumbnail="http://simpleicon.com/wp-content/uploads/users.png", color="#00ff00")
+    embed = Embed(title="Quote", thumbnail="http://simpleicon.com/wp-content/uploads/right_double_quotation_mark.png",
+                  color="#00ff00")
 
     if not len(params):
         embed.set_text("/quote can be either used to register or show quotes.")
