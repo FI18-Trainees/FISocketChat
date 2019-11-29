@@ -8,10 +8,10 @@ from utils import cfg
 class ChatHistory:
     def __init__(self):
         self.__history = []
-        self.__max_length = cfg.options.get("chat_history_length", 100)
+        self.__max_length = cfg.get("chat_history_length", 100)
 
     def add_message(self, msg: Union[Message, Embed]):
-        if cfg.options.get("save_chat_history", True):
+        if cfg.get("save_chat_history", True):
             self.__history.append(msg)
             if len(self.__history) > self.__max_length:
                 self.__history.pop(0)

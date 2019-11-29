@@ -53,7 +53,7 @@ quote_regex = compile(r"^&gt; (.+)", MULTILINE)
 # Startup parameters
 start_args = [x.strip().lower() for x in sys.argv]
 
-login_disabled = cfg.options.get("logindisabled", False)  # default from cfg
+login_disabled = cfg.get("logindisabled", False)  # default from cfg
 if "-disablelogin" in start_args:  # overwrite by parameter
     login_disabled = True
 
@@ -65,7 +65,7 @@ if "-dummyuser" in start_args:
     SHL.output(f"{red}Adding Dummy User{white}")
     dummy_user = True
 
-debug_mode = cfg.options.get("debug_enabled", False)
+debug_mode = cfg.get("debug_enabled", False)
 if "-debug" in start_args:
     debug_mode = True
 
