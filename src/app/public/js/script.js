@@ -159,16 +159,24 @@ $('document').ready(function () {
         }
     });
     socket.on('chat_message', function (msg) {
-        let content = msg['content'];
-      
-        let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
-        if (mentioned) {
-            msg['content'] = makeMention(content);
-            if (checkPermission() && notificationmode !== 'no' && (msg['author']['username'].toLowerCase() != ownusername)) {
-                newNotification("You have been mentioned!");
-            }
+        switch (msg['content_type']) {
+            case 'message':
+                let content = msg['content'];
+                let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
+                if (mentioned) {
+                    msg['content'] = makeMention(content);
+                    if (checkPermission() && notificationmode !== 'no') {
+                        newNotification("You have been mentioned!");
+                    }
+                }
+
+                // check if username of last message is identical to new message
+                newMessageHandler(msg);
+                break;
+            case 'embed':
+                addEmbed(msg);
+                break;
         }
-        newMessageHandler(msg);
 
         //check if chat would overflow currentSize and refresh scrollbar
         if (checkOverflow(document.querySelector('#messages'))) { 
@@ -279,7 +287,7 @@ function addNewMessage(msg) {
     let priority = msg['priority'];
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
-    message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
+    message_header = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
     message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
     message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
@@ -308,6 +316,99 @@ function setUserCount(count) {
         userlist = data;
         userlist.push('everyone');
     });
+}
+
+function addEmbed(msg) {
+    let author_name = msg['author']['username'];
+    let display_name = msg['author']['display_name'];
+    let author_color = msg['author']['chat-color'];
+    let author_avatar = msg['author']['avatar'];
+
+    let full_timestamp = msg['full_timestamp'];
+    let title = msg['title'];
+
+    embed_container = $('<div class="embed-container d-flex flex-column border-bottom px-3 my-3 w-75">');
+    embed_header = $('<div class="embed-header d-flex flex-wrap align-items-center mb-1">');
+
+    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle mr-2" src="' + author_avatar + '">');
+    embed_author_name = $('<div class="embed-author-name">').prop('title', author_name).text(display_name).css('color', author_color).click(uname_name_click);
+    embed_title = $('<div class="embed-title py-2">').text(title);
+
+    embed_footer_container = $('<div class="embed-footer-container d-inline-flex pb-1 mt-3">');
+    timestamp = new Date(full_timestamp);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' , hour: 'numeric', minute: 'numeric', second: 'numeric'};
+    embed_timestamp = $('<span class="embed-timestamp text-muted ml-auto">').text(timestamp.toLocaleDateString('de-DE', options));
+
+    embed_container.append(embed_header);
+    embed_container.append(embed_title);
+    embed_header.append(embed_author_thumbnail);
+    embed_header.append(embed_author_name);
+    embed_footer_container.append(embed_timestamp);
+
+    if(msg.hasOwnProperty('text')){
+        let text = msg['text'];
+    }
+    if(msg.hasOwnProperty('fields')){
+        let fields = msg['fields'];
+        embed_field_container = $('<div class="embed-field-container d-flex flex-wrap justify-content-between py-3">');
+        embed_container.append(embed_field_container);
+        fields.forEach(function(item) {
+            embed_topic_container = $('<div class="embed-topic-container m-1">');
+            embed_topic = $('<p class="embed-topic">').text(item['topic']);
+            embed_topic_value = $('<p class="embed-topic-value">').text(item['value']);
+
+            embed_field_container.append(embed_topic_container);
+            embed_topic_container.append(embed_topic, embed_topic_value);
+        });
+
+    }
+
+    if(msg.hasOwnProperty('media')){
+        let media = msg['media'];
+        embed_media_container = $('<div class="embed-media-container">');
+        console.log(media['media_type']);
+        switch(media['media_type']) {
+            case 'audio':
+                embed_audio = $('<audio class="audio-embed" controls preload="metadata"/>');
+                embed_audio.src = media['media_url'];
+                embed_media_container.append(embed_audio);
+                break;
+            case 'video':
+                embed_video = $('<video class="video-embed" controls preload="metadata"/>');
+                embed_video.src = media['media_url'];
+                embed_media_container.append(embed_video);
+                break;
+            case 'img':
+                alert('img');
+                embed_image = new Image();
+                embed_image.src = media['media_url'];
+                embed_image.onload = function () {imgloaded();};
+                embed_media_container.append(embed_image);
+                break;
+        }
+        embed_container.append(embed_media_container);
+    }
+    if(msg.hasOwnProperty('footer')){
+        let footer = msg['footer'];
+        embed_footer = $('<span class="embed-footer">').text(footer);
+        embed_footer_container.prepend(embed_footer);
+    }
+    if(msg.hasOwnProperty('color')){
+        let color = msg['color'];
+        embed_container.css('border-left-color', color);
+    }
+    if(msg.hasOwnProperty('thumbnail')){
+        let thumbnail = msg['thumbnail'];
+        embed_thumbnail = new Image();
+        embed_thumbnail.src = thumbnail;
+        embed_thumbnail.onload = function () {imgloaded();};
+        embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto');
+        embed_header.append(embed_thumbnail);
+    }
+
+    embed_container.append(embed_footer_container);
+
+    $('#messages').append(embed_container);
 }
 
 function showError(message) {

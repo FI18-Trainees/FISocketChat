@@ -65,6 +65,13 @@ if "-dummyuser" in start_args:
     SHL.output(f"{red}Adding Dummy User{white}")
     dummy_user = True
 
+debug_mode = cfg.options.get("debug_enabled", False)
+if "-debug" in start_args:
+    debug_mode = True
+
+if debug_mode:
+    SHL.output(f"{red}Enabled debug_mode.{white}")
+
 
 @auth.error_handler
 def auth_error():
