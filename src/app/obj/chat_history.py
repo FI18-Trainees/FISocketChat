@@ -1,4 +1,7 @@
+from typing import Union
+
 from .message import Message
+from .embed import Embed
 from utils import cfg
 
 
@@ -7,7 +10,7 @@ class ChatHistory:
         self.__history = []
         self.__max_length = cfg.options.get("chat_history_length", 100)
 
-    def add_message(self, msg: Message):
+    def add_message(self, msg: Union[Message, Embed]):
         if cfg.options.get("save_chat_history", True):
             self.__history.append(msg)
             if len(self.__history) > self.__max_length:
