@@ -34,8 +34,5 @@ class ChatHistory:
     def get_messages(self, username: str = "all"):
         return [x for x in self.__history if x.username in [username, "all"]]
 
-    def test(self):
-        return self.__history
-
 
 chat_history = ChatHistory()
