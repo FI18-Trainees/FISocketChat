@@ -7,14 +7,14 @@ from flask import render_template, send_from_directory, make_response, jsonify, 
 from werkzeug.utils import secure_filename
 
 from app import app, emote_handler, auth, user_manager, chat_history
-from app.obj import get_default_user, Resource_Manager
+from app.obj import get_default_user, ResourceManager
 from utils import Console
 from app.commands import commands
 
 SHL = Console("Routes")
 
 uploaded_files = dict()
-resource_manager = Resource_Manager(uploaded_files)
+resource_manager = ResourceManager(uploaded_files)
 resource_manager.start_reloader()
 
 

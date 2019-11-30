@@ -5,19 +5,17 @@ import os.path
 
 from utils import Console, white, green2, red, cfg
 
-
 SHL = Console("Resource Manager")
 
+root_filepath = os.path.join("app", "storage", "uploads")
 
-rootfilepath = os.path.join("app", "storage", "uploads")
 
-
-class Resource_Manager:
-    def __init__(self, uploaddict):
-        self.maxage = cfg.get('uploads_max_age', 172800)
-        self.checkcooldown = cfg.get('uploads_check_cooldown', 43200)
+class ResourceManager:
+    def __init__(self, upload_dict):
+        self.max_age = cfg.get('uploads_max_age', 172800)
+        self.check_cooldown = cfg.get('uploads_check_cooldown', 43200)
         self.runCheck = False
-        self.uploaddict = uploaddict
+        self.upload_dict = upload_dict
 
     def start_reloader(self):
         self.runCheck = True
@@ -30,13 +28,13 @@ class Resource_Manager:
 
     def run(self):
         while self.runCheck:
-            todelete = list()
-            for entry in self.uploaddict:
-                if self.uploaddict[entry].get('date').timestamp() + self.maxage < float(time.time()):
-                    os.unlink(os.path.join(rootfilepath, self.uploaddict[entry].get('path')))
-                    todelete.append(entry)
+            to_delete = []
+            for entry in self.upload_dict:
+                if self.upload_dict[entry].get('date').timestamp() + self.max_age < float(time.time()):
+                    os.unlink(os.path.join(root_filepath, self.upload_dict[entry].get('path')))
+                    to_delete.append(entry)
 
-            for x in todelete:
-                del self.uploaddict[x]
+            for x in to_delete:
+                del self.upload_dict[x]
 
-            time.sleep(self.checkcooldown)
+            time.sleep(self.check_cooldown)
