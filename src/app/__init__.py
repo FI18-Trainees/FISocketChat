@@ -11,7 +11,7 @@ from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
 from app.emotes import Emotes
-from app.obj import UserManager, get_default_user, UserLimiter, SystemMessenger, SystemMessage, chat_history
+from app.obj import user_manager, get_default_user, user_limiter, SystemMessenger, SystemMessage, chat_history
 from utils import Console, white, green2, red, cfg
 
 SHL = Console("Init")
@@ -24,8 +24,6 @@ app.config['UPLOAD_FOLDER'] = os.path.join("app", "storage", "uploads")
 app.config['MAX_CONTENT_LENGTH'] = 3.5 * 1024 * 1024    # 3.5 Mb limit
 
 auth = HTTPTokenAuth()
-user_manager = UserManager()
-user_limit = UserLimiter()
 
 # SOCKETS
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
@@ -136,4 +134,4 @@ if dummy_user:
         def_user = get_default_user()
         def_user.display_name = name
         def_user.username = name
-        user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user)
+        user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user, secret="_")

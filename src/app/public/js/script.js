@@ -11,6 +11,7 @@ var userlist = [];
 var notificationmode = 'no';
 var autoscroll = true;
 var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
+var secret = null;
 
 var message_history = [];
 var history_pointer = 0;
@@ -136,7 +137,6 @@ $('document').ready(function () {
     });
     socket.on('connect', function () {
         changeOnlineStatus(true);
-        getMessageHistory();
     });
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
@@ -225,6 +225,10 @@ $('document').ready(function () {
                 document.getElementById('logininfo_sitebar').style.display = "none";
                 loginmode = false;
             }
+        }
+        if (status.hasOwnProperty('secret')) {
+            secret = status['secret'];
+            getMessageHistory();
         }
     });
 
@@ -620,24 +624,40 @@ function checkOverflow(el) {
 }
 
 function getMessageHistory() {
-    $.getJSON('/api/chathistory', function (result) {
-        // checking if the JSON even contains messages.
+    $.getJSON(`/api/chathistory?sid=${socket.id}&username=${ownusername}&secret=${secret}`, function (result) {
         if (Object.keys(result).length > 0) {
-            // clearing chat
-            $('#messages').empty();
-            // iterate over each message from the JSON
-            for (let msg in result) {
-                newMessageHandler(result[msg]);
-            }
-            if (checkOverflow(document.querySelector('#messages'))) {
-                $('.nano').nanoScroller();
-                if(autoscroll) {
-                    chatdiv = document.querySelector('#messages');
-                    chatdiv.scrollTop = chatdiv.scrollHeight;
+            handleMessageHistory(result);
+        } else {
+            $.getJSON(`/api/chathistory`, function (result) {
+                if (Object.keys(result).length > 0) {
+                    handleMessageHistory(result);
                 }
-            }
+            });
         }
     });
+}
+
+function handleMessageHistory(history) {
+    $('#messages').empty();
+            // iterate over each message from the JSON
+    for (let msg in history) {
+        let m = history[msg];
+        switch (m["content_type"]) {
+            case 'message':
+                newMessageHandler(m);
+                break;
+            case 'embed':
+                addEmbed(m);
+                break;
+        }
+    }
+    if (checkOverflow(document.querySelector('#messages'))) {
+        $('.nano').nanoScroller();
+        if(autoscroll) {
+            chatdiv = document.querySelector('#messages');
+            chatdiv.scrollTop = chatdiv.scrollHeight;
+        }
+    }
 }
 
 $('#fileinput').on('change', function (e) {
