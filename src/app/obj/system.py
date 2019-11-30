@@ -1,10 +1,11 @@
 from typing import Union
 
 from flask_socketio import emit
+from flask import request
 
 from .system_message import SystemMessage
 from .embed import Embed
-from . import chat_history
+from . import chat_history, user_manager
 from utils import Console, red, white
 
 SHL = Console("SystemMessenger")
@@ -24,11 +25,19 @@ class SystemMessenger:
             message.change_display_name(kwargs.get("display_name", self.__display_name))
         if kwargs.get("append_allow", self.__append_allow) is not None:
             message.change_append_allow(kwargs.get("append_allow", self.__append_allow))
-        if kwargs.get("save_in_history", self.__save_in_history):
-            chat_history.add_message(message)
+
+        username = kwargs.get("username", None)
+        if username:
+            send_to_sid = user_manager.get_sid(username)
+        else:
+            send_to_sid = [kwargs.get("sid", request.sid)]
+            username = user_manager.configs[send_to_sid[0]]["user"].username
 
         try:
-            emit('chat_message', message.to_json(), broadcast=False)
+            for sid in send_to_sid:
+                emit('chat_message', message.to_json(), broadcast=False, room=sid)
+            chat_history.add_message(message, username=username)
+
         except RuntimeError:  # no connected clients
             if not kwargs.get("predict_error", True):
                 SHL.output(f"{red}Something went wrong while sending your message {message}{white}")
@@ -43,8 +52,7 @@ class SystemMessenger:
             message.change_display_name(kwargs.get("display_name", self.__display_name))
         if kwargs.get("append_allow", self.__append_allow) is not None:
             message.change_append_allow(kwargs.get("append_allow", self.__append_allow))
-        if kwargs.get("save_in_history", self.__save_in_history):
-            chat_history.add_message(message)
+        chat_history.add_message(message, username="all")
 
         try:
             emit('chat_message', message.to_json(), broadcast=True)

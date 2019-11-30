@@ -22,3 +22,6 @@ class UserLimiter:
 
     def __str__(self):
         return self.user_cooldowns
+
+
+user_limiter = UserLimiter()
