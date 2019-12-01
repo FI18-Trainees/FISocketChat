@@ -88,7 +88,8 @@ def register_all():
             register(command.main, command.settings)
         except:
             pass
-    SHL.output(f"{red}========================{white}")
+    SHL.output(f"Done.")
+    SHL.output("==================")
 
 
 register_all()

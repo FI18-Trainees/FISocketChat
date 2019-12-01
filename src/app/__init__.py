@@ -11,7 +11,7 @@ from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
 from app.emotes import Emotes
-from app.obj import UserManager, get_default_user, UserLimiter, SystemMessenger, SystemMessage, chat_history
+from app.obj import user_manager, get_default_user, user_limiter, SystemMessenger, SystemMessage, chat_history
 from utils import Console, white, green2, red, cfg
 
 SHL = Console("Init")
@@ -24,8 +24,6 @@ app.config['UPLOAD_FOLDER'] = os.path.join("app", "storage", "uploads")
 app.config['MAX_CONTENT_LENGTH'] = 3.5 * 1024 * 1024    # 3.5 Mb limit
 
 auth = HTTPTokenAuth()
-user_manager = UserManager()
-user_limit = UserLimiter()
 
 # SOCKETS
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
@@ -35,7 +33,7 @@ emote_handler = Emotes(False)
 
 # CHAT
 announcer = SystemMessenger(display_name="Announcement", append_allow=False, save_in_history=True)
-announcer.broadcast("Chat initialised.")
+announcer.broadcast("Chat initialised.", predict_error=True)  # most likely no user connected
 
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
@@ -53,7 +51,7 @@ quote_regex = compile(r"^&gt; (.+)", MULTILINE)
 # Startup parameters
 start_args = [x.strip().lower() for x in sys.argv]
 
-login_disabled = cfg.options.get("logindisabled", False)  # default from cfg
+login_disabled = cfg.get("logindisabled", False)  # default from cfg
 if "-disablelogin" in start_args:  # overwrite by parameter
     login_disabled = True
 
@@ -65,7 +63,7 @@ if "-dummyuser" in start_args:
     SHL.output(f"{red}Adding Dummy User{white}")
     dummy_user = True
 
-debug_mode = cfg.options.get("debug_enabled", False)
+debug_mode = cfg.get("debug_enabled", False)
 if "-debug" in start_args:
     debug_mode = True
 
@@ -114,11 +112,11 @@ from .import routes
 # checking and creating upload dir
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    SHL.output(f"{green2}Upload folder was not present, created upload folder.{white}", "Upload")
+    SHL.output(f"Upload folder was not present, created upload folder.", "Upload")
 
 else:
     # cleaning upload folder
-    SHL.output(f"{green2}Cleaning Upload folder.{white}", "Upload")
+    SHL.output(f"Cleaning Upload folder.", "Upload")
     for the_file in os.listdir(app.config['UPLOAD_FOLDER']):
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], the_file)
         try:
@@ -136,4 +134,4 @@ if dummy_user:
         def_user = get_default_user()
         def_user.display_name = name
         def_user.username = name
-        user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user)
+        user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user, secret="_")
