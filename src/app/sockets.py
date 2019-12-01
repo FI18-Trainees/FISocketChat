@@ -264,14 +264,14 @@ def get_embed_youtube_code(link: str) -> str:
 def get_embed_image_link(link: str) -> str:
     matches = image_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}" onload="imgloaded();"/>'
+        return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}" onload="updateScroll();"/>'
     return ""
 
 
 def get_embed_video_link(link: str) -> str:
     matches = video_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<br /><video class="video-embed" src="{match.group()}" controls preload="metadata"/>'
+        return f'<br /><video class="video-embed" src="{match.group()}" controls preload="metadata" onloadedmetadata="updateScroll();"/>'
     return ""
 
 
