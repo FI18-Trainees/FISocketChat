@@ -186,7 +186,7 @@ $('document').ready(function () {
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
             else {
-                showInfo("There are new Messages below. Click here to scroll down.", null, function(){ setautoscroll(true); hideInfo(); imgloaded()});
+                showInfo("There are new Messages below. Click here to scroll down.", null, function(){ setautoscroll(true); hideInfo(); updateScroll()});
             }
         }
         if (!focused) {
@@ -379,12 +379,13 @@ function addEmbed(msg) {
             case 'video':
                 embed_video = $('<video class="video-embed" controls preload="metadata"/>');
                 embed_video.src = media['media_url'];
+                embed_video.addEventListener('loadedmetadata', updateScroll);
                 embed_media_container.append(embed_video);
                 break;
             case 'img':
                 embed_image = new Image();
                 embed_image.src = media['media_url'];
-                embed_image.onload = function () {imgloaded();};
+                embed_image.onload = function () {updateScroll();};
                 embed_media_container.append(embed_image);
                 break;
         }
@@ -403,7 +404,7 @@ function addEmbed(msg) {
         let thumbnail = msg['thumbnail'];
         embed_thumbnail = new Image();
         embed_thumbnail.src = thumbnail;
-        embed_thumbnail.onload = function () {imgloaded();};
+        embed_thumbnail.onload = function () {updateScroll();};
         embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto');
         embed_header.append(embed_thumbnail);
     }
@@ -597,7 +598,7 @@ function mobileAndTabletcheck() {
     }
 }
 
-function imgloaded() {
+function updateScroll() {
     if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
         $('.nano').nanoScroller();
         if(autoscroll) {
