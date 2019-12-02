@@ -5,7 +5,7 @@ from app.obj import Embed, Field, Media, media_types
 SHL = Console("Command Embed")
 
 settings = {
-    'invoke': 'embedtest',  # user would have to use /example to call main function below
+    'invoke': 'embedtest',  # user would have to use /embedtest to call main function below
     'system_display_name': 'System - Example',  # name of the system user you can send messages with (default: "System")
     'debug_only': True
 }
