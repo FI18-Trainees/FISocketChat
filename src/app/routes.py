@@ -36,6 +36,11 @@ def status():
     return response
 
 
+@app.route("/favicon.ico")
+def send_favicon():
+    return send_from_directory('public', "favicon.ico", mimetype='image/x-icon"')
+
+
 @app.route('/public/js/<path:path>')
 def send_js(path):
     return send_from_directory(os.path.join('public', 'js'), path, mimetype='text/javascript')
