@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from datetime import datetime
 from collections.abc import Iterable
 
@@ -86,18 +86,19 @@ class Embed:
         self.__thumbnail = thumbnail
         self.__append_allow = append_allow
 
-    def add_fields(self, fields):
+    def add_fields(self, fields: Union[Field, Iterable]):
         if isinstance(fields, Field):
             self.__fields.append(fields)
         if isinstance(fields, Iterable):
             for x in fields:
-                self.__fields.append(x)
+                if isinstance(x, Field):
+                    self.__fields.append(x)
 
-    def set_fields(self, fields):
+    def set_fields(self, fields: Union[Field, Iterable]):
         if isinstance(fields, Field):
             self.__fields = [fields]
         if isinstance(fields, Iterable):
-            self.__fields = list(fields)
+            self.__fields = [x for x in fields if isinstance(x, Field)]
 
     def set_title(self, new: str):
         if new.strip():
