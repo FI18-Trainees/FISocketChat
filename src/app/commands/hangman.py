@@ -1,4 +1,4 @@
-from app.obj import SystemMessenger, User, Command, Embed, Field
+from app.obj import SystemMessenger, User, Command, Embed
 from app.obj.games.hangmangame import HangmanGame
 from utils import Console
 
