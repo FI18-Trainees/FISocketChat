@@ -11,6 +11,7 @@ var userlist = [];
 var notificationmode = 'no';
 var autoscroll = true;
 var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
+var secret = null;
 
 var message_history = [];
 var history_pointer = 0;
@@ -136,7 +137,6 @@ $('document').ready(function () {
     });
     socket.on('connect', function () {
         changeOnlineStatus(true);
-        getMessageHistory();
     });
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
@@ -186,7 +186,7 @@ $('document').ready(function () {
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
             else {
-                showInfo("There are new Messages below. Click here to scroll down.", null, function(){ setautoscroll(true); hideInfo(); imgloaded()});
+                showInfo("There are new Messages below. Click here to scroll down.", null, function(){ setautoscroll(true); hideInfo(); updateScroll()});
             }
         }
         if (!focused) {
@@ -225,6 +225,10 @@ $('document').ready(function () {
                 document.getElementById('logininfo_sitebar').style.display = "none";
                 loginmode = false;
             }
+        }
+        if (status.hasOwnProperty('secret')) {
+            secret = status['secret'];
+            getMessageHistory();
         }
     });
 
@@ -375,12 +379,13 @@ function addEmbed(msg) {
             case 'video':
                 embed_video = $('<video class="video-embed" controls preload="metadata"/>');
                 embed_video.src = media['media_url'];
+                embed_video.addEventListener('loadedmetadata', updateScroll);
                 embed_media_container.append(embed_video);
                 break;
             case 'img':
                 embed_image = new Image();
                 embed_image.src = media['media_url'];
-                embed_image.onload = function () {imgloaded();};
+                embed_image.onload = function () {updateScroll();};
                 embed_media_container.append(embed_image);
                 break;
         }
@@ -399,8 +404,8 @@ function addEmbed(msg) {
         let thumbnail = msg['thumbnail'];
         embed_thumbnail = new Image();
         embed_thumbnail.src = thumbnail;
-        embed_thumbnail.onload = function () {imgloaded();};
-        embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto', 'mt-3');
+        embed_thumbnail.onload = function () {updateScroll();};
+        embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto');
         embed_header.append(embed_thumbnail);
     }
 
@@ -559,6 +564,9 @@ function uname_name_click(e){
 function setautoscroll(value) {
     autoscroll = value;
     document.getElementById('autoscroll').checked = value;
+    if(value) {
+        hideInfo();
+    }
 }
 
 function messagesScroll(event) {
@@ -593,7 +601,7 @@ function mobileAndTabletcheck() {
     }
 }
 
-function imgloaded() {
+function updateScroll() {
     if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
         $('.nano').nanoScroller();
         if(autoscroll) {
@@ -620,24 +628,40 @@ function checkOverflow(el) {
 }
 
 function getMessageHistory() {
-    $.getJSON('/api/chathistory', function (result) {
-        // checking if the JSON even contains messages.
+    $.getJSON(`/api/chathistory?sid=${socket.id}&username=${ownusername}&secret=${secret}`, function (result) {
         if (Object.keys(result).length > 0) {
-            // clearing chat
-            $('#messages').empty();
-            // iterate over each message from the JSON
-            for (let msg in result) {
-                newMessageHandler(result[msg]);
-            }
-            if (checkOverflow(document.querySelector('#messages'))) {
-                $('.nano').nanoScroller();
-                if(autoscroll) {
-                    chatdiv = document.querySelector('#messages');
-                    chatdiv.scrollTop = chatdiv.scrollHeight;
+            handleMessageHistory(result);
+        } else {
+            $.getJSON(`/api/chathistory`, function (result) {
+                if (Object.keys(result).length > 0) {
+                    handleMessageHistory(result);
                 }
-            }
+            });
         }
     });
+}
+
+function handleMessageHistory(history) {
+    $('#messages').empty();
+            // iterate over each message from the JSON
+    for (let msg in history) {
+        let m = history[msg];
+        switch (m["content_type"]) {
+            case 'message':
+                newMessageHandler(m);
+                break;
+            case 'embed':
+                addEmbed(m);
+                break;
+        }
+    }
+    if (checkOverflow(document.querySelector('#messages'))) {
+        $('.nano').nanoScroller();
+        if(autoscroll) {
+            chatdiv = document.querySelector('#messages');
+            chatdiv.scrollTop = chatdiv.scrollHeight;
+        }
+    }
 }
 
 $('#fileinput').on('change', function (e) {

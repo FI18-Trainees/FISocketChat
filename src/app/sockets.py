@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 import requests
 import re
+import uuid
 
 from flask_socketio import emit
 from validators import url as val_url
 
 from app import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, login_disabled, request, user_limit, chat_history, announcer
+    code_regex, quote_regex, login_disabled, request, user_limiter, chat_history, announcer
 from app import handle_command as command_handler
 from app.obj import User, Command, Message, get_default_user, SystemMessage
 from utils import Console, yellow2, white, green2, cfg
@@ -17,14 +18,14 @@ SHL = Console("Socket")
 
 @socketio.on('chat_command')
 def handle_command(command):
-    if user_limit.check_cooldown(request.sid):
+    if user_limiter.check_cooldown(request.sid):
         if login_disabled:
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_command")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
                        f"{user_manager.configs[request.sid]['user'].username}", "S.ON chat_command")
         return
-    user_limit.update_cooldown(request.sid)
+    user_limiter.update_cooldown(request.sid)
     SHL.output(f"Received message {command}", "S.ON chat_message")
 
     try:
@@ -63,14 +64,14 @@ def handle_command(command):
 
 @socketio.on('chat_message')
 def handle_message(message):
-    if user_limit.check_cooldown(request.sid):
+    if user_limiter.check_cooldown(request.sid):
         if login_disabled:
             SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_message")
         else:
             SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
                        f"{user_manager.configs[request.sid]['user'].username}", "S.ON chat_message")
         return
-    user_limit.update_cooldown(request.sid)
+    user_limiter.update_cooldown(request.sid)
     SHL.output(f"Received message {message}", "S.ON chat_message")
 
     try:
@@ -169,7 +170,9 @@ def connect(data=""):
     else:
         emit('status', {'loginmode': False})
 
-    user_manager.add(request.sid, user=new_user)
+    secret = str(uuid.uuid4())
+    emit('status', {'secret': secret})
+    user_manager.add(sid=request.sid, user=new_user, secret=secret)
     SHL.output(f"User count: {user_manager.get_count()}.", "S.ON Connect")
     emit_status({'count': user_manager.get_count()})
 
@@ -178,7 +181,7 @@ def connect(data=""):
 def disconnect():
     SHL.output("User disconnected.", "S.ON Disconnect")
     user_manager.rem(request.sid)
-    user_limit.remove_sid(request.sid)
+    user_limiter.remove_sid(request.sid)
     SHL.output(f"User count: {user_manager.get_count()}.", "S.ON Disconnect")
     emit_status({'count': user_manager.get_count()})
 
@@ -264,14 +267,14 @@ def get_embed_youtube_code(link: str) -> str:
 def get_embed_image_link(link: str) -> str:
     matches = image_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}" onload="imgloaded();"/>'
+        return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}" onload="updateScroll();"/>'
     return ""
 
 
 def get_embed_video_link(link: str) -> str:
     matches = video_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
-        return f'<br /><video class="video-embed" src="{match.group()}" controls preload="metadata"/>'
+        return f'<br /><video class="video-embed" src="{match.group()}" controls preload="metadata" onloadedmetadata="updateScroll();"/>'
     return ""
 
 
