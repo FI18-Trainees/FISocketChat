@@ -1,4 +1,4 @@
-from app.obj import SystemMessenger, User, Command, Embed
+from app.obj import SystemMessenger, User, Command, Embed, Field
 from app.obj.games.hangmangame import HangmanGame
 from utils import Console
 
@@ -20,8 +20,8 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     # game command should be                            /hangman start *word*
     # then it should be                                 /hangman guess *char*
     # to check game state when connection lost try     /hangman state
-    embed = Embed(title="Hangman", thumbnail="http://simpleicon.com/wp-content/uploads/group_chat_1.png",
-                  color="#00ff00")
+    embed = Embed(title="Hangman", thumbnail="https://image.flaticon.com/icons/png/512/43/43980.png",
+                  color="#00ff00", footer="Hangman V1.1")
 
     if not len(params):
         embed.set_text("/hangman start *word* starts a game of hangman with your own word.")
