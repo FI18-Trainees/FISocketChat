@@ -225,6 +225,10 @@ sitebar div {
         max-height:26px;
     }
 
+    .sitebar-content .toggle-off {
+        border: 1px solid #f8f9fa;
+    }
+
 .content-wrapper {
     display: flex;
 }
