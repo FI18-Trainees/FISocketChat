@@ -694,12 +694,12 @@ function uploadImage(file){
     });
 }
 
-
 function inputButtonClick() {
     let evt = document.createEvent('MouseEvent');
     evt.initEvent('click', true, false);
     document.getElementById('fileinput').dispatchEvent(evt);
 }
+
 function getCommands(){
     $.getJSON('/api/commands', function (result) {
         if (Object.keys(result).length > 0) {
@@ -710,6 +710,7 @@ function getCommands(){
         }
     });
 }
+
 function handlePaste(e){
     var clipboardData, pastedData;
 
