@@ -9,6 +9,7 @@ var cooldown = 0;
 var ownusername = null;
 var userlist = [];
 var notificationmode = 'no';
+var theme = 'normie';
 var autoscroll = true;
 var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 var secret = null;
@@ -277,7 +278,7 @@ function newMessageHandler(msg) {
     addNewMessage(msg);
 }
 
-function addNewMessage(msg) {
+var addNewMessage = function(msg) {
     let message_container, message_header, message_body, message_thumbnail, message_username, message_timestamp, message_content;
 
     let content = msg['content'];
@@ -291,6 +292,11 @@ function addNewMessage(msg) {
     let priority = msg['priority'];
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
+
+    if(theme === 'fiora' && username === ownusername) {
+
+    }
+
     message_header = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
     message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
@@ -304,7 +310,7 @@ function addNewMessage(msg) {
     $('#messages').append(message_container);
 }
 
-function appendMessage(msg) {
+var appendMessage = function(msg) {
     let content = msg['content'];
     let timestamp = msg['timestamp'];
 
