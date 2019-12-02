@@ -369,6 +369,11 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/klugerschachzug.png' style='height:50px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>"
   },
+  "kleinesX": {
+    "replace": "<img src='/public/img/x-doubt.png' style='height:25px; width:auto;' alt='X' title='X'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+  },
   "X": {
     "replace": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>",
     "menuDisplay": false,

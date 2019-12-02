@@ -20,8 +20,8 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     # game command should be                            /hangman start *word*
     # then it should be                                 /hangman guess *char*
     # to check game state when connection lost try     /hangman state
-    embed = Embed(title="Hangman", thumbnail="http://simpleicon.com/wp-content/uploads/group_chat_1.png",
-                  color="#00ff00")
+    embed = Embed(title="Hangman", thumbnail="https://image.flaticon.com/icons/png/512/43/43980.png",
+                  color="#00ff00", footer="Hangman V1.1")
 
     if not len(params):
         embed.set_text("/hangman start *word* starts a game of hangman with your own word.")
@@ -46,9 +46,8 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
             if not ("-" in params[1] or "_" in params[1]):
                 hangman_game.start(params[1], author)
                 SHL.output(f"{author} started a game with: {params[1]}", "HangmanGame")  # log
-                embed.set_text(f"{author.display_name} is challenging everyone to a hangman game!")
-                system.broadcast(embed)
-                embed.set_text(f"The word searched is: {hangman_game.get_word()}")
+                embed.set_text(f"{author.display_name} is challenging everyone to a hangman game!<br/>"
+                               f"The word searched is: {hangman_game.get_word()}")
                 system.broadcast(embed)
                 return
             system.send_error("No underscores or dashes in word allowed!")
@@ -63,10 +62,9 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                     if len(params[1]) != 1:
                         system.send_error("Invalid guess length! Guess has to be single char!")
                         return
-                    embed.set_text(f"{author.display_name} has tried {params[1]}")
-                    system.broadcast(embed)
                     SHL.output(f"{author} hast tried to guess {params[1]} as a char", "HangmanGame")  # log
-                    embed.set_text(hangman_game.check_char(params[1], author))
+                    embed.set_text(f"{author.display_name} has tried {params[1]}<br/>"
+                                   f"{hangman_game.check_char(params[1], author)}")
                     system.broadcast(embed)
                     return
                 embed.set_text(f"{author.display_name} the filthy cheater tried to guess their own word!")
