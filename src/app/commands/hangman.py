@@ -70,7 +70,6 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                 embed.set_text(f"{author.display_name} the filthy cheater tried to guess their own word!")
                 embed.set_color("#FF6D00")
                 system.broadcast(embed)
-                embed.set_color("#F04747")
                 return
             system.send_error(no_game())
             return
@@ -90,7 +89,6 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
                 embed.set_text(f"{author.display_name} the filthy cheater tried to solve their own word!")
                 embed.set_color("#FF6D00")
                 system.broadcast(embed)
-                embed.set_color("#F04747")
                 return
             system.send_error(no_game())
             return
