@@ -583,5 +583,10 @@
     "replace": "<img src='/public/img/stonks.png' style='height:200px; width:auto;' alt='STONKS' title='STONKS'>",
     "menuDisplay": false,
     "menuDisplayCode": ""
+  },
+  "approved": {
+    "replace": "<img src='/public/img/approved.png' style='height:40px; width:auto;' alt='approved' title='approved'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/approved.png' style='height:32px; width:auto;' alt='approved' title='approved'>"
   }
 }
