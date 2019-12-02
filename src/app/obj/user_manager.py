@@ -18,7 +18,7 @@ class UserManager:
         return len(self.configs)
 
     def get_sid(self, username: str) -> list:
-        return [x for x in self.configs if x["user"].username == username]
+        return [x for x in self.configs if self.configs[x]["user"].username == username]
 
     def authenticate_user_for_sid(self, sid: str, username: str, secret: str) -> bool:
         user = self.configs.get(sid, {}).get("user", None)
