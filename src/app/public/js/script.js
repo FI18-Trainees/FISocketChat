@@ -564,6 +564,9 @@ function uname_name_click(e){
 function setautoscroll(value) {
     autoscroll = value;
     document.getElementById('autoscroll').checked = value;
+    if(value) {
+        hideInfo();
+    }
 }
 
 function messagesScroll(event) {
