@@ -59,8 +59,7 @@ def send_css(path):
 
 @app.route('/api/emotes')
 def send_emotes():
-    sort = False
-    sort = request.args.get('sort') is not None and request.args.get('sort').lower() == "true"
+    sort = request.args.get('sort', "False").lower() == "true"
     emotes = emote_handler.emotes
     if sort:
         response = make_response(json.dumps(emotes, sort_keys=True))
