@@ -1,6 +1,6 @@
 import subprocess
 
-from app.obj import SystemMessenger, User, Command
+from app.obj import SystemMessenger, User, Command, Embed
 from utils import Console, white, red, yellow
 
 SHL = Console("Command gitversion")
@@ -52,9 +52,15 @@ except UnicodeDecodeError:
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     if not len(params):
         if __msg is not None:
-            system.send(__msg)
+            git_msg = __msg
+            color = "#00ff00"
         else:
-            system.send("Error fetching version.")
+            git_msg = "Error fetching version."
+            color = "#ff0000"
+        embed = Embed(title="Gitversion", text=git_msg, color=color,
+                      thumbnail="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png")
+
+        system.send(embed)
         return
 
     if params[0] == "help":

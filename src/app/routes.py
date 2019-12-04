@@ -8,12 +8,15 @@ from flask import render_template, send_from_directory, make_response, jsonify, 
 from werkzeug.utils import secure_filename
 
 from app import app, emote_handler, auth, user_manager, chat_history
-from app.obj import get_default_user
-from utils import Console
+from app.obj import get_default_user, ResourceManager
+from utils import Console, red, white
+from app.commands import commands
 
 SHL = Console("Routes")
 
 uploaded_files = dict()
+resource_manager = ResourceManager(uploaded_files)
+resource_manager.start_reloader()
 
 
 def get_ip(r) -> str:
@@ -32,6 +35,11 @@ def status():
     response = make_response("OK")
     response.headers["api"] = "hellothere"
     return response
+
+
+@app.route("/favicon.ico")
+def send_favicon():
+    return send_from_directory('public', "favicon.ico", mimetype='image/x-icon"')
 
 
 @app.route('/public/js/<path:path>')
@@ -62,6 +70,13 @@ def send_emotes():
     return jsonify(emotes)
 
 
+@app.route('/api/commands')
+@auth.login_required
+def send_commands_list():
+    SHL.output(f"[{get_ip(request)}] Returning commands list", "/api/user")
+    return jsonify(list(commands.keys()))
+
+
 @app.route('/api/user')
 @auth.login_required
 def send_user():
@@ -73,8 +88,14 @@ def send_user():
 @app.route('/api/chathistory')
 @auth.login_required
 def send_chat_history():
-    SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
-    return jsonify(chat_history.to_json())
+    sid = request.args.get("sid", None)
+    secret = request.args.get("secret", None)
+    username = request.args.get("username", "all")
+    if username == "all" or user_manager.authenticate_user_for_sid(sid=sid, username=username, secret=secret):
+        SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
+        return jsonify(chat_history.to_json(username=username))
+    SHL.output(f"[{get_ip(request)}] {red}Invalid sid or secret{white}", "/api/chathistory")
+    return jsonify([])
 
 
 @app.route('/api/uploads/<filename>')
@@ -96,7 +117,6 @@ def upload_file():
         if file.filename.strip() == '':
             make_response("no file submitted", 400)
         if file and allowed_file(file.filename):
-
             filename = secure_filename(str(datetime.now()) + "-" + file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
@@ -106,7 +126,7 @@ def upload_file():
                 return uploaded_files.get(filemd5)['url']
             else:
                 file_url = url_for('uploaded_file', filename=filename)
-                uploaded_files.update({filemd5: {'url': file_url, 'date': datetime.now()}})
+                uploaded_files.update({filemd5: {'url': file_url, 'date': datetime.now(), 'path': filename}})
                 return file_url
 
 

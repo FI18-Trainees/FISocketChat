@@ -30,7 +30,7 @@ class Message:
             "full_timestamp":  str(self.full_timestamp),
             "timestamp": str(self.timestamp),
             "append_allow": self.append_allow,
-            "priority": str(self.priority)
+            "priority": self.priority.name
         }
 
     def apply_func(self, funcs: tuple):

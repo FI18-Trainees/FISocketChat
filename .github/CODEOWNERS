@@ -1,0 +1,18 @@
+* @zaanposni @monkmitrad @SFFan123 @ArPiiX
+
+# EMOTES
+/src/app/public/img/ @ArPiiX @SFFan123
+/src/app/emotes/emotes.json @ArPiiX @SFFan123
+
+# WEBDEV
+*.css @monkmitrad
+*.html @monkmitrad @SFFan123
+*.js @monkmitrad @SFFan123
+
+# PYTHON
+*.py @zaanposni
+/requirements.txt @zaanposni
+
+# UNITTESTS
+/tests/ @zaanposni
+/.github/workflows @zaanposni

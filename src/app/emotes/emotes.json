@@ -159,6 +159,16 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/monkaT.png' style='height:32px; width:auto;' alt='monkaT' title='monkaT'>"
   },
+  "monkaH": {
+    "replace": "<img src='/public/img/monkaH.png' style='height:40px; width:auto;' alt='monkaH' title='monkaH'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaH.png' style='height:32px; width:auto;' alt='monkaH' title='monkaH'>"
+  },
+  "monkaShoot": {
+    "replace": "<img src='/public/img/monkaShoot.gif' style='height:40px; width:auto;' alt='monkaShoot' title='monkaShoot'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/monkaShoot.gif' style='height:32px; width:auto;' alt='monkaShoot' title='monkaShoot'>"
+  },
   "peepoStrongest": {
     "replace": "<img src='/public/img/peepoStrongest.gif' style='height:40px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>",
     "menuDisplay": true,
@@ -358,6 +368,11 @@
     "replace": "<img src='/public/img/klugerschachzug.png' style='height:100px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/klugerschachzug.png' style='height:50px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>"
+  },
+  "kleinesX": {
+    "replace": "<img src='/public/img/x-doubt.png' style='height:25px; width:auto;' alt='X' title='X'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
   },
   "X": {
     "replace": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>",
@@ -573,5 +588,10 @@
     "replace": "<img src='/public/img/stonks.png' style='height:200px; width:auto;' alt='STONKS' title='STONKS'>",
     "menuDisplay": false,
     "menuDisplayCode": ""
+  },
+  "approved": {
+    "replace": "<img src='/public/img/approved.png' style='height:40px; width:auto;' alt='approved' title='approved'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/approved.png' style='height:32px; width:auto;' alt='approved' title='approved'>"
   }
 }

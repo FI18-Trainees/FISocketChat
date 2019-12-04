@@ -4,6 +4,7 @@ import traceback
 
 from flask_socketio import emit
 
+from app import debug_mode
 from app.obj import SystemMessenger, User, Command
 from utils import Console, red, white
 
@@ -38,12 +39,19 @@ def register(func, settings):
     invoke = settings.get('invoke')
     log = settings.get('log', True)
     default_display_name = settings.get('system_display_name', None)
+    debug_only = settings.get('debug_only', False)
 
     def wrapper(author: User, cmd: Command, params: list, inv: str) -> None:
         if log:
             SHL.output(f"{str(author)} used {str(cmd.content)}", "CommandHandler")  # logging
         systems[inv.lower()].change_display_name(default_display_name)
 
+        if debug_only:
+            if debug_mode:
+                func(system=systems[inv.lower()], author=author, cmd=cmd, params=params)
+            else:
+                systems[inv.lower()].send_error("Only available in debug mode")
+            return
         func(system=systems[inv.lower()], author=author, cmd=cmd, params=params)
 
     systems[invoke.lower()] = SystemMessenger(default_display_name)
@@ -80,7 +88,8 @@ def register_all():
             register(command.main, command.settings)
         except:
             pass
-    SHL.output(f"{red}========================{white}")
+    SHL.output(f"Done.")
+    SHL.output("==================")
 
 
 register_all()

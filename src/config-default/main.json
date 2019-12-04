@@ -2,7 +2,9 @@
   "logindisabled": false,
   "port": 5000,
   "save_chat_history": true,
-  "chat_history_length": 200,
+  "chat_history_length": 500,
   "message_cooldown": true,
-  "enable_connect_announcement": false
+  "enable_connect_announcement": false,
+  "uploads_max_age": 172800,
+  "uploads_check_cooldown": 43200
 }

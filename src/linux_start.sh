@@ -1,4 +1,4 @@
 #!/bin/bash
 clear
-python server.py
+python3 server.py
 read

@@ -16,7 +16,7 @@ body {
     --discord-lightgrey: #72767d;
     --discord-white: #ffffff;
     --discord-blue: #7289da;
-    --discord-red: rgba(240, 71, 71, 1);
+    --discord-red: #f04747;
     --discord-pink: #FF1493;
     --discord-orange: #fdad5c;
     font: 13px "Comic Sans MS", Arial;
@@ -30,43 +30,69 @@ body {
     color: var(--discord-white) !important;
 }
 
-    #messages .message-container {
-        border-bottom-color: var(--discord-lightgrey) !important;
+#messages .message-container {
+    border-bottom-color: var(--discord-lightgrey) !important;
+}
+
+#messages .message-profile-image {
+    height: 40px;
+}
+
+#messages .message-name {
+    font: 13px "Comic Sans MS", Arial;
+}
+
+#messages .message-timestamp {
+    color: var(--discord-grey);
+    font: 9px "Comic Sans MS", Arial;
+}
+
+#messages .message-content:link {
+    color: var(--discord-blue);
+}
+
+    #messages .message-content em {
+        font-style: normal;
     }
 
-    #messages .message-profile-image {
+    #messages .message-content .mention {
+        background: var(--discord-orange);
+    }
+
+    #messages .message-content .code {
+        background: var(--discord-grey);
+        font: 14px "Monoid", Arial;
+    }
+
+    #messages .message-content .quote {
+        border-left: 0.25em solid var(--discord-grey);
+    }
+
+    #messages .embed-container {
+        border-left: 3.5px solid;
+        background: var(--discord-black);
+    }
+
+    #messages .embed-container .embed-thumbnail {
+        max-height: 70px;
+        width: auto;
+    }
+
+    #messages .embed-container .embed-profile-image {
         height: 40px;
     }
 
-    #messages .message-name {
-        font: 13px "Comic Sans MS", Arial;
+    #messages .embed-container .embed-title {
+        font-size: 20px;
     }
 
-    #messages .message-timestamp {
-        color: var(--discord-grey);
-        font: 9px "Comic Sans MS", Arial;
+    #messages .embed-container .embed-topic {
+        font-size: 18px;
     }
 
-        #messages .message-content:link {
-            color: var(--discord-blue);
-        }
-
-        #messages .message-content em {
-            font-style: normal;
-        }
-
-        #messages .message-content .mention {
-            background: var(--discord-orange);
-        }
-
-        #messages .message-content .code {
-            background: var(--discord-grey);
-            font: 14px "Monoid", Arial;
-        }
-
-        #messages .message-content .quote {
-            border-left: 0.25em solid var(--discord-grey);
-        }
+    #messages .embed-container .embed-footer-container {
+        font-size: 10px;
+    }
 
 .message-input {
     bottom: 10px;
@@ -111,6 +137,38 @@ input[type=file] {
 
 .bg-discord-red {
     background: var(--discord-red);
+    box-shadow: none;
+}
+.bg-discord-blue {
+    background: var(--discord-blue);
+    box-shadow: none;
+}
+.bg-discord-black {
+    background: var(--discord-black);
+    box-shadow: none;
+}
+.bg-discord-dark {
+    background: var(--discord-dark);
+    box-shadow: none;
+}
+.bg-discord-grey {
+    background: var(--discord-grey);
+    box-shadow: none;
+}
+.bg-discord-lightgrey {
+    background: var(--discord-lightgrey);
+    box-shadow: none;
+}
+.bg-discord-white {
+    background: var(--discord-white);
+    box-shadow: none;
+}
+.bg-discord-pink {
+    background: var(--discord-pink);
+    box-shadow: none;
+}
+.bg-discord-orange {
+    background: var(--discord-orange);
     box-shadow: none;
 }
 
@@ -200,9 +258,8 @@ a:hover, a:visited, a:link, a:active {
     }
 
 .image-preview {
-    width: 100%;
     max-width: 600px;
-    height: 100%;
+    height: auto;
     max-height: 600px;
 }
 

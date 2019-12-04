@@ -3,6 +3,7 @@ var socket = null;
 var focused = true;
 var unread = 0;
 var emotelist = null;
+var commandlist = null;
 var loginmode = true;
 var cooldown = 0;
 var ownusername = null;
@@ -10,11 +11,16 @@ var userlist = [];
 var notificationmode = 'no';
 var autoscroll = true;
 var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
+var secret = null;
 
 var message_history = [];
 var history_pointer = 0;
 
+var imagecache;
+
 const messagefield = $('#messageinput');
+const infobox = $('#infobox');
+const errorbox = $('#errorbox');
 
 $('document').ready(function () {
     socket = io.connect(window.location.href.slice(0, -1),
@@ -131,7 +137,6 @@ $('document').ready(function () {
     });
     socket.on('connect', function () {
         changeOnlineStatus(true);
-        getMessageHistory();
     });
     socket.on('connect_error', (error) => {
         showError("Connection failed.");
@@ -154,16 +159,24 @@ $('document').ready(function () {
         }
     });
     socket.on('chat_message', function (msg) {
-        let content = msg['content'];
-      
-        let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
-        if (mentioned) {
-            msg['content'] = makeMention(content);
-            if (checkPermission() && notificationmode !== 'no' && (msg['author']['username'].toLowerCase() != ownusername)) {
-                newNotification("You have been mentioned!");
-            }
+        switch (msg['content_type']) {
+            case 'message':
+                let content = msg['content'];
+                let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
+                if (mentioned) {
+                    msg['content'] = makeMention(content);
+                    if (checkPermission() && notificationmode !== 'no') {
+                        newNotification("You have been mentioned!");
+                    }
+                }
+
+                // check if username of last message is identical to new message
+                newMessageHandler(msg);
+                break;
+            case 'embed':
+                addEmbed(msg);
+                break;
         }
-        newMessageHandler(msg);
 
         //check if chat would overflow currentSize and refresh scrollbar
         if (checkOverflow(document.querySelector('#messages'))) { 
@@ -171,6 +184,9 @@ $('document').ready(function () {
             if(autoscroll) {
                 chatdiv = document.querySelector('#messages');
                 chatdiv.scrollTop = chatdiv.scrollHeight;
+            }
+            else {
+                showInfo("There are new Messages below. Click here to scroll down.", null, function(){ setautoscroll(true); hideInfo(); updateScroll()});
             }
         }
         if (!focused) {
@@ -210,6 +226,10 @@ $('document').ready(function () {
                 loginmode = false;
             }
         }
+        if (status.hasOwnProperty('secret')) {
+            secret = status['secret'];
+            getMessageHistory();
+        }
     });
 
     $(document).on('keydown', function (event) {
@@ -232,9 +252,13 @@ $('document').ready(function () {
     updateEmoteMenu();
     document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
 
+    getCommands();
+
     mobileAndTabletcheck();
     displayNotifyMode();
     $('#notification-mode').val(getCookie('notificationmode'));
+
+    document.getElementById('messageinput').addEventListener('paste', handlePaste);
 });
 
 function reconnect() {
@@ -267,7 +291,7 @@ function addNewMessage(msg) {
     let priority = msg['priority'];
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
-    message_header = $('<h2 class="message-header d-inline-flex align-items-baseline mb-1">');
+    message_header = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
     message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
     message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
@@ -289,21 +313,126 @@ function appendMessage(msg) {
 }
 
 function setUserCount(count) {
-    $('#usercount').text('Usercount: ' + count);
     $.ajax({
         url: "api/user",
     }).done(function(data) {
+        $('#usercount').prop('title', data.join(', ')).text('Usercount: ' + count);
         userlist = data;
         userlist.push('everyone');
     });
 }
 
+function addEmbed(msg) {
+    let author_name = msg['author']['username'];
+    let display_name = msg['author']['display_name'];
+    let author_color = msg['author']['chat-color'];
+    let author_avatar = msg['author']['avatar'];
+
+    let full_timestamp = msg['full_timestamp'];
+    let title = msg['title'];
+
+    embed_container = $('<div class="embed-container d-flex flex-column border-bottom px-3 my-3 w-75">');
+    embed_header = $('<div class="embed-header d-flex flex-wrap align-items-center mb-1">');
+
+    embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle mr-2" src="' + author_avatar + '">');
+    embed_author_name = $('<div class="embed-author-name">').prop('title', author_name).text(display_name).css('color', author_color).click(uname_name_click);
+    embed_title = $('<div class="embed-title py-2">').text(title);
+
+    embed_footer_container = $('<div class="embed-footer-container d-inline-flex pb-1 mt-3">');
+    timestamp = new Date(full_timestamp);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' , hour: 'numeric', minute: 'numeric', second: 'numeric'};
+    embed_timestamp = $('<span class="embed-timestamp text-muted ml-auto">').text(timestamp.toLocaleDateString('de-DE', options));
+
+    embed_container.append(embed_header);
+    embed_container.append(embed_title);
+    embed_header.append(embed_author_thumbnail);
+    embed_header.append(embed_author_name);
+    embed_footer_container.append(embed_timestamp);
+
+    if(msg.hasOwnProperty('text')){
+        let text = msg['text'];
+        $('<p class="embed-text">').html(text).insertAfter(embed_title);
+    }
+    if(msg.hasOwnProperty('fields')){
+        let fields = msg['fields'];
+        embed_field_container = $('<div class="embed-field-container d-flex flex-wrap justify-content-between py-3">');
+        embed_container.append(embed_field_container);
+        fields.forEach(function(item) {
+            embed_topic_container = $('<div class="embed-topic-container m-1">');
+            embed_topic = $('<p class="embed-topic">').text(item['topic']);
+            embed_topic_value = $('<p class="embed-topic-value">').html(item['value']);
+
+            embed_field_container.append(embed_topic_container);
+            embed_topic_container.append(embed_topic, embed_topic_value);
+        });
+    }
+
+    if(msg.hasOwnProperty('media')){
+        let media = msg['media'];
+        embed_media_container = $('<div class="embed-media-container">');
+        switch(media['media_type']) {
+            case 'audio':
+                embed_audio = $('<audio class="audio-embed" controls preload="metadata"/>');
+                embed_audio.src = media['media_url'];
+                embed_media_container.append(embed_audio);
+                break;
+            case 'video':
+                embed_video = $('<video class="video-embed" controls preload="metadata"/>');
+                embed_video.src = media['media_url'];
+                embed_video.addEventListener('loadedmetadata', updateScroll);
+                embed_media_container.append(embed_video);
+                break;
+            case 'img':
+                embed_image = new Image();
+                embed_image.src = media['media_url'];
+                embed_image.onload = function () {updateScroll();};
+                embed_media_container.append(embed_image);
+                break;
+        }
+        embed_container.append(embed_media_container);
+    }
+    if(msg.hasOwnProperty('footer')){
+        let footer = msg['footer'];
+        embed_footer = $('<span class="embed-footer">').text(footer);
+        embed_footer_container.prepend(embed_footer);
+    }
+    if(msg.hasOwnProperty('color')){
+        let color = msg['color'];
+        embed_container.css('border-left-color', color);
+    }
+    if(msg.hasOwnProperty('thumbnail')){
+        let thumbnail = msg['thumbnail'];
+        embed_thumbnail = new Image();
+        embed_thumbnail.src = thumbnail;
+        embed_thumbnail.onload = function () {updateScroll();};
+        embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto');
+        embed_header.append(embed_thumbnail);
+    }
+
+    embed_container.append(embed_footer_container);
+
+    $('#messages').append(embed_container);
+}
+
 function showError(message) {
-    document.getElementById("errorbox").innerText = message;
-    $("#errorbox").fadeIn("slow");
+    errorbox.text(message);
+    errorbox.fadeIn("slow");
     setTimeout(function () {
         hideError();
     }, 2000);
+}
+
+function showInfo(message, fadeoutdelay, onclick) {
+    infobox.text(message);
+    infobox.fadeIn("slow");
+    if(onclick != null) {
+        infobox.click(onclick);
+    }
+    if(fadeoutdelay > 0) {
+        setTimeout(function () {
+            hideInfo();
+        }, fadeoutdelay);
+    }
 }
 
 function changeOnlineStatus(online) {
@@ -315,7 +444,12 @@ function changeOnlineStatus(online) {
 }
 
 function hideError() {
-    $("#errorbox").fadeOut("slow");
+    errorbox.fadeOut("slow");
+}
+
+function hideInfo() {
+    infobox.fadeOut("slow");
+    infobox.off('click');
 }
 
 function addEmoteCode(emote) {
@@ -392,6 +526,17 @@ function tabComplete(CursorPos) {
                 return;
             }
         }
+    }
+    else if (toComplete.toLowerCase().startsWith("/") && toComplete.length > 1) {
+        for (commands of commandlist.entries()) {
+            if (commands !== null && commands[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                let mIn = messagefield.val().substr(0, lastSplit) + "/" + commands[1] + " ";
+                messagefield.val(mIn + messagefield.val().substr(CursorPos));
+                messagefield.prop('selectionStart', mIn.length);
+                messagefield.prop('selectionEnd', mIn.length);
+                return;
+            }
+        }
     } else {
         for (let emote in emotelist) {
             if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
@@ -419,6 +564,9 @@ function uname_name_click(e){
 function setautoscroll(value) {
     autoscroll = value;
     document.getElementById('autoscroll').checked = value;
+    if(value) {
+        hideInfo();
+    }
 }
 
 function messagesScroll(event) {
@@ -453,7 +601,7 @@ function mobileAndTabletcheck() {
     }
 }
 
-function imgloaded() {
+function updateScroll() {
     if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
         $('.nano').nanoScroller();
         if(autoscroll) {
@@ -480,24 +628,40 @@ function checkOverflow(el) {
 }
 
 function getMessageHistory() {
-    $.getJSON('/api/chathistory', function (result) {
-        // checking if the JSON even contains messages.
+    $.getJSON(`/api/chathistory?sid=${socket.id}&username=${ownusername}&secret=${secret}`, function (result) {
         if (Object.keys(result).length > 0) {
-            // clearing chat
-            $('#messages').empty();
-            // iterate over each message from the JSON
-            for (let msg in result) {
-                newMessageHandler(result[msg]);
-            }
-            if (checkOverflow(document.querySelector('#messages'))) {
-                $('.nano').nanoScroller();
-                if(autoscroll) {
-                    chatdiv = document.querySelector('#messages');
-                    chatdiv.scrollTop = chatdiv.scrollHeight;
+            handleMessageHistory(result);
+        } else {
+            $.getJSON(`/api/chathistory`, function (result) {
+                if (Object.keys(result).length > 0) {
+                    handleMessageHistory(result);
                 }
-            }
+            });
         }
     });
+}
+
+function handleMessageHistory(history) {
+    $('#messages').empty();
+            // iterate over each message from the JSON
+    for (let msg in history) {
+        let m = history[msg];
+        switch (m["content_type"]) {
+            case 'message':
+                newMessageHandler(m);
+                break;
+            case 'embed':
+                addEmbed(m);
+                break;
+        }
+    }
+    if (checkOverflow(document.querySelector('#messages'))) {
+        $('.nano').nanoScroller();
+        if(autoscroll) {
+            chatdiv = document.querySelector('#messages');
+            chatdiv.scrollTop = chatdiv.scrollHeight;
+        }
+    }
 }
 
 $('#fileinput').on('change', function (e) {
@@ -507,9 +671,13 @@ $('#fileinput').on('change', function (e) {
     e.preventDefault();
     return false;
   }
-  let fd = new FormData();
-  fd.append('file', file);
-  $.ajax({
+  uploadImage(file);
+});
+
+function uploadImage(file){
+    let fd = new FormData();
+    fd.append('file', file);
+    $.ajax({
     url: '/api/upload/',
     type: 'POST',
 
@@ -523,11 +691,46 @@ $('#fileinput').on('change', function (e) {
             messagefield.val(messagefield.val() + " " + window.location.protocol + "//" + window.location.host + data);
         }
     }
-  });
-});
+    });
+}
+
 
 function inputButtonClick() {
     let evt = document.createEvent('MouseEvent');
     evt.initEvent('click', true, false);
     document.getElementById('fileinput').dispatchEvent(evt);
 }
+function getCommands(){
+    $.getJSON('/api/commands', function (result) {
+        if (Object.keys(result).length > 0) {
+            if (JSON.stringify(emotelist) === JSON.stringify(result)) {
+                return;
+            }
+            commandlist = result;
+        }
+    });
+}
+function handlePaste(e){
+    var clipboardData, pastedData;
+
+    e.stopPropagation();
+
+    clipboardData = e.clipboardData || window.clipboardData;
+    let items = clipboardData.items;
+    pastedData = clipboardData.getData('Text');
+
+    for (var i = 0; i < items.length; i++) {
+        // Skip content if not image
+        if (items[i].type.indexOf("image") == -1) continue;
+        e.preventDefault();
+        imagecache = items[i].getAsFile();
+        uploadImage(imagecache)
+        //finally try as text
+        if(items[i].type.indexOf("Text")>0){
+            console.log(items[i]);
+            break;
+        }
+    }
+}
+
+
