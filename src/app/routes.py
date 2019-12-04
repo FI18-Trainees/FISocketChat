@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import os
 from datetime import datetime
 from hashlib import md5
@@ -50,7 +51,15 @@ def send_css(path):
 
 @app.route('/api/emotes')
 def send_emotes():
-    return jsonify(emote_handler.emotes)
+    sort = False
+    sort = request.args.get('sort') is not None and request.args.get('sort').lower() == "true"
+    emotes = emote_handler.emotes
+    if sort:
+        response = make_response(json.dumps(emotes, sort_keys=True))
+        response.headers["mimetype"] = "application/json"
+        response.headers["Content-Type"] = "application/json"
+        return response
+    return jsonify(emotes)
 
 
 @app.route('/api/user')
