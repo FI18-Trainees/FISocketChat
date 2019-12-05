@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from datetime import datetime
-from hashlib import md5
+from hashlib import sha1
 
 from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash
 from werkzeug.utils import secure_filename
@@ -131,9 +131,9 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
 
-def __gen_md5(fname):
-    hash_md5 = md5()
+def __gen_hash(fname):
+    __hash = sha1()
     with open(os.path.join(app.config['UPLOAD_FOLDER'], fname), "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
+            __hash.update(chunk)
+    return __hash.hexdigest()
