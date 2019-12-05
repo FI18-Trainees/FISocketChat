@@ -60,13 +60,28 @@ def send_css(path):
 @app.route('/api/emotes')
 def send_emotes():
     sort = request.args.get('sort', "False").lower() == "true"
+    keysonly = request.args.get('keysonly', "False").lower() == "true"
+
     emotes = emote_handler.emotes
     if sort:
-        response = make_response(json.dumps(emotes, sort_keys=True))
+        if keysonly:
+            emotes = list(emotes.keys())
+            emotes.sort()
+            return jsonify(emotes)
+        else:
+            response = make_response(json.dumps(emotes, sort_keys=True))
+
         response.headers["mimetype"] = "application/json"
         response.headers["Content-Type"] = "application/json"
         return response
-    return jsonify(emotes)
+    else:
+        if keysonly:
+            return jsonify(list(emotes.keys()))
+        else:
+            response = make_response(json.dumps(emotes, sort_keys=False))
+        response.headers["mimetype"] = "application/json"
+        response.headers["Content-Type"] = "application/json"
+        return response
 
 
 @app.route('/api/commands')
