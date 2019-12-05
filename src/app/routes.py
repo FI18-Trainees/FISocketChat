@@ -70,18 +70,17 @@ def send_emotes():
             return jsonify(emotes)
         else:
             response = make_response(json.dumps(emotes, sort_keys=True))
-
-        response.headers["mimetype"] = "application/json"
-        response.headers["Content-Type"] = "application/json"
-        return response
+            response.headers["mimetype"] = "application/json"
+            response.headers["Content-Type"] = "application/json"
+            return response
     else:
         if keysonly:
             return jsonify(list(emotes.keys()))
         else:
             response = make_response(json.dumps(emotes, sort_keys=False))
-        response.headers["mimetype"] = "application/json"
-        response.headers["Content-Type"] = "application/json"
-        return response
+            response.headers["mimetype"] = "application/json"
+            response.headers["Content-Type"] = "application/json"
+            return response
 
 
 @app.route('/api/commands')
