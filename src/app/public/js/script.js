@@ -3,6 +3,7 @@ var socket = null;
 var focused = true;
 var unread = 0;
 var emotelist = null;
+var emotekeylist = null;
 var commandlist = null;
 var loginmode = true;
 var cooldown = 0;
@@ -483,6 +484,18 @@ function updateEmoteMenu() {
                     emoteMenu.append(document.createElement('wbr'));
                 }
             }
+            emotekeylist = Object.keys(emotelist);
+            emotekeylist.sort(function (a, b) {
+                let varA = a.toUpperCase();
+                let varB = b.toUpperCase();
+                if (varA < varB) {
+                    return -1;
+                }
+                if (varA > varB) {
+                    return 1;
+                }
+                return 0;
+            });
         }
     });
 }
@@ -536,9 +549,9 @@ function tabComplete(CursorPos) {
             }
         }
     } else {
-        for (let emote in emotelist) {
-            if (emote.toLowerCase().startsWith(toComplete.toLowerCase())) {
-                let mIn = messagefield.val().substr(0, lastSplit) + emote + " ";
+        for (let x in emotekeylist) {
+            if (emotekeylist[x].toLowerCase().startsWith(toComplete.toLowerCase())) {
+                let mIn = messagefield.val().substr(0, lastSplit) + emotekeylist[x] + " ";
                 messagefield.val(mIn + messagefield.val().substr(CursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
