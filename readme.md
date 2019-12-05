@@ -7,8 +7,7 @@
 
 ## Requirements
 
-Python 3.6 or higher
-
+**Python 3.6 or higher**
 ```
 pip install -r requirements.txt
 ```
@@ -20,12 +19,17 @@ python3 server.py -disablelogin
 ```
 
 ## Contributors <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"/>
-- <a href="https://github.com/SFFan123">SFFan123</a>
-- <a href="https://github.com/zaanposni">Zaanposni</a>
-- <a href="https://github.com/Monkmitrad">Monkmitrad</a>
-- <a href="https://github.com/ArPiiX">ArPiiX</a>
-<hr />
 
-### License:
+<a href="https://github.com/SFFan123"><img src="https://avatars0.githubusercontent.com/u/38184195?s=460&v=4"
+                                            height=90px, width=90px style="border-radius: 50%" /></a>
+<a href="https://github.com/zaanposni"><img src="https://avatars3.githubusercontent.com/u/24491035?s=460&v=4"
+                                            height=90px, width=90px style="border-radius: 50%" /></a>
+<a href="https://github.com/ArPiiX"><img src="https://avatars1.githubusercontent.com/u/48033823?s=460&v=4"
+                                         height=90px, width=90px style="border-radius: 50%" /></a>
+<a href="https://github.com/Monkmitrad"><img src="https://avatars1.githubusercontent.com/u/33026966?s=460&v=4"
+                                             height=90px, width=90px style="border-radius: 50%" /></a>
+
+
+## License:
 
 This project is licensed under MIT.
