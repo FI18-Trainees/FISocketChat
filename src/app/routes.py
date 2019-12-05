@@ -115,7 +115,7 @@ def upload_file():
             filename = secure_filename(str(datetime.now()) + "-" + file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-            filemd5 = __gen_md5(filename)
+            filemd5 = __gen_hash(filename)
             if filemd5 in uploaded_files:
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 return uploaded_files.get(filemd5)['url']
