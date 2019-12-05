@@ -11,7 +11,6 @@ var userlist = [];
 var notificationmode = 'no';
 var autoscroll = true;
 var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
-var secret = null;
 
 var message_history = [];
 var history_pointer = 0;
@@ -214,6 +213,7 @@ $('document').ready(function () {
             ownusername = status['username'].toLowerCase();
             $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color']);
             $('#logininfo_picture').attr('src',`https://profile.zaanposni.com/pictures/${ownusername}.png`);
+            getMessageHistory();
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
@@ -226,8 +226,18 @@ $('document').ready(function () {
                 loginmode = false;
             }
         }
-        if (status.hasOwnProperty('secret')) {
-            secret = status['secret'];
+        if (status.hasOwnProperty('on_ready')) {
+            updateEmoteMenu();
+            document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
+
+            getCommands();
+
+            mobileAndTabletcheck();
+            displayNotifyMode();
+            $('#notification-mode').val(getCookie('notificationmode'));
+
+            document.getElementById('messageinput').addEventListener('paste', handlePaste);
+
             getMessageHistory();
         }
     });
@@ -248,17 +258,6 @@ $('document').ready(function () {
         notificationmode = this.value;
         document.cookie = `notificationmode=${notificationmode}; expires=Thu, 01 Jan 2023 00:00:00 UTC; path=/`;
     });
-
-    updateEmoteMenu();
-    document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
-
-    getCommands();
-
-    mobileAndTabletcheck();
-    displayNotifyMode();
-    $('#notification-mode').val(getCookie('notificationmode'));
-
-    document.getElementById('messageinput').addEventListener('paste', handlePaste);
 });
 
 function reconnect() {
@@ -628,7 +627,7 @@ function checkOverflow(el) {
 }
 
 function getMessageHistory() {
-    $.getJSON(`/api/chathistory?sid=${socket.id}&username=${ownusername}&secret=${secret}`, function (result) {
+    $.getJSON(`/api/chathistory?username=${ownusername}`, function (result) {
         if (Object.keys(result).length > 0) {
             handleMessageHistory(result);
         } else {

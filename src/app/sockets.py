@@ -170,11 +170,10 @@ def connect(data=""):
     else:
         emit('status', {'loginmode': False})
 
-    secret = str(uuid.uuid4())
-    emit('status', {'secret': secret})
-    user_manager.add(sid=request.sid, user=new_user, secret=secret)
+    user_manager.add(sid=request.sid, user=new_user)
     SHL.output(f"User count: {user_manager.get_count()}.", "S.ON Connect")
     emit_status({'count': user_manager.get_count()})
+    emit('status', {'on_ready': True})
 
 
 @socketio.on('disconnect')
