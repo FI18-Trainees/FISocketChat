@@ -213,7 +213,6 @@ $('document').ready(function () {
             ownusername = status['username'].toLowerCase();
             $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color']);
             $('#logininfo_picture').attr('src',`https://profile.zaanposni.com/pictures/${ownusername}.png`);
-            getMessageHistory();
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
