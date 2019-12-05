@@ -78,7 +78,7 @@ def send_user():
 
 @app.route('/api/chathistory')
 def send_chat_history():
-    if login_disabled:
+    if not login_disabled:
         actual_username = verify_token("")
         if not actual_username:
             SHL.output(f"[{get_ip(request)}] {red}Invalid login.{white}", "/api/chathistory")
@@ -86,7 +86,7 @@ def send_chat_history():
         req_username = request.args.get("username", "all")
         if req_username in ["all", actual_username]:
             SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
-            return jsonify(chat_history.to_json(username=actual_username))
+            return jsonify(chat_history.to_json(username=req_username))
         SHL.output(f"[{get_ip(request)}] {red}Invalid username requested.{white}", "/api/chathistory")
         return jsonify([])
     SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
