@@ -79,6 +79,16 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/simonW.png' style='height:32px; width:auto;' alt='simonW' title='simonW'>"
   },
+  "chadDaVista": {
+    "replace": "<img src='/public/img/stoll3.png' style='height:40px; width:auto;' alt='chadDaVista' title='chadDaVista'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/stoll3.png' style='height:32px; width:auto;' alt='chadDaVista' title='chadDaVista'>"
+  },
+  "innocentDaVista": {
+    "replace": "<img src='/public/img/stoll4.png' style='height:40px; width:auto;' alt='innocentDaVista' title='innocentDaVista'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/stoll4.png' style='height:32px; width:auto;' alt='innocentDaVista' title='innocentDaVista'>"
+  },
   "FeelsGoodMan": {
     "replace": "<img src='/public/img/FeelsGoodMan1.png' style='height:40px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
     "menuDisplay": true,
