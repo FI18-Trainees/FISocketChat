@@ -7,7 +7,7 @@ from hashlib import md5
 from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash
 from werkzeug.utils import secure_filename
 
-from app import app, emote_handler, auth, user_manager, chat_history
+from app import app, emote_handler, auth, user_manager, chat_history, verify_token, login_disabled
 from app.obj import get_default_user, ResourceManager
 from utils import Console, red, white
 from app.commands import commands
@@ -99,16 +99,20 @@ def send_user():
 
 
 @app.route('/api/chathistory')
-@auth.login_required
 def send_chat_history():
-    sid = request.args.get("sid", None)
-    secret = request.args.get("secret", None)
-    username = request.args.get("username", "all")
-    if username == "all" or user_manager.authenticate_user_for_sid(sid=sid, username=username, secret=secret):
-        SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
-        return jsonify(chat_history.to_json(username=username))
-    SHL.output(f"[{get_ip(request)}] {red}Invalid sid or secret{white}", "/api/chathistory")
-    return jsonify([])
+    if not login_disabled:
+        actual_username = verify_token("")
+        if not actual_username:
+            SHL.output(f"[{get_ip(request)}] {red}Invalid login.{white}", "/api/chathistory")
+            return jsonify([])
+        req_username = request.args.get("username", "all")
+        if req_username in ["all", actual_username]:
+            SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
+            return jsonify(chat_history.to_json(username=req_username))
+        SHL.output(f"[{get_ip(request)}] {red}Invalid username requested.{white}", "/api/chathistory")
+        return jsonify([])
+    SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
+    return jsonify(chat_history.to_json(username="all"))
 
 
 @app.route('/api/uploads/<filename>')
