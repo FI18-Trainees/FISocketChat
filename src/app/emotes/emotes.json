@@ -79,10 +79,10 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/simonW.png' style='height:32px; width:auto;' alt='simonW' title='simonW'>"
   },
-  "chadDaVista": {
-    "replace": "<img src='/public/img/stoll3.png' style='height:40px; width:auto;' alt='chadDaVista' title='chadDaVista'>",
+  "DaVista3": {
+    "replace": "<img src='/public/img/stoll3.png' style='height:40px; width:auto;' alt='DaVista3' title='DaVista3'>",
     "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/stoll3.png' style='height:32px; width:auto;' alt='chadDaVista' title='chadDaVista'>"
+    "menuDisplayCode": "<img src='/public/img/stoll3.png' style='height:32px; width:auto;' alt='DaVista3' title='DaVista3'>"
   },
   "innocentDaVista": {
     "replace": "<img src='/public/img/stoll4.png' style='height:40px; width:auto;' alt='innocentDaVista' title='innocentDaVista'>",
