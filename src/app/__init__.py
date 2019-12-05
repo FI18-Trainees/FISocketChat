@@ -134,4 +134,4 @@ if dummy_user:
         def_user = get_default_user()
         def_user.display_name = name
         def_user.username = name
-        user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user, secret="_")
+        user_manager.add(f"qwertzuiopasdfghjk{name}", user=def_user)
