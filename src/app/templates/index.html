@@ -70,28 +70,19 @@
                     </div>
                 </a>
             </div>
-            <div class="sitebar-content">
-                <a href="https://tools.zaanposni.com/sorry/private/index.html" target="_blank">
+            {% for key in customItems %}
+                <div class="sitebar-content">
+                <a href="{{customItems[key].get("url", "") }}" target="_blank">
                     <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
                         <div class="media-body">
-                            <h5 class="mt-0 mb-1 text-white text-wrap">Entschuldigungstool</h5>
-                            Entschuldige dich jetzt!
+                            <h5 class="mt-0 mb-1 text-white text-wrap">{{ customItems[key].get("title", "") }}</h5>
+                            {{ customItems[key].get("subtitle", "")}}
                         </div>
-                        <i class="fas fa-envelope-open-text fa-2x text-white mx-2"></i>
+                        {{ customItems[key].get("icon", "")|safe }}
                     </div>
                 </a>
             </div>
-            <div class="sitebar-content">
-                <a href="https://drive.google.com/drive/folders/1Ea9cyKQX5EyTO0DLAGRnznkjB6sNfs7u?usp=sharing" target="_blank">
-                    <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1 text-white text-wrap">GoogleDrive-Ablage</h5>
-                            Falls du mal was notieren möchtest!
-                        </div>
-                        <i class="fab fa-google-drive fa-2x text-white mx-2"></i>
-                    </div>
-                </a>
-            </div>
+            {% endfor %}
             <div class="sitebar-content" id="notify-mode">
                 <div class="media d-inline-flex bg-lighter-01 rounded p-2 w-100">
                     <div class="media-body">
