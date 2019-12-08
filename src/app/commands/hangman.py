@@ -44,10 +44,17 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
     if params[0].lower() == "start" and params[1].lower() != "":
         if not hangman_game.get_state():
             if not ("-" in params[1] or "_" in params[1]):
-                hangman_game.start(params[1], author)
+                if "sentence" not in params[1]:
+                    hangman_game.start(params[1], author)
+                    SHL.output(f"{author} started a game with: {params[1]}", "HangmanGame")  # log
+                    embed.set_text(f"{author.display_name} is challenging everyone to a hangman game!<br/>"
+                                   f"The word searched is: {hangman_game.get_word()}")
+                    system.broadcast(embed)
+                    return
+                hangman_game.start_sentence(params[2:], author)
                 SHL.output(f"{author} started a game with: {params[1]}", "HangmanGame")  # log
-                embed.set_text(f"{author.display_name} is challenging everyone to a hangman game!<br/>"
-                               f"The word searched is: {hangman_game.get_word()}")
+                embed.set_text(f"{author.display_name} is challenging everyone to a hangman game with a sentence!<br/>"
+                               f"The sentence searched is: {hangman_game.get_word()}")
                 system.broadcast(embed)
                 return
             system.send_error("No underscores or dashes in word allowed!")

@@ -21,6 +21,20 @@ class HangmanGame:
         self.guessed = [False] * len(word)
         self.initiator = initiator
 
+    def start_sentence(self, word: list, initiator: User) -> None:
+        self.reset_game()
+        self.state = True
+        self.word = [x for x in (" ".join(word).lower())]
+        self.word_clear = word
+        self.guessed = [False] * len(word)
+        self.initiator = initiator
+        self.sentence_spaces()
+
+    def sentence_spaces(self):
+        for e, item in enumerate(self.word):
+            if item == " ":
+                self.guessed[e] = True
+
     def check_char(self, char: str, author: User) -> str:
         if not all(self.guessed):
             if not self.mistakes >= self.max_mistakes-1:
@@ -77,7 +91,7 @@ class HangmanGame:
                f"<br/>The word was {self.word_clear}<br/>Please start a new game to try again!"
 
     def join_word_blanks(self) -> str:
-        return f"{''.join([self.word[e] if guess else ' _' for e, guess in enumerate(self.guessed)])}"
+        return f"{' '.join([self.word[e] if guess else '_' for e, guess in enumerate(self.guessed)])}"
 
     def get_state(self) -> bool:
         return self.state
