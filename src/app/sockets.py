@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 import requests
 import re
-import uuid
 
 from flask_socketio import emit
 from validators import url as val_url
 
 from app import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, login_disabled, request, user_limiter, chat_history, announcer
+    code_regex, quote_regex, special_image_regex, login_disabled, request, user_limiter, chat_history, announcer
 from app import handle_command as command_handler
-from app.obj import User, Command, Message, get_default_user, SystemMessage
+from app.obj import User, Command, Message, get_default_user
 from utils import Console, yellow2, white, green2, cfg
 
 SHL = Console("Socket")
@@ -267,6 +266,9 @@ def get_embed_image_link(link: str) -> str:
     matches = image_regex.finditer(link)
     for matchNum, match in enumerate(matches, start=1):
         return f'<a target="_blank" rel="noopener noreferrer" href="{link}"/><br/><img class="image-preview" src="{match.group()}" onload="updateScroll();"/>'
+    matches = special_image_regex.finditer(link)
+    for matchNum, match in enumerate(matches, start=1):
+        return f'<br /><img class="image-preview" src="{link.replace(match.group(), ".gif")}" onload="updateScroll();"/>'
     return ""
 
 
