@@ -6,7 +6,7 @@ from hashlib import sha1
 from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash
 from werkzeug.utils import secure_filename
 
-from app import app, emote_handler, auth, user_manager, chat_history, verify_token, login_disabled
+from app import app, emote_handler, auth, user_manager, chat_history, verify_token, login_disabled, cfg
 from app.obj import get_default_user, ResourceManager
 from utils import Console, red, white
 from app.commands import commands
@@ -26,7 +26,7 @@ def get_ip(r) -> str:
 @app.route('/index')
 @auth.login_required
 def index():
-    return render_template('index.html')
+    return render_template('index.html', customItems=cfg.get("sitebarCustomItems", {}))
 
 
 @app.route("/status")
