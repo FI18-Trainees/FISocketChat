@@ -603,5 +603,45 @@
     "replace": "<img src='/public/img/approved.png' style='height:40px; width:auto;' alt='approved' title='approved'>",
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/approved.png' style='height:32px; width:auto;' alt='approved' title='approved'>"
+  },
+  "KappaOmega": {
+    "replace": "<img src='/public/img/kappaomega.png' style='height:40px; width:auto;' alt='KappaOmega' title='KappaOmega'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/kappaomega.png' style='height:32px; width:auto;' alt='KappaOmega' title='KappaOmega'>"
+  },
+  "tutut": {
+    "replace": "<img src='/public/img/tutut.gif' style='height:40px; width:auto;' alt='tutut' title='tutut'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/tutut.gif' style='height:32px; width:auto;' alt='tutut' title='tutut'>"
+  },
+  "OOF": {
+    "replace": "<img src='/public/img/oof.gif' style='height:60px; width:auto;' alt='OOF' title='OOF'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/oof.gif' style='height:32px; width:auto;' alt='OOF' title='OOF'>"
+  },
+  "PepeLaugh": {
+    "replace": "<img src='/public/img/pepelaugh.png' style='height:40px; width:auto;' alt='PepeLaugh' title='PepeLaugh'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/pepelaugh.png' style='height:32px; width:auto;' alt='PepeLaugh' title='PepeLaugh'>"
+  },
+  "KEKW": {
+    "replace": "<img src='/public/img/kekw.gif' style='height:40px; width:auto;' alt='KEKW' title='KEKW'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/kekw.gif' style='height:32px; width:auto;' alt='KEKW' title='KEKW'>"
+  },
+  "KappaRoss": {
+    "replace": "<img src='/public/img/kappaross.png' style='height:40px; width:auto;' alt='KappaRoss' title='KappaRoss'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/kappaross.png' style='height:32px; width:auto;' alt='KappaRoss' title='KappaRoss'>"
+  },
+  "Keepo": {
+    "replace": "<img src='/public/img/keepo.png' style='height:40px; width:auto;' alt='Keepo' title='Keepo'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/keepo.png' style='height:32px; width:auto;' alt='Keepo' title='Keepo'>"
+  },
+  "Fchen": {
+    "replace": "<img src='/public/img/f.png' style='height:20px; width:auto;' alt='Fchen' title='Fchen'>",
+    "menuDisplay": false,
+    "menuDisplayCode": "<img src='/public/img/f.png' style='height:32px; width:auto;' alt='Fchen' title='Fchen'>"
   }
 }
