@@ -114,3 +114,4 @@ venv.bak/
 /src/app/storage/quotes/
 /src/app/storage/uploads/
 /src/config/
+/src/app/public/js/compiled

@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "outDir": "./built",
+        "outDir": "./src/app/public/js/",
         "allowJs": true,
-        "target": "es5",
-        "lib" : ["DOM"]
+        "lib" : ["DOM"],
+        "noImplicitAny": false
     },
     "include": [
         "./src/**/*"
