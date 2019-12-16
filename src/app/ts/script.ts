@@ -1,4 +1,4 @@
-import * as io from "socket.io-client";
+//import * as io from "socket.io-client";
 import { IMessage } from "./IMessage";
 import { IEmbed } from "./IEmbed";
 import { IMedia } from "./IMedia";
@@ -7,7 +7,6 @@ import { IFields } from "./IFields";
 
 //localStorage.debug = '*';
 
-var socket: SocketIO.Socket;
 var focused = true;
 var unread = 0;
 var emotelist: JSON;
@@ -16,12 +15,12 @@ var commandlist: string[];
 var loginmode = true;
 var cooldown = 0;
 var ownusername: string;
-var userlist: string[] = [];
+var userlist: string[];
 var notificationmode = 'no';
 var autoscroll = true;
 var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 
-var message_history: string[] = [];
+var message_history: Array<string>;
 var history_pointer = 0;
 
 var imagecache;
@@ -109,8 +108,8 @@ $('document').ready(function () {
             showError('Invalid message.');
             return false;
         }
-
         message_history.push(<string>messagefield.val());
+        
         history_pointer = message_history.length;
         let u = <string>$('#user_name').val();
 
@@ -165,13 +164,12 @@ $('document').ready(function () {
             reconnect();
         }
     });
-    socket.on('chat_message', function (msg: {content_type: string, content: string}) {
-        switch (msg['content_type']) {
+    socket.on('chat_message', function (msg: IMessage) {
+        switch (msg.content_type) {
             case 'message':
-                let content = msg['content'];
-                let mentioned = (content.toLowerCase().search('@' + ownusername) !== -1) || (content.toLowerCase().search('@everyone') !== -1);
+                let mentioned = (msg.content.toLowerCase().search('@' + ownusername) !== -1) || (msg.content.toLowerCase().search('@everyone') !== -1);
                 if (mentioned) {
-                    msg['content'] = makeMention(content);
+                    msg.content = makeMention(msg.content);
                     if (checkPermission() && notificationmode !== 'no') {
                         newNotification("You have been mentioned!");
                     }
@@ -181,7 +179,7 @@ $('document').ready(function () {
                 newMessageHandler(msg);
                 break;
             case 'embed':
-                addEmbed(msg);
+                addEmbed(msg as IEmbed);
                 break;
         }
 
@@ -193,7 +191,7 @@ $('document').ready(function () {
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
             else {
-                showInfo("There are new Messages below. Click here to scroll down.", 0, function(){ setautoscroll(true); hideInfo(); updateScroll()});
+                showInfo("There are new Messages below. Click here to scroll down.", 0);
             }
         }
         if (!focused) {
@@ -403,11 +401,14 @@ function showError(message: string) {
     }, 2000);
 }
 
-function showInfo(message: string, fadeoutdelay: number, onclick) {
+function showInfo(message: string, fadeoutdelay: number) {
     infobox.text(message);
     infobox.fadeIn("slow");
     if(onclick != null) {
-        infobox.click(onclick);
+        setautoscroll(true); 
+        hideInfo(); 
+        updateScroll();
+        infobox.click(function(){ setautoscroll(true); hideInfo(); updateScroll()});
     }
     if(fadeoutdelay > 0) {
         setTimeout(function () {
@@ -500,11 +501,11 @@ function toggleEmoteMenu() {
 function tabComplete(CursorPos: number) {
     if ((<string>messagefield.val()).length === 0)
         return;
-    let messageSplit = (<string>messagefield.val()).substring(0, CursorPos);
+    let messageSplit: any = (<string>messagefield.val()).substring(0, CursorPos);
     let matches = Array.from(messageSplit['matchAll'](/[\r\n\t ]/gm));
     let lastSplit = 0;
     if (matches.length > 0) {
-        lastSplit = (<RegExpMatchArray>matches[matches.length - 1]).index + 1;
+        lastSplit = <number>(<RegExpMatchArray>matches[matches.length - 1]).index + 1;
     }
     let toComplete = messageSplit.substring(lastSplit);
     if (toComplete.length < 1)
@@ -547,7 +548,7 @@ function makeMention(text: string) {
     return '<em class="d-flex w-100 mention">' + text + '</em>';
 }
 
-function uname_name_click(e){
+function uname_name_click(e: any){
     if(e.originalEvent.ctrlKey){
         e.preventDefault();
         (<HTMLInputElement>document.getElementById('messageinput')).value += '@' + e.target.title + ' ';
@@ -634,19 +635,22 @@ function getMessageHistory() {
     });
 }
 
-function handleMessageHistory(history) {
+function handleMessageHistory(history: IMessage[]) {
     $('#messages').empty();
-            // iterate over each message from the JSON
-    for (let msg in history) {
-        let m = history[msg];
-        switch (m["content_type"]) {
+    // iterate over each message from the JSON
+    history.forEach(element => {
+        switch (element["content_type"]) {
             case 'message':
-                newMessageHandler(m);
+                newMessageHandler(element);
                 break;
             case 'embed':
-                addEmbed(m);
+                addEmbed(element as IEmbed);
                 break;
         }
+    });
+    for (let msg in history) {
+        let m = history[msg];
+        
     }
     if (checkOverflow(<HTMLDivElement>document.querySelector('#messages'))) {
         //$('.nano').nanoScroller();

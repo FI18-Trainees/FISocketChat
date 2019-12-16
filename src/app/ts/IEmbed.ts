@@ -1,13 +1,8 @@
-import { IAuthor } from "./IAuthor";
-import { ITimestamp } from "./ITimestamp";
 import { IFields } from "./IFields";
 import { IMedia } from "./IMedia";
+import { IMessage } from "./IMessage";
 
-export interface IEmbed {
-    author: IAuthor;
-    timestamp: ITimestamp;
-    append_allow: boolean;
-    priority: string;
+export interface IEmbed extends IMessage {
     title: string;
     text?: string;
     fields?: IFields[];
