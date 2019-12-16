@@ -1,4 +1,3 @@
-//import * as io from "socket.io-client";
 import { IMessage } from "./IMessage";
 import { IEmbed } from "./IEmbed";
 import { IMedia } from "./IMedia";
@@ -7,31 +6,30 @@ import { IFields } from "./IFields";
 
 //localStorage.debug = '*';
 
-var focused = true;
-var unread = 0;
-var emotelist: JSON;
-var emotekeylist: string[];
-var commandlist: string[];
-var loginmode = true;
-var cooldown = 0;
-var ownusername: string;
-var userlist: string[];
-var notificationmode = 'no';
-var autoscroll = true;
-var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
+let focused = true;
+let unread = 0;
+let emotelist: JSON;
+let emotekeylist: string[];
+let commandlist: string[];
+let loginmode = true;
+let cooldown = 0;
+let ownusername: string;
+let userlist: string[];
+let notificationmode = 'no';
+let autoscroll = true;
+let lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
+let historyPointer = 0;
 
-var message_history: Array<string>;
-var history_pointer = 0;
+let imagecache;
 
-var imagecache;
-
+const messageHistory: string[] = [];
 const messagefield: JQuery<HTMLInputElement> = $('#messageinput');
 const infobox = $('#infobox');
 const errorbox = $('#errorbox');
 
 $('document').ready(function () {
 
-    let socket = io.connect(window.location.href.slice(0, -1),
+    const socket = io.connect(window.location.href.slice(0, -1),
         {
             secure: true,
             transports: ['polling', 'websocket'],
@@ -52,7 +50,7 @@ $('document').ready(function () {
     };
 
 
-    messagefield.keydown(function (e) {
+    messagefield.on('keydown', function (e) {
         switch (e.keyCode) {
             case 9:
                 //tab key
@@ -74,24 +72,26 @@ $('document').ready(function () {
                 break;
             case 38:
                 //up arrow
-                if (messagefield.val() === "" || messagefield.val() === message_history[history_pointer]) {
-                    history_pointer -= 1;
-                    if (history_pointer < 0) {
-                        history_pointer = 0;
+                if (messagefield.val() === "" || messagefield.val() === messageHistory[historyPointer]) {
+                    historyPointer -= 1;
+                    if (historyPointer < 0) {
+                        historyPointer = 0;
                     }
-                    messagefield.val(message_history[history_pointer]);
+                    messagefield.val(messageHistory[historyPointer]);
                 }
                 break;
             case 40:
                 // down arrow
-                if ((<string>messagefield.val()).trim() === "" || messagefield.val() === message_history[history_pointer]) {
-                    history_pointer += 1;
-                    if (history_pointer > message_history.length - 1) {
-                        history_pointer = message_history.length - 1;
+                if ((messagefield.val() as string).trim() === "" || messagefield.val() === messageHistory[historyPointer]) {
+                    historyPointer += 1;
+                    if (historyPointer > messageHistory.length - 1) {
+                        historyPointer = messageHistory.length - 1;
                     }
-                    messagefield.val(message_history[history_pointer]);
+                    messagefield.val(messageHistory[historyPointer]);
                 }
                 break;
+            default:
+                return;
         }
     });
 
@@ -104,18 +104,18 @@ $('document').ready(function () {
         cooldown = window.setTimeout(function () {
             cooldown = 0
         }, 400);
-        if ((<string>messagefield.val()).trim() === "") {
+        if ((messagefield.val() as string).trim() === "") {
             showError('Invalid message.');
             return false;
         }
-        message_history.push(<string>messagefield.val());
+        messageHistory.push(messagefield.val() as string);
         
-        history_pointer = message_history.length;
-        let u = <string>$('#user_name').val();
+        historyPointer = messageHistory.length;
+        let u = $('#user_name').val() as string;
 
-        let event_name = "chat_message";
-        if ((<string>messagefield.val()).startsWith("/")) {
-            event_name = "chat_command";
+        let eventName = "chat_message";
+        if ((messagefield.val() as string).startsWith("/")) {
+            eventName = "chat_command";
         }
 
         if (!loginmode) {
@@ -129,7 +129,7 @@ $('document').ready(function () {
             u = 'Shawn'; // username will be replaced with value from userconfig, but must be given
         }
 
-        socket.emit(event_name, {
+        socket.emit(eventName, {
             'display_name': u,
             'message': messagefield.val(),
             'token': getCookie('access_token')
@@ -167,7 +167,7 @@ $('document').ready(function () {
     socket.on('chat_message', function (msg: IMessage) {
         switch (msg.content_type) {
             case 'message':
-                let mentioned = (msg.content.toLowerCase().search('@' + ownusername) !== -1) || (msg.content.toLowerCase().search('@everyone') !== -1);
+                const mentioned = (msg.content.toLowerCase().search('@' + ownusername) !== -1) || (msg.content.toLowerCase().search('@everyone') !== -1);
                 if (mentioned) {
                     msg.content = makeMention(msg.content);
                     if (checkPermission() && notificationmode !== 'no') {
@@ -181,13 +181,15 @@ $('document').ready(function () {
             case 'embed':
                 addEmbed(msg as IEmbed);
                 break;
+            default:
+                return;
         }
 
         //check if chat would overflow currentSize and refresh scrollbar
-        if (checkOverflow(<HTMLDivElement>document.getElementById('#messages'))) {
+        if (checkOverflow(document.getElementById('messages') as HTMLDivElement)) {
             //$('.nano').nanoScroller();
             if(autoscroll) {
-                let chatdiv: HTMLDivElement = <HTMLDivElement>document.getElementById('messages');
+                const chatdiv: HTMLDivElement = document.getElementById('messages') as HTMLDivElement;
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
             else {
@@ -213,11 +215,11 @@ $('document').ready(function () {
     });
     socket.on('status', function (status: {count?: string, username?: string, loginmode?: string, chat_color?: string}) {
         if (status.hasOwnProperty('count')) {
-            setUserCount(<string>status['count']);
+            setUserCount(status['count'] as string);
         }
         if (status.hasOwnProperty('username')) {
-            ownusername = (<string>status['username']).toLowerCase();
-            $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', <string>status['chat_color']);
+            ownusername = (status['username'] as string).toLowerCase();
+                $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color'] as string);
             $('#logininfo_picture').attr('src',`https://profile.zaanposni.com/pictures/${ownusername}.png`);
         }
         if (status.hasOwnProperty('loginmode')) {
@@ -233,13 +235,13 @@ $('document').ready(function () {
         }
         if (status.hasOwnProperty('on_ready')) {
             updateEmoteMenu();
-            (<HTMLButtonElement>document.getElementById("emotebtn")).addEventListener('click', toggleEmoteMenu);
+            (document.getElementById("emotebtn") as HTMLButtonElement).addEventListener('click', toggleEmoteMenu);
 
             getCommands();
 
             mobileAndTabletcheck();
             displayNotifyMode();
-            $('#notification-mode').val(<string>getCookie('notificationmode'));
+            $('#notification-mode').val(getCookie('notificationmode') as string);
 
             $('messageinput').on('paste', function(){handlePaste});
 
@@ -283,13 +285,15 @@ function newMessageHandler(msg: IMessage) {
 
 function addNewMessage(msg: IMessage) {
     let message_container, message_header, message_body, message_thumbnail, message_username, message_timestamp, message_content;
+    console.log(msg.timestamp);
+    console.log(msg.timestamp);
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
     message_body = $('<div class="message-body w-100">');
     message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + msg.author.avatar + '">');
     message_username = $('<div class="message-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
-    message_timestamp = $('<time class="message-timestamp ml-1">').prop('title', msg.timestamp.full_timestamp).text(msg.timestamp.timestamp);
+    message_timestamp = $('<time class="message-timestamp ml-1">').prop('title', msg.full_timestamp).text(msg.timestamp);
     message_content = $('<div class="message-content text-white w-100 pb-1">').html(msg.content);
 
     message_container.append(message_thumbnail, message_body);
@@ -300,7 +304,7 @@ function addNewMessage(msg: IMessage) {
 
 function appendMessage(msg: IMessage) {
     $('#messages .message-container').last().children().append($('<div class="message-content text-white w-100 pb-1">').html(msg.content));
-    $('#messages .message-header').last().children('time').text(msg.timestamp.timestamp);
+    $('#messages .message-header').last().children('time').text(msg.timestamp);
 }
 
 function setUserCount(count: string) {
@@ -323,7 +327,7 @@ function addEmbed(msg: IEmbed) {
     let embed_title = $('<div class="embed-title py-2">').text(msg.title);
 
     let embed_footer_container = $('<div class="embed-footer-container d-inline-flex pb-1 mt-3">');
-    let timestamp = new Date(msg.timestamp.full_timestamp);
+    let timestamp = new Date(msg.full_timestamp);
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' , hour: 'numeric', minute: 'numeric', second: 'numeric'};
     let embed_timestamp = $('<span class="embed-timestamp text-muted ml-auto">').text(timestamp.toLocaleDateString('de-DE', options));
 
@@ -334,13 +338,13 @@ function addEmbed(msg: IEmbed) {
     embed_footer_container.append(embed_timestamp);
 
     if(msg.hasOwnProperty('text')){
-        $('<p class="embed-text">').html(<string>msg.text).insertAfter(embed_title);
+        $('<p class="embed-text">').html(msg.text as string).insertAfter(embed_title);
     }
     if(msg.hasOwnProperty('fields')){
         let fields = msg.fields;
         let embed_field_container = $('<div class="embed-field-container d-flex flex-wrap justify-content-between py-3">');
         embed_container.append(embed_field_container);
-        (<IFields[]>fields).forEach(item => {
+        (fields as IFields[]).forEach(item => {
             let embed_topic_container = $('<div class="embed-topic-container m-1">');
             let embed_topic = $('<p class="embed-topic">').text(item.topic);
             let embed_topic_value = $('<p class="embed-topic-value">').html(item.value);
@@ -352,37 +356,39 @@ function addEmbed(msg: IEmbed) {
 
     if(msg.hasOwnProperty('media')){
         let embed_media_container = $('<div class="embed-media-container">');
-        switch((<IMedia>msg.media).media_type) {
+        switch((msg.media as IMedia).media_type) {
             case 'audio':
                 let embed_audio: JQuery<HTMLAudioElement> = $('<audio class="audio-embed" controls preload="metadata"/>');
-                embed_audio.attr('src', (<IMedia>msg.media).media_url) ;
+                embed_audio.attr('src', (msg.media as IMedia).media_url) ;
                 embed_media_container.append(embed_audio);
                 break;
             case 'video':
                 let embed_video: JQuery<HTMLVideoElement> = $('<video class="video-embed" controls preload="metadata"/>');
-                embed_video.attr('src', (<IMedia>msg.media).media_url);
+                embed_video.attr('src', (msg.media as IMedia).media_url);
                 //embed_video.addEventListener('loadedmetadata', updateScroll);
                 embed_media_container.append(embed_video);
                 break;
             case 'img':
                 let embed_image = new Image();
-                embed_image.src = (<IMedia>msg.media).media_url;
+                embed_image.src = (msg.media as IMedia).media_url;
                 embed_image.onload = function () {updateScroll();};
                 embed_media_container.append(embed_image);
                 break;
+            default:
+                throw Error('wrong media type');
         }
         embed_container.append(embed_media_container);
     }
     if(msg.hasOwnProperty('footer')){
-        let embed_footer = $('<span class="embed-footer">').text(<string>msg.footer);
+        let embed_footer = $('<span class="embed-footer">').text(msg.footer as string);
         embed_footer_container.prepend(embed_footer);
     }
     if(msg.hasOwnProperty('color')){
-        embed_container.css('border-left-color', <string>msg.color);
+        embed_container.css('border-left-color', msg.color as string);
     }
     if(msg.hasOwnProperty('thumbnail')){
-        let embed_thumbnail = new Image();
-        embed_thumbnail.src = <string>msg.thumbnail;
+        const embed_thumbnail = new Image();
+        embed_thumbnail.src = msg.thumbnail as string;
         embed_thumbnail.onload = function () {updateScroll();};
         embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto', 'mt-3');
         embed_header.append(embed_thumbnail);
@@ -450,14 +456,14 @@ function updateEmoteMenu() {
             }
             emotelist = result;
             // getting the emote menu
-            let emoteMenu = $('#emoteMenu');
+            const emoteMenu = $('#emoteMenu');
             // clearing the emote menu
             emoteMenu.empty();
             // iterate over the emotes from the JSON
             for (let emote in result) {
                 // jumping over the hidden ones.
                 if (result[emote]["menuDisplay"]) {
-                    let emoteitem = document.createElement('a');
+                    const emoteitem = document.createElement('a');
                     emoteitem.classList.add('cursor-pointer');
                     emoteitem.innerHTML = result[emote]["menuDisplayCode"];
                     emoteitem.onclick = function () {
@@ -469,8 +475,8 @@ function updateEmoteMenu() {
             }
             emotekeylist = Object.keys(emotelist);
             emotekeylist.sort(function (a, b) {
-                let varA = a.toUpperCase();
-                let varB = b.toUpperCase();
+                const varA = a.toUpperCase();
+                const varB = b.toUpperCase();
                 if (varA < varB) {
                     return -1;
                 }
@@ -484,13 +490,13 @@ function updateEmoteMenu() {
 }
 
 function getCookie(name: string) {
-    let value = "; " + document.cookie;
-    let parts = value.split("; " + name + "=");
-    if (parts.length === 2) return (<string>parts.pop()).split(";").shift();
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+    if (parts.length === 2) return (parts.pop() as string).split(";").shift();
 }
 
 function toggleEmoteMenu() {
-    let object = $('#emoteMenu');
+    const object = $('#emoteMenu');
     if (object.css('display') === 'none' || object.css('emoteMenu') === '') {
         object.css('display', 'block');
     } else {
@@ -499,22 +505,24 @@ function toggleEmoteMenu() {
 }
 
 function tabComplete(CursorPos: number) {
-    if ((<string>messagefield.val()).length === 0)
+    if ((messagefield.val() as string).length === 0) {
         return;
-    let messageSplit: any = (<string>messagefield.val()).substring(0, CursorPos);
-    let matches = Array.from(messageSplit['matchAll'](/[\r\n\t ]/gm));
+    }
+    const messageSplit: any = (messagefield.val() as string).substring(0, CursorPos);
+    const matches = Array.from(messageSplit['matchAll'](/[\r\n\t ]/gm));
     let lastSplit = 0;
     if (matches.length > 0) {
-        lastSplit = <number>(<RegExpMatchArray>matches[matches.length - 1]).index + 1;
+        lastSplit = ((matches[matches.length - 1] as RegExpMatchArray).index as number) + 1 ;
     }
-    let toComplete = messageSplit.substring(lastSplit);
-    if (toComplete.length < 1)
+    const toComplete = messageSplit.substring(lastSplit);
+    if (toComplete.length < 1) {
         return;
+    }
     if (toComplete.toLowerCase().startsWith("@") && toComplete.length > 1) {
         for (let username in userlist.entries()) {
             if (username[1] !== null && username[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
-                let mIn = (<string>messagefield.val()).substr(0, lastSplit) + "@" + username[1] + " ";
-                messagefield.val(mIn + (<string>messagefield.val()).substr(CursorPos));
+                const mIn = (messagefield.val() as string).substr(0, lastSplit) + "@" + username[1] + " ";
+                messagefield.val(mIn + (messagefield.val() as string).substr(CursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
                 return;
@@ -524,23 +532,23 @@ function tabComplete(CursorPos: number) {
     else if (toComplete.toLowerCase().startsWith("/") && toComplete.length > 1) {
         for (let commands in commandlist.entries()) {
             if (commands !== null && commands[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
-                let mIn = (<string>messagefield.val()).substr(0, lastSplit) + "/" + commands[1] + " ";
-                messagefield.val(mIn + (<string>messagefield.val()).substr(CursorPos));
+                const mIn = (messagefield.val() as string).substr(0, lastSplit) + "/" + commands[1] + " ";
+                messagefield.val(mIn + (messagefield.val() as string).substr(CursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
                 return;
             }
         }
     } else {
-        for (let x in emotekeylist) {
-            if (emotekeylist[x].toLowerCase().startsWith(toComplete.toLowerCase())) {
-                let mIn = (<string>messagefield.val()).substr(0, lastSplit) + emotekeylist[x] + " ";
-                messagefield.val(mIn + (<string>messagefield.val()).substr(CursorPos));
+        emotekeylist.forEach(x => {
+            if (x.toLowerCase().startsWith(toComplete.toLowerCase())) {
+                const mIn = (messagefield.val() as string).substr(0, lastSplit) + x + " ";
+                messagefield.val(mIn + (messagefield.val() as string).substr(CursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
-                break;
+                return;
             }
-        }
+        });
     }
 }
 
@@ -551,13 +559,13 @@ function makeMention(text: string) {
 function uname_name_click(e: any){
     if(e.originalEvent.ctrlKey){
         e.preventDefault();
-        (<HTMLInputElement>document.getElementById('messageinput')).value += '@' + e.target.title + ' ';
+        (document.getElementById('messageinput') as HTMLInputElement).value += '@' + e.target.title + ' ';
     }
 }
 
 function setautoscroll(value: boolean) {
     autoscroll = value;
-    (<HTMLInputElement>document.getElementById('autoscroll')).checked = value;
+    (document.getElementById('autoscroll') as HTMLInputElement).checked = value;
     if(value) {
         hideInfo();
     }
@@ -566,7 +574,7 @@ function setautoscroll(value: boolean) {
 function messagesScroll(event: WheelEvent) {
     if(event.deltaY>0) { //Down
         if(lastScrollDirection === 1) {
-        let messagediv = <HTMLDivElement>document.getElementById('messages');
+        const messagediv = document.getElementById('messages') as HTMLDivElement;
             if(messagediv.scrollTop === (messagediv.scrollHeight - messagediv.offsetHeight)) {
                 setautoscroll(true);
                 lastScrollDirection = 0;
@@ -596,10 +604,10 @@ function mobileAndTabletcheck() {
 }
 
 function updateScroll() {
-    if (checkOverflow(<HTMLDivElement>document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
+    if (checkOverflow(document.getElementById('messages') as HTMLDivElement)) { //check if chat would overflow currentSize and refresh scrollbar
         //$('.nano').nanoScroller();
         if(autoscroll) {
-            let chatdiv = <HTMLDivElement>document.querySelector('#messages');
+            const chatdiv = document.querySelector('#messages') as HTMLDivElement;
             chatdiv.scrollTop = chatdiv.scrollHeight;
         }
     }
@@ -607,13 +615,13 @@ function updateScroll() {
 
 // Determines if the passed element is overflowing its bounds, either vertically or horizontally.
 // Will temporarily modify the "overflow" style to detect this if necessary.
-function checkOverflow(el: HTMLElement) {
-    let curOverflow = el.style.overflow;
-
-    if (!curOverflow || curOverflow === "visible")
-        el.style.overflow = "hidden";
-
-    let isOverflowing = el.clientWidth < el.scrollWidth
+function checkOverflow(el: HTMLDivElement) {
+    const curOverflow = el.style.overflow;
+    if (!curOverflow || curOverflow === "visible") {
+        el.style.overflow = 'hidden';
+    }
+        
+    const isOverflowing = el.clientWidth < el.scrollWidth
         || el.clientHeight < el.scrollHeight;
 
     el.style.overflow = curOverflow;
@@ -648,14 +656,10 @@ function handleMessageHistory(history: IMessage[]) {
                 break;
         }
     });
-    for (let msg in history) {
-        let m = history[msg];
-        
-    }
-    if (checkOverflow(<HTMLDivElement>document.querySelector('#messages'))) {
+    if (checkOverflow(document.getElementById('messages') as HTMLDivElement)) {
         //$('.nano').nanoScroller();
         if(autoscroll) {
-            let chatdiv = <HTMLDivElement>document.querySelector('#messages');
+            const chatdiv = document.getElementById('messages') as HTMLDivElement;
             chatdiv.scrollTop = chatdiv.scrollHeight;
         }
     }
@@ -663,7 +667,7 @@ function handleMessageHistory(history: IMessage[]) {
 
 $('#fileinput').on('change', function (e) {
 
-    let file = (<FileList>(<HTMLInputElement>document.getElementById('fileinput')).files)[0];
+    const file = ((document.getElementById('fileinput') as HTMLInputElement).files as FileList)[0];
     if (file.size > 1024*1024*3) {
         alert('max upload size is 3M');
         e.preventDefault();
@@ -673,7 +677,7 @@ $('#fileinput').on('change', function (e) {
 });
 
 function uploadImage(file: File){
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append('file', file);
     $.ajax({
     url: '/api/upload/',
@@ -694,9 +698,9 @@ function uploadImage(file: File){
 
 
 function inputButtonClick() {
-    let evt = document.createEvent('MouseEvent');
+    const evt = document.createEvent('MouseEvent');
     evt.initEvent('click', true, false);
-    (<HTMLInputElement>document.getElementById('fileinput')).dispatchEvent(evt);
+    (document.getElementById('fileinput') as HTMLInputElement).dispatchEvent(evt);
 }
 function getCommands(){
     $.getJSON('/api/commands', function (result) {
@@ -713,16 +717,16 @@ function handlePaste(e: ClipboardEvent){
 
     e.stopPropagation();
 
-    clipboardData = <DataTransfer>e.clipboardData;
+    clipboardData = e.clipboardData as DataTransfer;
     // clipboardData = e.clipboardData || window.clipboardData;
-    let items = clipboardData.items;
+    const items = clipboardData.items;
     pastedData = clipboardData.getData('Text');
     
     for (let i = 0; i < items.length; i++) {
         // Skip content if not image
-        if (items[i].type.indexOf("image") == -1) continue;
+        if (items[i].type.indexOf("image") === -1) continue;
         e.preventDefault();
-        imagecache = <File>items[i].getAsFile();
+        imagecache = items[i].getAsFile() as File;
         uploadImage(imagecache)
         //finally try as text
         if(items[i].type.indexOf("Text")>0){
@@ -732,13 +736,9 @@ function handlePaste(e: ClipboardEvent){
     }
 }
 
-
-
-
-
 //More info here: https://developer.mozilla.org/de/docs/Web/API/notification
 
-var notifications = new Array();
+const notifications = new Array();
 
 window.onload = function () {
     // Let's check if the browser supports notifications
@@ -768,7 +768,7 @@ window.onload = function () {
 
 //create new notification with the variable "text" as content
 function newNotification(text: string) {
-    var notification = new Notification(text);
+    const notification = new Notification(text);
     notifications.push(notification);
 }
 
@@ -798,7 +798,7 @@ function closeNotification(item: Notification){
 }
 
 function displayNotifyMode() {
-    if(checkPermission() == true){
+    if(checkPermission() === true){
         $('#notify-mode').css('display', 'flex');
     } else {
         $('#notify-mode').css('display', 'none');

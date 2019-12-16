@@ -1,11 +1,11 @@
 import { IAuthor } from "./IAuthor";
-import { ITimestamp } from "./ITimestamp";
 
 export interface IMessage {
     content_type: string;
     author: IAuthor;
     content: string;
-    timestamp: ITimestamp;
+    timestamp: string;
+    full_timestamp: string;
     append_allow: boolean;
     priority: string;
 }
