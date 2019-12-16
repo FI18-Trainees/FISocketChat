@@ -1,20 +1,20 @@
 import os.path
 import json
 
-from . import Console
+from .shell import Console
 
-BASE_PATH = content_dir = "config" if os.path.isdir("config") else "config-default"
+BASE_PATH = "config" if os.path.isdir("config") else "config-default"
 
 PATHS = ["main.json"]
 SHL = Console("cfg", cls=True)
 
 
 class __Config:
-    def __init__(self):
+    def __init__(self, debug: bool = False):
         self.options = {}
-        self.reload()
+        self.reload(debug=debug)
 
-    def reload(self, debug=False):
+    def reload(self, debug: bool = False):
         SHL.output(f"Reloading config.")
         for path in PATHS:
             SHL.output(f"Reloading configfile {os.path.join(BASE_PATH, path)}")
@@ -31,7 +31,7 @@ class __Config:
                 if debug:
                     SHL.output(f"[{key}]: {value}")
 
-    def get(self, key, default):
+    def get(self, key: str, default=None):
         return self.options.get(key, default)
 
 
