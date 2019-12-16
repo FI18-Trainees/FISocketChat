@@ -1,23 +1,27 @@
-import * as express from "express";
-import * as $ from "jquery";
+import * as io from "socket.io-client";
+import { IMessage } from "./IMessage";
+import { IEmbed } from "./IEmbed";
+import { IMedia } from "./IMedia";
+import { IFields } from "./IFields";
 //TODO import nanoScroller
 
 //localStorage.debug = '*';
-var socket = null;
+
+var socket: SocketIO.Socket;
 var focused = true;
 var unread = 0;
-var emotelist = null;
-var emotekeylist = null;
-var commandlist = null;
+var emotelist: JSON;
+var emotekeylist: string[];
+var commandlist: string[];
 var loginmode = true;
 var cooldown = 0;
-var ownusername = null;
-var userlist = [];
+var ownusername: string;
+var userlist: string[] = [];
 var notificationmode = 'no';
 var autoscroll = true;
 var lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
 
-var message_history = [];
+var message_history: string[] = [];
 var history_pointer = 0;
 
 var imagecache;
@@ -25,19 +29,13 @@ var imagecache;
 const messagefield: JQuery<HTMLInputElement> = $('#messageinput');
 const infobox = $('#infobox');
 const errorbox = $('#errorbox');
-const app = express();
 
 $('document').ready(function () {
 
-    app.set("port", process.env.PORT || 3000);
-    let https = require("https").Server(app);
-    let io = require("socket.io")(https);
-
-    socket = io.connect(window.location.href.slice(0, -1),
+    let socket = io.connect(window.location.href.slice(0, -1),
         {
             secure: true,
             transports: ['polling', 'websocket'],
-            reconnect: true,
             query: "token=" + getCookie("access_token"),
         });
     window.onfocus = function () {
@@ -56,7 +54,6 @@ $('document').ready(function () {
 
 
     messagefield.keydown(function (e) {
-        //e = e || window.event;
         switch (e.keyCode) {
             case 9:
                 //tab key
@@ -113,9 +110,9 @@ $('document').ready(function () {
             return false;
         }
 
-        message_history.push(messagefield.val());
+        message_history.push(<string>messagefield.val());
         history_pointer = message_history.length;
-        let u = $('#user_name').val().toString();
+        let u = <string>$('#user_name').val();
 
         let event_name = "chat_message";
         if ((<string>messagefield.val()).startsWith("/")) {
@@ -142,24 +139,24 @@ $('document').ready(function () {
         return false;
     });
 
-    socket.on('error', function (msg) {
+    socket.on('error', function (msg: {message: string}) {
         showError(msg['message']);
     });
     socket.on('connect', function () {
         changeOnlineStatus(true);
     });
-    socket.on('connect_error', (error) => {
+    socket.on('connect_error', (error: string) => {
         showError("Connection failed.");
         console.log(error);
         changeOnlineStatus(false);
         reconnect();
     });
-    socket.on('connect_timeout', (timeout) => {
+    socket.on('connect_timeout', (timeout: number) => {
         changeOnlineStatus(false);
         console.log(timeout);
         reconnect();
     });
-    socket.on('disconnect', (reason) => {
+    socket.on('disconnect', (reason: string) => {
         showError("Disconnected.");
         disconnectNotification();
         changeOnlineStatus(false);
@@ -168,7 +165,7 @@ $('document').ready(function () {
             reconnect();
         }
     });
-    socket.on('chat_message', function (msg) {
+    socket.on('chat_message', function (msg: {content_type: string, content: string}) {
         switch (msg['content_type']) {
             case 'message':
                 let content = msg['content'];
@@ -189,14 +186,14 @@ $('document').ready(function () {
         }
 
         //check if chat would overflow currentSize and refresh scrollbar
-        if (checkOverflow(document.querySelector('#messages'))) {
+        if (checkOverflow(<HTMLDivElement>document.getElementById('#messages'))) {
             //$('.nano').nanoScroller();
             if(autoscroll) {
-                let chatdiv = document.querySelector('#messages');
+                let chatdiv: HTMLDivElement = <HTMLDivElement>document.getElementById('messages');
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
             else {
-                showInfo("There are new Messages below. Click here to scroll down.", null, function(){ setautoscroll(true); hideInfo(); updateScroll()});
+                showInfo("There are new Messages below. Click here to scroll down.", 0, function(){ setautoscroll(true); hideInfo(); updateScroll()});
             }
         }
         if (!focused) {
@@ -216,37 +213,37 @@ $('document').ready(function () {
         }
         $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
-    socket.on('status', function (status) {
+    socket.on('status', function (status: {count?: string, username?: string, loginmode?: string, chat_color?: string}) {
         if (status.hasOwnProperty('count')) {
-            setUserCount(status['count']);
+            setUserCount(<string>status['count']);
         }
         if (status.hasOwnProperty('username')) {
-            ownusername = status['username'].toLowerCase();
-            $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color']);
+            ownusername = (<string>status['username']).toLowerCase();
+            $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', <string>status['chat_color']);
             $('#logininfo_picture').attr('src',`https://profile.zaanposni.com/pictures/${ownusername}.png`);
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
-                document.getElementById('username-item').style.display = 'none';
+                $('#username-item').css('display', 'none');
                 loginmode = true;
             } else {
-                document.getElementById('username-item').style.display = 'block';
-                (<HTMLInputElement>document.getElementById('user_name')).value = 'DebugUser';
-                document.getElementById('logininfo_sitebar').style.display = "none";
+                $('#username-item').css('display', 'block');
+                $('#user_name').val('DebugUser');
+                $('logininfo_sitebar').css('display', 'none');
                 loginmode = false;
             }
         }
         if (status.hasOwnProperty('on_ready')) {
             updateEmoteMenu();
-            document.getElementById("emotebtn").addEventListener('click', toggleEmoteMenu);
+            (<HTMLButtonElement>document.getElementById("emotebtn")).addEventListener('click', toggleEmoteMenu);
 
             getCommands();
 
             mobileAndTabletcheck();
             displayNotifyMode();
-            $('#notification-mode').val(getCookie('notificationmode'));
+            $('#notification-mode').val(<string>getCookie('notificationmode'));
 
-            document.getElementById('messageinput').addEventListener('paste', handlePaste);
+            $('messageinput').on('paste', function(){handlePaste});
 
             getMessageHistory();
         }
@@ -272,13 +269,13 @@ $('document').ready(function () {
 
 function reconnect() {
     setTimeout(function () {
-        socket.connect();
+        io.connect();
     }, 3000);
 }
 
-function newMessageHandler(msg) {
-    if($('#messages :last-child div h2 div').prop('title') === msg['author']['username']) {
-        if (msg["append_allow"]) {
+function newMessageHandler(msg: IMessage) {
+    if($('#messages :last-child div h2 div').prop('title') === msg.author.username) {
+        if (msg.append_allow) {
             appendMessage(msg);
             return
         }
@@ -286,26 +283,16 @@ function newMessageHandler(msg) {
     addNewMessage(msg);
 }
 
-function addNewMessage(msg) {
+function addNewMessage(msg: IMessage) {
     let message_container, message_header, message_body, message_thumbnail, message_username, message_timestamp, message_content;
-
-    let content = msg['content'];
-    let username = msg['author']['username'];
-    let display_name = msg['author']['display_name'];
-    let user_color = msg['author']['chat_color'];
-    let user_avatar = msg['author']['avatar'];
-    let timestamp = msg['timestamp'];
-    let timestamp_full = msg['full_timestamp'];
-    let append_allow = msg['append_allow'];
-    let priority = msg['priority'];
 
     message_container = $('<div class="message-container d-flex border-bottom p-2">');
     message_header = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
     message_body = $('<div class="message-body w-100">');
-    message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + user_avatar + '">');
-    message_username = $('<div class="message-name">').prop('title', username).text(display_name).css('color', user_color).click(uname_name_click);
-    message_timestamp = $('<time class="message-timestamp ml-1">').prop('title', timestamp_full).text(timestamp);
-    message_content = $('<div class="message-content text-white w-100 pb-1">').html(content);
+    message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + msg.author.avatar + '">');
+    message_username = $('<div class="message-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
+    message_timestamp = $('<time class="message-timestamp ml-1">').prop('title', msg.timestamp.full_timestamp).text(msg.timestamp.timestamp);
+    message_content = $('<div class="message-content text-white w-100 pb-1">').html(msg.content);
 
     message_container.append(message_thumbnail, message_body);
     message_body.append(message_header, message_content);
@@ -313,15 +300,12 @@ function addNewMessage(msg) {
     $('#messages').append(message_container);
 }
 
-function appendMessage(msg) {
-    let content = msg['content'];
-    let timestamp = msg['timestamp'];
-
-    $('#messages .message-container').last().children().append($('<div class="message-content text-white w-100 pb-1">').html(content));
-    $('#messages .message-header').last().children('time').text(timestamp);
+function appendMessage(msg: IMessage) {
+    $('#messages .message-container').last().children().append($('<div class="message-content text-white w-100 pb-1">').html(msg.content));
+    $('#messages .message-header').last().children('time').text(msg.timestamp.timestamp);
 }
 
-function setUserCount(count) {
+function setUserCount(count: string) {
     $.ajax({
         url: "api/user",
     }).done(function(data) {
@@ -331,24 +315,17 @@ function setUserCount(count) {
     });
 }
 
-function addEmbed(msg) {
-    let author_name = msg['author']['username'];
-    let display_name = msg['author']['display_name'];
-    let author_color = msg['author']['chat-color'];
-    let author_avatar = msg['author']['avatar'];
-
-    let full_timestamp = msg['full_timestamp'];
-    let title = msg['title'];
+function addEmbed(msg: IEmbed) {
 
     let embed_container = $('<div class="embed-container d-flex flex-column border-bottom px-3 my-3 w-75">');
     let embed_header = $('<div class="embed-header d-flex flex-wrap align-items-center mb-1">');
 
-    let embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle mr-2" src="' + author_avatar + '">');
-    let embed_author_name = $('<div class="embed-author-name">').prop('title', author_name).text(display_name).css('color', author_color).click(uname_name_click);
-    let embed_title = $('<div class="embed-title py-2">').text(title);
+    let embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle mr-2" src="' + msg.author.avatar + '">');
+    let embed_author_name = $('<div class="embed-author-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
+    let embed_title = $('<div class="embed-title py-2">').text(msg.title);
 
     let embed_footer_container = $('<div class="embed-footer-container d-inline-flex pb-1 mt-3">');
-    let timestamp = new Date(full_timestamp);
+    let timestamp = new Date(msg.timestamp.full_timestamp);
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' , hour: 'numeric', minute: 'numeric', second: 'numeric'};
     let embed_timestamp = $('<span class="embed-timestamp text-muted ml-auto">').text(timestamp.toLocaleDateString('de-DE', options));
 
@@ -359,17 +336,16 @@ function addEmbed(msg) {
     embed_footer_container.append(embed_timestamp);
 
     if(msg.hasOwnProperty('text')){
-        let text = msg['text'];
-        $('<p class="embed-text">').html(text).insertAfter(embed_title);
+        $('<p class="embed-text">').html(<string>msg.text).insertAfter(embed_title);
     }
     if(msg.hasOwnProperty('fields')){
-        let fields = msg['fields'];
+        let fields = msg.fields;
         let embed_field_container = $('<div class="embed-field-container d-flex flex-wrap justify-content-between py-3">');
         embed_container.append(embed_field_container);
-        fields.forEach(function(item) {
+        (<IFields[]>fields).forEach(item => {
             let embed_topic_container = $('<div class="embed-topic-container m-1">');
-            let embed_topic = $('<p class="embed-topic">').text(item['topic']);
-            let embed_topic_value = $('<p class="embed-topic-value">').html(item['value']);
+            let embed_topic = $('<p class="embed-topic">').text(item.topic);
+            let embed_topic_value = $('<p class="embed-topic-value">').html(item.value);
 
             embed_field_container.append(embed_topic_container);
             embed_topic_container.append(embed_topic, embed_topic_value);
@@ -377,23 +353,22 @@ function addEmbed(msg) {
     }
 
     if(msg.hasOwnProperty('media')){
-        let media = msg['media'];
         let embed_media_container = $('<div class="embed-media-container">');
-        switch(media['media_type']) {
+        switch((<IMedia>msg.media).media_type) {
             case 'audio':
                 let embed_audio: JQuery<HTMLAudioElement> = $('<audio class="audio-embed" controls preload="metadata"/>');
-                embed_audio.attr('src', media['media_url']) ;
+                embed_audio.attr('src', (<IMedia>msg.media).media_url) ;
                 embed_media_container.append(embed_audio);
                 break;
             case 'video':
                 let embed_video: JQuery<HTMLVideoElement> = $('<video class="video-embed" controls preload="metadata"/>');
-                embed_video.attr('src', media['media_url']);
+                embed_video.attr('src', (<IMedia>msg.media).media_url);
                 //embed_video.addEventListener('loadedmetadata', updateScroll);
                 embed_media_container.append(embed_video);
                 break;
             case 'img':
                 let embed_image = new Image();
-                embed_image.src = media['media_url'];
+                embed_image.src = (<IMedia>msg.media).media_url;
                 embed_image.onload = function () {updateScroll();};
                 embed_media_container.append(embed_image);
                 break;
@@ -401,18 +376,15 @@ function addEmbed(msg) {
         embed_container.append(embed_media_container);
     }
     if(msg.hasOwnProperty('footer')){
-        let footer = msg['footer'];
-        let embed_footer = $('<span class="embed-footer">').text(footer);
+        let embed_footer = $('<span class="embed-footer">').text(<string>msg.footer);
         embed_footer_container.prepend(embed_footer);
     }
     if(msg.hasOwnProperty('color')){
-        let color = msg['color'];
-        embed_container.css('border-left-color', color);
+        embed_container.css('border-left-color', <string>msg.color);
     }
     if(msg.hasOwnProperty('thumbnail')){
-        let thumbnail = msg['thumbnail'];
         let embed_thumbnail = new Image();
-        embed_thumbnail.src = thumbnail;
+        embed_thumbnail.src = <string>msg.thumbnail;
         embed_thumbnail.onload = function () {updateScroll();};
         embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto', 'mt-3');
         embed_header.append(embed_thumbnail);
@@ -423,7 +395,7 @@ function addEmbed(msg) {
     $('#messages').append(embed_container);
 }
 
-function showError(message) {
+function showError(message: string) {
     errorbox.text(message);
     errorbox.fadeIn("slow");
     setTimeout(function () {
@@ -431,7 +403,7 @@ function showError(message) {
     }, 2000);
 }
 
-function showInfo(message, fadeoutdelay, onclick) {
+function showInfo(message: string, fadeoutdelay: number, onclick) {
     infobox.text(message);
     infobox.fadeIn("slow");
     if(onclick != null) {
@@ -444,7 +416,7 @@ function showInfo(message, fadeoutdelay, onclick) {
     }
 }
 
-function changeOnlineStatus(online) {
+function changeOnlineStatus(online: boolean) {
     if (online) {
         $('#online-status').text('Connected').addClass('badge-success').removeClass('badge-danger');
     } else {
@@ -461,7 +433,7 @@ function hideInfo() {
     infobox.off('click');
 }
 
-function addEmoteCode(emote) {
+function addEmoteCode(emote: string) {
     messagefield.val(messagefield.val() + " " + emote + " ");
     toggleEmoteMenu();
     messagefield.focus();
@@ -510,10 +482,10 @@ function updateEmoteMenu() {
     });
 }
 
-function getCookie(name) {
+function getCookie(name: string) {
     let value = "; " + document.cookie;
     let parts = value.split("; " + name + "=");
-    if (parts.length === 2) return parts.pop().split(";").shift();
+    if (parts.length === 2) return (<string>parts.pop()).split(";").shift();
 }
 
 function toggleEmoteMenu() {
@@ -525,7 +497,7 @@ function toggleEmoteMenu() {
     }
 }
 
-function tabComplete(CursorPos) {
+function tabComplete(CursorPos: number) {
     if ((<string>messagefield.val()).length === 0)
         return;
     let messageSplit = (<string>messagefield.val()).substring(0, CursorPos);
@@ -571,7 +543,7 @@ function tabComplete(CursorPos) {
     }
 }
 
-function makeMention(text) {
+function makeMention(text: string) {
     return '<em class="d-flex w-100 mention">' + text + '</em>';
 }
 
@@ -582,7 +554,7 @@ function uname_name_click(e){
     }
 }
 
-function setautoscroll(value) {
+function setautoscroll(value: boolean) {
     autoscroll = value;
     (<HTMLInputElement>document.getElementById('autoscroll')).checked = value;
     if(value) {
@@ -590,10 +562,10 @@ function setautoscroll(value) {
     }
 }
 
-function messagesScroll(event) {
+function messagesScroll(event: WheelEvent) {
     if(event.deltaY>0) { //Down
         if(lastScrollDirection === 1) {
-        let messagediv = document.getElementById('messages');
+        let messagediv = <HTMLDivElement>document.getElementById('messages');
             if(messagediv.scrollTop === (messagediv.scrollHeight - messagediv.offsetHeight)) {
                 setautoscroll(true);
                 lastScrollDirection = 0;
@@ -623,10 +595,10 @@ function mobileAndTabletcheck() {
 }
 
 function updateScroll() {
-    if (checkOverflow(document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
+    if (checkOverflow(<HTMLDivElement>document.querySelector('#messages'))) { //check if chat would overflow currentSize and refresh scrollbar
         //$('.nano').nanoScroller();
         if(autoscroll) {
-            let chatdiv = document.querySelector('#messages');
+            let chatdiv = <HTMLDivElement>document.querySelector('#messages');
             chatdiv.scrollTop = chatdiv.scrollHeight;
         }
     }
@@ -634,7 +606,7 @@ function updateScroll() {
 
 // Determines if the passed element is overflowing its bounds, either vertically or horizontally.
 // Will temporarily modify the "overflow" style to detect this if necessary.
-function checkOverflow(el) {
+function checkOverflow(el: HTMLElement) {
     let curOverflow = el.style.overflow;
 
     if (!curOverflow || curOverflow === "visible")
@@ -676,26 +648,27 @@ function handleMessageHistory(history) {
                 break;
         }
     }
-    if (checkOverflow(document.querySelector('#messages'))) {
+    if (checkOverflow(<HTMLDivElement>document.querySelector('#messages'))) {
         //$('.nano').nanoScroller();
         if(autoscroll) {
-            let chatdiv = document.querySelector('#messages');
+            let chatdiv = <HTMLDivElement>document.querySelector('#messages');
             chatdiv.scrollTop = chatdiv.scrollHeight;
         }
     }
 }
 
-/*$('#fileinput').on('change', function (e) {
-  let file = $('#fileinput').files[0];
-  if (file.size > 1024*1024*3) {
-    alert('max upload size is 3M');
-    e.preventDefault();
-    return false;
-  }
-  uploadImage(file);
-});*/
+$('#fileinput').on('change', function (e) {
 
-function uploadImage(file){
+    let file = (<FileList>(<HTMLInputElement>document.getElementById('fileinput')).files)[0];
+    if (file.size > 1024*1024*3) {
+        alert('max upload size is 3M');
+        e.preventDefault();
+        return false;
+    }
+    uploadImage(file);
+});
+
+function uploadImage(file: File){
     let fd = new FormData();
     fd.append('file', file);
     $.ajax({
@@ -719,7 +692,7 @@ function uploadImage(file){
 function inputButtonClick() {
     let evt = document.createEvent('MouseEvent');
     evt.initEvent('click', true, false);
-    document.getElementById('fileinput').dispatchEvent(evt);
+    (<HTMLInputElement>document.getElementById('fileinput')).dispatchEvent(evt);
 }
 function getCommands(){
     $.getJSON('/api/commands', function (result) {
@@ -731,12 +704,12 @@ function getCommands(){
         }
     });
 }
-function handlePaste(e){
+function handlePaste(e: ClipboardEvent){
     let clipboardData, pastedData;
 
     e.stopPropagation();
 
-    clipboardData = e.clipboardData;
+    clipboardData = <DataTransfer>e.clipboardData;
     // clipboardData = e.clipboardData || window.clipboardData;
     let items = clipboardData.items;
     pastedData = clipboardData.getData('Text');
@@ -745,7 +718,7 @@ function handlePaste(e){
         // Skip content if not image
         if (items[i].type.indexOf("image") == -1) continue;
         e.preventDefault();
-        imagecache = items[i].getAsFile();
+        imagecache = <File>items[i].getAsFile();
         uploadImage(imagecache)
         //finally try as text
         if(items[i].type.indexOf("Text")>0){
@@ -790,7 +763,7 @@ window.onload = function () {
 };
 
 //create new notification with the variable "text" as content
-function newNotification(text) {
+function newNotification(text: string) {
     var notification = new Notification(text);
     notifications.push(notification);
 }
@@ -816,7 +789,7 @@ function closeAllNotifications() {
     }
 }
 
-function closeNotification(item){
+function closeNotification(item: Notification){
     item.close();
 }
 
