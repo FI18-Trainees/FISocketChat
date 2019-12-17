@@ -50,7 +50,7 @@ $('document').ready(function () {
     };
 
 
-    messagefield.on('keydown', function (e) {
+    messagefield.keydown(e => {
         switch (e.keyCode) {
             case 9:
                 //tab key
@@ -91,11 +91,11 @@ $('document').ready(function () {
                 }
                 break;
             default:
-                return;
+                break;
         }
     });
 
-    $('form').submit(function (e) {
+    $('form').submit(e => {
         e.preventDefault(); // prevents page reloading
         if (cooldown !== 0) {
             showError("Sending messages to fast!");
@@ -138,7 +138,7 @@ $('document').ready(function () {
         return false;
     });
 
-    socket.on('error', function (msg: {message: string}) {
+    socket.on('error', (msg: {message: string}) => {
         showError(msg['message']);
     });
     socket.on('connect', function () {
@@ -164,7 +164,7 @@ $('document').ready(function () {
             reconnect();
         }
     });
-    socket.on('chat_message', function (msg: IMessage) {
+    socket.on('chat_message', (msg: IMessage) => {
         switch (msg.content_type) {
             case 'message':
                 const mentioned = (msg.content.toLowerCase().search('@' + ownusername) !== -1) || (msg.content.toLowerCase().search('@everyone') !== -1);
@@ -182,7 +182,7 @@ $('document').ready(function () {
                 addEmbed(msg as IEmbed);
                 break;
             default:
-                return;
+                break;
         }
 
         //check if chat would overflow currentSize and refresh scrollbar
@@ -213,7 +213,7 @@ $('document').ready(function () {
         }
         $('.chat').animate({scrollTop: $('.chat').prop("scrollHeight")}, 0);
     });
-    socket.on('status', function (status: {count?: string, username?: string, loginmode?: string, chat_color?: string}) {
+    socket.on('status', (status: {count?: string, username?: string, loginmode?: string, chat_color?: string}) => {
         if (status.hasOwnProperty('count')) {
             setUserCount(status['count'] as string);
         }
@@ -249,7 +249,7 @@ $('document').ready(function () {
         }
     });
 
-    $(document).on('keydown', function (event) {
+    $(document).on('keydown', event => {
         if (event.keyCode === 17) {
             $('.message-name').css('cursor', 'pointer');
         }
@@ -262,7 +262,7 @@ $('document').ready(function () {
     });
 
     $('#notification-mode').change(function () {
-        notificationmode = (<string>(<JQuery<HTMLSelectElement>>$('#notification-mode')).val());
+        notificationmode = (($('#notification-mode') as JQuery<HTMLSelectElement>).val() as string);
         document.cookie = `notificationmode=${notificationmode}; expires=Thu, 01 Jan 2023 00:00:00 UTC; path=/`;
     });
 });
@@ -284,22 +284,20 @@ function newMessageHandler(msg: IMessage) {
 }
 
 function addNewMessage(msg: IMessage) {
-    let message_container, message_header, message_body, message_thumbnail, message_username, message_timestamp, message_content;
-    console.log(msg.timestamp);
-    console.log(msg.timestamp);
+    let messageContainer, messageHeader, messageBody, messageThumbnail, messageUsername, messageTimestamp, messageContent;
 
-    message_container = $('<div class="message-container d-flex border-bottom p-2">');
-    message_header = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
-    message_body = $('<div class="message-body w-100">');
-    message_thumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + msg.author.avatar + '">');
-    message_username = $('<div class="message-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
-    message_timestamp = $('<time class="message-timestamp ml-1">').prop('title', msg.full_timestamp).text(msg.timestamp);
-    message_content = $('<div class="message-content text-white w-100 pb-1">').html(msg.content);
+    messageContainer = $('<div class="message-container d-flex border-bottom p-2">');
+    messageHeader = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
+    messageBody = $('<div class="message-body w-100">');
+    messageThumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + msg.author.avatar + '">');
+    messageUsername = $('<div class="message-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
+    messageTimestamp = $('<time class="message-timestamp ml-1">').prop('title', msg.full_timestamp).text(msg.timestamp);
+    messageContent = $('<div class="message-content text-white w-100 pb-1">').html(msg.content);
 
-    message_container.append(message_thumbnail, message_body);
-    message_body.append(message_header, message_content);
-    message_header.append(message_username, message_timestamp);
-    $('#messages').append(message_container);
+    messageContainer.append(messageThumbnail, messageBody);
+    messageBody.append(messageHeader, messageContent);
+    messageHeader.append(messageUsername, messageTimestamp);
+    $('#messages').append(messageContainer);
 }
 
 function appendMessage(msg: IMessage) {
@@ -310,7 +308,7 @@ function appendMessage(msg: IMessage) {
 function setUserCount(count: string) {
     $.ajax({
         url: "api/user",
-    }).done(function(data) {
+    }).done(data => {
         $('#usercount').prop('title', data.join(', ')).text('Usercount: ' + count);
         userlist = data;
         userlist.push('everyone');
@@ -319,84 +317,84 @@ function setUserCount(count: string) {
 
 function addEmbed(msg: IEmbed) {
 
-    let embed_container = $('<div class="embed-container d-flex flex-column border-bottom px-3 my-3 w-75">');
-    let embed_header = $('<div class="embed-header d-flex flex-wrap align-items-center mb-1">');
+    const embedContainer = $('<div class="embed-container d-flex flex-column border-bottom px-3 my-3 w-75">');
+    const embedHeader = $('<div class="embed-header d-flex flex-wrap align-items-center mb-1">');
 
-    let embed_author_thumbnail = $('<img class="embed-profile-image rounded-circle mr-2" src="' + msg.author.avatar + '">');
-    let embed_author_name = $('<div class="embed-author-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
-    let embed_title = $('<div class="embed-title py-2">').text(msg.title);
+    const embedAuthorThumbnail = $('<img class="embed-profile-image rounded-circle mr-2" src="' + msg.author.avatar + '">');
+    const embedAuthorName = $('<div class="embed-author-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
+    const embedTitle = $('<div class="embed-title py-2">').text(msg.title);
 
-    let embed_footer_container = $('<div class="embed-footer-container d-inline-flex pb-1 mt-3">');
-    let timestamp = new Date(msg.full_timestamp);
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' , hour: 'numeric', minute: 'numeric', second: 'numeric'};
-    let embed_timestamp = $('<span class="embed-timestamp text-muted ml-auto">').text(timestamp.toLocaleDateString('de-DE', options));
+    const embedFooterContainer = $('<div class="embed-footer-container d-inline-flex pb-1 mt-3">');
+    const timestamp = new Date(msg.full_timestamp);
+    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' , hour: 'numeric', minute: 'numeric', second: 'numeric'};
+    const embedTimestamp = $('<span class="embed-timestamp text-muted ml-auto">').text(timestamp.toLocaleDateString('de-DE', dateOptions));
 
-    embed_container.append(embed_header);
-    embed_container.append(embed_title);
-    embed_header.append(embed_author_thumbnail);
-    embed_header.append(embed_author_name);
-    embed_footer_container.append(embed_timestamp);
+    embedContainer.append(embedHeader);
+    embedContainer.append(embedTitle);
+    embedHeader.append(embedAuthorThumbnail);
+    embedHeader.append(embedAuthorName);
+    embedFooterContainer.append(embedTimestamp);
 
     if(msg.hasOwnProperty('text')){
-        $('<p class="embed-text">').html(msg.text as string).insertAfter(embed_title);
+        $('<p class="embed-text">').html(msg.text as string).insertAfter(embedTitle);
     }
     if(msg.hasOwnProperty('fields')){
-        let fields = msg.fields;
-        let embed_field_container = $('<div class="embed-field-container d-flex flex-wrap justify-content-between py-3">');
-        embed_container.append(embed_field_container);
+        const fields = msg.fields;
+        const embedFieldContainer = $('<div class="embed-field-container d-flex flex-wrap justify-content-between py-3">');
+        embedContainer.append(embedFieldContainer);
         (fields as IFields[]).forEach(item => {
-            let embed_topic_container = $('<div class="embed-topic-container m-1">');
-            let embed_topic = $('<p class="embed-topic">').text(item.topic);
-            let embed_topic_value = $('<p class="embed-topic-value">').html(item.value);
+            const embedTopicContainer = $('<div class="embed-topic-container m-1">');
+            const embedTopic = $('<p class="embed-topic">').text(item.topic);
+            const embedTopicValue = $('<p class="embed-topic-value">').html(item.value);
 
-            embed_field_container.append(embed_topic_container);
-            embed_topic_container.append(embed_topic, embed_topic_value);
+            embedFieldContainer.append(embedTopicContainer);
+            embedTopicContainer.append(embedTopic, embedTopicValue);
         });
     }
 
     if(msg.hasOwnProperty('media')){
-        let embed_media_container = $('<div class="embed-media-container">');
+        const embedMediaContainer = $('<div class="embed-media-container">');
         switch((msg.media as IMedia).media_type) {
             case 'audio':
-                let embed_audio: JQuery<HTMLAudioElement> = $('<audio class="audio-embed" controls preload="metadata"/>');
-                embed_audio.attr('src', (msg.media as IMedia).media_url) ;
-                embed_media_container.append(embed_audio);
+                const embedAudio: JQuery<HTMLAudioElement> = $('<audio class="audio-embed" controls preload="metadata"/>');
+                embedAudio.attr('src', (msg.media as IMedia).media_url) ;
+                embedMediaContainer.append(embedAudio);
                 break;
             case 'video':
-                let embed_video: JQuery<HTMLVideoElement> = $('<video class="video-embed" controls preload="metadata"/>');
-                embed_video.attr('src', (msg.media as IMedia).media_url);
+                const embedVideo: JQuery<HTMLVideoElement> = $('<video class="video-embed" controls preload="metadata"/>');
+                embedVideo.attr('src', (msg.media as IMedia).media_url);
                 //embed_video.addEventListener('loadedmetadata', updateScroll);
-                embed_media_container.append(embed_video);
+                embedMediaContainer.append(embedVideo);
                 break;
             case 'img':
-                let embed_image = new Image();
-                embed_image.src = (msg.media as IMedia).media_url;
-                embed_image.onload = function () {updateScroll();};
-                embed_media_container.append(embed_image);
+                const embedImage = new Image();
+                embedImage.src = (msg.media as IMedia).media_url;
+                embedImage.onload = function () {updateScroll();};
+                embedMediaContainer.append(embedImage);
                 break;
             default:
                 throw Error('wrong media type');
         }
-        embed_container.append(embed_media_container);
+        embedContainer.append(embedMediaContainer);
     }
     if(msg.hasOwnProperty('footer')){
-        let embed_footer = $('<span class="embed-footer">').text(msg.footer as string);
-        embed_footer_container.prepend(embed_footer);
+        const embedFooter = $('<span class="embed-footer">').text(msg.footer as string);
+        embedFooterContainer.prepend(embedFooter);
     }
     if(msg.hasOwnProperty('color')){
-        embed_container.css('border-left-color', msg.color as string);
+        embedContainer.css('border-left-color', msg.color as string);
     }
     if(msg.hasOwnProperty('thumbnail')){
-        const embed_thumbnail = new Image();
-        embed_thumbnail.src = msg.thumbnail as string;
-        embed_thumbnail.onload = function () {updateScroll();};
-        embed_thumbnail.classList.add('embed-thumbnail', 'ml-auto', 'mt-3');
-        embed_header.append(embed_thumbnail);
+        const embedThumbnail = new Image();
+        embedThumbnail.src = msg.thumbnail as string;
+        embedThumbnail.onload = function () {updateScroll();};
+        embedThumbnail.classList.add('embed-thumbnail', 'ml-auto', 'mt-3');
+        embedHeader.append(embedThumbnail);
     }
 
-    embed_container.append(embed_footer_container);
+    embedContainer.append(embedFooterContainer);
 
-    $('#messages').append(embed_container);
+    $('#messages').append(embedContainer);
 }
 
 function showError(message: string) {
@@ -448,7 +446,7 @@ function addEmoteCode(emote: string) {
 
 function updateEmoteMenu() {
     // retrieving the emotes as JSON from the API
-    $.getJSON('/api/emotes', function (result) {
+    $.getJSON('/api/emotes', result => {
         // checking if the JSON even contains emotes.
         if (Object.keys(result).length > 0) {
             if (JSON.stringify(emotelist) === JSON.stringify(result)) {
@@ -474,7 +472,7 @@ function updateEmoteMenu() {
                 }
             }
             emotekeylist = Object.keys(emotelist);
-            emotekeylist.sort(function (a, b) {
+            emotekeylist.sort((a, b) => {
                 const varA = a.toUpperCase();
                 const varB = b.toUpperCase();
                 if (varA < varB) {
@@ -540,13 +538,13 @@ function tabComplete(CursorPos: number) {
             }
         }
     } else {
-        emotekeylist.forEach(x => {
+        emotekeylist.some(x => {
             if (x.toLowerCase().startsWith(toComplete.toLowerCase())) {
                 const mIn = (messagefield.val() as string).substr(0, lastSplit) + x + " ";
                 messagefield.val(mIn + (messagefield.val() as string).substr(CursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
-                return;
+                return true;
             }
         });
     }
@@ -630,11 +628,11 @@ function checkOverflow(el: HTMLDivElement) {
 }
 
 function getMessageHistory() {
-    $.getJSON(`/api/chathistory?username=${ownusername}`, function (result) {
+    $.getJSON(`/api/chathistory?username=${ownusername}`, result => {
         if (Object.keys(result).length > 0) {
             handleMessageHistory(result);
         } else {
-            $.getJSON(`/api/chathistory`, function (result) {
+            $.getJSON(`/api/chathistory`, result => {
                 if (Object.keys(result).length > 0) {
                     handleMessageHistory(result);
                 }
@@ -654,6 +652,8 @@ function handleMessageHistory(history: IMessage[]) {
             case 'embed':
                 addEmbed(element as IEmbed);
                 break;
+            default:
+                break;
         }
     });
     if (checkOverflow(document.getElementById('messages') as HTMLDivElement)) {
@@ -665,7 +665,7 @@ function handleMessageHistory(history: IMessage[]) {
     }
 }
 
-$('#fileinput').on('change', function (e) {
+$('#fileinput').on('change', e => {
 
     const file = ((document.getElementById('fileinput') as HTMLInputElement).files as FileList)[0];
     if (file.size > 1024*1024*3) {
@@ -688,7 +688,7 @@ function uploadImage(file: File){
     contentType: false,
     processData: false,
 
-    success: function (data, b, jqXHR) {
+    success: (data, b, jqXHR) => {
         if(jqXHR.status === 200) {
             messagefield.val(messagefield.val() + " " + window.location.protocol + "//" + window.location.host + data);
         }
