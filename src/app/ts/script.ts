@@ -2,7 +2,6 @@ import { IMessage } from "./interfaces/IMessage";
 import { IEmbed } from "./interfaces/IEmbed";
 import { IMedia } from "./interfaces/IMedia";
 import { IFields } from "./interfaces/IFields";
-//TODO import nanoScroller
 
 //localStorage.debug = '*';
 
@@ -70,7 +69,7 @@ jQuery(() => {
                     $('form').trigger('submit');
                 }
                 break;
-            case 'Up' || 'UpArrow':
+            case 'ArrowUp':
                 //up arrow
                 if (messagefield.val() === "" || messagefield.val() === messageHistory[historyPointer]) {
                     historyPointer -= 1;
@@ -80,7 +79,7 @@ jQuery(() => {
                     messagefield.val(messageHistory[historyPointer]);
                 }
                 break;
-            case 'Down' || 'DownArrow':
+            case 'ArrowDown':
                 // down arrow
                 if ((messagefield.val() as string).trim() === "" || messagefield.val() === messageHistory[historyPointer]) {
                     historyPointer += 1;
@@ -193,7 +192,7 @@ jQuery(() => {
                 chatdiv.scrollTop = chatdiv.scrollHeight;
             }
             else {
-                showInfo("There are new Messages below. Click here to scroll down.", 0);
+                showInfo("There are new Messages below. Click here to scroll down.", 0, () => {setautoscroll(true); hideInfo(); updateScroll();});
             }
         }
         if (!focused) {
@@ -407,14 +406,13 @@ function showError(message: string) {
     }, 2000);
 }
 
-function showInfo(message: string, fadeoutdelay: number) {
+// tslint:disable-next-line: no-any
+function showInfo(message: string, fadeoutdelay: number, onclick: any) {
     infobox.text(message);
     infobox.fadeIn("slow");
     if(onclick != null) {
-        setautoscroll(true); 
-        hideInfo(); 
-        updateScroll();
-        infobox.on('click', () => { setautoscroll(true); hideInfo(); updateScroll()}); // doesn't work yet
+
+        infobox.on('click', onclick); // doesn't work yet
     }
     if(fadeoutdelay > 0) {
         setTimeout(() => {
@@ -492,7 +490,10 @@ function updateEmoteMenu() {
 function getCookie(name: string) {
     const value = "; " + document.cookie;
     const parts = value.split("; " + name + "=");
-    if (parts.length === 2) return (parts.pop() as string).split(";").shift();
+    if (parts.length === 2) {
+        return (parts.pop() as string).split(";").shift();
+    }
+    return;
 }
 
 function toggleEmoteMenu() {
@@ -528,6 +529,7 @@ function tabComplete(cursorPos: number) {
                 messagefield.prop('selectionEnd', mIn.length);
                 return true;
             }
+            return false;
         });
     }
     else if (toComplete.toLowerCase().startsWith("/") && toComplete.length > 1) {
@@ -539,6 +541,7 @@ function tabComplete(cursorPos: number) {
                 messagefield.prop('selectionEnd', mIn.length);
                 return true;
             }
+            return false;
         });
     } else {
         emotekeylist.some(x => {
@@ -549,6 +552,7 @@ function tabComplete(cursorPos: number) {
                 messagefield.prop('selectionEnd', mIn.length);
                 return true;
             }
+            return false;
         });
     }
 }
@@ -678,6 +682,7 @@ $('#fileinput').on('change', e => {
         return false;
     }
     uploadImage(file);
+    return;
 });
 
 function uploadImage(file: File){

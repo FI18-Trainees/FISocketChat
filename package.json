@@ -2,13 +2,8 @@
     "name": "fisocketchat",
     "version": "0.0.0",
     "description": "",
-    "main": "build/src/index.js",
-    "types": "build/src/index.d.ts",
-    "files": [
-        "build/src"
-    ],
-    "license": "Apache-2.0",
-    "keywords": [],
+    "main": "src/app/public/js/compiled/script.js",
+    "license": "MIT",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "check": "gts check",
