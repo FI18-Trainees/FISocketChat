@@ -414,7 +414,7 @@ function showInfo(message: string, fadeoutdelay: number) {
         setautoscroll(true); 
         hideInfo(); 
         updateScroll();
-        infobox.on('click', () => { setautoscroll(true); hideInfo(); updateScroll()});
+        infobox.on('click', () => { setautoscroll(true); hideInfo(); updateScroll()}); // doesn't work yet
     }
     if(fadeoutdelay > 0) {
         setTimeout(() => {
