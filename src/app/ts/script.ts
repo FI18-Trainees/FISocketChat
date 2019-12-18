@@ -1,7 +1,7 @@
-import { IMessage } from "./IMessage";
-import { IEmbed } from "./IEmbed";
-import { IMedia } from "./IMedia";
-import { IFields } from "./IFields";
+import { IMessage } from "./interfaces/IMessage";
+import { IEmbed } from "./interfaces/IEmbed";
+import { IMedia } from "./interfaces/IMedia";
+import { IFields } from "./interfaces/IFields";
 //TODO import nanoScroller
 
 //localStorage.debug = '*';
@@ -17,7 +17,7 @@ let ownusername: string;
 let userlist: string[];
 let notificationmode = 'no';
 let autoscroll = true;
-let lastScrollDirection = 0; // 1 is down; 0 is none; -1 is up
+let lastScrollDirection = 0; // 1 is down; 0s is none; -1 is up
 let historyPointer = 0;
 
 let imagecache;
@@ -27,7 +27,7 @@ const messagefield: JQuery<HTMLInputElement> = $('#messageinput');
 const infobox = $('#infobox');
 const errorbox = $('#errorbox');
 
-$('document').ready(function () {
+jQuery(() => {
 
     const socket = io.connect(window.location.href.slice(0, -1),
         {
@@ -35,7 +35,7 @@ $('document').ready(function () {
             transports: ['polling', 'websocket'],
             query: "token=" + getCookie("access_token"),
         });
-    window.onfocus = function () {
+    window.onfocus = () => {
         document.title = "Socket.IO chat";
         unread = 0;
         focused = true;
@@ -45,14 +45,14 @@ $('document').ready(function () {
         }
         closeAllNotifications();
     };
-    window.onblur = function () {
+    window.onblur = () => {
         focused = false;
     };
 
 
-    messagefield.keydown(e => {
-        switch (e.keyCode) {
-            case 9:
+    messagefield.on('keydown', e => {
+        switch (e.key) {
+            case 'Tab':
                 //tab key
                 e.preventDefault();
                 if (e.shiftKey) {
@@ -62,15 +62,15 @@ $('document').ready(function () {
                     tabComplete(messagefield.prop('selectionStart'));
                 }
                 break;
-            case 13:
-                if (e.keyCode ===  13 && !e.shiftKey) {
+            case 'Enter':
+                if (e.key === 'Enter' && !e.shiftKey) {
                     // Enter was pressed without shift key
                     // prevent default behavior
                     e.preventDefault();
-                    $('form').submit();
+                    $('form').trigger('submit');
                 }
                 break;
-            case 38:
+            case 'Up' || 'UpArrow':
                 //up arrow
                 if (messagefield.val() === "" || messagefield.val() === messageHistory[historyPointer]) {
                     historyPointer -= 1;
@@ -80,7 +80,7 @@ $('document').ready(function () {
                     messagefield.val(messageHistory[historyPointer]);
                 }
                 break;
-            case 40:
+            case 'Down' || 'DownArrow':
                 // down arrow
                 if ((messagefield.val() as string).trim() === "" || messagefield.val() === messageHistory[historyPointer]) {
                     historyPointer += 1;
@@ -95,13 +95,13 @@ $('document').ready(function () {
         }
     });
 
-    $('form').submit(e => {
+    $('form').on('submit', e => {
         e.preventDefault(); // prevents page reloading
         if (cooldown !== 0) {
             showError("Sending messages to fast!");
             return;
         }
-        cooldown = window.setTimeout(function () {
+        cooldown = window.setTimeout(() => {
             cooldown = 0
         }, 400);
         if ((messagefield.val() as string).trim() === "") {
@@ -141,7 +141,7 @@ $('document').ready(function () {
     socket.on('error', (msg: {message: string}) => {
         showError(msg['message']);
     });
-    socket.on('connect', function () {
+    socket.on('connect', () => {
         changeOnlineStatus(true);
     });
     socket.on('connect_error', (error: string) => {
@@ -240,35 +240,37 @@ $('document').ready(function () {
             getCommands();
 
             mobileAndTabletcheck();
+            initializeNotifications();
             displayNotifyMode();
             $('#notification-mode').val(getCookie('notificationmode') as string);
 
-            $('messageinput').on('paste', function(){handlePaste});
+            // tslint:disable-next-line: no-unused-expression
+            $('messageinput').on('paste', () => {handlePaste});
 
             getMessageHistory();
         }
     });
 
     $(document).on('keydown', event => {
-        if (event.keyCode === 17) {
+        if (event.ctrlKey) {
             $('.message-name').css('cursor', 'pointer');
         }
     });
 
-    $(document).on('keyup', function (event) {
-        if (event.keyCode === 17) {
+    $(document).on('keyup', event => {
+        if (event.ctrlKey) {
             $('.message-name').css('cursor', 'default');
         }
     });
 
-    $('#notification-mode').change(function () {
+    $('#notification-mode').on('change', () => {
         notificationmode = (($('#notification-mode') as JQuery<HTMLSelectElement>).val() as string);
         document.cookie = `notificationmode=${notificationmode}; expires=Thu, 01 Jan 2023 00:00:00 UTC; path=/`;
     });
 });
 
 function reconnect() {
-    setTimeout(function () {
+    setTimeout(() => {
         io.connect();
     }, 3000);
 }
@@ -290,7 +292,7 @@ function addNewMessage(msg: IMessage) {
     messageHeader = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
     messageBody = $('<div class="message-body w-100">');
     messageThumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + msg.author.avatar + '">');
-    messageUsername = $('<div class="message-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
+    messageUsername = $('<div class="message-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).on('click', uname_name_click);
     messageTimestamp = $('<time class="message-timestamp ml-1">').prop('title', msg.full_timestamp).text(msg.timestamp);
     messageContent = $('<div class="message-content text-white w-100 pb-1">').html(msg.content);
 
@@ -321,7 +323,7 @@ function addEmbed(msg: IEmbed) {
     const embedHeader = $('<div class="embed-header d-flex flex-wrap align-items-center mb-1">');
 
     const embedAuthorThumbnail = $('<img class="embed-profile-image rounded-circle mr-2" src="' + msg.author.avatar + '">');
-    const embedAuthorName = $('<div class="embed-author-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).click(uname_name_click);
+    const embedAuthorName = $('<div class="embed-author-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).on('click', uname_name_click);
     const embedTitle = $('<div class="embed-title py-2">').text(msg.title);
 
     const embedFooterContainer = $('<div class="embed-footer-container d-inline-flex pb-1 mt-3">');
@@ -369,7 +371,7 @@ function addEmbed(msg: IEmbed) {
             case 'img':
                 const embedImage = new Image();
                 embedImage.src = (msg.media as IMedia).media_url;
-                embedImage.onload = function () {updateScroll();};
+                embedImage.onload = () => {updateScroll();};
                 embedMediaContainer.append(embedImage);
                 break;
             default:
@@ -387,7 +389,7 @@ function addEmbed(msg: IEmbed) {
     if(msg.hasOwnProperty('thumbnail')){
         const embedThumbnail = new Image();
         embedThumbnail.src = msg.thumbnail as string;
-        embedThumbnail.onload = function () {updateScroll();};
+        embedThumbnail.onload = () => {updateScroll();};
         embedThumbnail.classList.add('embed-thumbnail', 'ml-auto', 'mt-3');
         embedHeader.append(embedThumbnail);
     }
@@ -400,7 +402,7 @@ function addEmbed(msg: IEmbed) {
 function showError(message: string) {
     errorbox.text(message);
     errorbox.fadeIn("slow");
-    setTimeout(function () {
+    setTimeout(() => {
         hideError();
     }, 2000);
 }
@@ -412,10 +414,10 @@ function showInfo(message: string, fadeoutdelay: number) {
         setautoscroll(true); 
         hideInfo(); 
         updateScroll();
-        infobox.click(function(){ setautoscroll(true); hideInfo(); updateScroll()});
+        infobox.on('click', () => { setautoscroll(true); hideInfo(); updateScroll()});
     }
     if(fadeoutdelay > 0) {
-        setTimeout(function () {
+        setTimeout(() => {
             hideInfo();
         }, fadeoutdelay);
     }
@@ -441,7 +443,7 @@ function hideInfo() {
 function addEmoteCode(emote: string) {
     messagefield.val(messagefield.val() + " " + emote + " ");
     toggleEmoteMenu();
-    messagefield.focus();
+    messagefield.trigger('focus');
 }
 
 function updateEmoteMenu() {
@@ -458,13 +460,13 @@ function updateEmoteMenu() {
             // clearing the emote menu
             emoteMenu.empty();
             // iterate over the emotes from the JSON
-            for (let emote in result) {
+            for (const emote in result) {
                 // jumping over the hidden ones.
                 if (result[emote]["menuDisplay"]) {
                     const emoteitem = document.createElement('a');
                     emoteitem.classList.add('cursor-pointer');
                     emoteitem.innerHTML = result[emote]["menuDisplayCode"];
-                    emoteitem.onclick = function () {
+                    emoteitem.onclick = () => {
                         addEmoteCode(emote);
                     };
                     emoteMenu.append(emoteitem);
@@ -502,11 +504,12 @@ function toggleEmoteMenu() {
     }
 }
 
-function tabComplete(CursorPos: number) {
+function tabComplete(cursorPos: number) {
     if ((messagefield.val() as string).length === 0) {
         return;
     }
-    const messageSplit: any = (messagefield.val() as string).substring(0, CursorPos);
+    // tslint:disable-next-line: no-any
+    const messageSplit: any = (messagefield.val() as string).substring(0, cursorPos);
     const matches = Array.from(messageSplit['matchAll'](/[\r\n\t ]/gm));
     let lastSplit = 0;
     if (matches.length > 0) {
@@ -517,31 +520,31 @@ function tabComplete(CursorPos: number) {
         return;
     }
     if (toComplete.toLowerCase().startsWith("@") && toComplete.length > 1) {
-        for (let username in userlist.entries()) {
-            if (username[1] !== null && username[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
-                const mIn = (messagefield.val() as string).substr(0, lastSplit) + "@" + username[1] + " ";
-                messagefield.val(mIn + (messagefield.val() as string).substr(CursorPos));
+        userlist.some(username => {
+            if (username !== null && username.toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                const mIn = (messagefield.val() as string).substr(0, lastSplit) + "@" + username + " ";
+                messagefield.val(mIn + (messagefield.val() as string).substr(cursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
-                return;
+                return true;
             }
-        }
+        });
     }
     else if (toComplete.toLowerCase().startsWith("/") && toComplete.length > 1) {
-        for (let commands in commandlist.entries()) {
-            if (commands !== null && commands[1].toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
-                const mIn = (messagefield.val() as string).substr(0, lastSplit) + "/" + commands[1] + " ";
-                messagefield.val(mIn + (messagefield.val() as string).substr(CursorPos));
+        commandlist.some(command => {
+            if (command !== null && command.toLowerCase().startsWith(toComplete.substring(1).toLowerCase())) {
+                const mIn = (messagefield.val() as string).substr(0, lastSplit) + "/" + command + " ";
+                messagefield.val(mIn + (messagefield.val() as string).substr(cursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
-                return;
+                return true;
             }
-        }
+        });
     } else {
         emotekeylist.some(x => {
             if (x.toLowerCase().startsWith(toComplete.toLowerCase())) {
                 const mIn = (messagefield.val() as string).substr(0, lastSplit) + x + " ";
-                messagefield.val(mIn + (messagefield.val() as string).substr(CursorPos));
+                messagefield.val(mIn + (messagefield.val() as string).substr(cursorPos));
                 messagefield.prop('selectionStart', mIn.length);
                 messagefield.prop('selectionEnd', mIn.length);
                 return true;
@@ -554,6 +557,7 @@ function makeMention(text: string) {
     return '<em class="d-flex w-100 mention">' + text + '</em>';
 }
 
+// tslint:disable-next-line: no-any
 function uname_name_click(e: any){
     if(e.originalEvent.ctrlKey){
         e.preventDefault();
@@ -593,7 +597,7 @@ function messagesScroll(event: WheelEvent) {
 
 function mobileAndTabletcheck() {
     let check = false;
-    (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor);
+    ((a) => {if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor);
     if(check) {
         $('#sendbtn').css('display', 'block');
     } else {
@@ -703,7 +707,7 @@ function inputButtonClick() {
     (document.getElementById('fileinput') as HTMLInputElement).dispatchEvent(evt);
 }
 function getCommands(){
-    $.getJSON('/api/commands', function (result) {
+    $.getJSON('/api/commands', result => {
         if (Object.keys(result).length > 0) {
             if (JSON.stringify(emotelist) === JSON.stringify(result)) {
                 return;
@@ -740,7 +744,7 @@ function handlePaste(e: ClipboardEvent){
 
 const notifications = new Array();
 
-window.onload = function () {
+function initializeNotifications() {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
         alert("This browser does not support desktop notification");
@@ -754,10 +758,11 @@ window.onload = function () {
 
     // Otherwise, we need to ask the user for permission
     else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(function (permission) {
+        Notification.requestPermission().then(permission => {
             // If the user accepts, let's create a notification
             if (checkPermission()) {
                 displayNotifyMode();
+                // tslint:disable-next-line: no-unused-expression
                 new Notification("This is how a notification would appear!");
             }
         });

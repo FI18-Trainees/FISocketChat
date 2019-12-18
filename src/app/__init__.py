@@ -131,7 +131,7 @@ else:
 
 # I left this for testing
 if dummy_user:
-    for name in {"ArPiiX", "SFFan123", "monkmitrad", "zaanposni"}:
+    for name in {"ArPiiX", "SFFan123", "monkmitrad", "yannick"}:
         def_user = get_default_user()
         def_user.display_name = name
         def_user.username = name
