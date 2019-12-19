@@ -40,8 +40,9 @@ def status():
 def send_favicon():
     return send_from_directory('public', "favicon.ico", mimetype='image/x-icon"')
 
+
 @app.route('/public/<path:path>')
-def send_js(path):
+def send_assets(path):
     mimetype = "text"
     if path.endswith(".js"):
         mimetype = "text/javascript"

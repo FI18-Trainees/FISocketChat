@@ -1,0 +1,162 @@
+{
+  "wsgi.errors": <_io.TextIOWrapper
+  name=
+  "<stderr>"
+  mode=
+  "w"
+  encoding=
+  "utf-8"
+  >,
+  "wsgi.version": (1,
+  0),
+  "wsgi.multithread": True,
+  "wsgi.multiprocess": False,
+  "wsgi.run_once": False,
+  "wsgi.url_scheme": "http",
+  "REQUEST_METHOD": "GET",
+  "SCRIPT_NAME": "",
+  "RAW_PATH_INFO": "/socket.io/",
+  "PATH_INFO": "/socket.io/",
+  "QUERY_STRING": "token=26b79438-a27d-4243-9a30-c84176f493bc&EIO=3&transport=polling&t=MrkWUFc",
+  "CONTENT_TYPE": "text/plain",
+  "SERVER_PROTOCOL": "HTTP/1.0",
+  "SERVER_NAME": "127.0.0.1",
+  "SERVER_PORT": "5000",
+  "REMOTE_ADDR": "127.0.0.1",
+  "REMOTE_PORT": "49805",
+  "GATEWAY_INTERFACE": "CGI/1.1",
+  "headers_raw": ((
+  "X-Real-IP",
+  "162.158.92.94"
+  ),
+  (
+  "Host",
+  "chat.zaanposni.com"
+  ),
+  (
+  "X-NginX-Proxy",
+  "true"
+  ),
+  (
+  "X-Forwarded-Host",
+  "chat.zaanposni.com"
+  ),
+  (
+  "X-Forwarded-Server",
+  "chat.zaanposni.com"
+  ),
+  (
+  "X-Forwarded-For",
+  "89.245.34.207, 162.158.92.94"
+  ),
+  (
+  "Connection",
+  "upgrade"
+  ),
+  (
+  "Host",
+  "chat.zaanposni.com"
+  ),
+  (
+  "Accept-Encoding",
+  "gzip"
+  ),
+  (
+  "CF-IPCountry",
+  "DE"
+  ),
+  (
+  "CF-RAY",
+  "51c6c7734bc2d6d9-FRA"
+  ),
+  (
+  "X-Forwarded-Proto",
+  "https"
+  ),
+  (
+  "CF-Visitor",
+  "{"
+  scheme
+  ":"
+  https
+  "}"
+  ),
+  (
+  "accept",
+  "*/*"
+  ),
+  (
+  "user-agent",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36 OPR/63.0.3368.94"
+  ),
+  (
+  "sec-fetch-mode",
+  "cors"
+  ),
+  (
+  "sec-fetch-site",
+  "same-origin"
+  ),
+  (
+  "referer",
+  "https://chat.zaanposni.com/"
+  ),
+  (
+  "accept-language",
+  "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7"
+  ),
+  (
+  "cookie",
+  "io=bf0449b375074309a29245d884512698; __cfduid=d1a977d7a527377ba9e55b103ce37f0221565467801; access_token=26b79438-a27d-4243-9a30-c84176f493bc; cf_use_ob=0"
+  ),
+  (
+  "CF-Connecting-IP",
+  "89.245.34.207"
+  ),
+  (
+  "CDN-Loop",
+  "cloudflare"
+  )),
+  "HTTP_X_REAL_IP": "162.158.92.94",
+  "HTTP_HOST": "chat.zaanposni.com,chat.zaanposni.com",
+  "HTTP_X_NGINX_PROXY": "true",
+  "HTTP_X_FORWARDED_HOST": "chat.zaanposni.com",
+  "HTTP_X_FORWARDED_SERVER": "chat.zaanposni.com",
+  "HTTP_X_FORWARDED_FOR": "89.245.34.207, 162.158.92.94",
+  "HTTP_CONNECTION": "upgrade",
+  "HTTP_ACCEPT_ENCODING": "gzip",
+  "HTTP_CF_IPCOUNTRY": "DE",
+  "HTTP_CF_RAY": "51c6c7734bc2d6d9-FRA",
+  "HTTP_X_FORWARDED_PROTO": "https",
+  "HTTP_CF_VISITOR": "{"
+  scheme
+  ":"
+  https
+  "}",
+  "HTTP_ACCEPT": "*/*",
+  "HTTP_USER_AGENT": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36 OPR/63.0.3368.94",
+  "HTTP_SEC_FETCH_MODE": "cors",
+  "HTTP_SEC_FETCH_SITE": "same-origin",
+  "HTTP_REFERER": "https://chat.zaanposni.com/",
+  "HTTP_ACCEPT_LANGUAGE": "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7",
+  "HTTP_COOKIE": "io=bf0449b375074309a29245d884512698; __cfduid=d1a977d7a527377ba9e55b103ce37f0221565467801; access_token=26b79438-a27d-4243-9a30-c84176f493bc; cf_use_ob=0",
+  "HTTP_CF_CONNECTING_IP": "89.245.34.207",
+  "HTTP_CDN_LOOP": "cloudflare",
+  "wsgi.input": <eventlet.wsgi.Input
+  object
+  at
+  0x052C8D50>,
+  "eventlet.input": <eventlet.wsgi.Input
+  object
+  at
+  0x052C8D50>,
+  "eventlet.posthooks": [ ],
+  "flask.app": <Flask
+  "app"
+  >,
+  "werkzeug.request": <Request
+  "http://chat.zaanposni.com,chat.zaanposni.com/socket.io/?token=26b79438-a27d-4243-9a30-c84176f493bc&EIO=3&transport=polling&t=MrkWUFc" [
+  GET
+]>, "saved_session": {
+}
+}
