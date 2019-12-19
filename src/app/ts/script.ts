@@ -762,7 +762,8 @@ function initializeNotifications() {
     }
 
     // Otherwise, we need to ask the user for permission
-    else if (Notification.permission !== "denied") {
+    // tslint:disable-next-line: no-any
+    else if ((Notification as any).permission !== "denied") {
         Notification.requestPermission().then(permission => {
             // If the user accepts, let's create a notification
             if (checkPermission()) {
@@ -784,7 +785,8 @@ function newNotification(text: string) {
 
 //check if permission to show notification is granted
 function checkPermission() {
-    if (Notification.permission === "granted") {
+    // tslint:disable-next-line: no-any
+    if ((Notification as any).permission === "granted") {
         return true;
     } else {
         return false;
