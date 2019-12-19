@@ -1,4 +1,4 @@
-name: BasicCheckup
+name: PythonLint
 on:
   push:
     branches:

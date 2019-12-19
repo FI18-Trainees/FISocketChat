@@ -10,6 +10,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
+node_modules/
 dist/
 downloads/
 eggs/
@@ -113,3 +114,4 @@ venv.bak/
 /src/app/storage/quotes/
 /src/app/storage/uploads/
 /src/config/
+/src/app/public/js/compiled/

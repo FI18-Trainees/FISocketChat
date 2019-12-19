@@ -1,8 +1,9 @@
 <h1 align="center">FISocketChat</h1>
 <p align="center">
   <a href="https://github.com/FI18-Trainees/FISocketChat/blob/dev/LICENSE"><img src="https://img.shields.io/github/license/FI18-Trainees/FISocketChat.svg"/></a>
-  <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/BasicCheckup/badge.svg" alt="GitHub Action"/>
+  <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/PythonLint/badge.svg" alt="GitHub Action"/>
   <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/Unittests/badge.svg" alt="GitHub Action"/>
+  <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/TS_Build/badge.svg" alt="GitHub Action"/>
 </p>
 
 ## Requirements
