@@ -2,7 +2,7 @@ class User:
     def __init__(self,
                  display_name: str,
                  username: str,
-                 avatar: str = "/public/img/emote1.PNG",
+                 avatar: str = "/public/assets/emote1.PNG",
                  chat_color: str = "#FF0000"):
         self.display_name = display_name
         self.username = username
@@ -37,5 +37,5 @@ def get_sys_user() -> User:
         display_name="System",
         username="System",
         chat_color="#FF0000",
-        avatar="/public/img/system.png"
+        avatar="/public/assets/system.png"
     )

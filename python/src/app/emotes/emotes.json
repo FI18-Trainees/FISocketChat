@@ -1,647 +1,647 @@
 {
-  "Bosch": {
-    "replace": "<img src='/public/img/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>"
-  },
-  "Shawn": {
-    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=v2kV6pgJxuo\"><img src='/public/img/emote1.PNG' style='height:40px; width:auto;' alt='Shawn' title='Shawn'></a>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/emote1.PNG' style='height:32px; width:auto;' alt='Shawn' title='Shawn'>"
-  },
-  "Hackerman": {
-    "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=K7Hn1rPQouU\"><img src='/public/img/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'></a>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
-  },
-  "FaFoSerious": {
-    "replace": "<img src='/public/img/fafoconcentrated.png' style='height:40px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/fafoconcentrated.png' style='height:32px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>"
-  },
-  "Fuck1": {
-    "replace": "<img src='/public/img/uwot.png' style='height:40px; width:auto;' alt='Fuck1' title='Fuck1'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/uwot.png' style='height:32px; width:auto;' alt='Fuck1' title='Fuck1'>"
-  },
-  "Bruh1": {
-    "replace": "<img src='/public/img/bruh.png' style='height:40px; width:auto;' alt='Bruh1' title='Bruh1'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/bruh.png' style='height:32px; width:auto;' alt='Bruh1' title='Bruh1'>"
-  },
-  "björnRage": {
-    "replace": "<img src='/public/img/bjoernrage.png' style='height:40px; width:auto;' alt='björnRage' title='björnRage'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/bjoernrage.png' style='height:32px; width:auto;' alt='björnRage' title='björnRage'>"
-  },
-  "björnW": {
-    "replace": "<img src='/public/img/bjoernW.png' style='height:40px; width:auto;' alt='björnW' title='björnW'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/bjoernW.png' style='height:32px; width:auto;' alt='björnW' title='björnW'>"
-  },
-  "oaHmm": {
-    "replace": "<img src='/public/img/oaHmm.png' style='height:40px; width:auto;' alt='oaHmm' title='oaHmm'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/oaHmm.png' style='height:32px; width:auto;' alt='oaHmm' title='oaHmm'>"
-  },
-  "yKool": {
-    "replace": "<img src='/public/img/yannick1.png' style='height:40px; width:auto;' alt='yKool' title='yKool'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/yannick1.png' style='height:32px; width:auto;' alt='yKool' title='yKool'>"
-  },
-  "ded": {
-    "replace": "<img src='/public/img/ded.png' style='height:40px; width:auto;' alt='ded' title='ded'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/ded.png' style='height:32px; width:auto;' alt='ded' title='ded'>"
-  },
-  "DBahn": {
-    "replace": "<img src='/public/img/deutschebahn.png' style='height:40px; width:auto;' alt='DBahn' title='DBahn'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/deutschebahn.png' style='height:32px; width:auto;' alt='DBahn' title='DBahn'>"
-  },
-  "Enthusiast": {
-    "replace": "<img src='/public/img/happy.png' style='height:40px; width:auto;' alt='Enthusiast' title='Enthusiast'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/happy.png' style='height:32px; width:auto;' alt='Enthusiast' title='Enthusiast'>"
-  },
-  "Creep": {
-    "replace": "<img src='/public/img/creep.png' style='height:40px; width:auto;' alt='Creep' title='Creep'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/creep.png' style='height:32px; width:auto;' alt='Creep' title='Creep'>"
-  },
-  "DerMoment": {
-    "replace": "<img src='/public/img/the_moment.png' style='height:40px; width:auto;' alt='DerMoment' title='DerMoment'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/the_moment.png' style='height:32px; width:auto;' alt='DerMoment' title='DerMoment'>"
-  },
-  "simonW": {
-    "replace": "<img src='/public/img/simonW.png' style='height:40px; width:auto;' alt='simonW' title='simonW'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/simonW.png' style='height:32px; width:auto;' alt='simonW' title='simonW'>"
-  },
-  "DaVista3": {
-    "replace": "<img src='/public/img/stoll3.png' style='height:40px; width:auto;' alt='DaVista3' title='DaVista3'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/stoll3.png' style='height:32px; width:auto;' alt='DaVista3' title='DaVista3'>"
-  },
-  "innocentDaVista": {
-    "replace": "<img src='/public/img/stoll4.png' style='height:40px; width:auto;' alt='innocentDaVista' title='innocentDaVista'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/stoll4.png' style='height:32px; width:auto;' alt='innocentDaVista' title='innocentDaVista'>"
-  },
-  "FeelsGoodMan": {
-    "replace": "<img src='/public/img/FeelsGoodMan1.png' style='height:40px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/FeelsGoodMan1.png' style='height:32px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>"
-  },
-  "FeelsBadMan": {
-    "replace": "<img src='/public/img/FeelsBadMan1.png' style='height:40px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/FeelsBadMan1.png' style='height:32px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>"
-  },
-  "peepoWide": {
-    "replace": "<img src='/public/img/peepoWide.png' style='height:40px; width:auto;' alt='peepoWide' title='peepoWide'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/peepoWide.png' style='height:32px; width:auto;' alt='peepoWide' title='peepoWide'>"
-  },
-  "peepoClap": {
-    "replace": "<img src='/public/img/peepoClap.gif' style='height:40px; width:auto;' alt='peepoClap' title='peepoClap'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>"
-  },
-  "Pepega": {
-    "replace": "<img src='/public/img/Pepega.png' style='height:40px; width:auto;' alt='Pepega' title='Pepega'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>"
-  },
-  "Pr0": {
-    "replace": "<img src='/public/img/pr0gramm.png' style='height:40px; width:auto;' alt='Pr0' title='Pr0'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pr0gramm.png' style='height:32px; width:auto;' alt='Pr0' title='Pr0'>"
-  },
-  "monkaS": {
-    "replace": "<img src='/public/img/monkaS.png' style='height:40px; width:auto;' alt='monkaS' title='monkaS'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>"
-  },
-  "monkaShred": {
-    "replace": "<img src='/public/img/monkaShred.gif' style='height:40px; width:auto;' alt='monkaShred' title='monkaShred'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaShred.gif' style='height:32px; width:auto;' alt='monkaShred' title='monkaShred'>"
-  },
-  "pepeJAM": {
-    "replace": "<img src='/public/img/pepeJAM.gif' style='height:40px; width:auto;' alt='pepeJAM' title='pepeJAM'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>"
-  },
-  "pepeJAMJAM": {
-    "replace": "<img src='/public/img/pepeJAMJAM.gif' style='height:40px; width:auto;' alt='pepeJAMJAM' title='pepeJAMJAM'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pepeJAMJAM.gif' style='height:32px; width:auto;' alt='pepeJAMJAM' title='pepeJAMJAM'>"
-  },
-  "pepeFastJam": {
-    "replace": "<img src='/public/img/pepefast.gif' style='height:40px; width:auto;' alt='pepeFastJam' title='pepeFastJam'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pepefast.gif' style='height:32px; width:auto;' alt='pepeFastJam' title='pepeFastJam'>"
-  },
-  "monkaHmm": {
-    "replace": "<img src='/public/img/monkaHmm.png' style='height:40px; width:auto;' alt='monkaHmm' title='monkaHmm'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>"
-  },
-  "monkaW": {
-    "replace": "<img src='/public/img/monkaW.png' style='height:40px; width:auto;' alt='monkaW' title='monkaW'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>"
-  },
-  "monkaFBI": {
-    "replace": "<img src='/public/img/monkaFBI.png' style='height:40px; width:auto;' alt='monkaFBI' title='monkaFBI'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaFBI.png' style='height:32px; width:auto;' alt='monkaFBI' title='monkaFBI'>"
-  },
-  "REEE": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=RBRxM5yq2NU\"><img src='/public/img/REEE.png' style='height:40px; width:auto;' alt='REEE' title='REEE'></a>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
-  },
-  "monkaT": {
-    "replace": "<img src='/public/img/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaT.png' style='height:32px; width:auto;' alt='monkaT' title='monkaT'>"
-  },
-  "monkaH": {
-    "replace": "<img src='/public/img/monkaH.png' style='height:40px; width:auto;' alt='monkaH' title='monkaH'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaH.png' style='height:32px; width:auto;' alt='monkaH' title='monkaH'>"
-  },
-  "monkaShoot": {
-    "replace": "<img src='/public/img/monkaShoot.gif' style='height:40px; width:auto;' alt='monkaShoot' title='monkaShoot'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaShoot.gif' style='height:32px; width:auto;' alt='monkaShoot' title='monkaShoot'>"
-  },
-  "peepoStrongest": {
-    "replace": "<img src='/public/img/peepoStrongest.gif' style='height:40px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>"
-  },
-  "monkaRun": {
-    "replace": "<img src='/public/img/monkaRun.gif' style='height:40px; width:auto;' alt='monkaRun' title='monkaRun'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>"
-  },
-  "D:": {
-    "replace": "<img src='/public/img/OMG1.png' style='height:40px; width:auto;' alt='D:' title='D:'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/OMG1.png' style='height:32px; width:auto;' alt='D:' title='D:'>"
-  },
-  "SourPls": {
-    "replace": "<img src='/public/img/SourPls.gif' style='height:40px; width:auto;' alt='SourPls' title='SourPls'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/SourPls.gif' style='height:32px; width:auto;' alt='SourPls' title='SourPls'>"
-  },
-  "DansGame": {
-    "replace": "<img src='/public/img/DansGame.png' style='height:40px; width:auto;' alt='DansGame' title='DansGame'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/DansGame.png' style='height:32px; width:auto;' alt='DansGame' title='DansGame'>"
-  },
-  "HotPocket": {
-    "replace": "<img src='/public/img/HotPocket.png' style='height:40px; width:auto;' alt='HotPocket' title='HotPocket'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/HotPocket.png' style='height:32px; width:auto;' alt='HotPocket' title='HotPocket'>"
-  },
-  "confusedCat": {
-    "replace": "<img src='/public/img/confusedcat.png' style='height:40px; width:auto;' alt='confusedCat' title='confusedCat'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/confusedcat.png' style='height:32px; width:auto;' alt='confusedCat' title='confusedCat'>"
-  },
-  "pikaWut": {
-    "replace": "<img src='/public/img/pikaWut.png' style='height:40px; width:auto;' alt='pikaWut' title='pikaWut'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pikaWut.png' style='height:32px; width:auto;' alt='pikaWut' title='pikaWut'>"
-  },
-  "ähmOK": {
-    "replace": "<img src='/public/img/aehmok.png' style='height:200px; width:auto;' alt='ähmOK' title='ähmOK'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/aehmok.png' style='height:32px; width:auto;' alt='ähmOK' title='ähmOK'>"
-  },
-  "whutBlink": {
-    "replace": "<img src='/public/img/whutBlink.gif' style='height:40px; width:auto;' alt='whutBlink' title='whutBlink'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/whutBlink.gif' style='height:32px; width:auto;' alt='whutBlink' title='whutBlink'>"
-  },
-  "ricadoFlick": {
-    "replace": "<img src='/public/img/ricadoFlick.gif' style='height:40px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/ricadoFlick.gif' style='height:32px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>"
-  },
-  "bongoCat": {
-    "replace": "<img src='/public/img/bongoCat.gif' style='height:50px; width:auto;' alt='bongoCat' title='bongoCat'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/bongoCat.gif' style='height:50px; width:auto;' alt='bongoCat' title='bongoCat'>"
-  },
-  "sumSmash": {
-    "replace": "<img src='/public/img/sumSmash.gif' style='height:40px; width:auto;' alt='sumSmash' title='sumSmash'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/sumSmash.gif' style='height:32px; width:auto;' alt='sumSmash' title='sumSmash'>"
-  },
-  "forsenCD": {
-    "replace": "<img src='/public/img/forsenCD.png' style='height:40px; width:auto;' alt='forsenCD' title='forsenCD'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/forsenCD.png' style='height:32px; width:auto;' alt='forsenCD' title='forsenCD'>"
-  },
-  "forsenPls": {
-    "replace": "<img src='/public/img/forsenPls.gif' style='height:40px; width:auto;' alt='forsenPls' title='forsenPls'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/forsenPls.gif' style='height:32px; width:auto;' alt='forsenPls' title='forsenPls'>"
-  },
-  "LuL": {
-    "replace": "<img src='/public/img/LuL.png' style='height:40px; width:auto;' alt='LuL' title='LuL'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/LuL.png' style='height:32px; width:auto;' alt='LuL' title='LuL'>"
-  },
-  "Pog": {
-    "replace": "<img src='/public/img/Pog.png' style='height:40px; width:auto;' alt='Pog' title='Pog'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>"
-  },
-  "OMEGALUL": {
-    "replace": "<img src='/public/img/OMEGALUL.png' style='height:40px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/OMEGALUL.png' style='height:32px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>"
-  },
-  "weSmart": {
-    "replace": "<img src='/public/img/weSmart.png' style='height:40px; width:auto;' alt='weSmart' title='weSmart'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/weSmart.png' style='height:32px; width:auto;' alt='weSmart' title='weSmart'>"
-  },
-  "weSmart2": {
-    "replace": "<img src='/public/img/weSmart.gif' style='height:40px; width:auto;' alt='weSmart2' title='weSmart2'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/weSmart.gif' style='height:32px; width:auto;' alt='weSmart2' title='weSmart2'>"
-  },
-  "AYAYA": {
-    "replace": "<img src='/public/img/ayaya.png' style='height:40px; width:auto;' alt='AYAYA' title='AYAYA'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/ayaya.png' style='height:32px; width:auto;' alt='AYAYA' title='AYAYA'>"
-  },
-  "WeebsOut": {
-    "replace": "<img src='/public/img/weebsout.png' style='height:40px; width:auto;' alt='WeebsOut' title='WeebsOut'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/weebsout.png' style='height:32px; width:auto;' alt='WeebsOut' title='WeebsOut'>"
-  },
-  "triggered": {
-    "replace": "<img src='/public/img/triggered.png' style='height:40px; width:auto;' alt='triggered' title='triggered'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/triggered.png' style='height:32px; width:auto;' alt='triggered' title='triggered'>"
-  },
-  "triggered2": {
-    "replace": "<img src='/public/img/triggered.gif' style='height:40px; width:auto;' alt='triggered2' title='triggered2'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/triggered.gif' style='height:32px; width:auto;' alt='triggered2' title='triggered2'>"
-  },
-  "rooSnap": {
-    "replace": "<img src='/public/img/rooSnap.gif' style='height:40px; width:auto;' alt='rooSnap' title='rooSnap'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/rooSnap.gif' style='height:32px; width:auto;' alt='rooSnap' title='rooSnap'>"
-  },
-  "rooCoffee": {
-    "replace": "<img src='/public/img/rooCoffee.gif' style='height:40px; width:auto;' alt='rooCoffee' title='rooCoffee'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/rooCoffee.gif' style='height:32px; width:auto;' alt='rooCoffee' title='rooCoffee'>"
-  },
-  "CrabPls": {
-    "replace": "<img src='/public/img/CrabPls.gif' style='height:40px; width:auto;' alt='CrabPls' title='CrabPls'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/CrabPls.gif' style='height:32px; width:auto;' alt='CrabPls' title='CrabPls'>"
-  },
-  "Clap": {
-    "replace": "<img src='/public/img/Clap.gif' style='height:40px; width:auto;' alt='Clap' title='Clap'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Clap.gif' style='height:32px; width:auto;' alt='Clap' title='Clap'>"
-  },
-  "hullo": {
-    "replace": "<img src='/public/img/hullo.gif' style='height:40px; width:auto;' alt='hullo' title='hullo'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/hullo.gif' style='height:32px; width:auto;' alt='hullo' title='hullo'>"
-  },
-  "ChangeMyMind": {
-    "replace": "<img src='/public/img/changeMyMind.png' style='height:40px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>"
-  },
-  "Pedalo": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=NTxdEc3pUJc\"><img src='/public/img/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'></a>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pedalo.png' style='height:32px; width:auto;' alt='Pedalo' title='Pedalo'>"
-  },
-  "uargh": {
-    "replace": "<img src='/public/img/uargh.png' style='height:40px; width:auto;' alt='Würg' title='Würg'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/uargh.png' style='height:32px; width:auto;' alt='Würg' title='Würg'>"
-  },
-  ":P": {
-    "replace": "<img src='/public/img/face-with-stuck-out-tongue.png' style='height:40px; width:auto;' alt=':P' title=':P'>",
-    "menuDisplay": false,
-    "menuDisplayCode": ""
-  },
-  "Skype": {
-    "replace": "<img src='/public/img/skype.png' style='height:32px; width:auto;' alt='Skype' title='Skype'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/skype.png' style='height:32px; width:auto;' alt='Skype' title='Skype'>"
-  },
-  ":thinking:": {
-    "replace": "<img src='/public/img/thinking-face.png' style='height:40px; width:auto;' alt=':thinking:' title=':thinking:'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/thinking-face.png' style='height:32px; width:auto;' alt=':thinking:' title=':thinking:'>"
-  },
-  ":upsidedown:": {
-    "replace": "<img src='/public/img/upside-down-face.png' style='height:40px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/upside-down-face.png' style='height:32px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>"
-  },
-  ":thinkink:": {
-    "replace": "<img src='/public/img/thinkink.gif' style='height:40px; width:auto;' alt=':thinkink:' title=':thinkink:'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/thinkink.gif' style='height:32px; width:auto;' alt=':thinkink:' title=':thinkink:'>"
-  },
-  ":thonking:": {
-    "replace": "<img src='/public/img/thonking.png' style='height:40px; width:auto;' alt=':thonking:' title=':thonking:'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/thonking.png' style='height:32px; width:auto;' alt=':thonking:' title=':thonking:'>"
-  },
-  "pikaP": {
-    "replace": "<img src='/public/img/pikaP.png' style='height:40px; width:auto;' alt='pikaP' title='pikaP'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>"
-  },
-  "KlugerSchachZug": {
-    "replace": "<img src='/public/img/klugerschachzug.png' style='height:100px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/klugerschachzug.png' style='height:50px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>"
-  },
-  "kleinesX": {
-    "replace": "<img src='/public/img/x-doubt.png' style='height:25px; width:auto;' alt='X' title='X'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
-  },
-  "X": {
-    "replace": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
-  },
-  "grossesX": {
-    "replace": "<img src='/public/img/x-doubt.png' style='height:125px; width:auto;' alt='grossesX' title='grossesX'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='grossesX' title='grossesX'>"
-  },
-  "ganzgrossesX": {
-    "replace": "<img src='/public/img/x-doubt.png' style='height:250px; width:auto;' alt='ganzgrossesX' title='ganzgrossesX'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/x-doubt.png' style='height:50px; width:auto;' alt='ganzgrossesX' title='ganzgrossesX'>"
-  },
-  "F": {
-    "replace": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='F' title='F'>"
-  },
-  "bigF": {
-    "replace": "<img src='/public/img/f.png' style='height:125px; width:auto;' alt='bigF' title='bigF'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/f.png' style='height:50px; width:auto;' alt='bigF' title='bigF'>"
-  },
-  "discordload": {
-    "replace": "<img src='/public/img/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/discordloadhangds.gif' style='height:32px; width:auto;' alt='discordload' title='discordload'>"
-  },
-  "gnomed": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/img/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'></a>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/gnomed.png' style='height:32px; width:auto;' alt='gnomed' title='gnomed'>"
-  },
-  "Björn": {
-    "replace": "PjÖrN",
-    "menuDisplay": false,
-    "menuDisplayCode": ""
-  },
-  "simonGit": {
-    "replace": "<img src='/public/img/simon.jpg' style='height:240px; width:auto;' alt='simonGit' title='SimonGit'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/simon.jpg' style='height:50px; width:auto;' alt='simonGit' title='SimonGit'>"
-  },
-  "poohRead": {
-    "replace": "<img src='/public/img/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pooh.png' style='height:32px; width:auto;' alt='poohRead' title='poohRead'>"
-  },
-  "3Head": {
-    "replace": "<img src='/public/img/3Head.png' style='height:40px; width:auto;' alt='3Head' title='3Head'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/3Head.png' style='height:32px; width:auto;' alt='3Head' title='3Head'>"
-  },
-  "4Head": {
-    "replace": "<img src='/public/img/4Head.png' style='height:40px; width:auto;' alt='4Head' title='4Head'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/4Head.png' style='height:32px; width:auto;' alt='4Head' title='4Head'>"
-  },
-  "5Head": {
-    "replace": "<img src='/public/img/5Head.png' style='height:40px; width:auto;' alt='5Head' title='5Head'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/5Head.png' style='height:32px; width:auto;' alt='5Head' title='5Head'>"
-  },
-  "PRS": {
-    "replace": "<img src='/public/img/blaulicht.gif' style='height:40px; width:auto;' alt='PRS' title='PRS'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/blaulicht.gif' style='height:32px; width:auto;' alt='PRS' title='PRS'>"
-  },
-  "hypeE": {
-    "replace": "<img src='/public/img/hypeE.gif' style='height:40px; width:auto;' alt='hypeE' title='hypeE'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/hypeE.gif' style='height:32px; width:auto;' alt='hypeE' title='hypeE'>"
-  },
-  "loading": {
-    "replace": "<img src='/public/img/loading.gif' style='height:40px; width:auto;' alt='loading' title='loading'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/loading.gif' style='height:32px; width:auto;' alt='loading' title='loading'>"
-  },
-  "winloading": {
-    "replace": "<img src='/public/img/windowsload.gif' style='height:40px; width:auto;' alt='winloading' title='winloading'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/windowsload.gif' style='height:32px; width:auto;' alt='winloading' title='winloading'>"
-  },
-  "progressbar": {
-    "replace": "<img src='/public/img/progressbar.gif' alt='progressbar' title='progressbar'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/progressbar.gif' style='height:32px; width:100px;' alt='progressbar' title='progressbar'>"
-  },
-  "Danke": {
-    "replace": "<img src='/public/img/danke.png' style='height:40px; width:auto;' alt='Danke' title='Danke'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/danke.png' style='height:32px; width:auto;' alt='Danke' title='Danke'>"
-  },
-  "Bitte": {
-    "replace": "<img src='/public/img/bitte.png' style='height:40px; width:auto;' alt='Bitte' title='Bitte'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/bitte.png' style='height:32px; width:auto;' alt='Bitte' title='Bitte'>"
-  },
-  "Kuchen": {
-    "replace": "<img src='/public/img/kuchen.png' style='height:auto; width:250px;' alt='Kuchen' title='Kuchen'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/kuchen.png' style='height:50px; width:auto;' alt='Kuchen' title='Kuchen'>"
-  },
-  "DaVista": {
-    "replace": "<img src='/public/img/stoll.jpg' style='height:40px; width:auto;' alt='DaVista' title='DaVista'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/stoll.jpg' style='height:32px; width:auto;' alt='DaVista' title='DaVista'>"
-  },
-  "DaVista2": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://rb-davista.de.bosch.com\"><img src='/public/img/stoll2.png' style='height:40px; width:auto;' alt='DaVista2' title='DaVista2'></a>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/stoll2.png' style='height:32px; width:auto;' alt='DaVista2' title='DaVista2'>"
-  },
-  ":phone:": {
-    "replace": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>"
-  },
-  "Kappa": {
-    "replace": "<img src='/public/img/Kappa1.png' style='height: 40px; width:auto;' alt='Kappa' title='Kappa'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/Kappa1.png' style='height: 32px; width:auto;' alt='Kappa' title='Kappa'>"
-  },
-  "KappaG": {
-    "replace": "<img src='/public/img/kappagold.png' style='height:40px; width:auto;' alt='KappaG' title='KappaG'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/kappagold.png' style='height:32px; width:auto;' alt='KappaG' title='KappaG'>"
-  },
-  "KappaHD": {
-    "replace": "<img src='/public/img/kappahd.png' style='height:40px; width:auto;' alt='KappaHD' title='KappaHD'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/kappahd.png' style='height:32px; width:auto;' alt='KappaHD' title='KappaHD'>"
-  },
-  "FacePalm": {
-    "replace": "<img src='/public/img/facepalm.png' style='height:40px; width:auto;' alt='FacePalm' title='FacePalm'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/facepalm.png' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>"
-  },
-  "WiW": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=PhMDDF0WxSs\"><img src='/public/img/wiw.jpg' style='height:40px; width:auto;' alt='WasIstWas?' title='WasIstWas?'></a>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'>"
-  },
-  "WayTooDank": {
-    "replace": "<img src='/public/img/waytoodank.gif' style='height:40px; width:auto;' alt='WayTooDank' title='WayTooDank'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/waytoodank.gif' style='height:32px; width:auto;' alt='WayTooDank' title='WayTooDank'>"
-  },
-  "iron95Pls": {
-    "replace": "<img src='/public/img/iron95Pls.gif' style='height:40px; width:auto;' alt='iron95Pls' title='iron95Pls'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/iron95Pls.gif' style='height:32px; width:auto;' alt='iron95Pls' title='iron95Pls'>"
-  },
-  "ppPoof": {
-    "replace": "<img src='/public/img/ppPoof.gif' style='height:40px; width:auto;' alt='ppPoof' title='ppPoof'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/ppPoof.gif' style='height:32px; width:auto;' alt='ppPoof' title='ppPoof'>"
-  },
-  "nymnCorn": {
-    "replace": "<img src='/public/img/nymnCorn.gif' style='height:40px; width:auto;' alt='nymnCorn' title='nymnCorn'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>"
-  },
-  ":shrug": {
-    "replace": "¯\\_(ツ)_/¯",
-    "menuDisplay": true,
-    "menuDisplayCode": ":shrug"
-  },
-  ":flip": {
-    "replace": "(╯°□°）╯︵ ┻━┻",
-    "menuDisplay": true,
-    "menuDisplayCode": ":flip"
-  },
-  ":unflip": {
-    "replace": "┬─┬ノ( º _ ºノ) ",
-    "menuDisplay": true,
-    "menuDisplayCode": ":unflip"
-  },
-  ":lenny": {
-    "replace": "( ͡° ͜ʖ ͡°)",
-    "menuDisplay": true,
-    "menuDisplayCode": "( ͡° ͜ʖ ͡°)"
-  },
-  ":success": {
-    "replace": "(•̀ᴗ•́)و ̑̑ ",
-    "menuDisplay": true,
-    "menuDisplayCode": "(•̀ᴗ•́)و ̑̑ "
-  },
-  "???": {
-    "replace": "Justus Jonas, Peter Shaw, Bob Andrews",
-    "menuDisplay": true,
-    "menuDisplayCode": "???"
-  },
-  "!!!": {
-    "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=7KPDSYskJo4\" style=\"color:white\">Kim Jülich, Franziska Winkler, Marie Grevenbroich</a>",
-    "menuDisplay": true,
-    "menuDisplayCode": "!!!"
-  },
-  "true": {
-    "replace": "<a style='font-family: Consolas; color:rgb(46,171,254);'>true</a>",
-    "menuDisplay": false,
-    "menuDisplayCode": ""
-  },
-  "false": {
-    "replace": "<a style='font-family: Consolas; color:rgb(46,171,254);'>false</a>",
-    "menuDisplay": false,
-    "menuDisplayCode": ""
-  },
-  "STONKS": {
-    "replace": "<img src='/public/img/stonks.png' style='height:200px; width:auto;' alt='STONKS' title='STONKS'>",
-    "menuDisplay": false,
-    "menuDisplayCode": ""
-  },
-  "approved": {
-    "replace": "<img src='/public/img/approved.png' style='height:40px; width:auto;' alt='approved' title='approved'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/approved.png' style='height:32px; width:auto;' alt='approved' title='approved'>"
-  },
-  "KappaOmega": {
-    "replace": "<img src='/public/img/kappaomega.png' style='height:40px; width:auto;' alt='KappaOmega' title='KappaOmega'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/kappaomega.png' style='height:32px; width:auto;' alt='KappaOmega' title='KappaOmega'>"
-  },
-  "tutut": {
-    "replace": "<img src='/public/img/tutut.gif' style='height:40px; width:auto;' alt='tutut' title='tutut'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/tutut.gif' style='height:32px; width:auto;' alt='tutut' title='tutut'>"
-  },
-  "OOF": {
-    "replace": "<img src='/public/img/oof.gif' style='height:60px; width:auto;' alt='OOF' title='OOF'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/oof.gif' style='height:32px; width:auto;' alt='OOF' title='OOF'>"
-  },
-  "PepeLaugh": {
-    "replace": "<img src='/public/img/pepelaugh.png' style='height:40px; width:auto;' alt='PepeLaugh' title='PepeLaugh'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/pepelaugh.png' style='height:32px; width:auto;' alt='PepeLaugh' title='PepeLaugh'>"
-  },
-  "KEKW": {
-    "replace": "<img src='/public/img/kekw.gif' style='height:40px; width:auto;' alt='KEKW' title='KEKW'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/kekw.gif' style='height:32px; width:auto;' alt='KEKW' title='KEKW'>"
-  },
-  "KappaRoss": {
-    "replace": "<img src='/public/img/kappaross.png' style='height:40px; width:auto;' alt='KappaRoss' title='KappaRoss'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/kappaross.png' style='height:32px; width:auto;' alt='KappaRoss' title='KappaRoss'>"
-  },
-  "Keepo": {
-    "replace": "<img src='/public/img/keepo.png' style='height:40px; width:auto;' alt='Keepo' title='Keepo'>",
-    "menuDisplay": true,
-    "menuDisplayCode": "<img src='/public/img/keepo.png' style='height:32px; width:auto;' alt='Keepo' title='Keepo'>"
-  },
-  "Fchen": {
-    "replace": "<img src='/public/img/f.png' style='height:20px; width:auto;' alt='Fchen' title='Fchen'>",
-    "menuDisplay": false,
-    "menuDisplayCode": "<img src='/public/img/f.png' style='height:32px; width:auto;' alt='Fchen' title='Fchen'>"
-  }
+    "Bosch": {
+        "replace": "<img src='/public/assets/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>"
+    },
+    "Shawn": {
+        "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=v2kV6pgJxuo\"><img src='/public/assets/emote1.PNG' style='height:40px; width:auto;' alt='Shawn' title='Shawn'></a>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/emote1.PNG' style='height:32px; width:auto;' alt='Shawn' title='Shawn'>"
+    },
+    "Hackerman": {
+        "replace": "<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=K7Hn1rPQouU\"><img src='/public/assets/hackerman.jpg' style='height:100px; width:auto;' alt='Hackerman' title='Hackerman'></a>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/hackerman.jpg' style='height:50px; width:auto;' alt='Hackerman' title='Hackerman'>"
+    },
+    "FaFoSerious": {
+        "replace": "<img src='/public/assets/fafoconcentrated.png' style='height:40px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/fafoconcentrated.png' style='height:32px; width:auto;' alt='FaFoSerious' title='FaFoSerious'>"
+    },
+    "Fuck1": {
+        "replace": "<img src='/public/assets/uwot.png' style='height:40px; width:auto;' alt='Fuck1' title='Fuck1'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/uwot.png' style='height:32px; width:auto;' alt='Fuck1' title='Fuck1'>"
+    },
+    "Bruh1": {
+        "replace": "<img src='/public/assets/bruh.png' style='height:40px; width:auto;' alt='Bruh1' title='Bruh1'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/bruh.png' style='height:32px; width:auto;' alt='Bruh1' title='Bruh1'>"
+    },
+    "björnRage": {
+        "replace": "<img src='/public/assets/bjoernrage.png' style='height:40px; width:auto;' alt='björnRage' title='björnRage'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/bjoernrage.png' style='height:32px; width:auto;' alt='björnRage' title='björnRage'>"
+    },
+    "björnW": {
+        "replace": "<img src='/public/assets/bjoernW.png' style='height:40px; width:auto;' alt='björnW' title='björnW'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/bjoernW.png' style='height:32px; width:auto;' alt='björnW' title='björnW'>"
+    },
+    "oaHmm": {
+        "replace": "<img src='/public/assets/oaHmm.png' style='height:40px; width:auto;' alt='oaHmm' title='oaHmm'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/oaHmm.png' style='height:32px; width:auto;' alt='oaHmm' title='oaHmm'>"
+    },
+    "yKool": {
+        "replace": "<img src='/public/assets/yannick1.png' style='height:40px; width:auto;' alt='yKool' title='yKool'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/yannick1.png' style='height:32px; width:auto;' alt='yKool' title='yKool'>"
+    },
+    "ded": {
+        "replace": "<img src='/public/assets/ded.png' style='height:40px; width:auto;' alt='ded' title='ded'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/ded.png' style='height:32px; width:auto;' alt='ded' title='ded'>"
+    },
+    "DBahn": {
+        "replace": "<img src='/public/assets/deutschebahn.png' style='height:40px; width:auto;' alt='DBahn' title='DBahn'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/deutschebahn.png' style='height:32px; width:auto;' alt='DBahn' title='DBahn'>"
+    },
+    "Enthusiast": {
+        "replace": "<img src='/public/assets/happy.png' style='height:40px; width:auto;' alt='Enthusiast' title='Enthusiast'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/happy.png' style='height:32px; width:auto;' alt='Enthusiast' title='Enthusiast'>"
+    },
+    "Creep": {
+        "replace": "<img src='/public/assets/creep.png' style='height:40px; width:auto;' alt='Creep' title='Creep'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/creep.png' style='height:32px; width:auto;' alt='Creep' title='Creep'>"
+    },
+    "DerMoment": {
+        "replace": "<img src='/public/assets/the_moment.png' style='height:40px; width:auto;' alt='DerMoment' title='DerMoment'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/the_moment.png' style='height:32px; width:auto;' alt='DerMoment' title='DerMoment'>"
+    },
+    "simonW": {
+        "replace": "<img src='/public/assets/simonW.png' style='height:40px; width:auto;' alt='simonW' title='simonW'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/simonW.png' style='height:32px; width:auto;' alt='simonW' title='simonW'>"
+    },
+    "DaVista3": {
+        "replace": "<img src='/public/assets/stoll3.png' style='height:40px; width:auto;' alt='DaVista3' title='DaVista3'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/stoll3.png' style='height:32px; width:auto;' alt='DaVista3' title='DaVista3'>"
+    },
+    "innocentDaVista": {
+        "replace": "<img src='/public/assets/stoll4.png' style='height:40px; width:auto;' alt='innocentDaVista' title='innocentDaVista'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/stoll4.png' style='height:32px; width:auto;' alt='innocentDaVista' title='innocentDaVista'>"
+    },
+    "FeelsGoodMan": {
+        "replace": "<img src='/public/assets/FeelsGoodMan1.png' style='height:40px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/FeelsGoodMan1.png' style='height:32px; width:auto;' alt='FeelsGoodMan' title='FeelsGoodMan'>"
+    },
+    "FeelsBadMan": {
+        "replace": "<img src='/public/assets/FeelsBadMan1.png' style='height:40px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/FeelsBadMan1.png' style='height:32px; width:auto;' alt='FeelsBadMan' title='FeelsBadMan'>"
+    },
+    "peepoWide": {
+        "replace": "<img src='/public/assets/peepoWide.png' style='height:40px; width:auto;' alt='peepoWide' title='peepoWide'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/peepoWide.png' style='height:32px; width:auto;' alt='peepoWide' title='peepoWide'>"
+    },
+    "peepoClap": {
+        "replace": "<img src='/public/assets/peepoClap.gif' style='height:40px; width:auto;' alt='peepoClap' title='peepoClap'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/peepoClap.gif' style='height:32px; width:auto;' alt='peepoClap' title='peepoClap'>"
+    },
+    "Pepega": {
+        "replace": "<img src='/public/assets/Pepega.png' style='height:40px; width:auto;' alt='Pepega' title='Pepega'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/Pepega.png' style='height:32px; width:auto;' alt='Pepega' title='Pepega'>"
+    },
+    "Pr0": {
+        "replace": "<img src='/public/assets/pr0gramm.png' style='height:40px; width:auto;' alt='Pr0' title='Pr0'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pr0gramm.png' style='height:32px; width:auto;' alt='Pr0' title='Pr0'>"
+    },
+    "monkaS": {
+        "replace": "<img src='/public/assets/monkaS.png' style='height:40px; width:auto;' alt='monkaS' title='monkaS'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaS.png' style='height:32px; width:auto;' alt='monkaS' title='monkaS'>"
+    },
+    "monkaShred": {
+        "replace": "<img src='/public/assets/monkaShred.gif' style='height:40px; width:auto;' alt='monkaShred' title='monkaShred'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaShred.gif' style='height:32px; width:auto;' alt='monkaShred' title='monkaShred'>"
+    },
+    "pepeJAM": {
+        "replace": "<img src='/public/assets/pepeJAM.gif' style='height:40px; width:auto;' alt='pepeJAM' title='pepeJAM'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pepeJAM.gif' style='height:32px; width:auto;' alt='pepeJAM' title='pepeJAM'>"
+    },
+    "pepeJAMJAM": {
+        "replace": "<img src='/public/assets/pepeJAMJAM.gif' style='height:40px; width:auto;' alt='pepeJAMJAM' title='pepeJAMJAM'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pepeJAMJAM.gif' style='height:32px; width:auto;' alt='pepeJAMJAM' title='pepeJAMJAM'>"
+    },
+    "pepeFastJam": {
+        "replace": "<img src='/public/assets/pepefast.gif' style='height:40px; width:auto;' alt='pepeFastJam' title='pepeFastJam'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pepefast.gif' style='height:32px; width:auto;' alt='pepeFastJam' title='pepeFastJam'>"
+    },
+    "monkaHmm": {
+        "replace": "<img src='/public/assets/monkaHmm.png' style='height:40px; width:auto;' alt='monkaHmm' title='monkaHmm'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaHmm.png' style='height:32px; width:auto;' alt='monkaHmm' title='monkaHmm'>"
+    },
+    "monkaW": {
+        "replace": "<img src='/public/assets/monkaW.png' style='height:40px; width:auto;' alt='monkaW' title='monkaW'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaW.png' style='height:32px; width:auto;' alt='monkaW' title='monkaW'>"
+    },
+    "monkaFBI": {
+        "replace": "<img src='/public/assets/monkaFBI.png' style='height:40px; width:auto;' alt='monkaFBI' title='monkaFBI'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaFBI.png' style='height:32px; width:auto;' alt='monkaFBI' title='monkaFBI'>"
+    },
+    "REEE": {
+        "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=RBRxM5yq2NU\"><img src='/public/assets/REEE.png' style='height:40px; width:auto;' alt='REEE' title='REEE'></a>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/REEE.png' style='height:32px; width:auto;' alt='REEE' title='REEE'>"
+    },
+    "monkaT": {
+        "replace": "<img src='/public/assets/monkaT.png' style='height:40px; width:auto;' alt='monkaT' title='monkaT'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaT.png' style='height:32px; width:auto;' alt='monkaT' title='monkaT'>"
+    },
+    "monkaH": {
+        "replace": "<img src='/public/assets/monkaH.png' style='height:40px; width:auto;' alt='monkaH' title='monkaH'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaH.png' style='height:32px; width:auto;' alt='monkaH' title='monkaH'>"
+    },
+    "monkaShoot": {
+        "replace": "<img src='/public/assets/monkaShoot.gif' style='height:40px; width:auto;' alt='monkaShoot' title='monkaShoot'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaShoot.gif' style='height:32px; width:auto;' alt='monkaShoot' title='monkaShoot'>"
+    },
+    "peepoStrongest": {
+        "replace": "<img src='/public/assets/peepoStrongest.gif' style='height:40px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/peepoStrongest.gif' style='height:32px; width:auto;' alt='peepoStrongest' title='peepoStrongest'>"
+    },
+    "monkaRun": {
+        "replace": "<img src='/public/assets/monkaRun.gif' style='height:40px; width:auto;' alt='monkaRun' title='monkaRun'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/monkaRun.gif' style='height:32px; width:auto;' alt='monkaRun' title='monkaRun'>"
+    },
+    "D:": {
+        "replace": "<img src='/public/assets/OMG1.png' style='height:40px; width:auto;' alt='D:' title='D:'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/OMG1.png' style='height:32px; width:auto;' alt='D:' title='D:'>"
+    },
+    "SourPls": {
+        "replace": "<img src='/public/assets/SourPls.gif' style='height:40px; width:auto;' alt='SourPls' title='SourPls'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/SourPls.gif' style='height:32px; width:auto;' alt='SourPls' title='SourPls'>"
+    },
+    "DansGame": {
+        "replace": "<img src='/public/assets/DansGame.png' style='height:40px; width:auto;' alt='DansGame' title='DansGame'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/DansGame.png' style='height:32px; width:auto;' alt='DansGame' title='DansGame'>"
+    },
+    "HotPocket": {
+        "replace": "<img src='/public/assets/HotPocket.png' style='height:40px; width:auto;' alt='HotPocket' title='HotPocket'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/HotPocket.png' style='height:32px; width:auto;' alt='HotPocket' title='HotPocket'>"
+    },
+    "confusedCat": {
+        "replace": "<img src='/public/assets/confusedcat.png' style='height:40px; width:auto;' alt='confusedCat' title='confusedCat'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/confusedcat.png' style='height:32px; width:auto;' alt='confusedCat' title='confusedCat'>"
+    },
+    "pikaWut": {
+        "replace": "<img src='/public/assets/pikaWut.png' style='height:40px; width:auto;' alt='pikaWut' title='pikaWut'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pikaWut.png' style='height:32px; width:auto;' alt='pikaWut' title='pikaWut'>"
+    },
+    "ähmOK": {
+        "replace": "<img src='/public/assets/aehmok.png' style='height:200px; width:auto;' alt='ähmOK' title='ähmOK'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/aehmok.png' style='height:32px; width:auto;' alt='ähmOK' title='ähmOK'>"
+    },
+    "whutBlink": {
+        "replace": "<img src='/public/assets/whutBlink.gif' style='height:40px; width:auto;' alt='whutBlink' title='whutBlink'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/whutBlink.gif' style='height:32px; width:auto;' alt='whutBlink' title='whutBlink'>"
+    },
+    "ricadoFlick": {
+        "replace": "<img src='/public/assets/ricadoFlick.gif' style='height:40px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/ricadoFlick.gif' style='height:32px; width:auto;' alt='ricadoFlick' title='ricadoFlick'>"
+    },
+    "bongoCat": {
+        "replace": "<img src='/public/assets/bongoCat.gif' style='height:50px; width:auto;' alt='bongoCat' title='bongoCat'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/bongoCat.gif' style='height:50px; width:auto;' alt='bongoCat' title='bongoCat'>"
+    },
+    "sumSmash": {
+        "replace": "<img src='/public/assets/sumSmash.gif' style='height:40px; width:auto;' alt='sumSmash' title='sumSmash'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/sumSmash.gif' style='height:32px; width:auto;' alt='sumSmash' title='sumSmash'>"
+    },
+    "forsenCD": {
+        "replace": "<img src='/public/assets/forsenCD.png' style='height:40px; width:auto;' alt='forsenCD' title='forsenCD'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/forsenCD.png' style='height:32px; width:auto;' alt='forsenCD' title='forsenCD'>"
+    },
+    "forsenPls": {
+        "replace": "<img src='/public/assets/forsenPls.gif' style='height:40px; width:auto;' alt='forsenPls' title='forsenPls'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/forsenPls.gif' style='height:32px; width:auto;' alt='forsenPls' title='forsenPls'>"
+    },
+    "LuL": {
+        "replace": "<img src='/public/assets/LuL.png' style='height:40px; width:auto;' alt='LuL' title='LuL'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/LuL.png' style='height:32px; width:auto;' alt='LuL' title='LuL'>"
+    },
+    "Pog": {
+        "replace": "<img src='/public/assets/Pog.png' style='height:40px; width:auto;' alt='Pog' title='Pog'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/Pog.png' style='height:32px; width:auto;' alt='Pog' title='Pog'>"
+    },
+    "OMEGALUL": {
+        "replace": "<img src='/public/assets/OMEGALUL.png' style='height:40px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/OMEGALUL.png' style='height:32px; width:auto;' alt='OMEGALUL' title='OMEGALUL'>"
+    },
+    "weSmart": {
+        "replace": "<img src='/public/assets/weSmart.png' style='height:40px; width:auto;' alt='weSmart' title='weSmart'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/weSmart.png' style='height:32px; width:auto;' alt='weSmart' title='weSmart'>"
+    },
+    "weSmart2": {
+        "replace": "<img src='/public/assets/weSmart.gif' style='height:40px; width:auto;' alt='weSmart2' title='weSmart2'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/weSmart.gif' style='height:32px; width:auto;' alt='weSmart2' title='weSmart2'>"
+    },
+    "AYAYA": {
+        "replace": "<img src='/public/assets/ayaya.png' style='height:40px; width:auto;' alt='AYAYA' title='AYAYA'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/ayaya.png' style='height:32px; width:auto;' alt='AYAYA' title='AYAYA'>"
+    },
+    "WeebsOut": {
+        "replace": "<img src='/public/assets/weebsout.png' style='height:40px; width:auto;' alt='WeebsOut' title='WeebsOut'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/weebsout.png' style='height:32px; width:auto;' alt='WeebsOut' title='WeebsOut'>"
+    },
+    "triggered": {
+        "replace": "<img src='/public/assets/triggered.png' style='height:40px; width:auto;' alt='triggered' title='triggered'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/triggered.png' style='height:32px; width:auto;' alt='triggered' title='triggered'>"
+    },
+    "triggered2": {
+        "replace": "<img src='/public/assets/triggered.gif' style='height:40px; width:auto;' alt='triggered2' title='triggered2'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/triggered.gif' style='height:32px; width:auto;' alt='triggered2' title='triggered2'>"
+    },
+    "rooSnap": {
+        "replace": "<img src='/public/assets/rooSnap.gif' style='height:40px; width:auto;' alt='rooSnap' title='rooSnap'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/rooSnap.gif' style='height:32px; width:auto;' alt='rooSnap' title='rooSnap'>"
+    },
+    "rooCoffee": {
+        "replace": "<img src='/public/assets/rooCoffee.gif' style='height:40px; width:auto;' alt='rooCoffee' title='rooCoffee'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/rooCoffee.gif' style='height:32px; width:auto;' alt='rooCoffee' title='rooCoffee'>"
+    },
+    "CrabPls": {
+        "replace": "<img src='/public/assets/CrabPls.gif' style='height:40px; width:auto;' alt='CrabPls' title='CrabPls'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/CrabPls.gif' style='height:32px; width:auto;' alt='CrabPls' title='CrabPls'>"
+    },
+    "Clap": {
+        "replace": "<img src='/public/assets/Clap.gif' style='height:40px; width:auto;' alt='Clap' title='Clap'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/Clap.gif' style='height:32px; width:auto;' alt='Clap' title='Clap'>"
+    },
+    "hullo": {
+        "replace": "<img src='/public/assets/hullo.gif' style='height:40px; width:auto;' alt='hullo' title='hullo'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/hullo.gif' style='height:32px; width:auto;' alt='hullo' title='hullo'>"
+    },
+    "ChangeMyMind": {
+        "replace": "<img src='/public/assets/changeMyMind.png' style='height:40px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/changeMyMind.png' style='height:32px; width:auto;' alt='ChangeMyMind' title='ChangeMyMind'>"
+    },
+    "Pedalo": {
+        "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=NTxdEc3pUJc\"><img src='/public/assets/pedalo.png' style='height:40px; width:auto;' alt='Pedalo' title='Pedalo'></a>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pedalo.png' style='height:32px; width:auto;' alt='Pedalo' title='Pedalo'>"
+    },
+    "uargh": {
+        "replace": "<img src='/public/assets/uargh.png' style='height:40px; width:auto;' alt='Würg' title='Würg'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/uargh.png' style='height:32px; width:auto;' alt='Würg' title='Würg'>"
+    },
+    ":P": {
+        "replace": "<img src='/public/assets/face-with-stuck-out-tongue.png' style='height:40px; width:auto;' alt=':P' title=':P'>",
+        "menuDisplay": false,
+        "menuDisplayCode": ""
+    },
+    "Skype": {
+        "replace": "<img src='/public/assets/skype.png' style='height:32px; width:auto;' alt='Skype' title='Skype'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/skype.png' style='height:32px; width:auto;' alt='Skype' title='Skype'>"
+    },
+    ":thinking:": {
+        "replace": "<img src='/public/assets/thinking-face.png' style='height:40px; width:auto;' alt=':thinking:' title=':thinking:'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/thinking-face.png' style='height:32px; width:auto;' alt=':thinking:' title=':thinking:'>"
+    },
+    ":upsidedown:": {
+        "replace": "<img src='/public/assets/upside-down-face.png' style='height:40px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/upside-down-face.png' style='height:32px; width:auto;' alt=':upsidedown:' title=':upsidedown:'>"
+    },
+    ":thinkink:": {
+        "replace": "<img src='/public/assets/thinkink.gif' style='height:40px; width:auto;' alt=':thinkink:' title=':thinkink:'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/thinkink.gif' style='height:32px; width:auto;' alt=':thinkink:' title=':thinkink:'>"
+    },
+    ":thonking:": {
+        "replace": "<img src='/public/assets/thonking.png' style='height:40px; width:auto;' alt=':thonking:' title=':thonking:'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/thonking.png' style='height:32px; width:auto;' alt=':thonking:' title=':thonking:'>"
+    },
+    "pikaP": {
+        "replace": "<img src='/public/assets/pikaP.png' style='height:40px; width:auto;' alt='pikaP' title='pikaP'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pikaP.png' style='height:32px; width:auto;' alt='pikaP' title='pikaP'>"
+    },
+    "KlugerSchachZug": {
+        "replace": "<img src='/public/assets/klugerschachzug.png' style='height:100px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/klugerschachzug.png' style='height:50px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>"
+    },
+    "kleinesX": {
+        "replace": "<img src='/public/assets/x-doubt.png' style='height:25px; width:auto;' alt='X' title='X'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+    },
+    "X": {
+        "replace": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+    },
+    "grossesX": {
+        "replace": "<img src='/public/assets/x-doubt.png' style='height:125px; width:auto;' alt='grossesX' title='grossesX'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='grossesX' title='grossesX'>"
+    },
+    "ganzgrossesX": {
+        "replace": "<img src='/public/assets/x-doubt.png' style='height:250px; width:auto;' alt='ganzgrossesX' title='ganzgrossesX'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='ganzgrossesX' title='ganzgrossesX'>"
+    },
+    "F": {
+        "replace": "<img src='/public/assets/f.png' style='height:50px; width:auto;' alt='F' title='F'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/f.png' style='height:50px; width:auto;' alt='F' title='F'>"
+    },
+    "bigF": {
+        "replace": "<img src='/public/assets/f.png' style='height:125px; width:auto;' alt='bigF' title='bigF'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/f.png' style='height:50px; width:auto;' alt='bigF' title='bigF'>"
+    },
+    "discordload": {
+        "replace": "<img src='/public/assets/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/discordloadhangds.gif' style='height:32px; width:auto;' alt='discordload' title='discordload'>"
+    },
+    "gnomed": {
+        "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=5T5BY1j2MkE\"><img src='/public/assets/gnomed.png' style='height:40px; width:auto;' alt='gnomed' title='gnomed'></a>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/gnomed.png' style='height:32px; width:auto;' alt='gnomed' title='gnomed'>"
+    },
+    "Björn": {
+        "replace": "PjÖrN",
+        "menuDisplay": false,
+        "menuDisplayCode": ""
+    },
+    "simonGit": {
+        "replace": "<img src='/public/assets/simon.jpg' style='height:240px; width:auto;' alt='simonGit' title='SimonGit'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/simon.jpg' style='height:50px; width:auto;' alt='simonGit' title='SimonGit'>"
+    },
+    "poohRead": {
+        "replace": "<img src='/public/assets/pooh.png' style='height:40px; width:auto;' alt='poohRead' title='poohRead'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pooh.png' style='height:32px; width:auto;' alt='poohRead' title='poohRead'>"
+    },
+    "3Head": {
+        "replace": "<img src='/public/assets/3Head.png' style='height:40px; width:auto;' alt='3Head' title='3Head'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/3Head.png' style='height:32px; width:auto;' alt='3Head' title='3Head'>"
+    },
+    "4Head": {
+        "replace": "<img src='/public/assets/4Head.png' style='height:40px; width:auto;' alt='4Head' title='4Head'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/4Head.png' style='height:32px; width:auto;' alt='4Head' title='4Head'>"
+    },
+    "5Head": {
+        "replace": "<img src='/public/assets/5Head.png' style='height:40px; width:auto;' alt='5Head' title='5Head'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/5Head.png' style='height:32px; width:auto;' alt='5Head' title='5Head'>"
+    },
+    "PRS": {
+        "replace": "<img src='/public/assets/blaulicht.gif' style='height:40px; width:auto;' alt='PRS' title='PRS'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/blaulicht.gif' style='height:32px; width:auto;' alt='PRS' title='PRS'>"
+    },
+    "hypeE": {
+        "replace": "<img src='/public/assets/hypeE.gif' style='height:40px; width:auto;' alt='hypeE' title='hypeE'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/hypeE.gif' style='height:32px; width:auto;' alt='hypeE' title='hypeE'>"
+    },
+    "loading": {
+        "replace": "<img src='/public/assets/loading.gif' style='height:40px; width:auto;' alt='loading' title='loading'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/loading.gif' style='height:32px; width:auto;' alt='loading' title='loading'>"
+    },
+    "winloading": {
+        "replace": "<img src='/public/assets/windowsload.gif' style='height:40px; width:auto;' alt='winloading' title='winloading'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/windowsload.gif' style='height:32px; width:auto;' alt='winloading' title='winloading'>"
+    },
+    "progressbar": {
+        "replace": "<img src='/public/assets/progressbar.gif' alt='progressbar' title='progressbar'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/progressbar.gif' style='height:32px; width:100px;' alt='progressbar' title='progressbar'>"
+    },
+    "Danke": {
+        "replace": "<img src='/public/assets/danke.png' style='height:40px; width:auto;' alt='Danke' title='Danke'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/danke.png' style='height:32px; width:auto;' alt='Danke' title='Danke'>"
+    },
+    "Bitte": {
+        "replace": "<img src='/public/assets/bitte.png' style='height:40px; width:auto;' alt='Bitte' title='Bitte'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/bitte.png' style='height:32px; width:auto;' alt='Bitte' title='Bitte'>"
+    },
+    "Kuchen": {
+        "replace": "<img src='/public/assets/kuchen.png' style='height:auto; width:250px;' alt='Kuchen' title='Kuchen'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/kuchen.png' style='height:50px; width:auto;' alt='Kuchen' title='Kuchen'>"
+    },
+    "DaVista": {
+        "replace": "<img src='/public/assets/stoll.jpg' style='height:40px; width:auto;' alt='DaVista' title='DaVista'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/stoll.jpg' style='height:32px; width:auto;' alt='DaVista' title='DaVista'>"
+    },
+    "DaVista2": {
+        "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://rb-davista.de.bosch.com\"><img src='/public/assets/stoll2.png' style='height:40px; width:auto;' alt='DaVista2' title='DaVista2'></a>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/stoll2.png' style='height:32px; width:auto;' alt='DaVista2' title='DaVista2'>"
+    },
+    ":phone:": {
+        "replace": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<i class=\"fas fa-phone\" alt=':phone:' title=':phone:'></i>"
+    },
+    "Kappa": {
+        "replace": "<img src='/public/assets/Kappa1.png' style='height: 40px; width:auto;' alt='Kappa' title='Kappa'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/Kappa1.png' style='height: 32px; width:auto;' alt='Kappa' title='Kappa'>"
+    },
+    "KappaG": {
+        "replace": "<img src='/public/assets/kappagold.png' style='height:40px; width:auto;' alt='KappaG' title='KappaG'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/kappagold.png' style='height:32px; width:auto;' alt='KappaG' title='KappaG'>"
+    },
+    "KappaHD": {
+        "replace": "<img src='/public/assets/kappahd.png' style='height:40px; width:auto;' alt='KappaHD' title='KappaHD'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/kappahd.png' style='height:32px; width:auto;' alt='KappaHD' title='KappaHD'>"
+    },
+    "FacePalm": {
+        "replace": "<img src='/public/assets/facepalm.png' style='height:40px; width:auto;' alt='FacePalm' title='FacePalm'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/facepalm.png' style='height:32px; width:auto;' alt='FacePalm' title='FacePalm'>"
+    },
+    "WiW": {
+        "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=PhMDDF0WxSs\"><img src='/public/assets/wiw.jpg' style='height:40px; width:auto;' alt='WasIstWas?' title='WasIstWas?'></a>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/wiw.jpg' style='height:32px; width:auto;' alt='WasIstWas?' title='WasIstWas?'>"
+    },
+    "WayTooDank": {
+        "replace": "<img src='/public/assets/waytoodank.gif' style='height:40px; width:auto;' alt='WayTooDank' title='WayTooDank'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/waytoodank.gif' style='height:32px; width:auto;' alt='WayTooDank' title='WayTooDank'>"
+    },
+    "iron95Pls": {
+        "replace": "<img src='/public/assets/iron95Pls.gif' style='height:40px; width:auto;' alt='iron95Pls' title='iron95Pls'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/iron95Pls.gif' style='height:32px; width:auto;' alt='iron95Pls' title='iron95Pls'>"
+    },
+    "ppPoof": {
+        "replace": "<img src='/public/assets/ppPoof.gif' style='height:40px; width:auto;' alt='ppPoof' title='ppPoof'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/ppPoof.gif' style='height:32px; width:auto;' alt='ppPoof' title='ppPoof'>"
+    },
+    "nymnCorn": {
+        "replace": "<img src='/public/assets/nymnCorn.gif' style='height:40px; width:auto;' alt='nymnCorn' title='nymnCorn'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/nymnCorn.gif' style='height:32px; width:auto;' alt='nymnCorn' title='nymnCorn'>"
+    },
+    ":shrug": {
+        "replace": "¯\\_(ツ)_/¯",
+        "menuDisplay": true,
+        "menuDisplayCode": ":shrug"
+    },
+    ":flip": {
+        "replace": "(╯°□°）╯︵ ┻━┻",
+        "menuDisplay": true,
+        "menuDisplayCode": ":flip"
+    },
+    ":unflip": {
+        "replace": "┬─┬ノ( º _ ºノ) ",
+        "menuDisplay": true,
+        "menuDisplayCode": ":unflip"
+    },
+    ":lenny": {
+        "replace": "( ͡° ͜ʖ ͡°)",
+        "menuDisplay": true,
+        "menuDisplayCode": "( ͡° ͜ʖ ͡°)"
+    },
+    ":success": {
+        "replace": "(•̀ᴗ•́)و ̑̑ ",
+        "menuDisplay": true,
+        "menuDisplayCode": "(•̀ᴗ•́)و ̑̑ "
+    },
+    "???": {
+        "replace": "Justus Jonas, Peter Shaw, Bob Andrews",
+        "menuDisplay": true,
+        "menuDisplayCode": "???"
+    },
+    "!!!": {
+        "replace": "<a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.youtube.com/watch?v=7KPDSYskJo4\" style=\"color:white\">Kim Jülich, Franziska Winkler, Marie Grevenbroich</a>",
+        "menuDisplay": true,
+        "menuDisplayCode": "!!!"
+    },
+    "true": {
+        "replace": "<a style='font-family: Consolas; color:rgb(46,171,254);'>true</a>",
+        "menuDisplay": false,
+        "menuDisplayCode": ""
+    },
+    "false": {
+        "replace": "<a style='font-family: Consolas; color:rgb(46,171,254);'>false</a>",
+        "menuDisplay": false,
+        "menuDisplayCode": ""
+    },
+    "STONKS": {
+        "replace": "<img src='/public/assets/stonks.png' style='height:200px; width:auto;' alt='STONKS' title='STONKS'>",
+        "menuDisplay": false,
+        "menuDisplayCode": ""
+    },
+    "approved": {
+        "replace": "<img src='/public/assets/approved.png' style='height:40px; width:auto;' alt='approved' title='approved'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/approved.png' style='height:32px; width:auto;' alt='approved' title='approved'>"
+    },
+    "KappaOmega": {
+        "replace": "<img src='/public/assets/kappaomega.png' style='height:40px; width:auto;' alt='KappaOmega' title='KappaOmega'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/kappaomega.png' style='height:32px; width:auto;' alt='KappaOmega' title='KappaOmega'>"
+    },
+    "tutut": {
+        "replace": "<img src='/public/assets/tutut.gif' style='height:40px; width:auto;' alt='tutut' title='tutut'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/tutut.gif' style='height:32px; width:auto;' alt='tutut' title='tutut'>"
+    },
+    "OOF": {
+        "replace": "<img src='/public/assets/oof.gif' style='height:60px; width:auto;' alt='OOF' title='OOF'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/oof.gif' style='height:32px; width:auto;' alt='OOF' title='OOF'>"
+    },
+    "PepeLaugh": {
+        "replace": "<img src='/public/assets/pepelaugh.png' style='height:40px; width:auto;' alt='PepeLaugh' title='PepeLaugh'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/pepelaugh.png' style='height:32px; width:auto;' alt='PepeLaugh' title='PepeLaugh'>"
+    },
+    "KEKW": {
+        "replace": "<img src='/public/assets/kekw.gif' style='height:40px; width:auto;' alt='KEKW' title='KEKW'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/kekw.gif' style='height:32px; width:auto;' alt='KEKW' title='KEKW'>"
+    },
+    "KappaRoss": {
+        "replace": "<img src='/public/assets/kappaross.png' style='height:40px; width:auto;' alt='KappaRoss' title='KappaRoss'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/kappaross.png' style='height:32px; width:auto;' alt='KappaRoss' title='KappaRoss'>"
+    },
+    "Keepo": {
+        "replace": "<img src='/public/assets/keepo.png' style='height:40px; width:auto;' alt='Keepo' title='Keepo'>",
+        "menuDisplay": true,
+        "menuDisplayCode": "<img src='/public/assets/keepo.png' style='height:32px; width:auto;' alt='Keepo' title='Keepo'>"
+    },
+    "Fchen": {
+        "replace": "<img src='/public/assets/f.png' style='height:20px; width:auto;' alt='Fchen' title='Fchen'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/f.png' style='height:32px; width:auto;' alt='Fchen' title='Fchen'>"
+    }
 }

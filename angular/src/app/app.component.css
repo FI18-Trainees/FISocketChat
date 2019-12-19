@@ -3,7 +3,7 @@ body {
     min-width: 350px;
 }
 
-body {
+.site-container {
     /*variables*/
     --discord-black: #23272a;
     --discord-dark: #2c2f33;
@@ -25,15 +25,11 @@ body {
     color: var(--discord-white) !important;
 }
 
-#messages {
-    background: greenyellow!important;
-}
-
 #messages .message-container {
     border-bottom-color: var(--discord-lightgrey) !important;
 }
 
-#messages .message-profile-image {
+#messages .message-container .message-profile-image {
     height: 40px;
 }
 
