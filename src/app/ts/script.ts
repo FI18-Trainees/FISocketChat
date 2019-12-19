@@ -784,7 +784,7 @@ function newNotification(text: string) {
 
 //check if permission to show notification is granted
 function checkPermission() {
-    if (Notification.permission === "granted") {
+    if ((Notification as any).permission === "granted") {
         return true;
     } else {
         return false;
