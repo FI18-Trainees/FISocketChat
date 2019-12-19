@@ -1,0 +1,48 @@
+.sitebar {
+    padding-top: 2%;
+    min-width: 12%;
+    border-right: 1px solid var(--discord-lightgrey);
+    margin: 0 0 0 0;
+}
+
+.sitebar div {
+    min-width: 105px;
+}
+
+.sitebar-content {
+    margin: 2%;
+    padding: 3%;
+    width: 96%;
+    background-color: var(--discord-dark);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-around;
+    text-decoration: none;
+}
+
+.sitebar-content:hover {
+    cursor: pointer;
+}
+
+.sitebar-content .select-wrapper .dropdown-toggle {
+    background: var(--discord-black);
+    color: var(--discord-white);
+}
+
+.sitebar-content .select-wrapper .bg-grey,
+.sitebar-content .select-wrapper .dropdown-menu {
+    background: var(--discord-dark);
+}
+
+.sitebar-content .select-wrapper .dropdown-menu a:hover {
+    background: var(--discord-grey);
+}
+
+.sitebar-content #logininfo_picture {
+    width: 100%;
+    max-width: 26px;
+    height: 100%;
+    max-height: 26px;
+}

@@ -3,4 +3,81 @@
 html,
 body {
     height: 100%;
+    min-width: 350px;
+}
+
+body {
+    /*variables*/
+    --discord-black: #23272a;
+    --discord-dark: #2c2f33;
+    --discord-grey: #99aab5;
+    --discord-lightgrey: #72767d;
+    --discord-white: #ffffff;
+    --discord-blue: #7289da;
+    --discord-red: #f04747;
+    --discord-pink: #FF1493;
+    --discord-orange: #fdad5c;
+    font: 13px "Comic Sans MS", Arial;
+}
+
+.bg-dark {
+    background: var(--discord-dark) !important;
+    box-shadow: none;
+}
+
+.bg-discord-red {
+    background: var(--discord-red);
+    box-shadow: none;
+}
+
+.bg-discord-blue {
+    background: var(--discord-blue);
+    box-shadow: none;
+}
+
+.bg-discord-black {
+    background: var(--discord-black);
+    box-shadow: none;
+}
+
+.bg-discord-dark {
+    background: var(--discord-dark);
+    box-shadow: none;
+}
+
+.bg-discord-grey {
+    background: var(--discord-grey);
+    box-shadow: none;
+}
+
+.bg-discord-lightgrey {
+    background: var(--discord-lightgrey);
+    box-shadow: none;
+}
+
+.bg-discord-white {
+    background: var(--discord-white);
+    box-shadow: none;
+}
+
+.bg-discord-pink {
+    background: var(--discord-pink);
+    box-shadow: none;
+}
+
+.bg-discord-orange {
+    background: var(--discord-orange);
+    box-shadow: none;
+}
+
+.bg-lighter-01 {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.bg-lighter-01:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.text-white {
+    color: var(--discord-white) !important;
 }
