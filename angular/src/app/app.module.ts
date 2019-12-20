@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { MessageHeaderComponent } from './chat-container/message-container/messa
 import { MessageContentComponent } from './chat-container/message-container/message-content/message-content.component';
 import { SidebarContentComponent } from './sidebar/sidebar-content/sidebar-content.component';
 import { NotificationService } from 'src/services/notification.service';
+import { ApiService } from 'src/services/api.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +32,10 @@ import { NotificationService } from 'src/services/notification.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [NotificationService],
+  providers: [NotificationService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
