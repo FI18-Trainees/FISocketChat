@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 from app import app, emote_handler, auth, user_manager, chat_history, verify_token, login_disabled, cfg
 from app.obj import get_default_user, ResourceManager
-from utils import Console, red, white
+from utils import Console, red, white, cfg
 from app.commands import commands
 
 SHL = Console("Routes")
@@ -104,9 +104,16 @@ def send_chat_history():
     return jsonify(chat_history.to_json(username="all"))
 
 
+@app.route('/api/sidebar')
+def send_sidebar_info():
+    SHL.output(f"[{get_ip(request)}] Returning sidebar info", "/api/sidebar")
+    return jsonify(cfg.get("sidebarCustomItems", []))
+
+
 @app.route('/api/uploads/<filename>')
 @auth.login_required
 def uploaded_file(filename):
+    SHL.output(f"[{get_ip(request)}] Returning {filename} from uploads folder.", f"/api/uploads/{filename}")
     return send_from_directory(os.path.join("storage", "uploads"), filename)
 
 
