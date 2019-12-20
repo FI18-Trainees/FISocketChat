@@ -1,0 +1,27 @@
+<ng-container *ngIf="content.link != null; else withoutLink">
+    <div class="sitebar-content" [id]="content.id">
+        <a [href]="content.link" target="_blank">
+            <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1 text-white text-wrap">{{content.header}}</h5>
+                    {{content.text}}
+                </div>
+                <i *ngIf="content.media.mediaType == 0" [class]="content.media.mediaLink" [id]="content.media.mediaId"></i>
+                <img *ngIf="content.media.mediaType == 1" [src]="content.media.mediaLink" [id]="content.media.mediaId" class="mx-2 rounded-circle">
+            </div>
+        </a>
+    </div>
+</ng-container>
+
+<ng-template #withoutLink>
+    <div class="sitebar-content">
+        <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
+            <div class="media-body">
+                <h5 class="mt-0 mb-1 text-white text-wrap">{{content.header}}</h5>
+                {{content.text}}
+            </div>
+            <i *ngIf="content.media.mediaType == 0" [class]="content.media.mediaLink" [id]="content.media.mediaId"></i>
+            <img *ngIf="content.media.mediaType == 1" [src]="content.media.mediaLink" [id]="content.media.mediaId" class="mx-2 rounded-circle">
+        </div>
+    </div>
+</ng-template>

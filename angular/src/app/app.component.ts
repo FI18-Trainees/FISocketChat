@@ -6,6 +6,7 @@ import { IMessage } from '../interfaces/IMessage';
 import { IEmbed } from '../interfaces/IEmbed';
 import { IMedia } from '../interfaces/IMedia';
 import { IFields } from '../interfaces/IFields';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,11 @@ import { IFields } from '../interfaces/IFields';
 })
 export class AppComponent {
   title = 'FISocketChat';
+
+  /**
+   *
+   */
+  constructor(private notifyService: NotificationService) {}
 }
 
 // localStorage.debug = '*';
@@ -751,70 +757,5 @@ function handlePaste(e: ClipboardEvent) {
             console.log(items[i]);
             break;
         }
-    }
-}
-
-// More info here: https://developer.mozilla.org/de/docs/Web/API/notification
-
-const notifications = new Array();
-
-function initializeNotifications() {
-    // Let's check if the browser supports notifications
-    if (!('Notification' in window)) {
-        alert('This browser does not support desktop notification');
-    } else if (checkPermission()) {
-    //    // If it's okay let's create a notification
-    //    new Notification("Welcome back!");
-    } else if ((Notification as any).permission !== 'denied') {
-        Notification.requestPermission().then(permission => {
-            // If the user accepts, let's create a notification
-            if (checkPermission()) {
-                displayNotifyMode();
-                // tslint:disable-next-line: no-unused-expression
-                new Notification('This is how a notification would appear!');
-            }
-        });
-    }
-    // At last, if the user has denied notifications, and you
-    // want to be respectful there is no need to bother them any more.
-}
-
-// create new notification with the variable "text" as content
-function newNotification(text: string) {
-    const notification = new Notification(text);
-    notifications.push(notification);
-}
-
-// check if permission to show notification is granted
-function checkPermission() {
-    // tslint:disable-next-line: no-any
-    if ((Notification as any).permission === 'granted') {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function disconnectNotification() {
-    if (checkPermission()) {
-        newNotification('You have been disconnected from the chat!');
-    }
-}
-
-function closeAllNotifications() {
-    if (notifications.length > 0) {
-        notifications.forEach(closeNotification);
-    }
-}
-
-function closeNotification(item: Notification) {
-    item.close();
-}
-
-function displayNotifyMode() {
-    if (checkPermission() === true) {
-        $('#notify-mode').css('display', 'flex');
-    } else {
-        $('#notify-mode').css('display', 'none');
     }
 }

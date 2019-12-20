@@ -12,6 +12,8 @@ import { InputContainerComponent } from './input-container/input-container.compo
 import { MessageProfileImageComponent } from './chat-container/message-container/message-profile-image/message-profile-image.component';
 import { MessageHeaderComponent } from './chat-container/message-container/message-header/message-header.component';
 import { MessageContentComponent } from './chat-container/message-container/message-content/message-content.component';
+import { SitebarContentComponent } from './sitebar/sitebar-content/sitebar-content.component';
+import { NotificationService } from 'src/services/notification.service';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,14 @@ import { MessageContentComponent } from './chat-container/message-container/mess
     InputContainerComponent,
     MessageProfileImageComponent,
     MessageHeaderComponent,
-    MessageContentComponent
+    MessageContentComponent,
+    SitebarContentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

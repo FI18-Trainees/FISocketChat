@@ -1,37 +1,4 @@
 <div class="container sitebar d-none d-md-block">
-    <div class="sitebar-content" id="logininfo_sitebar">
-        <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
-            <div class="media-body">
-                <h5 class="mt-0 mb-1 text-white text-wrap">Info</h5>
-                <span id="logininfo_name">Not logged in.</span>
-            </div>
-            <img src="" class="mx-2 rounded-circle" alt="x" id="logininfo_picture" />
-        </div>
-    </div>
-    <div class="sitebar-content">
-        <a href="https://github.com/FI18-Trainees/FISocketChat" target="_blank">
-            <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1 text-white text-wrap">GitHub</h5>
-                    Check out our Repo.
-                </div>
-                <i class="fab fa-github fa-2x text-white mx-2"></i>
-            </div>
-        </a>
-    </div>
-
-    <div class="sitebar-content">
-        <a href="" target="_blank">
-            <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1 text-white text-wrap"></h5>
-
-                </div>
-
-            </div>
-        </a>
-    </div>
-
     <div class="sitebar-content" id="notify-mode">
         <div class="media d-inline-flex bg-lighter-01 rounded p-2 w-100">
             <div class="media-body">
@@ -46,4 +13,6 @@
             </div>
         </div>
     </div>
+
+    <app-sitebar-content *ngFor="let content of sitebarElements" [content]="content"></app-sitebar-content>
 </div>
