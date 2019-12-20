@@ -1,9 +1,9 @@
 export enum MediaType {
-    icon,
-    image
+    icon = 'icon',
+    image = 'image'
 }
 
-export interface ISitebarContentMedia {
+export interface ISidebarContentMedia {
     mediaType: MediaType;
     mediaLink: string;
     mediaId?: string;

@@ -239,7 +239,7 @@ export class AppComponent implements OnInit {
                 } else {
                     $('#username-item').css('display', 'block');
                     $('#user_name').val('DebugUser');
-                    $('logininfo_sitebar').css('display', 'none');
+                    $('logininfo_sidebar').css('display', 'none');
                     this.loginmode = false;
                 }
             }

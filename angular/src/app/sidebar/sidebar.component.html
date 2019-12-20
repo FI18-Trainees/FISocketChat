@@ -1,5 +1,5 @@
-<div class="container sitebar d-none d-md-block">
-    <div class="sitebar-content" id="notify-mode">
+<div class="container sidebar d-none d-md-block">
+    <div class="sidebar-content" id="notify-mode">
         <div class="media d-inline-flex bg-lighter-01 rounded p-2 w-100">
             <div class="media-body">
                 <h5 class="mt-0 mb-1 text-white text-wrap w-100">Notification-Modus</h5>
@@ -14,5 +14,5 @@
         </div>
     </div>
 
-    <app-sitebar-content *ngFor="let content of sitebarElements" [content]="content"></app-sitebar-content>
+    <app-sidebar-content *ngFor="let content of (sidebarElements | async)" [content]="content"></app-sidebar-content>
 </div>

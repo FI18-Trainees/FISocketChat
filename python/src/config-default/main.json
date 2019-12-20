@@ -7,6 +7,6 @@
   "enable_connect_announcement": false,
   "uploads_max_age": 172800,
   "uploads_check_cooldown": 43200,
-  "sitebarCustomItems": {
+  "sidebarCustomItems": {
   }
 }

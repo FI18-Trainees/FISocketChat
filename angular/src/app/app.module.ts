@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SitebarComponent } from './sitebar/sitebar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { ChatContainerComponent } from './chat-container/chat-container.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MessageContainerComponent } from './chat-container/message-container/message-container.component';
@@ -12,13 +12,13 @@ import { InputContainerComponent } from './input-container/input-container.compo
 import { MessageProfileImageComponent } from './chat-container/message-container/message-profile-image/message-profile-image.component';
 import { MessageHeaderComponent } from './chat-container/message-container/message-header/message-header.component';
 import { MessageContentComponent } from './chat-container/message-container/message-content/message-content.component';
-import { SitebarContentComponent } from './sitebar/sitebar-content/sitebar-content.component';
+import { SidebarContentComponent } from './sidebar/sidebar-content/sidebar-content.component';
 import { NotificationService } from 'src/services/notification.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SitebarComponent,
+    SidebarComponent,
     ChatContainerComponent,
     NavbarComponent,
     MessageContainerComponent,
@@ -26,7 +26,7 @@ import { NotificationService } from 'src/services/notification.service';
     MessageProfileImageComponent,
     MessageHeaderComponent,
     MessageContentComponent,
-    SitebarContentComponent
+    SidebarContentComponent
   ],
   imports: [
     BrowserModule,
