@@ -7,6 +7,26 @@
   "enable_connect_announcement": false,
   "uploads_max_age": 172800,
   "uploads_check_cooldown": 43200,
-  "sidebarCustomItems": {
-  }
+  "sidebarCustomItems": [
+    {
+      "header": "Info",
+      "id": "logininfo_sidebar",
+      "text": "Not logged in.",
+      "textcolor": "red",
+      "media": {
+        "mediaType": "image",
+        "mediaLink": "/public/assets/blaulicht.gif",
+        "mediaId": "logininfo_picture"
+      }
+    },
+    {
+      "header": "GitHub",
+      "link": "https://github.com/FI18-Trainees/FISocketChat",
+      "text": "Check out our Repo.",
+      "media": {
+        "mediaType": "icon",
+        "mediaLink": "fab fa-github fa-2x text-white mx-2"
+      }
+    }
+  ]
 }
