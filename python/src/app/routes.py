@@ -75,7 +75,7 @@ def send_emotes():
 @app.route('/api/commands')
 @auth.login_required
 def send_commands_list():
-    SHL.output(f"[{get_ip(request)}] Returning commands list", "/api/user")
+    SHL.output(f"[{get_ip(request)}] Returning commands list", "/api/commands")
     return jsonify(list(commands.keys()))
 
 
