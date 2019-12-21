@@ -42,11 +42,12 @@ export class AppComponent implements OnInit {
     errorbox = $('#errorbox');
 
     ngOnInit(): void {
+        const accessToken = this.getCookie('access_token');
         const socket = io.connect(window.location.href.slice(0, -1),
         {
             secure: true,
             transports: ['polling', 'websocket'],
-            query: 'token=" + getCookie("access_token")',
+            query: 'token=' + accessToken ? accessToken : '',
         });
         window.onfocus = () => {
             document.title = 'Socket.IO chat';
