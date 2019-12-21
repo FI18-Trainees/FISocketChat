@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jQuery';
+import * as $ from 'jquery';
 import * as io from 'socket.io-client';
 
 import { IMessage } from '../interfaces/IMessage';
