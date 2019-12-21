@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: npm install and tsc
+      - name: npm install and ng build --prod
         run: |
           cd angular
           npm install
