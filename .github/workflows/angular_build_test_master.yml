@@ -1,11 +1,11 @@
-name: TS_Build
+name: Angular_Build
 on:
   push:
     branches:
       - master
 
 jobs:
-  tsc:
+  angular_build:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
@@ -14,15 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Node 12
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: '12.x'
 
-      - name: cd angular
+      - name: npm install and ng build --prod
         run: |
           cd angular
-          
-      - name: npm install and tsc
-        run: |
           npm install
+          npm install -g @angular/cli > /dev/null
+          ng build --prod
