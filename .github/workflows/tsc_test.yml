@@ -18,4 +18,5 @@ jobs:
 
       - name: npm install and tsc
         run: |
+          cd angular
           npm install
