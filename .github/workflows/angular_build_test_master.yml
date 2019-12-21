@@ -1,4 +1,4 @@
-name: TS_Build
+name: Angular_Build
 on:
   push:
     branches:
