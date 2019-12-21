@@ -4,8 +4,8 @@ import { MediaType } from 'src/interfaces/ISidebarContentMedia';
 
 @Component({
   selector: 'app-sidebar-content',
-  templateUrl: './Sidebar-content.component.html',
-  styleUrls: ['./Sidebar-content.component.css']
+  templateUrl: './sidebar-content.component.html',
+  styleUrls: ['./sidebar-content.component.css']
 })
 export class SidebarContentComponent implements OnInit {
 
