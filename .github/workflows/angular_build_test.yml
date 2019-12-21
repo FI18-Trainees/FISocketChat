@@ -22,8 +22,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - run: cd angular
-      - run: pwd
-      - run: npm install
-      - run: npm install -g @angular/cli > /dev/null
-      - run: ng build --prod
+      - run: cd angular; npm install
+      - run: cd angular; npm install -g @angular/cli > /dev/null
+      - run: cd angular; ng build --prod
