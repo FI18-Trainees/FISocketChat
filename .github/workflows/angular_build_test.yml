@@ -1,8 +1,5 @@
 name: TS_Build
-on:
-  push:
-    branches:
-      - master
+on: [pull_request]
 
 jobs:
   tsc:
@@ -19,7 +16,8 @@ jobs:
         with:
           node-version: 12
 
-      - name: npm install and tsc
+      - name: npm install and npm run build
         run: |
           cd angular
-          npm install
+          npm ci
+          npm run build:ci 
