@@ -14,19 +14,16 @@ jobs:
       with:
         python-version: 3.7
 
-    - name: cd python
-      run: |
-        cd python
-
     - name: Install dependencies
       run: |
+        cd python
         python -m pip install --upgrade pip
-        python -m pip install -r python/requirements.txt
+        python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
 
     - name: Unittests
       run: |
-        cd src
+        cd python/src
         python server.py -disablelogin &
         cd ..
         python tests/start.py
@@ -40,19 +37,16 @@ jobs:
       with:
         python-version: 3.7
 
-    - name: cd python
-      run: |
-        cd python
-
     - name: Install dependencies
       run: |
+        cd python
         python -m pip install --upgrade pip
-        python -m pip install -r python/requirements.txt
+        python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
 
     - name: Unittests
       run: |
-        cd src
+        cd python/src
         python server.py -disablelogin &
         cd ..
         python tests/start.py
@@ -66,19 +60,16 @@ jobs:
       with:
         python-version: 3.6
 
-    - name: cd python
-      run: |
-        cd python
-
     - name: Install dependencies
       run: |
+        cd python
         python -m pip install --upgrade pip
-        python -m pip install -r python/requirements.txt
+        python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
 
     - name: Unittests
       run: |
-        cd src
+        cd python/src
         python server.py -disablelogin &
         cd ..
         python tests/start.py
@@ -92,19 +83,16 @@ jobs:
       with:
         python-version: 3.6
 
-    - name: cd python
-      run: |
-        cd python
-
     - name: Install dependencies
       run: |
+        cd python
         python -m pip install --upgrade pip
-        python -m pip install -r python/requirements.txt
+        python -m pip install -r requirements.txt
         python -m pip install "python-socketio[asyncio_client]"
 
     - name: Unittests
       run: |
-        cd src
+        cd python/src
         python server.py -disablelogin &
         cd ..
         python tests/start.py
