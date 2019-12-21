@@ -5,7 +5,7 @@ on:
       - master
 
 jobs:
-  tsc:
+  angular_build:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
