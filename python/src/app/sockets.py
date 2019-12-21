@@ -127,8 +127,14 @@ def connect(data=""):
             SHL.output(f"{yellow2}Invalid session.{white}", "S.ON Connect")
             emit('error', {'message': 'invalid token'})
             return
+        
+        try:
+            ip = socketio.server.environ[request.sid]["HTTP_CF_CONNECTING_IP"]
+        except KeyError:
+            SHL.output("Invalid network setup", "S.ON Connect")
+            emit('error', {'message': 'Invalid network setup'})
+            return
 
-        ip = socketio.server.environ[request.sid]["HTTP_CF_CONNECTING_IP"]
         SHL.output(f"IP: {ip}", "S.ON Connect")
         SHL.output(f"Username: {new_user.username}", "S.ON Connect")
 
@@ -143,7 +149,7 @@ def connect(data=""):
             if "cloudflare" in r.text.lower():
                 emit('error', {'status_code': r.status_code, 'message': "authentication service offline"})
                 return
-            emit('error', {'status_code': r.status_code, 'message': r.text})
+            emit('error', {'status_code': r.status_code, 'message': "failed authorization"})
             return
         SHL.output(f"User config: {r.json()}", "S.ON Connect")
 

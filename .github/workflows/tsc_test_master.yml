@@ -19,6 +19,10 @@ jobs:
         with:
           node-version: 12
 
+      - name: cd angular
+        run: |
+          cd angular
+          
       - name: npm install and tsc
         run: |
           npm install

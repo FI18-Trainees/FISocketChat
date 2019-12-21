@@ -48,11 +48,12 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        const accessToken = this.getCookie('access_token');
         const socket = io.connect(window.location.href.slice(0, -1),
         {
             secure: true,
             transports: ['polling', 'websocket'],
-            query: 'token=" + getCookie("access_token")',
+            query: 'token=' + accessToken ? accessToken : '',
         });
         window.onfocus = () => {
             document.title = 'Socket.IO chat';
@@ -229,8 +230,6 @@ export class AppComponent implements OnInit {
             }
             if (status.hasOwnProperty('username')) {
                 this.ownusername = (status.username as string).toLowerCase();
-                $('#logininfo_name').text(`Logged in as ${status.username}`).css('color', status.chat_color as string);
-                $('#logininfo_picture').attr('src', `https://profile.zaanposni.com/pictures/${this.ownusername}.png`);
             }
             if (status.hasOwnProperty('loginmode')) {
                 if (status.loginmode) {
@@ -239,7 +238,7 @@ export class AppComponent implements OnInit {
                 } else {
                     $('#username-item').css('display', 'block');
                     $('#user_name').val('DebugUser');
-                    $('logininfo_sitebar').css('display', 'none');
+                    $('logininfo_sidebar').css('display', 'none');
                     this.loginmode = false;
                 }
             }
