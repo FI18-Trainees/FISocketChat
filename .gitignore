@@ -111,7 +111,9 @@ venv.bak/
 /FISocketChat.pyproj
 /FISocketChat.sln
 /obj/x86/Debug
-/src/app/storage/quotes/
-/src/app/storage/uploads/
-/src/config/
-/src/app/public/js/compiled/
+
+/python/src/app/storage/quotes/
+/python/src/app/storage/uploads/
+/python/src/config/
+/python/src/app/public/js/compiled/
+/python/src/app/public/

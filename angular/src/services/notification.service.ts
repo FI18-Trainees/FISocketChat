@@ -20,7 +20,7 @@ export class NotificationService {
     //    // If it's okay let's create a notification
     //    new Notification("Welcome back!");
     } else if ((Notification as any).permission !== 'denied') {
-        Notification.requestPermission().then(permission => {
+        Notification.requestPermission().then(() => {
             // If the user accepts, let's create a notification
             if (this.checkPermission()) {
                 this.displayNotifyMode();
