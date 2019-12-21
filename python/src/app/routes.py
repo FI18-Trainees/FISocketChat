@@ -26,7 +26,7 @@ def get_ip(r) -> str:
 @app.route('/index')
 @auth.login_required
 def index():
-    return send_from_directory('public', 'index.html') # customItems=cfg.get("sitebarCustomItems", {})
+    return send_from_directory('public', 'index.html')  # customItems=cfg.get("sitebarCustomItems", {})
 
 
 @app.route("/status")
@@ -107,7 +107,34 @@ def send_chat_history():
 @app.route('/api/sidebar')
 def send_sidebar_info():
     SHL.output(f"[{get_ip(request)}] Returning sidebar info", "/api/sidebar")
-    return jsonify(cfg.get("sidebarCustomItems", []))
+    sidebar = cfg.get("sidebarCustomItems", [])
+    if not login_disabled:
+        actual_username = verify_token("")
+        if not actual_username:
+            SHL.output(f"[{get_ip(request)}] {red}Invalid login.{white}", "/api/sidebar")
+            return jsonify([])
+        try:
+            if sidebar[0].get("id") != "logininfo_sidebar":
+                SHL.output(f"[{get_ip(request)}]{red} logininfo_sidebar missing in sidebar content.{white}", "/api/sidebar")
+                SHL.output(f"[{get_ip(request)}]{red} Returning default sidebar without account info.{white}", "/api/sidebar")
+                raise IndexError
+            print(user_manager.configs)
+            sidebar[0] = {
+                "header": "Info",
+                "id": "logininfo_sidebar",
+                "text": f"Logged in as {actual_username}.",
+                "textcolor": user_manager.configs[user_manager.get_sid(actual_username)[0]]["user"].chat_color,
+                "media": {
+                    "mediaType": "image",
+                    "mediaLink": f"https://profile.zaanposni.com/pictures/{actual_username}.png",
+                    "mediaId": "logininfo_picture"
+                }
+            }
+        except IndexError:
+            SHL.output(f"Invalid config, Returning []", "/api/sidebar")
+            return jsonify([])
+
+    return jsonify(sidebar)
 
 
 @app.route('/api/uploads/<filename>')
