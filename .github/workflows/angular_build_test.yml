@@ -24,4 +24,5 @@ jobs:
 
       - run: cd angular; npm install
       - run: cd angular; npm install -g @angular/cli > /dev/null
+      - run: cd angular; npm list -g --depth=0
       - run: cd angular; ng build --prod
