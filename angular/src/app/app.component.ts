@@ -68,51 +68,6 @@ export class AppComponent implements OnInit {
             this.focused = false;
         };
 
-        this.messagefield.on('keydown', e => {
-            console.log('test');
-            switch (e.key) {
-                case 'Tab':
-                    // tab key
-                    e.preventDefault();
-                    if (e.shiftKey) {
-                        this.messagefield.val(this.messagefield.val() + '\t');
-                    } else {
-                        this.tabComplete(this.messagefield.prop('selectionStart'));
-                    }
-                    break;
-                case 'Enter':
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        // Enter was pressed without shift key
-                        // prevent default behavior
-                        e.preventDefault();
-                        $('form').trigger('submit');
-                    }
-                    break;
-                case 'ArrowUp':
-                    // up arrow
-                    if (this.messagefield.val() === '' || this.messagefield.val() === this.messageHistory[this.historyPointer]) {
-                        this.historyPointer -= 1;
-                        if (this.historyPointer < 0) {
-                            this.historyPointer = 0;
-                        }
-                        this.messagefield.val(this.messageHistory[this.historyPointer]);
-                    }
-                    break;
-                case 'ArrowDown':
-                    // down arrow
-                    if ((this.messagefield.val() as string).trim() === '' || this.messagefield.val() === this.messageHistory[this.historyPointer]) {
-                        this.historyPointer += 1;
-                        if (this.historyPointer > this.messageHistory.length - 1) {
-                            this.historyPointer = this.messageHistory.length - 1;
-                        }
-                        this.messagefield.val(this.messageHistory[this.historyPointer]);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        });
-
         $('form').on('submit', e => {
             e.preventDefault(); // prevents page reloading
             if (this.cooldown !== 0) {

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputContainerComponent implements OnInit {
 
+  messageinput: string;
+
   constructor() { }
 
   static mobileAndTabletcheck() {
@@ -30,11 +32,60 @@ export class InputContainerComponent implements OnInit {
 
   ngOnInit() {
     InputContainerComponent.mobileAndTabletcheck();
+    /*$('#messageinput').on('keyup', (event: Event) => {
+      this.checkPressedKey(event);
+    });*/
   }
 
   inputButtonClick() {
     const evt = document.createEvent('MouseEvent');
     evt.initEvent('click', true, false);
     (document.getElementById('fileinput') as HTMLInputElement).dispatchEvent(evt);
+  }
+
+  public checkPressedKey(event: Event) {
+    const keyboardEvent: KeyboardEvent = event as KeyboardEvent;
+    alert(keyboardEvent.key);
+    switch (keyboardEvent.key) {
+        case 'Tab':
+            // tab key
+            event.preventDefault();
+            if (keyboardEvent.shiftKey) {
+                this.messageinput = (this.messageinput + '\t');
+            } else {
+                this.tabComplete(this.messagefield.prop('selectionStart'));
+            }
+            break;
+        case 'Enter':
+            if (keyboardEvent.key === 'Enter' && !keyboardEvent.shiftKey) {
+                // Enter was pressed without shift key
+                // prevent default behavior
+                event.preventDefault();
+                $('form').trigger('submit');
+            }
+            break;
+        case 'ArrowUp':
+            // up arrow
+            if (this.messageinput === '' || this.messageinput === this.messageHistory[this.historyPointer]) {
+                this.historyPointer -= 1;
+                if (this.historyPointer < 0) {
+                    this.historyPointer = 0;
+                }
+                this.messageinput = this.messageHistory[this.historyPointer];
+            }
+            break;
+        case 'ArrowDown':
+            // down arrow
+            if (this.messageinput.trim() === '' || this.messageinput === this.messageHistory[this.historyPointer]) {
+                this.historyPointer += 1;
+                if (this.historyPointer > this.messageHistory.length - 1) {
+                    this.historyPointer = this.messageHistory.length - 1;
+                }
+                this.messageinput = this.messageHistory[this.historyPointer];
+            }
+            break;
+        default:
+            break;
+    }
   }
 }
