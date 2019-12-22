@@ -4,10 +4,10 @@
             <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
                 <div class="media-body">
                     <h5 class="mt-0 mb-1 text-white text-wrap">{{content.header}}</h5>
-                    {{content.text}}
+                    <span [style.color]="content.textcolor ? content.textcolor : 'white'">{{content.text}}</span>
                 </div>
-                <i *ngIf="content.media.mediaType == 0" [class]="content.media.mediaLink" [id]="content.media.mediaId"></i>
-                <img *ngIf="content.media.mediaType == 1" [src]="content.media.mediaLink" [id]="content.media.mediaId" class="mx-2 rounded-circle">
+                <i *ngIf="content.media.mediaType == 'icon'" [class]="content.media.mediaLink" [id]="content.media.mediaId"></i>
+                <img *ngIf="content.media.mediaType == 'image'" [src]="content.media.mediaLink" [id]="content.media.mediaId" class="mx-2 rounded-circle">
             </div>
         </a>
     </div>
@@ -18,10 +18,10 @@
         <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
             <div class="media-body">
                 <h5 class="mt-0 mb-1 text-white text-wrap">{{content.header}}</h5>
-                {{content.text}}
+                <span [style.color]="content.textcolor ? content.textcolor : 'white'">{{content.text}}</span>
             </div>
-            <i *ngIf="content.media.mediaType == 0" [class]="content.media.mediaLink" [id]="content.media.mediaId"></i>
-            <img *ngIf="content.media.mediaType == 1" [src]="content.media.mediaLink" [id]="content.media.mediaId" class="mx-2 rounded-circle">
+            <i *ngIf="content.media.mediaType == 'icon'" [class]="content.media.mediaLink" [id]="content.media.mediaId"></i>
+            <img *ngIf="content.media.mediaType == 'image'" [src]="content.media.mediaLink" [id]="content.media.mediaId" class="mx-2 rounded-circle">
         </div>
     </div>
 </ng-template>

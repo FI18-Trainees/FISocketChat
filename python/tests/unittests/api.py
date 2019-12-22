@@ -27,4 +27,9 @@ class TestAPI(unittest.TestCase):
         self.assertTrue(isinstance(r, list))
 
         # ===========================================================================
+        print("Testing /api/sidebar endpoint")
+        r = requests.get("http://127.0.0.1:5000/api/sidebar").json()
+        self.assertTrue(isinstance(r, list))
+
+        # ===========================================================================
         # Please append tests for your api endpoints here

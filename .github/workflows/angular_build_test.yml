@@ -1,0 +1,23 @@
+name: Angular_Build
+on: [pull_request]
+
+jobs:
+  angular_build:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: npm install and ng build --prod
+        run: |
+          cd angular
+          npm install
+          npm install -g @angular/cli > /dev/null
+          ng build --prod
