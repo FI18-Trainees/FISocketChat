@@ -5,7 +5,7 @@ from .shell import Console
 
 BASE_PATH = "config" if os.path.isdir("config") else "config-default"
 
-PATHS = ["main.json"]
+PATHS = ["main.json", "sidebar.json"]
 SHL = Console("cfg", cls=True)
 
 

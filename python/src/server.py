@@ -2,10 +2,12 @@
 import sys
 import os
 
-os.system("cls" if os.name == "nt" else "clear")
+from utils import Console, cfg, red, white
+from app import app
+from app.sockets import socketio
 
-from utils import Console, cfg
-from app import app, socketio
+if not os.path.exists(os.path.join("app", "public")):
+    raise RuntimeError(f"{red}public folder is missing, use 'ng build --prod' and try again{white}")
 
 SHL = Console("Start")
 

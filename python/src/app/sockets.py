@@ -4,15 +4,22 @@ import re
 
 from flask_socketio import emit
 from validators import url as val_url
+from flask_socketio import SocketIO
+from flask import request
 
-from app import socketio, emote_handler,  user_manager, verify_token, \
-    emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, special_image_regex, login_disabled, request, user_limiter, chat_history, announcer
-from app import handle_command as command_handler
-from app.obj import User, Command, Message, get_default_user
 from utils import Console, yellow2, white, green2, cfg
+from .obj import User, Command, Message, get_default_user, user_manager, user_limiter, chat_history
+from .flask_app import app
+from .authentication import verify_token
+from .commands import handle_command as command_handler
+from .emotes import emote_handler
+from .chat_regex import *
+from .chat_utils import announcer
+from .runtime_settings import login_disabled
 
 SHL = Console("Socket")
+
+socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
 
 
 @socketio.on('chat_command')

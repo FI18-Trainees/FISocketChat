@@ -6,10 +6,13 @@ from hashlib import sha1
 from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash
 from werkzeug.utils import secure_filename
 
-from app import app, emote_handler, auth, user_manager, chat_history, verify_token, login_disabled, cfg
-from app.obj import get_default_user, ResourceManager
-from utils import Console, red, white, cfg
-from app.commands import commands
+from utils import cfg, Console, red, white
+from .flask_app import app
+from .obj import get_default_user, ResourceManager, chat_history, user_manager
+from .emotes import emote_handler
+from .authentication import auth, verify_token
+from .runtime_settings import login_disabled
+from .commands import commands
 
 SHL = Console("Routes")
 
