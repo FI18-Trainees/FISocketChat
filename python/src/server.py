@@ -2,6 +2,8 @@
 import sys
 import os
 
+# TODO: use a "import start_checkup.py"
+# TODO: use -unittest start param
 from utils import Console, cfg, red, white
 from app import app
 from app.sockets import socketio
