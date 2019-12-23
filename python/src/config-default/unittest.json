@@ -7,5 +7,6 @@
   "enable_connect_announcement": false,
   "uploads_max_age": 172800,
   "uploads_check_cooldown": 43200,
-  "dummy_user": ["ArPiiX", "SFFan123", "monkmitrad", "yannick"]
+  "dummy_user": ["ArPiiX", "SFFan123", "monkmitrad", "yannick"],
+  "sidebar": []
 }

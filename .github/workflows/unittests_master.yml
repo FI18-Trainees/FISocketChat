@@ -24,7 +24,7 @@ jobs:
     - name: Unittests
       run: |
         cd python/src
-        python server.py -disablelogin &
+        python server.py -unittest &
         cd ..
         python tests/start.py
 
@@ -47,7 +47,7 @@ jobs:
     - name: Unittests
       run: |
         cd python/src
-        python server.py -disablelogin &
+        python server.py -unittest &
         cd ..
         python tests/start.py
 
@@ -70,7 +70,7 @@ jobs:
     - name: Unittests
       run: |
         cd python/src
-        python server.py -disablelogin &
+        python server.py -unittest &
         cd ..
         python tests/start.py
 
@@ -93,7 +93,7 @@ jobs:
     - name: Unittests
       run: |
         cd python/src
-        python server.py -disablelogin &
+        python server.py -unittest &
         cd ..
         python tests/start.py
 
