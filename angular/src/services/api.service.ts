@@ -4,6 +4,8 @@ import { filter, map, debounceTime, take } from 'rxjs/operators';
 import { MapOperator } from 'rxjs/internal/operators/map';
 import { HttpClient } from '@angular/common/http';
 import { ISidebarContent } from 'src/interfaces/ISidebarContent';
+import { IMessage } from 'src/interfaces/IMessage';
+import { async } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,45 @@ export class ApiService {
       );
     }
     return of(this.sidebarContent);
+  }
+
+  getMessageHistory(ownusername: string): IMessage[] {
+    let result: IMessage[];
+    this.httpClient.get<IMessage[]>('/api/chathistory?username=$(ownusername)').pipe(
+      map(x => {
+        result = x;
+      })
+    );
+    if (result.length === 0) {
+      this.httpClient.get<IMessage[]>('/api/chathistory').pipe(
+        map(x => {
+          result = x;
+        })
+      );
+      if (result.length > 0) {
+        return result;
+      }
+    }
+  }
+
+  getCommands(): string[] {
+    let result: string[];
+    this.httpClient.get<string[]>('/api/commands').pipe(
+      map(x => {
+        result = x;
+      })
+    );
+    return result;
+  }
+
+  getUserlist(): string[] {
+    let result: string[];
+    this.httpClient.get<string[]>('api/user').pipe(
+      map(x => {
+        result = x;
+      })
+    );
+    result.push('everyone');
+    return result;
   }
 }
