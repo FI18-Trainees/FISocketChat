@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 import sys
-import os
 
-os.system("cls" if os.name == "nt" else "clear")
-
+import start_checkup
 from utils import Console, cfg
-from app import app, socketio
+from app import app
+from app.sockets import socketio
 
-SHL = Console("Start")
+SHL = Console("Startup")
 
 
 def run():
