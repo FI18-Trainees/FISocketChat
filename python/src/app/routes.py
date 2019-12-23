@@ -85,7 +85,7 @@ def send_commands_list():
 @app.route('/api/user')
 @auth.login_required
 def send_user():
-    r = [x.get("user", get_default_user()).username for x in user_manager.configs.values()]
+    r = [x.username for x in user_manager.configs.values()]
     SHL.output(f"[{get_ip(request)}] Returning: {r}", "/api/user")
     return jsonify(r)
 
@@ -126,7 +126,7 @@ def send_sidebar_info():
                 "header": "Info",
                 "id": "logininfo_sidebar",
                 "text": f"Logged in as {actual_username}.",
-                "textcolor": user_manager.configs[user_manager.get_sid(actual_username)[0]]["user"].chat_color,
+                "textcolor": user_manager.configs[user_manager.get_sid(actual_username)[0]].chat_color,
                 "media": {
                     "mediaType": "image",
                     "mediaLink": f"https://profile.zaanposni.com/pictures/{actual_username}.png",

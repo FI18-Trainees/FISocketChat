@@ -31,7 +31,7 @@ class SystemMessenger:
             send_to_sid = user_manager.get_sid(username)
         else:
             send_to_sid = [kwargs.get("sid", request.sid)]
-            username = user_manager.configs[send_to_sid[0]]["user"].username
+            username = user_manager.configs[send_to_sid[0]].username
 
         try:
             for sid in send_to_sid:
