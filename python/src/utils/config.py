@@ -34,5 +34,20 @@ class __Config:
     def get(self, key: str, default=None):
         return self.options.get(key, default)
 
+    def load_unittest_config(self, debug: bool = False):
+        SHL.output(f"Loading unittest configfile {os.path.join(BASE_PATH, 'unittest.json')}")
+        try:
+            with open(os.path.join(BASE_PATH, 'unittest.json'), 'r', encoding="utf-8") as c:
+                data = json.load(c)
+        except FileNotFoundError:
+            return
+        except json.JSONDecodeError:
+            return
+
+        for key, value in data.items():
+            self.options[key] = value
+            if debug:
+                SHL.output(f"[{key}]: {value}")
+
 
 cfg = __Config()

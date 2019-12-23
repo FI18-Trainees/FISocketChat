@@ -24,3 +24,10 @@ if "-debug" in start_args:
 
 if debug_mode:
     SHL.output(f"{red}Enabled debug_mode.{white}")
+
+if "-unittest" in start_args:
+    SHL.output(f"{red}Enabled unittest mode.{white}")
+    login_disabled = True
+    dummy_user = False
+    debug_mode = False
+    cfg.load_unittest_config()

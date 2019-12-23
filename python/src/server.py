@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 import sys
-import os
 
-# TODO: use a "import start_checkup.py"
-# TODO: use -unittest start param
-from utils import Console, cfg, red, white
+import start_checkup
+from utils import Console, cfg
 from app import app
 from app.sockets import socketio
 
-if not os.path.exists(os.path.join("app", "public")):
-    raise RuntimeError(f"{red}public folder is missing, use 'ng build --prod' and try again{white}")
-
-SHL = Console("Start")
+SHL = Console("Startup")
 
 
 def run():

@@ -4,8 +4,8 @@ import shutil
 
 
 from utils import Console, white, green2, red, cfg
-from .emotes import emote_handler
 from .runtime_settings import login_disabled, debug_mode, dummy_user
+from .emotes import emote_handler
 from .authentication import auth
 from .obj import user_manager, get_default_user, user_limiter, SystemMessenger, SystemMessage, chat_history
 from .chat_regex import *
