@@ -182,7 +182,7 @@ def connect(data=""):
         emit('status', {'loginmode': False})
 
     user_manager.add(sid=request.sid, user=new_user)
-    SHL.output(f"User {new_user.display_name} ({new_user.username}) connected ({user_manager.get_count()}).")
+    SHL.output(f"User {new_user.display_name} ({new_user.username}) connected ({user_manager.get_count()}).", "S.ON Connect")
     emit_status({'count': user_manager.get_count()})
     emit('status', {'on_ready': True})
 
