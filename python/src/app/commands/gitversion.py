@@ -1,7 +1,7 @@
 import subprocess
 
 from app.obj import SystemMessenger, User, Command, Embed
-from utils import Console, white, red, yellow
+from utils import Console, white, red, yellow, blue2
 
 SHL = Console("Command gitversion")
 
@@ -21,7 +21,7 @@ try:
         __git_remote_repo = git_remote_url[git_remote_url.index(":")+1:]
         git_remote_url = "https://" + __git_remote_host + "/" + __git_remote_repo
 
-        SHL.output(f"{white}Found local version: {git_version_short_hash}, Git over SSH", "gitversion")
+        SHL.output(f"{blue2}Found local version: {git_version_short_hash}, Git over SSH{white}", "gitversion")
 
         __generated_link = git_remote_url + "/commits/" + git_version_hash
         __msg = f"Current Version is <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{__generated_link}\">{git_version_short_hash}</a>.<br />"
@@ -29,24 +29,24 @@ try:
     elif git_remote_url.startswith("https://"):
         git_remote_url.replace(".git", "")
 
-        SHL.output(f"{white}Found local version: {git_version_short_hash}, Git over HTTPS", "gitversion")
+        SHL.output(f"{blue2}Found local version: {git_version_short_hash}, Git over HTTPS{white}", "gitversion")
 
         __generated_link = git_remote_url + "/commits/" + git_version_hash
         __msg = f"Current Version is <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"{__generated_link}\">{git_version_short_hash}</a>.<br />"
 
     else:
-        SHL.output(f"{red}Git remote URL could not be parsed, gitversion cannot link to the repo.", "gitversion")
+        SHL.output(f"{red}Git remote URL could not be parsed, gitversion cannot link to the repo.{white}", "gitversion")
 
-        SHL.output(f"{yellow}Found local version: {git_version_short_hash}, Git remote not found", "gitversion")
+        SHL.output(f"{yellow}Found local version: {git_version_short_hash}, Git remote not found{white}", "gitversion")
 
         __msg = f"Current Version is {git_version_short_hash}.<br /> " \
                 f"<a class=\"text-danger\">Error getting remote URL, cannot link to repo. Server owner messed up.</a>"
 
 
 except subprocess.CalledProcessError:
-    SHL.output(f"{red}Error getting git version", "gitversion")
+    SHL.output(f"{red}Error getting git version{white}", "gitversion")
 except UnicodeDecodeError:
-    SHL.output(f"{red}Error parsing git version", "gitversion")
+    SHL.output(f"{red}Error parsing git version{white}", "gitversion")
 
 
 def main(system: SystemMessenger, author: User, cmd: Command, params: list):

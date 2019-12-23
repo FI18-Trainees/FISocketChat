@@ -1,7 +1,7 @@
 import os.path
 import json
 
-from .shell import Console
+from .shell import Console, blue2, white
 
 BASE_PATH = "config" if os.path.isdir("config") else "config-default"
 
@@ -15,9 +15,9 @@ class __Config:
         self.reload(debug=debug)
 
     def reload(self, debug: bool = False):
-        SHL.output(f"Reloading config.")
+        SHL.output(f"{blue2}Reloading config.{white}")
         for path in PATHS:
-            SHL.output(f"Reloading configfile {os.path.join(BASE_PATH, path)}")
+            SHL.output(f"{blue2}Reloading configfile {os.path.join(BASE_PATH, path)}{white}")
             try:
                 with open(os.path.join(BASE_PATH, path), 'r', encoding="utf-8") as c:
                     data = json.load(c)
@@ -35,7 +35,7 @@ class __Config:
         return self.options.get(key, default)
 
     def load_unittest_config(self, debug: bool = False):
-        SHL.output(f"Loading unittest configfile {os.path.join(BASE_PATH, 'unittest.json')}")
+        SHL.output(f"{blue2}Loading unittest configfile {os.path.join(BASE_PATH, 'unittest.json')}{white}")
         try:
             with open(os.path.join(BASE_PATH, 'unittest.json'), 'r', encoding="utf-8") as c:
                 data = json.load(c)

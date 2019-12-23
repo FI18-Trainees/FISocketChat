@@ -4,7 +4,7 @@ import time
 import threading
 import os.path
 
-from utils import Console
+from utils import Console, blue2, white
 
 SHL = Console("EmotesHandler")
 
@@ -18,8 +18,7 @@ class Emotes:
         self.runCheck = start
         self.emit_status = None
         if not self.runCheck:
-            SHL.output(f"Getting Emotes once!")
-            SHL.output(f"Setting new emotes!")
+            SHL.output(f"{blue2}Setting emotes.{white}")
             self.emotes = self.get_emotes()
         else:
             self.start_reloader()
