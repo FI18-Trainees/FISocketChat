@@ -6,9 +6,7 @@ class UserManager:
         self.configs = {}
 
     def add(self, sid: str, user: User):
-        self.configs[sid] = {
-            "user": user
-        }
+        self.configs[sid] = user
 
     def rem(self, sid):
         self.configs.pop(sid, None)
@@ -17,7 +15,7 @@ class UserManager:
         return len(self.configs)
 
     def get_sid(self, username: str) -> list:
-        return [x for x in self.configs if self.configs[x]["user"].username == username]
+        return [x for x in self.configs if self.configs[x].username == username]
 
     def __str__(self):
         return f"User count: {self.get_count()}"

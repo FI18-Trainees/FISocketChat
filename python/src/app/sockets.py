@@ -7,7 +7,7 @@ from validators import url as val_url
 from flask_socketio import SocketIO
 from flask import request
 
-from utils import Console, yellow2, white, green2, cfg
+from utils import Console, yellow, white, green2, cfg, red
 from .obj import User, Command, Message, get_default_user, user_manager, user_limiter, chat_history
 from .flask_app import app
 from .authentication import verify_token
@@ -26,31 +26,30 @@ socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins
 def handle_command(command):
     if user_limiter.check_cooldown(request.sid):
         if login_disabled:
-            SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_command")
+            SHL.output(f"{yellow}Spam protection triggered for SID: {request.sid}{white}", "S.ON chat_command")
         else:
-            SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
-                       f"{user_manager.configs[request.sid]['user'].username}", "S.ON chat_command")
+            SHL.output(f"{yellow}Spam protection triggered for user: "
+                       f"{user_manager.configs[request.sid].username}{white}", "S.ON chat_command")
         return
     user_limiter.update_cooldown(request.sid)
-    SHL.output(f"Received message {command}", "S.ON chat_message")
 
     try:
         cmd = Command(author=get_default_user(), content=str(command['message']).strip(), system=False)
         cmd.author.display_name = str(command['display_name']).strip()
         cmd.author.username = cmd.author.display_name
     except KeyError:
-        SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_command")
+        SHL.output(f"{yellow}Bad request.{white}", "S.ON chat_command")
         emit("error", "bad request")
         return
     except ValueError:
-        SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_command")
+        SHL.output(f"{yellow}Bad request.{white}", "S.ON chat_command")
         emit("error", "bad request")
         return
 
     if not login_disabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
-            cmd.author = user_manager.configs[request.sid]["user"]
+            cmd.author = user_manager.configs[request.sid]
         except KeyError:
             SHL.output("Invalid userconfig", "S.ON chat_command")
             emit('error', {'message': 'invalid userconfig'})
@@ -61,7 +60,7 @@ def handle_command(command):
             return
 
     if cmd.author.display_name.find('Server') == 0 or len(cmd.author.display_name) not in range(1, 100):  # only allow username with length 1-100
-        SHL.output(f"{yellow2}Invalid username {cmd.author.display_name}{white}", "S.ON chat_message")
+        SHL.output(f"{yellow}Invalid username {cmd.author.display_name}{white}", "S.ON chat_message")
         emit('error', {"message": "invalid username"})
         return
 
@@ -72,31 +71,30 @@ def handle_command(command):
 def handle_message(message):
     if user_limiter.check_cooldown(request.sid):
         if login_disabled:
-            SHL.output(f"{yellow2}Spam protection triggered {white}for SID: {request.sid}", "S.ON chat_message")
+            SHL.output(f"{yellow}Spam protection triggered for SID: {request.sid}{white}", "S.ON chat_message")
         else:
-            SHL.output(f"{yellow2}Spam protection triggered {white}for user: "
-                       f"{user_manager.configs[request.sid]['user'].username}", "S.ON chat_message")
+            SHL.output(f"{yellow}Spam protection triggered for user: "
+                       f"{user_manager.configs[request.sid].username}{white}", "S.ON chat_message")
         return
     user_limiter.update_cooldown(request.sid)
-    SHL.output(f"Received message {message}", "S.ON chat_message")
 
     try:
         msg = Message(author=get_default_user(), content=str(message['message']).strip(), system=False)
         msg.author.display_name = str(message['display_name']).strip()
         msg.author.username = msg.author.display_name
     except KeyError:
-        SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_message")
+        SHL.output(f"{yellow}Bad request.{white}", "S.ON chat_message")
         emit("error", "bad request")
         return
     except ValueError:
-        SHL.output(f"{yellow2}Bad request.{white}", "S.ON chat_command")
+        SHL.output(f"{yellow}Bad request.{white}", "S.ON chat_command")
         emit("error", "bad request")
         return
 
     if not login_disabled:
         SHL.output("Importing userconfig", "S.ON chat_message")
         try:
-            msg.author = user_manager.configs[request.sid]["user"]
+            msg.author = user_manager.configs[request.sid]
         except KeyError:
             SHL.output("Invalid userconfig", "S.ON chat_message")
             emit('error', {'message': 'invalid userconfig'})
@@ -107,7 +105,7 @@ def handle_message(message):
             return
 
     if any(x in msg.author.display_name for x in ["System", "Server"]) or len(msg.author.display_name) not in range(1, 100):  # only allow username with length 1-100
-        SHL.output(f"{yellow2}Invalid username {msg.author.display_name}{white}", "S.ON chat_message")
+        SHL.output(f"{yellow}Invalid username {msg.author.display_name}{white}", "S.ON chat_message")
         emit('error', {"message": "invalid username"})
         return
 
@@ -117,28 +115,29 @@ def handle_message(message):
                         replace_newline, codeblock_replacer))
 
         chat_history.add_message(msg=msg)  # log
+        SHL.output(f"Received message '{msg.raw_content}' from {msg.author}", "S.ON chat_message")
         emit('chat_message', msg.to_json(), broadcast=True)
     else:
-        SHL.output(f"{yellow2}Invalid message length: {len(msg.content)}{white}", "S.ON chat_message")
+        SHL.output(f"{yellow}Invalid message length: {len(msg.content)}{white}", "S.ON chat_message")
         emit('error', {"message": "invalid message"})
 
 
 @socketio.on('connect')
 def connect(data=""):
-    SHL.output(f"New connection with data: {data}", "S.ON Connect")
+    SHL.output(f"User connecting.", "S.ON Connect")
     new_user = User(display_name="Shawn", username="Shawn")
     if not login_disabled:
         SHL.output("Validating session for new connection.", "S.ON Connect")
         new_user.username = verify_token(data)
         if not new_user.username:
-            SHL.output(f"{yellow2}Invalid session.{white}", "S.ON Connect")
+            SHL.output(f"{yellow}Invalid session.{white}", "S.ON Connect")
             emit('error', {'message': 'invalid token'})
             return
         
         try:
             ip = socketio.server.environ[request.sid]["HTTP_CF_CONNECTING_IP"]
         except KeyError:
-            SHL.output("Invalid network setup", "S.ON Connect")
+            SHL.output(f"{yellow}Invalid network setup{white}", "S.ON Connect")
             emit('error', {'message': 'Invalid network setup'})
             return
 
@@ -151,14 +150,14 @@ def connect(data=""):
                              'Authorization': f'Bearer {request.cookies.get("access_token", "")}'
                          })
 
+        SHL.output(f"Loading userconfig", "S.ON Connect")
         if r.status_code != 200:
-            SHL.output(f"{yellow2}Error on receiving userconfig: {r.status_code}{white}", "S.ON Connect")
+            SHL.output(f"{yellow}Error on receiving userconfig: {r.status_code}{white}", "S.ON Connect")
             if "cloudflare" in r.text.lower():
                 emit('error', {'status_code': r.status_code, 'message': "authentication service offline"})
                 return
             emit('error', {'status_code': r.status_code, 'message': "failed authorization"})
             return
-        SHL.output(f"User config: {r.json()}", "S.ON Connect")
 
         try:
             config = r.json()
@@ -167,11 +166,11 @@ def connect(data=""):
                 new_user.chat_color = config["chat_color"]
                 new_user.avatar = f"https://profile.zaanposni.com/pictures/{new_user.username}.png"
         except KeyError:
-            SHL.output("Invalid userconfig", "S.ON Connect")
+            SHL.output(f"{yellow}Invalid userconfig{white}", "S.ON Connect")
             emit('error', {'message': 'invalid userconfig'})
             return
         except AttributeError:
-            SHL.output("Invalid userconfig", "S.ON Connect")
+            SHL.output(f"{yellow}Invalid userconfig{white}", "S.ON Connect")
             emit('error', {'message': 'invalid userconfig'})
             return
 
@@ -183,17 +182,16 @@ def connect(data=""):
         emit('status', {'loginmode': False})
 
     user_manager.add(sid=request.sid, user=new_user)
-    SHL.output(f"User count: {user_manager.get_count()}.", "S.ON Connect")
+    SHL.output(f"User {new_user.display_name} ({new_user.username}) connected ({user_manager.get_count()}).", "S.ON Connect")
     emit_status({'count': user_manager.get_count()})
     emit('status', {'on_ready': True})
 
 
 @socketio.on('disconnect')
 def disconnect():
-    SHL.output("User disconnected.", "S.ON Disconnect")
     user_manager.rem(request.sid)
     user_limiter.remove_sid(request.sid)
-    SHL.output(f"User count: {user_manager.get_count()}.", "S.ON Disconnect")
+    SHL.output(f"User disconnected ({user_manager.get_count()}).", "S.ON Disconnect")
     emit_status({'count': user_manager.get_count()})
 
 

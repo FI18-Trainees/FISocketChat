@@ -20,8 +20,9 @@ white2 = '\033[97m'
 
 
 class Console:
-    def ts(self, c=False):
-        if c: return f'{yellow2}[{str(datetime.now()).split(".", 1)[0]}]{white}'
+    def ts(self, c: bool = False):
+        if c:
+            return f'{yellow}[{str(datetime.now()).split(".", 1)[0]}]{white}'
         return f'[{str(datetime.now()).split(".", 1)[0]}]'
 
     def __init__(self, prefix, cls=False):
@@ -31,6 +32,6 @@ class Console:
 
     def output(self, text, p=""):
         if p:
-            print(f'{self.ts(1)} {green2}[{p}]{white} {str(text)}')
+            print(f'{self.ts(True)} {green2}[{p}]{white} {str(text)}')
         else:
-            print(f'{self.ts(1)} {self.prefix} {str(text)}')
+            print(f'{self.ts(True)} {self.prefix} {str(text)}')

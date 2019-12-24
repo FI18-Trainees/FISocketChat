@@ -6,7 +6,7 @@ from flask_socketio import emit
 
 from app import debug_mode
 from app.obj import SystemMessenger, User, Command
-from utils import Console, red, white
+from utils import Console, red, white, blue2
 
 SHL = Console("CommandLoader")
 
@@ -56,7 +56,7 @@ def register(func, settings):
 
     systems[invoke.lower()] = SystemMessenger(default_display_name)
     commands[invoke.lower()] = wrapper
-    SHL.output(f"Registered {settings.get('invoke', 'unknown command')}")
+    SHL.output(f"{blue2}Registered {settings.get('invoke', 'unknown command')}{white}")
 
 
 def handle_command(author: User, command: Command) -> None:
@@ -76,7 +76,7 @@ def handle_command(author: User, command: Command) -> None:
         else:
             emit('error', {"message": "unknown command"})
     except Exception as e:
-        SHL.output(f"Exception in {params[0]}\n{traceback.print_exc()}", "CommandHandler")
+        SHL.output(f"{red}Exception in {params[0]}{white}\n{traceback.print_exc()}", "CommandHandler")
         emit('error', {"message": "Something went wrong."})
 
 
@@ -88,8 +88,7 @@ def register_all():
             register(command.main, command.settings)
         except:
             pass
-    SHL.output(f"Done.")
-    SHL.output("==================")
+    SHL.output(f"{blue2}Done.{white}")
 
 
 register_all()

@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-from utils import Console, white, green2, red, cfg
+from utils import Console, white, green2, red, cfg, blue2
 from .runtime_settings import login_disabled, debug_mode, dummy_user
 from .emotes import emote_handler
 from .authentication import auth
@@ -23,11 +23,11 @@ announcer.broadcast("Chat initialised.", predict_error=True)
 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    SHL.output(f"Upload folder was not present, created upload folder.", "Upload")
+    SHL.output(f"{blue2}Upload folder was not present, created upload folder.{white}", "Upload")
 
 else:
     # cleaning upload folder
-    SHL.output(f"Cleaning Upload folder.", "Upload")
+    SHL.output(f"{blue2}Cleaning Upload folder.{white}", "Upload")
     for the_file in os.listdir(app.config['UPLOAD_FOLDER']):
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], the_file)
         try:

@@ -13,6 +13,7 @@ class Message:
 
     def __init__(self, author: User, content: str, system: bool, append_allow: bool = True,
                  priority: prio_types = prio_types.default):
+        self.raw_content = content
         self.author = author
         self.content = content
         self.system = system
