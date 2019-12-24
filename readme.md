@@ -10,9 +10,18 @@
 
 **Python 3.6 or higher**
 ```
+cd python
 pip install -r requirements.txt
 ```
 Since there are some packages that affect our requirements, you should consider using a new venv and then installing the requirements.txt
+
+**Build angular**
+```bash
+cd angular
+npm install
+ng build --prod
+```
+
 ## Start
 ```bash
 cd src
