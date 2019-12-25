@@ -1,4 +1,4 @@
-name: Angular_Build
+name: AngularBuild
 on: [pull_request]
 
 jobs:
