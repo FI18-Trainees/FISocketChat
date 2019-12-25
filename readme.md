@@ -24,7 +24,7 @@ ng build --prod
 
 ## Start
 ```bash
-cd src
+cd python/src
 python3 server.py -disablelogin
 ```
 
