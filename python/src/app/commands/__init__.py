@@ -6,7 +6,7 @@ from flask_socketio import emit
 
 from app import debug_mode
 from app.obj import SystemMessenger, User, Command
-from utils import Console, red, white, blue2
+from utils import Console, red, white, blue2, yellow
 
 SHL = Console("CommandLoader")
 
@@ -50,6 +50,7 @@ def register(func, settings):
             if debug_mode:
                 func(system=systems[inv.lower()], author=author, cmd=cmd, params=params)
             else:
+                SHL.output(f"{yellow}{inv} only usable in debug_mode{white}", "CommandHandler")
                 systems[inv.lower()].send_error("Only available in debug mode")
             return
         func(system=systems[inv.lower()], author=author, cmd=cmd, params=params)
@@ -61,12 +62,14 @@ def register(func, settings):
 
 def handle_command(author: User, command: Command) -> None:
     if not command.content.startswith("/"):
+        SHL.output(f"{yellow}{author} used a invalid command: {command.content}{white}", "CommandHandler")
         emit('error', {"message": "invalid syntax"})
         return
 
     try:
         params = parse_param_list(command.content)
     except IndexError:
+        SHL.output(f"{yellow}{author} used a invalid command: {command.content}{white}", "CommandHandler")
         emit('error', {"message": "invalid invoke"})
         return
 
@@ -74,6 +77,7 @@ def handle_command(author: User, command: Command) -> None:
         if params[0].lower() in commands.keys():
             commands[params[0].lower()](author=author, cmd=command, params=params[1:], inv=params[0])
         else:
+            SHL.output(f"{yellow}{author} used a invalid command: {command.content}{white}", "CommandHandler")
             emit('error', {"message": "unknown command"})
     except Exception as e:
         SHL.output(f"{red}Exception in {params[0]}{white}\n{traceback.print_exc()}", "CommandHandler")

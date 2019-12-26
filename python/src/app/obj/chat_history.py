@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, List
 
 from .message import Message
 from .embed import Embed
@@ -31,7 +31,7 @@ class ChatHistory:
     def to_json(self, username: str = "all") -> list:
         return [x.to_json() for x in self.__history if x.username in [username, "all"]]
 
-    def get_messages(self, username: str = "all"):
+    def get_messages(self, username: str = "all") -> List[Message]:
         return [x for x in self.__history if x.username in [username, "all"]]
 
 

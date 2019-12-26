@@ -72,13 +72,14 @@ def send_assets(path):
 
 @app.route('/api/emotes')
 def send_emotes():
+    SHL.output(f"[{get_ip(request)}] Returning emotes list ({len(emote_handler.emotes)})", "/api/emotes")
     return jsonify(emote_handler.emotes)
 
 
 @app.route('/api/commands')
 @auth.login_required
 def send_commands_list():
-    SHL.output(f"[{get_ip(request)}] Returning commands list", "/api/commands")
+    SHL.output(f"[{get_ip(request)}] Returning commands list ({len(commands)})", "/api/commands")
     return jsonify(list(commands.keys()))
 
 
@@ -99,12 +100,14 @@ def send_chat_history():
             return jsonify([])
         req_username = request.args.get("username", "all")
         if req_username in ["all", actual_username]:
-            SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
-            return jsonify(chat_history.to_json(username=req_username))
+            history_user = chat_history.to_json(username=req_username)
+            SHL.output(f"[{get_ip(request)}] Returning chat history for user '{req_username}' ({len(history_user)})", "/api/chathistory")
+            return jsonify(history_user)
         SHL.output(f"[{get_ip(request)}] {red}Invalid username requested.{white}", "/api/chathistory")
         return jsonify([])
-    SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
-    return jsonify(chat_history.to_json(username="all"))
+    history_all = chat_history.to_json(username="all")
+    SHL.output(f"[{get_ip(request)}] Returning chat history for user 'all' ({len(history_all)})", "/api/chathistory")
+    return jsonify(history_all)
 
 
 @app.route('/api/sidebar')
