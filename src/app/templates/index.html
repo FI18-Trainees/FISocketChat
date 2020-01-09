@@ -60,7 +60,7 @@
             </div>
             {% for key in customItems %}
             <div class="sitebar-content">
-                <a href="{{customItems[key].get(" url ", " ") }}" target="_blank">
+                <a href="{{ customItems[key].get("url", " ") }}" target="_blank">
                     <div class="media d-inline-flex text-decoration-none bg-lighter-01 rounded p-2 w-100">
                         <div class="media-body">
                             <h5 class="mt-0 mb-1 text-white text-wrap">{{ customItems[key].get("title", "") }}</h5>
