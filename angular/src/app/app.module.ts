@@ -15,6 +15,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SidebarElementComponent } from './sidebar/sidebar-element/sidebar-element.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChatComponent } from './chat/chat.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     SidebarComponent,
     SidebarElementComponent,
+    ChatComponent,
+    InputComponent,
   ],
   imports: [
     BrowserModule,
