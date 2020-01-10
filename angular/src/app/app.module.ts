@@ -8,16 +8,16 @@ import { MatCardModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { SitebarComponent } from './sitebar/sitebar.component';
-import { SitebarElementComponent } from './sitebar-element/sitebar-element.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarElementComponent } from './sidebar/sidebar-element/sidebar-element.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SitebarComponent,
-    SitebarElementComponent,
+    SidebarComponent,
+    SidebarElementComponent,
   ],
   imports: [
     BrowserModule,
