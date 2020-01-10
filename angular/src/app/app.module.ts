@@ -2,7 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule,
+         MatSidenavModule,
+         MatFormFieldModule,
+         MatSelectModule,
+} from '@angular/material';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +30,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

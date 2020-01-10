@@ -1,4 +1,9 @@
 <mat-card>
-    <mat-card-title>Test Header</mat-card-title>
-    <mat-card-content>Test Content</mat-card-content>
+    <mat-form-field>
+        <mat-select #notificationmode value="no">
+            <mat-option value="no">Keine Notifications</mat-option>
+            <mat-option value="mention">Nur bei Mentions</mat-option>
+            <mat-option value="all">Alle Notifications</mat-option>
+        </mat-select>
+    </mat-form-field>
 </mat-card>
