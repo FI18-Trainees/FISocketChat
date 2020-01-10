@@ -7,6 +7,10 @@ import { MatCardModule,
          MatFormFieldModule,
          MatSelectModule,
          MatCheckboxModule,
+         MatButtonModule,
+         MatChipsModule,
+         MatInputModule,
+         MatIconModule,
 } from '@angular/material';
 
 
@@ -18,6 +22,7 @@ import { SidebarElementComponent } from './sidebar/sidebar-element/sidebar-eleme
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './chat/chat.component';
 import { InputComponent } from './input/input.component';
+import { MessageComponent } from './chat/message/message.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,7 @@ import { InputComponent } from './input/input.component';
     SidebarElementComponent,
     ChatComponent,
     InputComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,11 @@ import { InputComponent } from './input/input.component';
     MatSidenavModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatInputModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

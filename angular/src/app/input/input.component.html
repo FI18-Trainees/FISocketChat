@@ -1,3 +1,6 @@
-<mat-form-field>
-    
+<mat-form-field appearance="outline">
+    <button mat-button matPrefix>File</button>
+    <textarea matInput placeholder="Nachricht:" floatLabel="auto" #messageInput></textarea>
+    <button mat-icon-button matSuffix><mat-icon>sentiment_very_satisfied</mat-icon></button>
 </mat-form-field>
+<button mat-button>Send</button>
