@@ -6,6 +6,7 @@ import { MatCardModule,
          MatSidenavModule,
          MatFormFieldModule,
          MatSelectModule,
+         MatCheckboxModule,
 } from '@angular/material';
 
 
@@ -37,6 +38,7 @@ import { InputComponent } from './input/input.component';
     MatSidenavModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
