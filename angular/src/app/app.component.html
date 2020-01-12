@@ -1,4 +1,4 @@
-<div class="bg-dark h-100 text-white">
+<div class="h-100 text-white">
     <app-navbar></app-navbar>
     <mat-sidenav-container hasBackdrop="true" autosize>
         <mat-sidenav #sidenav mode="over">
@@ -7,7 +7,7 @@
         <mat-sidenav-content>
             <button type="button" mat-button (click)="sidenav.toggle()"><span class="navbar-toggler-icon"></span></button>
             <app-chat></app-chat>
-            <app-input></app-input>
+            <app-input fxLayout="row" fxLayoutAlign="center center"></app-input>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
