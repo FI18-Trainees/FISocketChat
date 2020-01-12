@@ -1,10 +1,10 @@
-<div class="h-100 text-white">
+<div class="h-100 text-white bg-discord-dark">
     <app-navbar></app-navbar>
     <mat-sidenav-container hasBackdrop="true" autosize>
         <mat-sidenav #sidenav mode="over">
             <app-sidebar></app-sidebar>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <mat-sidenav-content class="bg-discord-dark">
             <button type="button" mat-button (click)="sidenav.toggle()"><span class="navbar-toggler-icon"></span></button>
             <app-chat></app-chat>
             <app-input fxLayout="row" fxLayoutAlign="center center"></app-input>
