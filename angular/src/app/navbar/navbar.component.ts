@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,17 +6,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  navbarOpen = false;
+  @Output()
+  buttonClick = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
-    console.log(this.navbarOpen);
   }
 
 }

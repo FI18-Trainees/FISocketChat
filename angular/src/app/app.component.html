@@ -5,11 +5,10 @@
             <app-sidebar></app-sidebar>
         </mat-sidenav>
         <mat-sidenav-content fxFlex fxLayout="column" class="bg-discord-dark">
-            <app-navbar></app-navbar>
-            <button type="button" mat-button (click)="sidenav.toggle()"><mat-icon color="primary">navbar-toggler-icon</mat-icon></button>
+            <app-navbar (buttonClick)="sidenav.toggle()"></app-navbar>
             <app-chat ></app-chat>
             <app-input fxLayout="row" fxLayoutAlign="center center"></app-input>
         </mat-sidenav-content>
-    </mat-sidenav-container>
+    </mat-sidenav-container>    
 </div>
 <router-outlet></router-outlet>

@@ -11,6 +11,7 @@ import { MatCardModule,
          MatChipsModule,
          MatInputModule,
          MatIconModule,
+         MatToolbarModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -50,6 +51,7 @@ import { MessageComponent } from './chat/message/message.component';
     MatChipsModule,
     MatInputModule,
     MatIconModule,
+    MatToolbarModule,
     FlexLayoutModule,
   ],
   providers: [],

@@ -14,14 +14,9 @@ $FISocketChat-accent: mat-palette($mat-red, A200, A100, A400);
 // The warn palette is optional (defaults to red).
 $FISocketChat-warn: mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
-$FISocketChat-theme: mat-light-theme($FISocketChat-primary, $FISocketChat-accent, $FISocketChat-warn);
+$FISocketChat-theme: mat-dark-theme($FISocketChat-primary, $FISocketChat-accent, $FISocketChat-warn);
 // Define an alternate dark theme.
-$dark-primary: mat-palette($mat-blue-grey);
-$dark-accent: mat-palette($mat-red, A200, A100, A400);
-$dark-warn: mat-palette($mat-deep-orange);
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($FISocketChat-theme);
-@include mat-card-theme($dark-theme);
