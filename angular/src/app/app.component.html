@@ -1,12 +1,13 @@
 <div class="h-100 text-white bg-discord-dark">
-    <app-navbar></app-navbar>
+    
     <mat-sidenav-container hasBackdrop="true" autosize>
         <mat-sidenav #sidenav mode="over">
             <app-sidebar></app-sidebar>
         </mat-sidenav>
-        <mat-sidenav-content class="bg-discord-dark">
-            <button type="button" mat-button (click)="sidenav.toggle()"><span class="navbar-toggler-icon"></span></button>
-            <app-chat></app-chat>
+        <mat-sidenav-content fxFlex fxLayout="column" class="bg-discord-dark">
+            <app-navbar></app-navbar>
+            <button type="button" mat-button (click)="sidenav.toggle()"><mat-icon color="primary">navbar-toggler-icon</mat-icon></button>
+            <app-chat ></app-chat>
             <app-input fxLayout="row" fxLayoutAlign="center center"></app-input>
         </mat-sidenav-content>
     </mat-sidenav-container>

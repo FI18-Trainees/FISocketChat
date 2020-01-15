@@ -1,0 +1,12 @@
+app-chat, mat-sidenav-container {
+    height: 100%;
+}
+
+mat-sidenav-content {
+    overflow: hidden;
+}
+
+app-chat {
+    overflow: auto;
+}
+

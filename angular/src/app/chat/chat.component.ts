@@ -1,22 +1,15 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatSidenavContainer } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewInit {
-
-  @ViewChild(MatSidenavContainer, {static: false}) sidenavContainer: MatSidenavContainer;
+export class ChatComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit() {
-    this.sidenavContainer.scrollable.elementScrolled().subscribe(() => {/* react to scroll events */});
   }
 
 }

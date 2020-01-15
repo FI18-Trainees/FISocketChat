@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { filter, map, debounceTime, take } from 'rxjs/operators';
-import { MapOperator } from 'rxjs/internal/operators/map';
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ISidebarContent } from 'src/interfaces/ISidebarContent';
 import { IMessage } from 'src/interfaces/IMessage';
-import { async } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
