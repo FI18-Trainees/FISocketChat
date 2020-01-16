@@ -12,9 +12,10 @@ import { MatCardModule,
          MatInputModule,
          MatIconModule,
          MatToolbarModule,
+         MatGridListModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DeviceDetectorModule, DeviceDetectorService } from 'ngx-device-detector';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './chat/chat.component';
 import { InputComponent } from './input/input.component';
 import { MessageComponent } from './chat/message/message.component';
+import { EmoteMenuComponent } from './input/emote-menu/emote-menu.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { MessageComponent } from './chat/message/message.component';
     ChatComponent,
     InputComponent,
     MessageComponent,
+    EmoteMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { MessageComponent } from './chat/message/message.component';
     MatIconModule,
     MatToolbarModule,
     FlexLayoutModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

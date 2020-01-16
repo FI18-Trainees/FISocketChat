@@ -57,12 +57,23 @@ export class ApiService {
 
   getUserlist(): string[] {
     let result: string[];
-    this.httpClient.get<string[]>('api/user').pipe(
+    this.httpClient.get<string[]>('/api/user').pipe(
       map(x => {
         result = x;
       })
     );
     result.push('everyone');
+    return result;
+  }
+
+  getEmotes() {
+    // disabled until sockets are reactivated
+    let result: string[] = [];
+    this.httpClient.get<string[]>('/api/emotes').pipe(
+      map(x => {
+        result = x;
+      })
+    );
     return result;
   }
 }
