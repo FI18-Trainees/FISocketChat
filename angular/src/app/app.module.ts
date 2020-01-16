@@ -14,6 +14,7 @@ import { MatCardModule,
          MatToolbarModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DeviceDetectorModule, DeviceDetectorService } from 'ngx-device-detector';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +43,7 @@ import { MessageComponent } from './chat/message/message.component';
     HttpClientModule,
     NgbModule,
     BrowserAnimationsModule,
+    DeviceDetectorModule.forRoot(),
     MatCardModule,
     MatSidenavModule,
     MatFormFieldModule,
