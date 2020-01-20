@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit} fro
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MessageService } from 'src/services/message.service';
 import { Subscription } from 'rxjs';
-import { EmoteMenuComponent } from './emote-menu/emote-menu.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorInfoService } from 'src/services/error-info.service';
 
 @Component({
   selector: 'app-input',
@@ -17,7 +18,7 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
   mobileClient = true;
   emoteSubscription: Subscription;
 
-  constructor(private deviceService: DeviceDetectorService, private messageService: MessageService) {
+  constructor(private deviceService: DeviceDetectorService, private messageService: MessageService, private errorinfoService: ErrorInfoService) {
     if (this.deviceService.isDesktop()) {
       this.mobileClient = false;
     }
@@ -52,7 +53,7 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
       this.messageService.newMessage(message);
       return;
     }
-    console.log('Invalid message!');
+    this.errorinfoService.showError('Invalid message!');
   }
 
   clearInput() {

@@ -13,6 +13,7 @@ import { MatCardModule,
          MatIconModule,
          MatToolbarModule,
          MatGridListModule,
+         MatSnackBarModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DeviceDetectorModule, DeviceDetectorService } from 'ngx-device-detector';
@@ -30,6 +31,7 @@ import { MessageComponent } from './chat/message/message.component';
 import { EmoteMenuComponent } from './input/emote-menu/emote-menu.component';
 import { MessageService } from 'src/services/message.service';
 import { FormsModule } from '@angular/forms';
+import { ErrorInfoService } from 'src/services/error-info.service';
 
 @NgModule({
   declarations: [
@@ -62,8 +64,9 @@ import { FormsModule } from '@angular/forms';
     FlexLayoutModule,
     MatGridListModule,
     FormsModule,
+    MatSnackBarModule,
   ],
-  providers: [DeviceDetectorService, MessageService],
+  providers: [DeviceDetectorService, MessageService, ErrorInfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
