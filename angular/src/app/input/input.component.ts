@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MessageService } from 'src/services/message.service';
 
 @Component({
   selector: 'app-input',
@@ -11,8 +12,8 @@ export class InputComponent implements OnInit {
 
   mobileClient = true;
 
-  constructor(private deviceService: DeviceDetectorService) {
-    if (deviceService.isDesktop()) {
+  constructor(private deviceService: DeviceDetectorService, private messageService: MessageService) {
+    if (this.deviceService.isDesktop()) {
       this.mobileClient = false;
     }
   }
@@ -38,7 +39,7 @@ export class InputComponent implements OnInit {
     const message: string = this.messageInput.nativeElement.value;
     this.clearInput();
     if (message.trim()) {
-      console.log(message);
+      this.messageService.newMessage(message);
       return;
     }
     console.log('Invalid message!');

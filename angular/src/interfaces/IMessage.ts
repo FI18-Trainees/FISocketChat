@@ -1,4 +1,4 @@
-import { IAuthor } from "./IAuthor";
+import { IAuthor } from './IAuthor';
 
 export interface IMessage {
     content_type: string;
