@@ -21,12 +21,17 @@ export class EmoteMenuComponent implements OnInit, AfterViewInit {
   }
 
   updateEmoteMenu() {
+    const rowElement = document.createElement('div');
+    rowElement.classList.add('row', 'p-2');
+    rowElement.style.maxHeight = '50rem';
+    rowElement.style.minWidth = '375px';
+    this.emoteMenu.nativeElement.append(rowElement);
     this.emoteList.forEach(key => {
       if (Emotes[key].menuDisplay) {
         const emoteitem = document.createElement('a');
-        emoteitem.classList.add('cursor-pointer');
+        emoteitem.classList.add('curser-pointer', 'd-inline', 'text-nowrap', 'col', 'p-1');
         emoteitem.innerHTML = Emotes[key].menuDisplayCode;
-        this.emoteMenu.nativeElement.append(emoteitem);
+        rowElement.append(emoteitem);
       }
     });
   }
