@@ -1,6 +1,6 @@
 <mat-form-field appearance="outline" #formField>
     <button mat-button matPrefix>File</button>
-    <textarea matInput placeholder="Nachricht:" floatLabel="auto" #messageInput id="messageInput" (keyup)="checkPressedKey($event)"></textarea>
-    <app-emote-menu matSuffix></app-emote-menu>
+    <textarea matInput placeholder="Nachricht:" floatLabel="auto" #messageInput id="messageInput" (keyup)="checkPressedKey($event)" [(ngModel)]="messageContent"></textarea>
+    <app-emote-menu matSuffix (emoteEvent)="addEmote($event)"></app-emote-menu>
 </mat-form-field>
 <button mat-button (click)="formSubmit()" *ngIf="mobileClient">Send</button>

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  private messageSource = new BehaviorSubject('default message');
+  private messageSource = new ReplaySubject<string>();
   currentMessage = this.messageSource.asObservable();
 
   constructor() { }

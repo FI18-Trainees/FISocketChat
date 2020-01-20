@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import Emotes from '../../../assets/emotes.json';
 
 @Component({
@@ -9,6 +9,7 @@ import Emotes from '../../../assets/emotes.json';
 export class EmoteMenuComponent implements OnInit, AfterViewInit {
 
   @ViewChild('emoteMenu', { static: false }) emoteMenu: ElementRef;
+  @Output() emoteEvent: EventEmitter<string> = new EventEmitter<string>();
 
   emoteList = Object.keys(Emotes);
 
@@ -31,6 +32,10 @@ export class EmoteMenuComponent implements OnInit, AfterViewInit {
         const emoteitem = document.createElement('a');
         emoteitem.classList.add('curser-pointer', 'd-inline', 'text-nowrap', 'col', 'p-1');
         emoteitem.innerHTML = Emotes[key].menuDisplayCode;
+        emoteitem.onclick = () => {
+          console.log('Sending: ' + key);
+          this.emoteEvent.emit(key);
+        };
         rowElement.append(emoteitem);
       }
     });

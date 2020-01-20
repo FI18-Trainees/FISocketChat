@@ -24,14 +24,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   newMessage(messageContent: string) {
-    console.log(messageContent);
     const message: IMessage = {
       content_type: 'message',
       append_allow: true,
       author: {
         username: 'Test',
         display_name: 'Test',
-        avatar: 'https://lh3.googleusercontent.com/ykuq3KjWWVgwt9fV1zh1ZzAhXJF6pKV5tbUGH0BZIBBP5yIICcavfO-knvLifR1rv0uBiEnlngw=w640-h400-e365',
+        avatar: 'https://pleated-jeans.com/wp-content/uploads/2019/06/funny-pic-dump-6.3.19-13.jpg',
         chat_color: '#399b2a'
       },
       content: messageContent,

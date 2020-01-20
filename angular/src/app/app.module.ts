@@ -29,6 +29,7 @@ import { InputComponent } from './input/input.component';
 import { MessageComponent } from './chat/message/message.component';
 import { EmoteMenuComponent } from './input/emote-menu/emote-menu.component';
 import { MessageService } from 'src/services/message.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { MessageService } from 'src/services/message.service';
     MatToolbarModule,
     FlexLayoutModule,
     MatGridListModule,
+    FormsModule,
   ],
   providers: [DeviceDetectorService, MessageService],
   bootstrap: [AppComponent]
