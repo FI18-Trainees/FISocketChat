@@ -22,6 +22,7 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.deviceService.isDesktop()) {
       this.mobileClient = false;
     }
+    this.messageService.clickedUsername.subscribe(username => this.addUsername(username));
   }
 
   ngOnInit() { }
@@ -62,5 +63,9 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addEmote(emoteKey: string) {
     this.messageContent += emoteKey;
+  }
+
+  addUsername(username: string) {
+    this.messageContent += '@' + username;
   }
 }

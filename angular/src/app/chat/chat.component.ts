@@ -6,6 +6,7 @@ import { registerLocaleData } from '@angular/common';
 import localDe from '@angular/common/locales/de';
 import localDeExtra from '@angular/common/locales/extra/de';
 registerLocaleData(localDe, 'de-DE', localDeExtra);
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
