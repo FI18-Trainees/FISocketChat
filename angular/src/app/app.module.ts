@@ -32,6 +32,7 @@ import { EmoteMenuComponent } from './input/emote-menu/emote-menu.component';
 import { MessageService } from 'src/services/message.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorInfoService } from 'src/services/error-info.service';
+import { SocketService } from 'src/services/socket.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { ErrorInfoService } from 'src/services/error-info.service';
     FormsModule,
     MatSnackBarModule,
   ],
-  providers: [DeviceDetectorService, MessageService, ErrorInfoService],
+  providers: [DeviceDetectorService, MessageService, ErrorInfoService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
