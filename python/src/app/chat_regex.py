@@ -4,7 +4,7 @@ from re import IGNORECASE as __IGNORECASE
 
 emote_regex = __compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", __MULTILINE)
 html_regex = __compile(r"[<>]|&(?=[#\w]{1,5};)", __MULTILINE)
-link_regex = __compile(r"(?:(https?)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([^\s]*[^\s])?", __MULTILINE)
+link_regex = __compile(r"(?:(https?)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([^\s\'\"]*[^\s\'\"])?", MULTILINE)
 youtube_regex = __compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?(?:(?:[&?])t=(\d+))?")
 image_regex = __compile(r".+\.(?:jpg|gif|png|jpeg|bmp)$", __IGNORECASE)
 special_image_regex = __compile(r"\.gifv$", __IGNORECASE)
