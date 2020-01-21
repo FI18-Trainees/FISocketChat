@@ -34,7 +34,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   newMessage(messageContent: string) {
-    let priority: 'low';
+    const priority = 'low';
     this.socketService.sendMessage({display_name: 'Test', message: messageContent, token: 'Test'});
   }
 

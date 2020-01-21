@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { IMessage } from 'src/interfaces/IMessage';
-import { map } from 'rxjs/internal/operators/map';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,7 +12,7 @@ export class SocketService {
 
   sendMessage(msg: {display_name: string, message: string, token: string}) {
     this.socket.emit('chat_message', msg);
-    console.log('emitted');
+    console.log(this.checkConnection());
   }
 
   getMessage(): Observable<IMessage> {
@@ -26,5 +25,9 @@ export class SocketService {
 
   reconnect() {
     this.socket.connect();
+  }
+
+  checkConnection(): boolean {
+    return this.socket.ioSocket.connected;
   }
 }
