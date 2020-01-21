@@ -38,7 +38,7 @@ announcer.broadcast("Chat initialised.", predict_error=True)  # most likely no u
 # REGEX
 emote_regex = compile(r"(?<![\"\'\w()@/:_!?])[-!?:_/\w]+(?![\"\'\w()@/:_!?])", MULTILINE)
 html_regex = compile(r"[<>]|&(?=[#\w]{1,5};)", MULTILINE)
-link_regex = compile(r"(?:(https?)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([^\s]*[^\s])?", MULTILINE)
+link_regex = compile(r"(?:(https?)://)?([\w_-]+(?:(?:\.[\w_-]+)+))([^\s\'\"]*[^\s\'\"])?", MULTILINE)
 youtube_regex = compile(r"(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|playlist\?|watch\?v=|watch\?.+(?:&|&#38;);v=))([a-zA-Z0-9\-_]{11})?(?:(?:[&?])t=(\d+))?")
 image_regex = compile(r".+\.(?:jpg|gif|png|jpeg|bmp)$", IGNORECASE)
 special_image_regex = compile(r"\.gifv$", IGNORECASE)
