@@ -34,6 +34,7 @@ import { FormsModule } from '@angular/forms';
 import { ErrorInfoService } from 'src/services/error-info.service';
 import { SocketService } from 'src/services/socket.service';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io';
+import { EmbedComponent } from './chat/embed/embed.component';
 
 const config: SocketIoConfig = { url: 'localhost:5000', options: { secure: true, transports: ['polling', 'websocket'], query: 'token=' + ('access_token')} };
 
@@ -47,6 +48,7 @@ const config: SocketIoConfig = { url: 'localhost:5000', options: { secure: true,
     InputComponent,
     MessageComponent,
     EmoteMenuComponent,
+    EmbedComponent,
   ],
   imports: [
     BrowserModule,
