@@ -5,6 +5,7 @@ import { IMessage } from 'src/interfaces/IMessage';
 import { registerLocaleData } from '@angular/common';
 import localDe from '@angular/common/locales/de';
 import localDeExtra from '@angular/common/locales/extra/de';
+import { SocketService } from 'src/services/socket.service';
 registerLocaleData(localDe, 'de-DE', localDeExtra);
 
 @Component({
@@ -15,9 +16,13 @@ registerLocaleData(localDe, 'de-DE', localDeExtra);
 export class ChatComponent implements OnInit, OnDestroy {
   messageList: IMessage[] = [];
   messageSubscription: Subscription;
+  socketSubscription: Subscription;
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private socketService: SocketService) {
     this.messageSubscription = this.messageService.currentMessage.subscribe(message => this.newMessage(message));
+    this.socketSubscription = this.socketService.getMessage().subscribe(recievedMessage => {
+      this.addMessage(recievedMessage);
+    });
   }
 
   ngOnInit() {
@@ -25,42 +30,31 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.messageSubscription.unsubscribe();
+    this.socketSubscription.unsubscribe();
   }
 
   newMessage(messageContent: string) {
-    const date: Date = new Date();
-    const message: IMessage = {
-      content_type: 'message',
-      append_allow: true,
-      author: {
-        username: 'Test',
-        display_name: 'Test',
-        avatar: 'https://pleated-jeans.com/wp-content/uploads/2019/06/funny-pic-dump-6.3.19-13.jpg',
-        chat_color: '#399b2a'
-      },
-      content: messageContent,
-      full_timestamp: date.toLocaleDateString(),
-      timestamp: date.toLocaleTimeString(),
-      priority: 'low'
-    };
-    console.log(message.full_timestamp);
-    console.log(message.timestamp);
+    let priority: 'low';
+    this.socketService.sendMessage({display_name: 'Test', message: messageContent, token: 'Test'});
+  }
+
+  addMessage(msg: IMessage) {
     if (this.messageList.length !== 0) {
       // Check if message can be appended
-      if (message.append_allow) {
+      if (msg.append_allow) {
         // Check if last message is from same user
-        if (this.checkLastMessage(message.author.username)) {
+        if (this.checkLastMessage(msg.author.username)) {
           // Add message content and update timestamps
-          this.messageList[this.messageList.length - 1].content += message.content;
-          this.messageList[this.messageList.length - 1].full_timestamp = message.full_timestamp;
-          this.messageList[this.messageList.length - 1].timestamp = message.timestamp;
+          this.messageList[this.messageList.length - 1].content += msg.content;
+          this.messageList[this.messageList.length - 1].full_timestamp = msg.full_timestamp;
+          this.messageList[this.messageList.length - 1].timestamp = msg.timestamp;
           return;
         }
         return;
       }
       return;
     }
-    this.messageList.push(message);
+    this.messageList.push(msg);
   }
 
   checkLastMessage(username: string) {

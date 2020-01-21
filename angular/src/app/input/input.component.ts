@@ -66,6 +66,6 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addUsername(username: string) {
-    this.messageContent += '@' + username;
+    this.messageContent += '@' + username + ' ';
   }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule,
@@ -33,6 +33,9 @@ import { MessageService } from 'src/services/message.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorInfoService } from 'src/services/error-info.service';
 import { SocketService } from 'src/services/socket.service';
+import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'localhost:5000', options: { secure: true, transports: ['polling', 'websocket'], query: 'token=' + ('access_token')} };
 
 @NgModule({
   declarations: [
@@ -66,8 +69,9 @@ import { SocketService } from 'src/services/socket.service';
     MatGridListModule,
     FormsModule,
     MatSnackBarModule,
+    SocketIoModule.forRoot(config),
   ],
-  providers: [DeviceDetectorService, MessageService, ErrorInfoService, SocketService],
+  providers: [DeviceDetectorService, MessageService, ErrorInfoService, { provide: SocketService, useValue: new SocketService(new Socket(config)) }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
