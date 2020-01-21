@@ -38,7 +38,23 @@ export class ChatComponent implements OnInit, OnDestroy {
       timestamp: '21:43:55',
       priority: 'low'
     };
+    if (this.messageList.length !== 0) {
+      if (message.append_allow) {
+        if (this.checkLastMessage(message.author.username)) {
+          this.messageList[this.messageList.length - 1].content += message.content;
+          return;
+        }
+        return;
+      }
+      return;
+    }
     this.messageList.push(message);
   }
 
+  checkLastMessage(username: string) {
+    if (this.messageList[this.messageList.length - 1].author.username === username) {
+      return true;
+    }
+    return false;
+  }
 }
