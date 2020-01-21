@@ -6,6 +6,7 @@ import { registerLocaleData } from '@angular/common';
 import localDe from '@angular/common/locales/de';
 import localDeExtra from '@angular/common/locales/extra/de';
 import { SocketService } from 'src/services/socket.service';
+import { IEmbed } from 'src/interfaces/IEmbed';
 registerLocaleData(localDe, 'de-DE', localDeExtra);
 
 @Component({
@@ -55,6 +56,10 @@ export class ChatComponent implements OnInit, OnDestroy {
       return;
     }
     this.messageList.push(msg);
+  }
+
+  addEmbed(embed: IEmbed) {
+
   }
 
   checkLastMessage(username: string) {
