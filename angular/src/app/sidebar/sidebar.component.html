@@ -1,1 +1,15 @@
 <app-notification-mode></app-notification-mode>
+<a *ngFor="let sidebarContent of (sidebarContent | async)" [href]="sidebarContent.link ? sidebarContent.link : ''" target="_blank">
+    <mat-card>
+        <div class="content">
+            <mat-card-title>
+                {{sidebarContent.header}}
+            </mat-card-title>
+            <mat-card-content [style.color]="sidebarContent.textcolor ? sidebarContent.textcolor : '#FFFFFF'">
+                {{sidebarContent.text}}
+            </mat-card-content>
+        </div>
+        <img mat-card-image src="{{sidebarContent.media.mediaLink}}" *ngIf="sidebarContent.media.mediaType == 'image'"/>
+        <i [class]="sidebarContent.media.mediaLink" [id]="sidebarContent.media.mediaId" *ngIf="sidebarContent.media.mediaType == 'icon'"></i>
+    </mat-card>
+</a>
