@@ -62,7 +62,7 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addEmote(emoteKey: string) {
-    this.messageContent += emoteKey;
+    this.messageContent += ' ' + emoteKey + ' ';
   }
 
   addUsername(username: string) {

@@ -9,6 +9,7 @@ import Emotes from '../../../assets/emotes.json';
 export class EmoteMenuComponent implements OnInit, AfterViewInit {
 
   @ViewChild('emoteMenu', { static: false }) emoteMenu: ElementRef;
+  @ViewChild('emoteButton', { static: false }) emoteButton: ElementRef;
   @Output() emoteEvent: EventEmitter<string> = new EventEmitter<string>();
 
   emoteList = Object.keys(Emotes);
@@ -33,7 +34,6 @@ export class EmoteMenuComponent implements OnInit, AfterViewInit {
         emoteitem.classList.add('curser-pointer', 'd-inline', 'text-nowrap', 'col', 'p-1');
         emoteitem.innerHTML = Emotes[key].menuDisplayCode;
         emoteitem.onclick = () => {
-          console.log('Sending: ' + key);
           this.emoteEvent.emit(key);
         };
         rowElement.append(emoteitem);
