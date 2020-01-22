@@ -40,6 +40,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   addMessage(msg: IMessage) {
+
+    msg.content = '<div>' + msg.content + '</div>';
+
     if (this.messageList.length !== 0) {
       // Check if message can be appended
       if (msg.append_allow) {

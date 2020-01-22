@@ -12,7 +12,6 @@ export class SocketService {
 
   sendMessage(msg: {display_name: string, message: string, token: string}) {
     this.socket.emit('chat_message', msg);
-    console.log(this.checkConnection());
   }
 
   getMessage(): Observable<IMessage> {

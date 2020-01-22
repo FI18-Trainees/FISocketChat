@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidebarElementComponent } from './sidebar-element.component';
+import { NotificationModeComponent } from './notification-mode.component';
 
-describe('SidebarElementComponent', () => {
-  let component: SidebarElementComponent;
-  let fixture: ComponentFixture<SidebarElementComponent>;
+describe('NotificationModeComponent', () => {
+  let component: NotificationModeComponent;
+  let fixture: ComponentFixture<NotificationModeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidebarElementComponent ]
+      declarations: [ NotificationModeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SidebarElementComponent);
+    fixture = TestBed.createComponent(NotificationModeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

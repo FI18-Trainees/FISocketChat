@@ -22,8 +22,7 @@ import { DeviceDetectorModule, DeviceDetectorService } from 'ngx-device-detector
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { SidebarElementComponent } from './sidebar/sidebar-element/sidebar-element.component';
+import { NotificationModeComponent } from './sidebar/notification-mode/notification-mode.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './chat/chat.component';
 import { InputComponent } from './input/input.component';
@@ -35,6 +34,7 @@ import { ErrorInfoService } from 'src/services/error-info.service';
 import { SocketService } from 'src/services/socket.service';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io';
 import { EmbedComponent } from './chat/embed/embed.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 const config: SocketIoConfig = { url: 'localhost:5000', options: { secure: true, transports: ['polling', 'websocket'], query: 'token=' + ('access_token')} };
 
@@ -42,13 +42,13 @@ const config: SocketIoConfig = { url: 'localhost:5000', options: { secure: true,
   declarations: [
     AppComponent,
     NavbarComponent,
-    SidebarComponent,
-    SidebarElementComponent,
+    NotificationModeComponent,
     ChatComponent,
     InputComponent,
     MessageComponent,
     EmoteMenuComponent,
     EmbedComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

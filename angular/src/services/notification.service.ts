@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class NotificationService {
 
+  // More info here: https://developer.mozilla.org/de/docs/Web/API/notification
+
   private notificationmode: boolean;
   private notifications = new Array();
 
   constructor() { }
-
-  // More info here: https://developer.mozilla.org/de/docs/Web/API/notification
 
   initializeNotifications() {
     // Let's check if the browser supports notifications
@@ -32,7 +32,6 @@ export class NotificationService {
     // At last, if the user has denied notifications, and you
     // want to be respectful there is no need to bother them any more.
   }
-
 
   // check if permission to show notification is granted
   checkPermission() {
@@ -73,5 +72,4 @@ export class NotificationService {
   closeNotification(item: Notification) {
     item.close();
   }
-
 }
