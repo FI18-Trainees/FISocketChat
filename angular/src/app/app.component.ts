@@ -1,6 +1,5 @@
-import { Component, OnInit} from '@angular/core';
-import * as $ from 'jquery';
-import * as io from 'socket.io-client';
+import { Component, OnInit, HostListener} from '@angular/core';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +8,18 @@ import * as io from 'socket.io-client';
 })
 export class AppComponent implements OnInit {
 
-    constructor() {}
+    constructor(private notifyService: NotificationService) {}
 
     ngOnInit(): void {
+    }
+
+    @HostListener('window:focus', ['$event'])
+    onFocus(event: any): void {
+      this.notifyService.resetUnread();
+    }
+
+    @HostListener('window:blur', ['$event'])
+    onBlur(event: any): void {
+      // Do something
     }
 }

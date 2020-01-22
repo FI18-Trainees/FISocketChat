@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { IMessage } from 'src/interfaces/IMessage';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class SocketService {
 
   getMessage(): Observable<IMessage> {
     return this.socket.fromEvent('chat_message');
+  }
+
+  getLoginMode(): Observable<boolean> {
+    return this.socket.fromEvent('status');
   }
 
   close() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'src/services/notification.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MatSelectChange } from '@angular/material';
+import { MessageService } from 'src/services/message.service';
 
 @Component({
   selector: 'app-notification-mode',
@@ -19,6 +20,7 @@ export class NotificationModeComponent implements OnInit {
       const cookieValue: string = this.cookieService.get('notificationMode');
       if (cookieValue !== '') {
         this.notificationMode = cookieValue;
+        notifyService.updateNotificationMode(cookieValue);
       }
     }
   }
@@ -27,5 +29,6 @@ export class NotificationModeComponent implements OnInit {
 
   newSelection(event: MatSelectChange) {
     this.cookieService.set('notificationMode', event.value, 365, '/', '', false, 'Strict');
+    this.notifyService.updateNotificationMode(event.value);
   }
 }

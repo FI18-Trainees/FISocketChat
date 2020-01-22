@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +8,8 @@ export class NotificationService {
   // More info here: https://developer.mozilla.org/de/docs/Web/API/notification
 
   private notifications = new Array();
+  private notificationMode = 'no';
+  unreadMessages = 0;
 
   constructor() {
     this.initializeNotifications();
@@ -26,8 +27,8 @@ export class NotificationService {
         Notification.requestPermission().then(() => {
             // If the user accepts, let's create a notification
             if (this.checkPermission()) {
-                this.displayNotifyMode();
                 const testNotification: Notification = new Notification('This is how a notification would appear!');
+                this.notifications.push(testNotification);
             }
         });
     }
@@ -54,27 +55,24 @@ export class NotificationService {
 
   // create new notification with the variable "text" as content
   newNotification(text: string) {
-    const notification = new Notification(text);
-    this.notifications.push(notification);
-  }
-
-  displayNotifyMode() {
-    if (this.checkPermission() === true) {
-        $('#notify-mode').css('display', 'flex');
-    } else {
-        $('#notify-mode').css('display', 'none');
+    if (this.checkPermission()) {
+      const notification = new Notification(text);
+      this.notifications.push(notification);
+      setTimeout(notification.close.bind(notification), 4000);
     }
   }
 
-  closeAllNotifications() {
-    if (this.notifications.length > 0) {
-        this.notifications.forEach(this.closeNotification);
+  newMessage() {
+    if (this.notificationMode === 'all') {
+      this.newNotification('You have ' + ++this.unreadMessages + ' unread messages');
     }
   }
 
-  closeNotification(item: Notification) {
-    item.close();
+  updateNotificationMode(mode: string) {
+    this.notificationMode = mode;
   }
 
-  // setTimeout(notification.close.bind(notification), 4000);
+  resetUnread() {
+    this.unreadMessages = 0;
+  }
 }

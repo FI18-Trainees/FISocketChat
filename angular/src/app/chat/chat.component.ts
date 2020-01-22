@@ -7,6 +7,7 @@ import localDe from '@angular/common/locales/de';
 import localDeExtra from '@angular/common/locales/extra/de';
 import { SocketService } from 'src/services/socket.service';
 import { IEmbed } from 'src/interfaces/IEmbed';
+import { NotificationService } from 'src/services/notification.service';
 registerLocaleData(localDe, 'de-DE', localDeExtra);
 
 @Component({
@@ -19,7 +20,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   messageSubscription: Subscription;
   socketSubscription: Subscription;
 
-  constructor(private messageService: MessageService, private socketService: SocketService) {
+  constructor(private messageService: MessageService, private socketService: SocketService, private notifyService: NotificationService) {
     this.messageSubscription = this.messageService.currentMessage.subscribe(message => this.newMessage(message));
     this.socketSubscription = this.socketService.getMessage().subscribe(recievedMessage => {
       this.addMessage(recievedMessage);
@@ -40,8 +41,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   addMessage(msg: IMessage) {
-
     msg.content = '<div>' + msg.content + '</div>';
+    this.notifyService.newMessage();
 
     if (this.messageList.length !== 0) {
       // Check if message can be appended
