@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit} fro
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MessageService } from 'src/services/message.service';
 import { Subscription } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorInfoService } from 'src/services/error-info.service';
 
 @Component({

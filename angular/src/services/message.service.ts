@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  private messageSource = new ReplaySubject<string>();
+  private messageSource = new Subject<string>();
   currentMessage = this.messageSource.asObservable();
-  private usernameSource = new ReplaySubject<string>();
+  private usernameSource = new Subject<string>();
   clickedUsername = this.usernameSource.asObservable();
 
   constructor() { }

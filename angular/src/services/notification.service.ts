@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,36 +8,38 @@ export class NotificationService {
 
   // More info here: https://developer.mozilla.org/de/docs/Web/API/notification
 
-  private notificationmode: boolean;
   private notifications = new Array();
 
-  constructor() { }
+  constructor() {
+    this.initializeNotifications();
+  }
 
-  initializeNotifications() {
+  initializeNotifications(): boolean {
     // Let's check if the browser supports notifications
     if (!('Notification' in window)) {
         alert('This browser does not support desktop notification');
+        return;
     } else if (this.checkPermission()) {
-    //    // If it's okay let's create a notification
+    //    If it's okay let's create a notification
     //    new Notification("Welcome back!");
-    } else if ((Notification as any).permission !== 'denied') {
+    } else if (Notification.permission !== 'denied') {
         Notification.requestPermission().then(() => {
             // If the user accepts, let's create a notification
             if (this.checkPermission()) {
                 this.displayNotifyMode();
-                // tslint:disable-next-line: no-unused-expression
-                new Notification('This is how a notification would appear!');
+                const testNotification: Notification = new Notification('This is how a notification would appear!');
             }
         });
     }
     // At last, if the user has denied notifications, and you
     // want to be respectful there is no need to bother them any more.
+    return this.checkPermission();
   }
 
   // check if permission to show notification is granted
   checkPermission() {
       // tslint:disable-next-line: no-any
-      if ((Notification as any).permission === 'granted') {
+      if (Notification.permission === 'granted') {
           return true;
       } else {
           return false;
@@ -72,4 +75,6 @@ export class NotificationService {
   closeNotification(item: Notification) {
     item.close();
   }
+
+  // setTimeout(notification.close.bind(notification), 4000);
 }

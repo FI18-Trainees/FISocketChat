@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from 'src/services/notification.service';
+import { CookieService } from 'ngx-cookie-service';
+import { MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-notification-mode',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificationModeComponent implements OnInit {
 
-  constructor() { }
+  notificationPermission = true;
+  notificationMode = 'no';
 
-  ngOnInit() {
+  constructor(private notifyService: NotificationService, private cookieService: CookieService) {
+    this.notificationPermission = this.notifyService.checkPermission();
+    if (this.notificationPermission) {
+      const cookieValue: string = this.cookieService.get('notificationMode');
+      if (cookieValue !== '') {
+        this.notificationMode = cookieValue;
+      }
+    }
   }
 
+  ngOnInit() { }
+
+  newSelection(event: MatSelectChange) {
+    this.cookieService.set('notificationMode', event.value, 365, '/', '', false, 'Strict');
+  }
 }

@@ -1,6 +1,6 @@
-<mat-card>
+<mat-card [hidden]="!notificationPermission">
     <mat-form-field>
-        <mat-select #notificationmode value="no">
+        <mat-select #notificationModeSelector [value]="notificationMode" (selectionChange)="newSelection($event)">
             <mat-option value="no">Keine Notifications</mat-option>
             <mat-option value="mention">Nur bei Mentions</mat-option>
             <mat-option value="all">Alle Notifications</mat-option>
