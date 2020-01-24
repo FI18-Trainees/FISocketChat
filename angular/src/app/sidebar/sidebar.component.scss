@@ -1,0 +1,37 @@
+mat-card {
+    margin: 2%;
+    border-radius: 10px;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    
+}
+
+    mat-card .content {
+        flex: 1;
+    }
+
+    mat-card:hover {
+        cursor: pointer;
+    }
+
+    mat-card img {
+        width:100%;
+        max-width:26px;
+        height:100%;
+        max-height:26px;
+        margin-right: 10px;
+    }
+
+    mat-card i {
+        width:100%;
+        max-width:26px;
+        height:100%;
+        max-height:26px;
+        margin-right: 10px;
+    }
+
+a:hover {
+    text-decoration: none;
+}
