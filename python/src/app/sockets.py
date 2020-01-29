@@ -153,18 +153,17 @@ def connect(data=""):
         SHL.output(f"Loading userconfig", "S.ON Connect")
         if r.status_code != 200:
             SHL.output(f"{yellow}Error on receiving userconfig: {r.status_code}{white}", "S.ON Connect")
-            if "cloudflare" in r.text.lower():
-                emit('error', {'status_code': r.status_code, 'message': "authentication service offline"})
+            if r.status_code == 502:  # bad gateway
+                emit('error', {'status_code': r.status_code, 'message': "profile service offline"})
                 return
-            emit('error', {'status_code': r.status_code, 'message': "failed authorization"})
+            emit('error', {'status_code': r.status_code, 'message': "failed to complete login"})
             return
 
         try:
             config = r.json()
-            if config["display_name"].strip() != "":
-                new_user.display_name = config["display_name"]
-                new_user.chat_color = config["chat_color"]
-                new_user.avatar = f"https://profile.zaanposni.com/pictures/{new_user.username}.png"
+            new_user.display_name = config["display_name"]
+            new_user.chat_color = config["chat_color"]
+            new_user.avatar = f"https://profile.zaanposni.com/pictures/{new_user.username}.png"
         except KeyError:
             SHL.output(f"{yellow}Invalid userconfig{white}", "S.ON Connect")
             emit('error', {'message': 'invalid userconfig'})
