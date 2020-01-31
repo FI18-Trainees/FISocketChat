@@ -1,5 +1,5 @@
 {
-    "Bosch": {
+    "B0sch": {
         "replace": "<img src='/public/assets/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>",
         "menuDisplay": true,
         "menuDisplayCode": "<img src='/public/assets/bosch1.png' style='height: 32px; width:auto;' alt='Bosch' title='Bosch'>"
