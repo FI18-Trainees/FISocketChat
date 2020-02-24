@@ -339,6 +339,21 @@
     "menuDisplay": true,
     "menuDisplayCode": "<img src='/public/img/pedalo.png' style='height:32px; width:auto;' alt='Pedalo' title='Pedalo'>"
   },
+  "Pedalo2": {
+    "replace": "<img src='/public/img/pedalo2.png' style='height:40px; width:auto;' alt='Pedalo2' title='Pedalo2'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/pedalo2.png' style='height:32px; width:auto;' alt='Pedalo2' title='Pedalo2'>"
+  },
+  "NotLikeThis": {
+    "replace": "<img src='/public/img/notlikethis.png' style='height:40px; width:auto;' alt='NotLikeThis' title='NotLikeThis'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/notlikethis.png' style='height:32px; width:auto;' alt='NotLikeThis' title='NotLikeThis'>"
+  },
+  "EXplain": {
+    "replace": "<img src='/public/img/EXplain.png' style='height:40px; width:auto;' alt='EXplain' title='EXplain'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/img/EXplain.png' style='height:32px; width:auto;' alt='EXplain' title='EXplain'>"
+  },
   "uargh": {
     "replace": "<img src='/public/img/uargh.png' style='height:40px; width:auto;' alt='Würg' title='Würg'>",
     "menuDisplay": true,
