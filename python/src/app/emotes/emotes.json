@@ -334,6 +334,21 @@
         "menuDisplay": true,
         "menuDisplayCode": "<img src='/public/assets/pedalo.png' style='height:32px; width:auto;' alt='Pedalo' title='Pedalo'>"
     },
+    "Pedalo2": {
+    "replace": "<img src='/public/assets/pedalo2.png' style='height:40px; width:auto;' alt='Pedalo2' title='Pedalo2'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/assets/pedalo2.png' style='height:32px; width:auto;' alt='Pedalo2' title='Pedalo2'>"
+    },
+    "NotLikeThis": {
+    "replace": "<img src='/public/assets/notlikethis.png' style='height:40px; width:auto;' alt='NotLikeThis' title='NotLikeThis'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/assets/notlikethis.png' style='height:32px; width:auto;' alt='NotLikeThis' title='NotLikeThis'>"
+    },
+    "EXplain": {
+    "replace": "<img src='/public/assets/EXplain.png' style='height:40px; width:auto;' alt='EXplain' title='EXplain'>",
+    "menuDisplay": true,
+    "menuDisplayCode": "<img src='/public/assets/EXplain.png' style='height:32px; width:auto;' alt='EXplain' title='EXplain'>"
+    },
     "uargh": {
         "replace": "<img src='/public/assets/uargh.png' style='height:40px; width:auto;' alt='Würg' title='Würg'>",
         "menuDisplay": true,
@@ -379,10 +394,10 @@
         "menuDisplay": true,
         "menuDisplayCode": "<img src='/public/assets/klugerschachzug.png' style='height:50px; width:auto;' alt='KlugerSchachZug' title='KlugerSchachZug'>"
     },
-    "kleinesX": {
-        "replace": "<img src='/public/assets/x-doubt.png' style='height:25px; width:auto;' alt='X' title='X'>",
+    "Xchen": {
+        "replace": "<img src='/public/assets/x-doubt.png' style='height:25px; width:auto;' alt='Xchen' title='Xchen'>",
         "menuDisplay": false,
-        "menuDisplayCode": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>"
+        "menuDisplayCode": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='Xchen' title='Xchen'>"
     },
     "X": {
         "replace": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='X' title='X'>",
@@ -399,15 +414,25 @@
         "menuDisplay": false,
         "menuDisplayCode": "<img src='/public/assets/x-doubt.png' style='height:50px; width:auto;' alt='ganzgrossesX' title='ganzgrossesX'>"
     },
+    "Fchen": {
+        "replace": "<img src='/public/assets/f.png' style='height:25px; width:auto;' alt='Fchen' title='Fchen'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/f.png' style='height:32px; width:auto;' alt='Fchen' title='Fchen'>"
+    },
     "F": {
         "replace": "<img src='/public/assets/f.png' style='height:50px; width:auto;' alt='F' title='F'>",
         "menuDisplay": false,
         "menuDisplayCode": "<img src='/public/assets/f.png' style='height:50px; width:auto;' alt='F' title='F'>"
     },
-    "bigF": {
-        "replace": "<img src='/public/assets/f.png' style='height:125px; width:auto;' alt='bigF' title='bigF'>",
+    "grossesF": {
+        "replace": "<img src='/public/assets/f.png' style='height:125px; width:auto;' alt='grossesF' title='grossesF'>",
         "menuDisplay": false,
-        "menuDisplayCode": "<img src='/public/assets/f.png' style='height:50px; width:auto;' alt='bigF' title='bigF'>"
+        "menuDisplayCode": "<img src='/public/assets/f.png' style='height:50px; width:auto;' alt='grossesF' title='grossesF'>"
+    },
+    "ganzgrossesF": {
+        "replace": "<img src='/public/assets/f.png' style='height:250px; width:auto;' alt='ganzgrossesF' title='ganzgrossesF'>",
+        "menuDisplay": false,
+        "menuDisplayCode": "<img src='/public/assets/f.png' style='height:50px; width:auto;' alt='ganzgrossesF' title='ganzgrossesF'>"
     },
     "discordload": {
         "replace": "<img src='/public/assets/discordloadhangds.gif' style='height:40px; width:auto;' alt='discordload' title='discordload'>",
@@ -638,10 +663,5 @@
         "replace": "<img src='/public/assets/keepo.png' style='height:40px; width:auto;' alt='Keepo' title='Keepo'>",
         "menuDisplay": true,
         "menuDisplayCode": "<img src='/public/assets/keepo.png' style='height:32px; width:auto;' alt='Keepo' title='Keepo'>"
-    },
-    "Fchen": {
-        "replace": "<img src='/public/assets/f.png' style='height:20px; width:auto;' alt='Fchen' title='Fchen'>",
-        "menuDisplay": false,
-        "menuDisplayCode": "<img src='/public/assets/f.png' style='height:32px; width:auto;' alt='Fchen' title='Fchen'>"
     }
 }
