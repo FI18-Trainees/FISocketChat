@@ -27,13 +27,12 @@ import { InputComponent } from './input/input.component';
 import { MessageComponent } from './chat/message/message.component';
 import { EmoteMenuComponent } from './input/emote-menu/emote-menu.component';
 import { FormsModule } from '@angular/forms';
-import { SocketService } from 'src/services/socket.service';
-import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: '/', options: {} };
+
 import { EmbedComponent } from './chat/embed/embed.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CookieService } from 'ngx-cookie-service';
-
-const config: SocketIoConfig = { url: '/', options: { secure: true, transports: ['polling', 'websocket'], query: 'token=' + ('access_token')} };
 
 @NgModule({
   declarations: [
@@ -70,7 +69,7 @@ const config: SocketIoConfig = { url: '/', options: { secure: true, transports: 
     MatSnackBarModule,
     SocketIoModule.forRoot(config),
   ],
-  providers: [{ provide: SocketService, useValue: new SocketService(new Socket(config)) }, CookieService],
+  providers: [ CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

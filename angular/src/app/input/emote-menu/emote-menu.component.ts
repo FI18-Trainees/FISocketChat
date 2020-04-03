@@ -21,7 +21,6 @@ export class EmoteMenuComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.api.getEmotes().subscribe((emotes) => {
       Object.keys(emotes).forEach((key) => {
-        // console.log(emotes[key]);
         this.apiEmoteList.push({
           name: key,
           value: {
@@ -43,8 +42,6 @@ export class EmoteMenuComponent implements OnInit, AfterViewInit {
     rowElement.style.maxHeight = '50rem';
     rowElement.style.minWidth = '375px';
     this.emoteMenu.nativeElement.append(rowElement);
-
-    console.log('loadMenu');
 
     this.apiEmoteList.forEach((emote: IEmoteResponse) => {
       if (emote.value.menuDisplay) {
