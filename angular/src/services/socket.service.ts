@@ -3,7 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { IMessage } from 'src/interfaces/IMessage';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { IStatus } from 'src/interfaces/istatus';
+import { IStatus } from 'src/interfaces/IStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +35,6 @@ export class SocketService {
       }
       if (status.username) {
         this.username.next(status.username);
-      }
-      if (status.chat_color) {
-        this.chatColor.next(status.chat_color);
       }
     });
   }

@@ -173,7 +173,7 @@ def connect(data=""):
             emit('error', {'message': 'invalid userconfig'})
             return
 
-        emit('status', {'loginmode': True, 'username': new_user.username, 'chat_color': new_user.chat_color})
+        emit('status', {'loginmode': True, 'username': new_user.username})
         if cfg.get("enable_connect_announcement", False):
             announcer.broadcast(f"{new_user.username} connected.")
         SHL.output(f"{green2}Valid session.{white}", "S.ON Connect")

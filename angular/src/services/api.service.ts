@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
-import { map, tap, catchError } from 'rxjs/operators';
+import { map, tap, catchError, take, exhaustMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ISidebarContent } from 'src/interfaces/ISidebarContent';
 import { IMessage } from 'src/interfaces/IMessage';
 import { IEmoteResponse } from 'src/interfaces/IEmoteResponse';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ApiService {
 
   private sidebarContent: ISidebarContent[] = null;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private socketService: SocketService) { }
 
   getSidebarContent(): Observable<ISidebarContent[]> {
     if (this.sidebarContent == null) {
@@ -27,23 +28,18 @@ export class ApiService {
     return of(this.sidebarContent);
   }
 
-  getMessageHistory(ownusername: string): IMessage[] {
-    let result: IMessage[];
-    this.httpClient.get<IMessage[]>('/api/chathistory?username=$(ownusername)').pipe(
-      map(x => {
-        result = x;
-      })
-    );
-    if (result.length === 0) {
-      this.httpClient.get<IMessage[]>('/api/chathistory').pipe(
-        map(x => {
-          result = x;
-        })
-      );
-      if (result.length > 0) {
-        return result;
+  getMessageHistory(ownusername: string): Observable<IMessage[]> {
+    return this.socketService.loginmode.pipe(take(1), exhaustMap((loginmode: boolean) => {
+      if (loginmode) {
+        return this.httpClient.get<IMessage[]>('/api/chathistory?username=' + ownusername).pipe(
+          tap((messages: IMessage[]) => messages)
+        );
+      } else {
+        return this.httpClient.get<IMessage[]>('/api/chathistory').pipe(
+          tap((messages: IMessage[]) => messages)
+        );
       }
-    }
+    }));
   }
 
   getCommands(): string[] {

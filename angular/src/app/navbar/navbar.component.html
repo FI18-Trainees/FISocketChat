@@ -8,7 +8,7 @@
             <mat-chip-list>
                 <mat-chip  [ngClass]="{ 'connect-chip-connected': connectStatus, 'connect-chip-disconnected' : !connectStatus }">{{ connectText }}</mat-chip>
             </mat-chip-list>
-            <span class="fill"></span>
+            <span fxFlexFill></span>
             <mat-checkbox>Autoscroll</mat-checkbox>
             <span>Usercount: {{ userCount }}</span>
         </div>

@@ -3,6 +3,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { MessageService } from 'src/services/message.service';
 import { Subscription } from 'rxjs';
 import { ErrorInfoService } from 'src/services/error-info.service';
+import { MessagehistoryService } from 'src/services/messagehistory.service';
 
 @Component({
   selector: 'app-input',
@@ -17,7 +18,7 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
   mobileClient = true;
   emoteSubscription: Subscription;
 
-  constructor(private deviceService: DeviceDetectorService, private messageService: MessageService, private errorinfoService: ErrorInfoService) {
+  constructor(private deviceService: DeviceDetectorService, private messageService: MessageService, private errorinfoService: ErrorInfoService, private messageHistoryService: MessagehistoryService) {
     if (this.deviceService.isDesktop()) {
       this.mobileClient = false;
     }
@@ -43,6 +44,14 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         this.formSubmit();
         break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this.messageContent = this.messageHistoryService.getPreviousMessage();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        this.messageContent = this.messageHistoryService.getNextMessage();
+        break;
     }
   }
 
@@ -51,6 +60,7 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
     this.clearInput();
     if (message.trim()) {
       this.messageService.newMessage(message);
+      this.messageHistoryService.addMessage(message);
       return;
     }
     this.errorinfoService.showError('Invalid message!');

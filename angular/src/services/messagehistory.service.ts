@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { IMessage } from 'src/interfaces/IMessage';
+import { SocketService } from './socket.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class MessagehistoryService {
   sentMessages: string[] = [];
   index = 0;
 
-  constructor() {}
+  constructor() { }
 
   addMessage(text: string) {
     this.sentMessages.push(text);
