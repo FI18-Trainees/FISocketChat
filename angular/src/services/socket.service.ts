@@ -4,6 +4,7 @@ import { IMessage } from 'src/interfaces/IMessage';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { IStatus } from 'src/interfaces/IStatus';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,13 @@ export class SocketService {
   username: BehaviorSubject<string> = new BehaviorSubject<string>('');
   chatColor: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private cookieService: CookieService) {
+  constructor(private cookieService: CookieService, private notificationService: NotificationService) {
     this.socket = new ChatSocket(this.cookieService.get('access_token'));
     this.reconnect();
 
     this.socket.on('disconnect', () => {
       this.connectStatus.next(false);
+      this.notificationService.disconnectNotification();
     });
 
     this.socket.on('status', (status: IStatus) => {
