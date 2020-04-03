@@ -13,3 +13,12 @@
         <i [class]="sidebarContent.media.mediaLink" [id]="sidebarContent.media.mediaId" *ngIf="sidebarContent.media.mediaType == 'icon'"></i>
     </mat-card>
 </a>
+<div fxShow="true" fxHide.gt-sm="true">
+    <mat-card fxLayout="column">
+        <mat-chip-list class="py-2">
+            <mat-chip color="warn" selected>Disconnected</mat-chip>
+        </mat-chip-list>
+        <mat-checkbox class="py-2">Autoscroll</mat-checkbox>
+        <span class="py-2">Usercount: none</span>
+    </mat-card>
+</div>

@@ -4,11 +4,13 @@
             <i class="fas fa-bars"></i>
         </button>
         <span>FI Socket Chat</span>
-        <mat-chip-list>
-            <mat-chip color="warn" selected>Disconnected</mat-chip>
-        </mat-chip-list>
-        <span class="fill"></span>
-        <mat-checkbox>Autoscroll</mat-checkbox>
-        <span>Usercount: none</span>
+        <div fxShow="true" fxHide.lt-md="true" fxLayout="row">
+            <mat-chip-list>
+                <mat-chip color="warn" selected>Disconnected</mat-chip>
+            </mat-chip-list>
+            <span class="fill"></span>
+            <mat-checkbox>Autoscroll</mat-checkbox>
+            <span>Usercount: none</span>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>
