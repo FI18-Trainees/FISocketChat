@@ -1,3 +1,5 @@
+@import './styles/connectChip.scss';
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -20,3 +22,4 @@ $FISocketChat-theme: mat-dark-theme($FISocketChat-primary, $FISocketChat-accent,
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($FISocketChat-theme);
+@include connect-chip-theme();

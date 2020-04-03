@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { IMessage } from 'src/interfaces/IMessage';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -11,9 +11,15 @@ export class SocketService {
 
   socket: ChatSocket;
 
+  connectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(private cookieService: CookieService) {
     this.socket = new ChatSocket(this.cookieService.get('access_token'));
     this.reconnect();
+
+    this.socket.on('disconnect', () => {
+      this.connectStatus.next(false);
+    });
   }
 
   sendMessage(msg: { display_name: string, message: string, token: string }) {
@@ -30,10 +36,12 @@ export class SocketService {
 
   close() {
     this.socket.disconnect();
+    this.connectStatus.next(false);
   }
 
   reconnect() {
     this.socket.connect();
+    this.connectStatus.next(true);
   }
 
   checkConnection(): boolean {

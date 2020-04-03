@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@mixin connect-chip-theme() {
+    .connect-chip-connected {
+        background-color: seagreen !important;
+    }
+    .connect-chip-disconnected {
+        background-color: red !important;
+    }
+}
