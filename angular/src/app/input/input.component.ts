@@ -10,7 +10,7 @@ import { ErrorInfoService } from 'src/services/error-info.service';
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('messageInput', {static: false}) messageInput: HTMLTextAreaElement;
+  @ViewChild('messageInput') messageInput: HTMLTextAreaElement;
 
   messageContent = '';
 

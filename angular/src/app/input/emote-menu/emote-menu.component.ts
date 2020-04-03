@@ -10,8 +10,8 @@ import { IEmoteResponse } from 'src/interfaces/IEmoteResponse.js';
 })
 export class EmoteMenuComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('emoteMenu', { static: false }) emoteMenu: ElementRef;
-  @ViewChild('emoteButton', { static: false }) emoteButton: ElementRef;
+  @ViewChild('emoteMenu') emoteMenu: ElementRef;
+  @ViewChild('emoteButton') emoteButton: ElementRef;
   @Output() emoteEvent: EventEmitter<string> = new EventEmitter<string>();
 
   emoteList = Object.keys(Emotes);
