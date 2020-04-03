@@ -3,6 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { IMessage } from 'src/interfaces/IMessage';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { IStatus } from 'src/interfaces/istatus';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class SocketService {
   socket: ChatSocket;
 
   connectStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  loginmode: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  userCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  username: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  chatColor: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private cookieService: CookieService) {
     this.socket = new ChatSocket(this.cookieService.get('access_token'));
@@ -19,6 +24,21 @@ export class SocketService {
 
     this.socket.on('disconnect', () => {
       this.connectStatus.next(false);
+    });
+
+    this.socket.on('status', (status: IStatus) => {
+      if (status.count) {
+        this.userCount.next(status.count);
+      }
+      if (status.loginmode) {
+        this.loginmode.next(status.loginmode);
+      }
+      if (status.username) {
+        this.username.next(status.username);
+      }
+      if (status.chat_color) {
+        this.chatColor.next(status.chat_color);
+      }
     });
   }
 
@@ -28,10 +48,6 @@ export class SocketService {
 
   getMessage(): Observable<IMessage> {
     return this.socket.fromEvent('chat_message');
-  }
-
-  getLoginMode(): Observable<boolean> {
-    return this.socket.fromEvent('status');
   }
 
   close() {

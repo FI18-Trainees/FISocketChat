@@ -13,8 +13,10 @@ export class NavbarComponent implements OnInit {
 
   connectStatus = false;
   connectText = 'Disconnected';
+  userCount = 0;
 
   statusSub: Subscription;
+  userCountSub: Subscription;
 
   constructor(private socketService: SocketService) { }
 
@@ -26,6 +28,9 @@ export class NavbarComponent implements OnInit {
       } else {
         this.connectText = 'Disconnected';
       }
+    });
+    this.userCountSub = this.socketService.userCount.subscribe((userCount: number) => {
+      this.userCount = userCount;
     });
   }
 }

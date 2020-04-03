@@ -20,14 +20,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   messageSubscription: Subscription;
   socketSubscription: Subscription;
 
-  constructor(private messageService: MessageService, private socketService: SocketService, private notifyService: NotificationService) {
-    this.messageSubscription = this.messageService.currentMessage.subscribe(message => this.newMessage(message));
-    this.socketSubscription = this.socketService.getMessage().subscribe(recievedMessage => {
-      this.addMessage(recievedMessage);
-    });
-  }
+  constructor(private messageService: MessageService, private socketService: SocketService, private notifyService: NotificationService) { }
 
   ngOnInit() {
+    this.messageSubscription = this.messageService.currentMessage.subscribe(message => this.newMessage(message));
+    this.socketSubscription = this.socketService.getMessage().subscribe(recievedMessage => this.addMessage(recievedMessage));
   }
 
   ngOnDestroy() {
