@@ -34,9 +34,7 @@ def index():
 
 @app.route("/status")
 def status():
-    response = make_response("OK")
-    response.headers["api"] = "hellothere"
-    return response
+    return "OK"
 
 
 @app.route("/favicon.ico")
@@ -124,7 +122,6 @@ def send_sidebar_info():
                 SHL.output(f"[{get_ip(request)}]{red} logininfo_sidebar missing in sidebar content.{white}", "/api/sidebar")
                 SHL.output(f"[{get_ip(request)}]{red} Returning default sidebar without account info.{white}", "/api/sidebar")
                 raise IndexError
-            print(user_manager.configs)
             sidebar[0] = {
                 "header": "Info",
                 "id": "logininfo_sidebar",
