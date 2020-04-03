@@ -14,20 +14,28 @@ export class EmoteMenuComponent implements OnInit, AfterViewInit {
   @ViewChild('emoteButton') emoteButton: ElementRef;
   @Output() emoteEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  emoteList = Object.keys(Emotes);
   apiEmoteList: IEmoteResponse[] = [];
 
   constructor(private api: ApiService) { }
 
-  ngOnInit() { }
-
-  ngAfterViewInit() {
-    this.apiEmoteList = this.api.getEmotes();
-    this.api.emoteSubject.subscribe(() => {
+  ngOnInit() {
+    this.api.getEmotes().subscribe((emotes) => {
+      Object.keys(emotes).forEach((key) => {
+        // console.log(emotes[key]);
+        this.apiEmoteList.push({
+          name: key,
+          value: {
+            replace: emotes[key].replace,
+            menuDisplay: emotes[key].menuDisplay,
+            menuDisplayCode: emotes[key].menuDisplayCode
+          }
+        });
+      });
       this.updateEmoteMenu();
-      console.log('Updated');
     });
   }
+
+  ngAfterViewInit() { }
 
   updateEmoteMenu() {
     const rowElement = document.createElement('div');
@@ -39,7 +47,6 @@ export class EmoteMenuComponent implements OnInit, AfterViewInit {
     console.log('loadMenu');
 
     this.apiEmoteList.forEach((emote: IEmoteResponse) => {
-      console.log(emote);
       if (emote.value.menuDisplay) {
         const emoteitem = document.createElement('a');
         emoteitem.classList.add('curser-pointer', 'd-inline', 'text-nowrap', 'col', 'p-1');
@@ -50,18 +57,5 @@ export class EmoteMenuComponent implements OnInit, AfterViewInit {
         rowElement.append(emoteitem);
       }
     });
-/*
-    this.emoteList.forEach(key => {
-      if (Emotes[key].menuDisplay) {
-        const emoteitem = document.createElement('a');
-        emoteitem.classList.add('curser-pointer', 'd-inline', 'text-nowrap', 'col', 'p-1');
-        emoteitem.innerHTML = Emotes[key].menuDisplayCode;
-        emoteitem.onclick = () => {
-          this.emoteEvent.emit(key);
-        };
-        rowElement.append(emoteitem);
-      }
-    });
-*/
   }
 }

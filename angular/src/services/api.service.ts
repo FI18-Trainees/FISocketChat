@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ISidebarContent } from 'src/interfaces/ISidebarContent';
 import { IMessage } from 'src/interfaces/IMessage';
@@ -12,7 +12,6 @@ import { IEmoteResponse } from 'src/interfaces/IEmoteResponse';
 export class ApiService {
 
   private sidebarContent: ISidebarContent[] = null;
-  emoteSubject: Subject<boolean> = new Subject<boolean>();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -68,7 +67,8 @@ export class ApiService {
     return result;
   }
 
-  getEmotes(): IEmoteResponse[] {
+  getEmotes() {
+    /*
     const result: IEmoteResponse[] = [];
     this.httpClient.get('/api/emotes').subscribe(x => {
       Object.keys(x).forEach(emote => {
@@ -86,5 +86,9 @@ export class ApiService {
     });
     // this.emoteSubject.next();
     return result;
+    */
+    return this.httpClient.get('/api/emotes').pipe(
+      tap((emotes) => emotes)
+    );
   }
 }
