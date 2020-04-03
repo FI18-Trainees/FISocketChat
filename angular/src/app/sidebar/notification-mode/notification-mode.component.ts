@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'src/services/notification.service';
 import { CookieService } from 'ngx-cookie-service';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 import { MessageService } from 'src/services/message.service';
 
 @Component({
