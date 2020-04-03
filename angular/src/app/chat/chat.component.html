@@ -1,1 +1,4 @@
-<app-message *ngFor="let message of messageList" [message]="message"></app-message>
+<div *ngFor="let message of messageList">
+    <app-message *ngIf="message.content_type === 'message'" [message]="message"></app-message>
+    <app-embed *ngIf="message.content_type === 'embed'" [embed]="message"></app-embed>
+</div>

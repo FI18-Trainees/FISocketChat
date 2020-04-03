@@ -15,7 +15,7 @@ export class MessageService {
     const priority = 'low';
     if (messageContent.startsWith('/')) {
       // send Command
-      this.socketService.sendCommand({ display_name: 'Test', message: messageContent, token: 'Test' })
+      this.socketService.sendCommand({ display_name: 'Test', message: messageContent, token: 'Test' });
     } else {
       // send Message
       this.socketService.sendMessage({ display_name: 'Test', message: messageContent, token: 'Test' });

@@ -8,9 +8,7 @@ import localDeExtra from '@angular/common/locales/extra/de';
 import { SocketService } from 'src/services/socket.service';
 import { IEmbed } from 'src/interfaces/IEmbed';
 import { NotificationService } from 'src/services/notification.service';
-import { MessagehistoryService } from 'src/services/messagehistory.service';
 import { ApiService } from 'src/services/api.service';
-import { take, tap, map } from 'rxjs/operators';
 registerLocaleData(localDe, 'de-DE', localDeExtra);
 
 @Component({
@@ -19,7 +17,7 @@ registerLocaleData(localDe, 'de-DE', localDeExtra);
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  messageList: IMessage[] = [];
+  messageList: Array<IMessage | IEmbed> = [];
   messageSubscription: Subscription;
   socketSubscription: Subscription;
 
@@ -29,7 +27,17 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.socketService.username.subscribe((username: string) => {
       this.apiService.getMessageHistory(username).subscribe((messages: IMessage[]) => {
         messages.forEach((message: IMessage) => {
-          this.addMessage(message);
+          switch (message.content_type) {
+            case 'message':
+              this.addMessage(message);
+              break;
+            case 'embed':
+              this.addEmbed(message as IEmbed);
+              break;
+            default:
+              throw new Error('Invalid message type!');
+          }
+
         });
       });
     });
@@ -63,7 +71,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   addEmbed(embed: IEmbed) {
-
+    this.messageList.push(embed);
   }
 
   checkLastMessage(username: string) {

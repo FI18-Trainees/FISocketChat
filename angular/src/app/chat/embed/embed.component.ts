@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IEmbed } from 'src/interfaces/IEmbed';
 
 @Component({
   selector: 'app-embed',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmbedComponent implements OnInit {
 
+  @Input()
+  embed: IEmbed;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.embed);
   }
 
 }

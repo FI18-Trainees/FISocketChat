@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@mixin embed-theme($theme) {
+    .embed-thumbnail {
+
+    }
+    .embed-footer {
+        color: mat-color($FISocketChat-primary, '400-contrast');
+    }
+}
