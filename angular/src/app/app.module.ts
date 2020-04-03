@@ -33,7 +33,7 @@ import { EmbedComponent } from './chat/embed/embed.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CookieService } from 'ngx-cookie-service';
 
-const config: SocketIoConfig = { url: 'localhost:5000', options: { secure: true, transports: ['polling', 'websocket'], query: 'token=' + ('access_token')} };
+const config: SocketIoConfig = { url: '/', options: { secure: true, transports: ['polling', 'websocket'], query: 'token=' + ('access_token')} };
 
 @NgModule({
   declarations: [
