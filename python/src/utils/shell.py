@@ -20,7 +20,7 @@ white2 = '\033[97m'
 
 
 class Console:
-    def ts(self, c: bool = False):
+    def timestamp(self, c: bool = False):
         if c:
             return f'{yellow}[{str(datetime.now()).split(".", 1)[0]}]{white}'
         return f'[{str(datetime.now()).split(".", 1)[0]}]'
@@ -30,8 +30,20 @@ class Console:
             os.system("cls" if os.name == "nt" else "clear")
         self.prefix = f'{green2}[{prefix}]{white}'
 
-    def output(self, text, p=""):
-        if p:
-            print(f'{self.ts(True)} {green2}[{p}]{white} {str(text)}')
+    def output(self, text: str, prefix: str = None):
+        if prefix:
+            print(f'{self.timestamp(True)} {green2}[{prefix}]{white} {str(text)}')
         else:
-            print(f'{self.ts(True)} {self.prefix} {str(text)}')
+            print(f'{self.timestamp(True)} {self.prefix} {str(text)}')
+
+    def info(self, text: str, p: str = None):
+        self.output(text=f"{blue2}{text}{white}", prefix=p)
+
+    def warning(self, text: str, p: str = None):
+        self.output(text=f"{yellow}{text}{white}", prefix=p)
+
+    def error(self, text: str, p: str = None):
+        self.output(text=f"{red}{text}{white}", prefix=p)
+
+    def debug(self, text: str, p: str = None):
+        self.output(text=f"{white}{text}{white}", prefix=p)
