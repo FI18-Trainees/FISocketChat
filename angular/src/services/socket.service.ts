@@ -45,6 +45,10 @@ export class SocketService {
     this.socket.emit('chat_message', msg);
   }
 
+  sendCommand(cmd: { display_name: string, message: string, token: string }) {
+    this.socket.emit('chat_command', cmd);
+  }
+
   getMessage(): Observable<IMessage> {
     return this.socket.fromEvent('chat_message');
   }

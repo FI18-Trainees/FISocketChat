@@ -22,7 +22,7 @@ export class InputComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.deviceService.isDesktop()) {
       this.mobileClient = false;
     }
-    this.messageService.clickedUsername.subscribe(username => this.addUsername(username));
+    this.messageService.usernameSource.subscribe(username => this.addUsername(username));
   }
 
   ngOnInit() { }

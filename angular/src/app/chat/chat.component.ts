@@ -27,14 +27,12 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.socketService.username.subscribe((username: string) => {
-      console.log(username);
       this.apiService.getMessageHistory(username).subscribe((messages: IMessage[]) => {
         messages.forEach((message: IMessage) => {
           this.addMessage(message);
         });
       });
     });
-    this.messageSubscription = this.messageService.currentMessage.subscribe(message => this.newMessage(message));
     this.socketSubscription = this.socketService.getMessage().subscribe((recievedMessage: IMessage) => {
       this.addMessage(recievedMessage);
       this.notifyService.newMessage();
@@ -42,13 +40,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.messageSubscription.unsubscribe();
     this.socketSubscription.unsubscribe();
-  }
-
-  newMessage(messageContent: string) {
-    const priority = 'low';
-    this.socketService.sendMessage({ display_name: 'Test', message: messageContent, token: 'Test' });
   }
 
   addMessage(msg: IMessage) {

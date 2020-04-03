@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  private messageSource = new Subject<string>();
-  currentMessage = this.messageSource.asObservable();
-  private usernameSource = new Subject<string>();
-  clickedUsername = this.usernameSource.asObservable();
+  usernameSource = new Subject<string>();
 
-  constructor() { }
+  constructor(private socketService: SocketService) { }
 
-  newMessage(message: string) {
-    this.messageSource.next(message);
+  newMessage(messageContent: string) {
+    const priority = 'low';
+    if (messageContent.startsWith('/')) {
+      // send Command
+      this.socketService.sendCommand({ display_name: 'Test', message: messageContent, token: 'Test' })
+    } else {
+      // send Message
+      this.socketService.sendMessage({ display_name: 'Test', message: messageContent, token: 'Test' });
+    }
   }
 
   usernameClicked(username: string) {
-    this.usernameSource.next(username);
+    if (username !== 'System') {
+      this.usernameSource.next(username);
+    }
   }
 }
