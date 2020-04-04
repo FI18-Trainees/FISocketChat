@@ -1,12 +1,33 @@
 <mat-card class="mx-3" [style.border-left]="'5px solid ' + embed.color">
   <mat-card-header>
     <mat-card-title>{{ embed.title }} </mat-card-title>
+    <img matCardAvatar [src]="embed.author.avatar">
     <div class="flex-grow-1"></div>
-    <img matCardImage class="thumbnail" [src]="embed.thumbnail">
+    <img *ngIf="embed.thumbnail" mat-card-sm-image [src]="embed.thumbnail">
   </mat-card-header>
-  <mat-card-content>{{ embed.text }}</mat-card-content>
+  <mat-card-content *ngIf="embed.text">{{ embed.text }}</mat-card-content>
+  <mat-card-content *ngIf="embed.fields">
+    <mat-card-content *ngFor="let topic of embed.fields">
+      <mat-card-title>{{ topic.topic }}</mat-card-title>
+      <mat-card-content>{{ topic.value }}</mat-card-content>
+    </mat-card-content>
+  </mat-card-content>
+  <mat-card-content *ngIf="embed.media">
+    <div *ngIf="embed.media.media_type === 'audio'">
+      <audio [src]="embed.media.media_url"></audio>
+    </div>
+    <div *ngIf="embed.media.media_type === 'video'">
+      <video [src]="embed.media.media_url"></video>
+    </div>
+    <div *ngIf="embed.media.media_type === 'img'">
+      <img [src]="embed.media.media_url">
+    </div>
+  </mat-card-content>
+  <mat-card-footer *ngIf="embed.footer">
+    <span>{{ embed.footer }}</span>
+  </mat-card-footer>
   <mat-card-footer class="px-2" fxLayout="row">
-    <span class="small embed-footer">{{ embed.author.username }}</span>
+    <span class="small embed-footer" [title]="embed.author.username">{{ embed.author.display_name }}</span>
     <div class="flex-grow-1"></div>
     <span class="small embed-footer">{{ embed.timestamp }}</span>
   </mat-card-footer>
