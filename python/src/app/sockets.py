@@ -164,7 +164,7 @@ def connect(data=""):
             new_user.username = config["username"]
             new_user.display_name = config["displayname"]
             new_user.chat_color = config["chat_color"]
-            new_user.avatar = config["avatar_url"]
+            new_user.avatar = f"https://file.zaanposni.com/public/images/{new_user.username}.png"
         except KeyError:
             SHL.output(f"{yellow}Invalid userconfig{white}", "S.ON Connect")
             emit('error', {'message': 'invalid userconfig'})
