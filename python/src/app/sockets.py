@@ -144,10 +144,11 @@ def connect(data=""):
         SHL.output(f"IP: {ip}", "S.ON Connect")
         SHL.output(f"Username: {new_user.username}", "S.ON Connect")
 
-        r = requests.get(f"https://profile.zaanposni.com/get/{new_user.username}.json",
+        bearer = request.headers.get("Authorization", "")[6:].strip()
+        r = requests.get(f"https://auth2.zaanposni.com/api/user/lookup",
                          headers={
                              'Cache-Control': 'no-cache',
-                             'Authorization': f'Bearer {request.cookies.get("access_token", "")}'
+                             'Authorization': f'Bearer {request.cookies.get("access_token", bearer)}'
                          })
 
         SHL.output(f"Loading userconfig", "S.ON Connect")
@@ -161,7 +162,7 @@ def connect(data=""):
 
         try:
             config = r.json()
-            new_user.display_name = config["display_name"]
+            new_user.display_name = config["displayname"]
             new_user.chat_color = config["chat_color"]
             new_user.avatar = f"https://profile.zaanposni.com/pictures/{new_user.username}.png"
         except KeyError:

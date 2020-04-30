@@ -7,7 +7,7 @@ from utils import Console, white, green2, red
 from .runtime_settings import login_disabled
 
 SHL = Console("AuthInit")
-auth = HTTPTokenAuth()
+auth = HTTPTokenAuth(scheme='Bearer')
 
 
 @auth.error_handler
@@ -21,6 +21,7 @@ def auth_error():
 def verify_token(token):
     if login_disabled:
         return True
+
     token = request.cookies.get("access_token", token)
     SHL.output(f"Verify session with token: {token}.", "TokenAuth")
     try:
@@ -29,13 +30,12 @@ def verify_token(token):
         SHL.output(f"{red}Returning False, invalid headers.{white}", "TokenAuth")
         return False
 
-    r = requests.get("https://auth.zaanposni.com/verify",
+    r = requests.get("https://auth2.zaanposni.com/api/permission?permission=zaanposni.webaccess.chat",
                      headers={
                          'Cache-Control': 'no-cache',
-                         'X-Auth-For': ip,
                          'Authorization': f"Bearer {token}"
-                             })
-    SHL.output(f"Response from auth service: {r.text}", "TokenAuth")
+                     })
+    SHL.output(f"Response from auth service: {r.status_code}", "TokenAuth")
     if r.status_code == 200:
         SHL.output(f"{green2}Returning True.{white}", "TokenAuth")
         return r.text
