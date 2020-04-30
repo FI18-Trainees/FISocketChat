@@ -41,3 +41,16 @@ def verify_token(token):
         return r.text
     SHL.output(f"{red}Returning False, invalid session.{white}", "TokenAuth")
     return False
+
+
+def get_username(token):
+    r = requests.get(f"https://auth2.zaanposni.com/api/user/lookup",
+                     headers={
+                         'Cache-Control': 'no-cache',
+                         'Authorization': f'Bearer {request.cookies.get("access_token", token)}'
+                     })
+
+    if r.status_code != 200:
+        return None
+
+    return r.json()["username"]
