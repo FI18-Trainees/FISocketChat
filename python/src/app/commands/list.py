@@ -16,7 +16,7 @@ def main(system: SystemMessenger, author: User, cmd: Command, params: list):
         if login_disabled:
             embed.set_text("not available in logindisabled mode.")
         else:
-            embed.set_text("<br />".join([f"{x['user'].username}: {x['user'].display_name}"
+            embed.set_text("<br />".join([f"{x.username}: {x.display_name}"
                                       for x in user_manager.configs.values()]))
         system.send(embed)
         return
