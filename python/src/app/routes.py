@@ -10,7 +10,7 @@ from utils import cfg, Console, red, white
 from .flask_app import app
 from .obj import get_default_user, ResourceManager, chat_history, user_manager
 from .emotes import emote_handler
-from .authentication import auth, verify_token
+from .authentication import auth, verify_token, get_username
 from .runtime_settings import login_disabled
 from .commands import commands
 
@@ -92,10 +92,11 @@ def send_user():
 @app.route('/api/chathistory')
 def send_chat_history():
     if not login_disabled:
-        actual_username = verify_token("")
-        if not actual_username:
+        return_auth = verify_token(request.headers.get("Authorization", "")[6:].strip())
+        if not return_auth:
             SHL.output(f"[{get_ip(request)}] {red}Invalid login.{white}", "/api/chathistory")
             return jsonify([])
+        actual_username = get_username(request.headers.get("Authorization", "")[6:].strip())
         req_username = request.args.get("username", "all")
         if req_username in ["all", actual_username]:
             history_user = chat_history.to_json(username=req_username)
@@ -113,10 +114,11 @@ def send_sidebar_info():
     SHL.output(f"[{get_ip(request)}] Returning sidebar info", "/api/sidebar")
     sidebar = cfg.get("sidebarCustomItems", [])
     if not login_disabled:
-        actual_username = verify_token("")
-        if not actual_username:
+        return_auth = verify_token(request.headers.get("Authorization", "")[6:].strip())
+        if not return_auth:
             SHL.output(f"[{get_ip(request)}] {red}Invalid login.{white}", "/api/sidebar")
             return jsonify([])
+        actual_username = get_username(request.headers.get("Authorization", "")[6:].strip())
         try:
             if sidebar[0].get("id") != "logininfo_sidebar":
                 SHL.output(f"[{get_ip(request)}]{red} logininfo_sidebar missing in sidebar content.{white}", "/api/sidebar")
