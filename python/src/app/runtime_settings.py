@@ -25,6 +25,14 @@ if "-debug" in start_args:
 if debug_mode:
     SHL.output(f"{blue2}Enabled debug_mode.{white}")
 
+auth_service_url = "https://auth2.zaanposni.com"
+if "-authservice" in start_args:
+        try:
+            auth_service_url = sys.argv[sys.argv.index("-authservice") + 1]
+        except IndexError:
+            pass
+SHL.output(f"{blue2}Using authentication service at: '{auth_service_url}'.{white}")
+
 if "-unittest" in start_args:
     SHL.output(f"{blue2}Enabled unittest mode.{white}")
     login_disabled = True
