@@ -4,7 +4,7 @@ from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
 from utils import Console, white, green2, red
-from .runtime_settings import login_disabled
+from .runtime_settings import login_disabled, auth_service_url
 
 SHL = Console("AuthInit")
 auth = HTTPTokenAuth(scheme='Bearer')
@@ -30,7 +30,7 @@ def verify_token(token):
         SHL.output(f"{red}Returning False, invalid headers.{white}", "TokenAuth")
         return False
 
-    r = requests.get("https://auth2.zaanposni.com/api/permission?permission=zaanposni.webaccess.chat",
+    r = requests.get(f"{auth_service_url}/api/permission?permission=zaanposni.webaccess.chat",
                      headers={
                          'Cache-Control': 'no-cache',
                          'Authorization': f"Bearer {token}"
@@ -44,7 +44,7 @@ def verify_token(token):
 
 
 def get_username(token):
-    r = requests.get(f"https://auth2.zaanposni.com/api/user/lookup",
+    r = requests.get(f"{auth_service_url}/api/user/lookup",
                      headers={
                          'Cache-Control': 'no-cache',
                          'Authorization': f'Bearer {request.cookies.get("access_token", token)}'

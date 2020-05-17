@@ -11,6 +11,7 @@ from .obj import user_manager, get_default_user, user_limiter, SystemMessenger, 
 from .chat_regex import *
 from .commands import handle_command
 from .flask_app import app
+from .flask_limiter import limiter
 from .sockets import emit_status
 from .import routes
 from .chat_utils import announcer
