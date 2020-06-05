@@ -68,7 +68,7 @@ debug_mode = cfg.get("debug_enabled", False)
 if "-debug" in start_args:
     debug_mode = True
 
-auth_service_url = "https://auth2.zaanposni.com/"
+auth_service_url = os.environ.get("AUTHSERVICE", "https://auth2.zaanposni.com/")
 if "--auth-service" in start_args:
     try:
         auth_service_url = sys.argv[sys.argv.index("--auth-service") + 1]
