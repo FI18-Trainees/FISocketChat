@@ -219,7 +219,7 @@ jQuery(() => {
         if (status.hasOwnProperty('username')) {
             ownusername = (status['username'] as string).toLowerCase();
                 $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color'] as string);
-            $('#logininfo_picture').attr('src',`https://profile.zaanposni.com/pictures/${ownusername}.png`);
+            $('#logininfo_picture').attr('src',`https://file.zaanposni.com/public/images/${ownusername}.png`);
         }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {

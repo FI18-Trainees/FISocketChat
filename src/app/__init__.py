@@ -82,8 +82,8 @@ if debug_mode:
 @auth.error_handler
 def auth_error():
     if str(request.script_root + request.path).strip() != "/":
-        return redirect(f"https://info.zaanposni.com/?redirect=https://devchat.zaanposni.com{request.script_root + request.path}")
-    return redirect(f"https://info.zaanposni.com/?redirect=https://devchat.zaanposni.com")
+        return redirect(f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com{request.script_root + request.path}")
+    return redirect(f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com")
 
 
 @auth.verify_token
