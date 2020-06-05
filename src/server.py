@@ -21,13 +21,14 @@ def run():
             pass
         except ValueError:
             sys.exit(f'Invalid port "{sys.argv[sys.argv.index("--port") + 1]}"')
+    port = os.environ.get("FLASKPORT", port)
 
     if "--cfg-debug" in start_args:
         cfg.reload(debug=True)
 
     SHL.output("Starting up.")
     SHL.output(f"Using port: {port}")
-    socketio.run(app, host='0.0.0.0', port=port)
+    socketio.run(app, host='0.0.0.0', port=int(port))
 
 
 if __name__ == '__main__':

@@ -74,6 +74,7 @@ if "--auth-service" in start_args:
         auth_service_url = sys.argv[sys.argv.index("--auth-service") + 1]
     except IndexError:
         pass
+print(f"Using {auth_service_url} as auth service.")
 
 if debug_mode:
     SHL.output(f"{red}Enabled debug_mode.{white}")

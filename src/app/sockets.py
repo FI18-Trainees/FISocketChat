@@ -7,7 +7,7 @@ from validators import url as val_url
 
 from app import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, special_image_regex, login_disabled, request, user_limiter, chat_history, announcer, get_username
+    code_regex, quote_regex, special_image_regex, login_disabled, request, user_limiter, chat_history, announcer, get_username, auth_service_url
 from app import handle_command as command_handler
 from app.obj import User, Command, Message, get_default_user
 from utils import Console, yellow2, white, green2, cfg
@@ -135,7 +135,7 @@ def connect(data=""):
         SHL.output(f"Username: {new_user.username}", "S.ON Connect")
 
         bearer = request.headers.get("Authorization", "")[6:].strip()
-        r = requests.get(f"https://auth2.zaanposni.com/api/user/lookup",
+        r = requests.get(f"{auth_service_url}/api/user/lookup",
                          headers={
                              'Cache-Control': 'no-cache',
                              'Authorization': f'Bearer {request.cookies.get("access_token", bearer)}'
