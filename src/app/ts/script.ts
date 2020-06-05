@@ -2,8 +2,6 @@ import { IMessage } from "./interfaces/IMessage";
 import { IEmbed } from "./interfaces/IEmbed";
 import { IMedia } from "./interfaces/IMedia";
 import { IFields } from "./interfaces/IFields";
-import * as $ from 'jquery';
-import * as io from 'socket.io-client';
 
 //localStorage.debug = '*';
 
