@@ -134,10 +134,11 @@ def connect(data=""):
         SHL.output(f"IP: {ip}", "S.ON Connect")
         SHL.output(f"Username: {new_user.username}", "S.ON Connect")
 
-        r = requests.get(f"https://profile.zaanposni.com/get/{new_user.username}.json",
+        bearer = request.headers.get("Authorization", "")[6:].strip()
+        r = requests.get(f"https://auth2.zaanposni.com/api/user/lookup",
                          headers={
                              'Cache-Control': 'no-cache',
-                             'Authorization': f'Bearer {request.cookies.get("access_token", "")}'
+                             'Authorization': f'Bearer {request.cookies.get("access_token", bearer)}'
                          })
 
         if r.status_code != 200:
@@ -152,9 +153,10 @@ def connect(data=""):
         try:
             config = r.json()
             if config["display_name"].strip() != "":
-                new_user.display_name = config["display_name"]
+                new_user.username = config["username"]
+                new_user.display_name = config["displayname"]
                 new_user.chat_color = config["chat_color"]
-                new_user.avatar = f"https://profile.zaanposni.com/pictures/{new_user.username}.png"
+                new_user.avatar = f"https://file.zaanposni.com/public/images/{new_user.username}.png"
         except KeyError:
             SHL.output("Invalid userconfig", "S.ON Connect")
             emit('error', {'message': 'invalid userconfig'})
