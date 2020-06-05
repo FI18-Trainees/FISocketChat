@@ -68,6 +68,13 @@ debug_mode = cfg.get("debug_enabled", False)
 if "-debug" in start_args:
     debug_mode = True
 
+auth_service_url = "https://auth2.zaanposni.com/"
+if "--auth-service" in start_args:
+    try:
+        auth_service_url = sys.argv[sys.argv.index("--auth-service") + 1]
+    except IndexError:
+        pass
+
 if debug_mode:
     SHL.output(f"{red}Enabled debug_mode.{white}")
 
@@ -84,25 +91,43 @@ def verify_token(token):
     if login_disabled:
         return True
     token = request.cookies.get("access_token", token)
-    SHL.output(f"Verify session with token: {token}.", "TokenAuth")
+    SHL.output(f"Verify session with token: '{token}'.", "TokenAuth")
     try:
         ip = request.headers["X-Forwarded-For"]
     except KeyError:
         SHL.output(f"{red}Returning False, invalid headers.{white}", "TokenAuth")
         return False
 
-    r = requests.get("https://auth.zaanposni.com/verify",
-                     headers={
-                         'Cache-Control': 'no-cache',
-                         'X-Auth-For': ip,
-                         'Authorization': f"Bearer {token}"
-                             })
-    SHL.output(f"Response from auth service: {r.text}", "TokenAuth")
+    try:
+        r = requests.get(f"{auth_service_url}/api/permission?permission=zaanposni.webaccess.chat",
+                        headers={
+                            'Cache-Control': 'no-cache',
+                            'Authorization': f"Bearer {token}"
+                        },
+                        timeout=3)
+    except Exception as ex:
+        SHL.output(f"{red}Returning False, Communication with auth service failed:{white} {ex.__class__}")
+        return False
+
+    SHL.output(f"Response from auth service: {r.status_code}", "TokenAuth")
     if r.status_code == 200:
         SHL.output(f"{green2}Returning True.{white}", "TokenAuth")
-        return r.text
+        return True
     SHL.output(f"{red}Returning False, invalid session.{white}", "TokenAuth")
     return False
+
+
+def get_username(token):
+    r = requests.get(f"{auth_service_url}/api/user/lookup",
+                     headers={
+                         'Cache-Control': 'no-cache',
+                         'Authorization': f'Bearer {request.cookies.get("access_token", token)}'
+                     })
+
+    if r.status_code != 200:
+        return None
+
+    return r.json()["username"]
 
 
 from .commands import handle_command

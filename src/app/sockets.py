@@ -7,7 +7,7 @@ from validators import url as val_url
 
 from app import socketio, emote_handler,  user_manager, verify_token, \
     emote_regex, html_regex, newline_html_regex, link_regex, youtube_regex, image_regex, video_regex, audio_regex, \
-    code_regex, quote_regex, special_image_regex, login_disabled, request, user_limiter, chat_history, announcer
+    code_regex, quote_regex, special_image_regex, login_disabled, request, user_limiter, chat_history, announcer, get_username
 from app import handle_command as command_handler
 from app.obj import User, Command, Message, get_default_user
 from utils import Console, yellow2, white, green2, cfg
@@ -122,11 +122,13 @@ def connect(data=""):
     new_user = User(display_name="Shawn", username="Shawn")
     if not login_disabled:
         SHL.output("Validating session for new connection.", "S.ON Connect")
-        new_user.username = verify_token(data)
-        if not new_user.username:
+        valid_session = verify_token(data)
+        if not valid_session:
             SHL.output(f"{yellow2}Invalid session.{white}", "S.ON Connect")
             emit('error', {'message': 'invalid token'})
             return
+        
+        new_user.username = get_username(data)
 
         ip = socketio.server.environ[request.sid]["HTTP_CF_CONNECTING_IP"]
         SHL.output(f"IP: {ip}", "S.ON Connect")
