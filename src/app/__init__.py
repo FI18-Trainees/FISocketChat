@@ -7,7 +7,6 @@ from re import compile, MULTILINE, IGNORECASE
 
 from flask import Flask
 from flask_socketio import SocketIO
-from flask_httpauth import HTTPTokenAuth
 from flask import redirect, request
 
 from app.emotes import Emotes
@@ -22,8 +21,6 @@ app.config['SECRET_KEY'] = '1234567890!"§$%&/()=?'
 app.config['JSON_SORT_KEYS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join("app", "storage", "uploads")
 app.config['MAX_CONTENT_LENGTH'] = 3.5 * 1024 * 1024    # 3.5 Mb limit
-
-auth = HTTPTokenAuth()
 
 # SOCKETS
 socketio = SocketIO(app, logger=True, engineio_logger=True, cors_allowed_origins="*")
@@ -52,13 +49,6 @@ quote_regex = compile(r"^&gt; (.+)", MULTILINE)
 # Startup parameters
 start_args = [x.strip().lower() for x in sys.argv]
 
-login_disabled = cfg.get("logindisabled", False)  # default from cfg
-if "-disablelogin" in start_args:  # overwrite by parameter
-    login_disabled = True
-
-if login_disabled:
-    SHL.output(f"{red}Disabled authentication.{white}")
-
 dummy_user = False
 if "-dummyuser" in start_args:
     SHL.output(f"{red}Adding Dummy User{white}")
@@ -68,68 +58,8 @@ debug_mode = cfg.get("debug_enabled", False)
 if "-debug" in start_args:
     debug_mode = True
 
-auth_service_url = os.environ.get("AUTHSERVICE", "https://auth2.zaanposni.com/")
-if "--auth-service" in start_args:
-    try:
-        auth_service_url = sys.argv[sys.argv.index("--auth-service") + 1]
-    except IndexError:
-        pass
-print(f"Using {auth_service_url} as auth service.")
-
 if debug_mode:
     SHL.output(f"{red}Enabled debug_mode.{white}")
-
-
-@auth.error_handler
-def auth_error():
-    if str(request.script_root + request.path).strip() != "/":
-        return redirect(f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com{request.script_root + request.path}")
-    return redirect(f"https://info.zaanposni.com/?redirect=https://chat.zaanposni.com")
-
-
-@auth.verify_token
-def verify_token(token):
-    if login_disabled:
-        return True
-    token = request.cookies.get("access_token", token)
-    SHL.output(f"Verify session with token: '{token}'.", "TokenAuth")
-    try:
-        ip = request.headers["X-Forwarded-For"]
-    except KeyError:
-        SHL.output(f"{red}Returning False, invalid headers.{white}", "TokenAuth")
-        return False
-
-    try:
-        r = requests.get(f"{auth_service_url}/api/permission?permission=zaanposni.webaccess.chat",
-                        headers={
-                            'Cache-Control': 'no-cache',
-                            'Authorization': f"Bearer {token}"
-                        },
-                        timeout=3)
-    except Exception as ex:
-        SHL.output(f"{red}Returning False, Communication with auth service failed:{white} {ex.__class__}")
-        return False
-
-    SHL.output(f"Response from auth service: {r.status_code}", "TokenAuth")
-    if r.status_code == 200:
-        SHL.output(f"{green2}Returning True.{white}", "TokenAuth")
-        return True
-    SHL.output(f"{red}Returning False, invalid session.{white}", "TokenAuth")
-    return False
-
-
-def get_username(token):
-    r = requests.get(f"{auth_service_url}/api/user/lookup",
-                     headers={
-                         'Cache-Control': 'no-cache',
-                         'Authorization': f'Bearer {request.cookies.get("access_token", token)}'
-                     })
-
-    if r.status_code != 200:
-        return None
-
-    return r.json()["username"]
-
 
 from .commands import handle_command
 from .sockets import emit_status  # TODO: dafuq is this, send help

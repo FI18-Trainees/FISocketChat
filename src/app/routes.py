@@ -6,7 +6,7 @@ from hashlib import sha1
 from flask import render_template, send_from_directory, make_response, jsonify, request, url_for, flash
 from werkzeug.utils import secure_filename
 
-from app import app, emote_handler, auth, user_manager, chat_history, verify_token, login_disabled, cfg, get_username
+from app import app, emote_handler, user_manager, chat_history, cfg
 from app.obj import get_default_user, ResourceManager
 from utils import Console, red, white
 from app.commands import commands
@@ -24,7 +24,6 @@ def get_ip(r) -> str:
 
 @app.route('/')
 @app.route('/index')
-@auth.login_required
 def index():
     return render_template('index.html', customItems=cfg.get("sitebarCustomItems", {}))
 
@@ -62,14 +61,12 @@ def send_emotes():
 
 
 @app.route('/api/commands')
-@auth.login_required
 def send_commands_list():
     SHL.output(f"[{get_ip(request)}] Returning commands list", "/api/user")
     return jsonify(list(commands.keys()))
 
 
 @app.route('/api/user')
-@auth.login_required
 def send_user():
     r = [x.get("user", get_default_user()).username for x in user_manager.configs.values()]
     SHL.output(f"[{get_ip(request)}] Returning: {r}", "/api/user")
@@ -77,31 +74,17 @@ def send_user():
 
 
 @app.route('/api/chathistory')
-@auth.login_required
 def send_chat_history():
-    if not login_disabled:
-        actual_username = get_username("")
-        if not actual_username:
-            SHL.output(f"[{get_ip(request)}] {red}Invalid login.{white}", "/api/chathistory")
-            return jsonify([])
-        req_username = request.args.get("username", "all")
-        if req_username in ["all", actual_username]:
-            SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
-            return jsonify(chat_history.to_json(username=req_username))
-        SHL.output(f"[{get_ip(request)}] {red}Invalid username requested.{white}", "/api/chathistory")
-        return jsonify([])
     SHL.output(f"[{get_ip(request)}] Returning chat history", "/api/chathistory")
     return jsonify(chat_history.to_json(username="all"))
 
 
 @app.route('/api/uploads/<filename>')
-@auth.login_required
 def uploaded_file(filename):
     return send_from_directory(os.path.join("storage", "uploads"), filename)
 
 
 @app.route('/api/upload/', methods=['POST'])
-@auth.login_required
 def upload_file():
     if request.method == 'POST':
         SHL.output(f"[{get_ip(request)}] Uploads image", "/upload/")

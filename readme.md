@@ -6,18 +6,14 @@
   <img src="https://github.com/FI18-Trainees/FISocketChat/workflows/TS_Build/badge.svg" alt="GitHub Action"/>
 </p>
 
-## Requirements
-
-**Python 3.6 or higher**
-```
-pip install -r requirements.txt
-```
-Since there are some packages that affect our requirements, you should consider using a new venv and then installing the requirements.txt
 ## Start
 ```bash
-cd src
-python3 server.py -disablelogin
+docker-compose up
 ```
+
+## Development
+
+We strongly recommend to develop in docker since nobody knows wtf is going on.
 
 ## Contributors <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"/>
 
@@ -29,7 +25,6 @@ python3 server.py -disablelogin
                                          height=90px, width=90px style="border-radius: 50%" /></a>
 <a href="https://github.com/Monkmitrad"><img src="https://avatars1.githubusercontent.com/u/33026966?s=460&v=4"
                                              height=90px, width=90px style="border-radius: 50%" /></a>
-
 
 ## License:
 
