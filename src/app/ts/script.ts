@@ -48,7 +48,6 @@ jQuery(() => {
         focused = false;
     };
 
-
     messagefield.on('keydown', e => {
         switch (e.key) {
             case 'Tab':
@@ -216,18 +215,13 @@ jQuery(() => {
         if (status.hasOwnProperty('count')) {
             setUserCount(status['count'] as string);
         }
-        if (status.hasOwnProperty('username')) {
-            ownusername = (status['username'] as string).toLowerCase();
-                $('#logininfo_name').text(`Logged in as ${status['username']}`).css('color', status['chat_color'] as string);
-            $('#logininfo_picture').attr('src',`https://profile.zaanposni.com/pictures/${ownusername}.png`);
-        }
         if (status.hasOwnProperty('loginmode')) {
             if (status['loginmode']) {
                 $('#username-item').css('display', 'none');
                 loginmode = true;
             } else {
                 $('#username-item').css('display', 'block');
-                $('#user_name').val('DebugUser');
+                $('#user_name').val('Shawn');
                 $('logininfo_sitebar').css('display', 'none');
                 loginmode = false;
             }
@@ -290,7 +284,7 @@ function addNewMessage(msg: IMessage) {
     messageContainer = $('<div class="message-container d-flex border-bottom p-2">');
     messageHeader = $('<h2 class="message-header d-inline-flex align-items-center mb-1">');
     messageBody = $('<div class="message-body w-100">');
-    messageThumbnail = $('<img class="message-profile-image mr-3 rounded-circle" src="' + msg.author.avatar + '">');
+    messageThumbnail = $('<img class="message-profile-image mr-3 rounded-circle" onerror="this.src=\'/public/img/modcheck.gif\';" src="' + msg.author.avatar + '">');
     messageUsername = $('<div class="message-name">').prop('title', msg.author.username).text(msg.author.display_name).css('color', msg.author.chat_color).on('click', uname_name_click);
     messageTimestamp = $('<time class="message-timestamp ml-1">').prop('title', msg.full_timestamp).text(msg.timestamp);
     messageContent = $('<div class="message-content text-white w-100 pb-1">').html(msg.content);

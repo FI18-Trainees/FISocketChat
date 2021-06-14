@@ -1,0 +1,7 @@
+services:
+    api:
+      container_name: socketchat
+      ports:
+        - "127.0.0.1:8080:80"
+      build: .
+      restart: unless-stopped

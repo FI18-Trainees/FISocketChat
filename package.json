@@ -8,20 +8,21 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "check": "gts check",
         "clean": "gts clean",
-        "compile": "tsc -p .",
+        "compile": "",
         "fix": "gts fix",
         "prepare": "npm run compile",
         "pretest": "npm run compile",
         "posttest": "npm run check"
     },
     "devDependencies": {
-        "gts": "^1.1.2",
+        "@types/socket.io": "^3.0.2",
+        "gts": "^3.1.0",
         "typescript": "~3.7.0"
     },
     "dependencies": {
         "@types/jquery": "^3.3.31",
         "@types/socket.io-client": "^1.4.32",
         "jquery": "^3.3.31",
-        "socket.io-client": "^2.3.0"
+        "socket.io-client": "^4.1.2"
     }
 }
